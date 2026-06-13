@@ -18,5 +18,9 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm build:storybook
-
+      - name: Build Storybook
+        env:
+          HOME: ${{ github.workspace }}/.cache/storybook-home
+          USERPROFILE: ${{ github.workspace }}/.cache/storybook-home
+          STORYBOOK_DISABLE_TELEMETRY: "1"
+        run: pnpm --filter @polymarket-ui-kit/storybook build:ci

@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node scripts/run-storybook.mjs dev",
     "build": "node scripts/run-storybook.mjs build",
+    "build:ci": "storybook build -c .storybook --disable-telemetry",
     "lint": "eslint stories --ext .ts,.tsx",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "echo storybook smoke"
