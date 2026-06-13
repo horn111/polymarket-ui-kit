@@ -18,6 +18,8 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - name: Build Storybook dependencies
+        run: pnpm --filter "@polymarket-ui-kit/react..." build
       - name: Build Storybook
         env:
           HOME: ${{ github.workspace }}/.cache/storybook-home
