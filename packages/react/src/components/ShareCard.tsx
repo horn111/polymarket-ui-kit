@@ -1,4 +1,5 @@
 import {
+  clampProbability,
   formatCompactNumber,
   probabilityToCents,
   type PolymarketMarket,
@@ -17,32 +18,69 @@ export function ShareCard({
   attribution = "polymarket-ui-kit",
 }: ShareCardProps) {
   const leadingOutcome = market.outcomes[0];
+  const probability = leadingOutcome ? clampProbability(leadingOutcome.price ?? 0) : 0;
+  const probabilityWidth = `${Math.round(probability * 100)}%`;
+  const stats = [
+    market.volume
+      ? { label: "Volume", value: formatCompactNumber(market.volume) }
+      : null,
+    market.liquidity
+      ? { label: "Liquidity", value: formatCompactNumber(market.liquidity) }
+      : null,
+    market.commentCount
+      ? { label: "Comments", value: formatCompactNumber(market.commentCount) }
+      : null,
+  ].filter((item): item is { label: string; value: string } => Boolean(item));
 
   return (
-    <article className={cx("pui-card pui-share-card pui-stack", className)}>
-      <div className="pui-row" style={{ justifyContent: "space-between" }}>
-        <span className="pui-badge">Polymarket</span>
-        <span className="pui-muted">{attribution}</span>
-      </div>
-      <h2 style={{ fontSize: "1.65rem", lineHeight: 1.15, margin: 0 }}>
-        {market.question}
-      </h2>
-      {leadingOutcome ? (
-        <div>
-          <span className="pui-muted">{leadingOutcome.name}</span>
-          <div style={{ fontSize: "3rem", fontWeight: 800, lineHeight: 1 }}>
-            {probabilityToCents(leadingOutcome.price)}
-          </div>
+    <article className={cx("pui-card pui-share-card", className)}>
+      <div className="pui-share-card__topline">
+        <div className="pui-row">
+          <span className="pui-share-card__brand">Polymarket</span>
+          <span className="pui-share-card__status">Live market</span>
         </div>
-      ) : null}
-      <div className="pui-market-meta">
-        {market.volume ? <span>{formatCompactNumber(market.volume)} volume</span> : null}
-        {market.liquidity ? (
-          <span>{formatCompactNumber(market.liquidity)} liquidity</span>
-        ) : null}
-        {market.commentCount ? <span>{market.commentCount} comments</span> : null}
+        <span className="pui-share-card__attribution">{attribution}</span>
       </div>
+
+      <div className="pui-share-card__body">
+        <div className="pui-share-card__market">
+          <span className="pui-share-card__label">
+            {market.category ?? "Prediction market"}
+          </span>
+          <h2>{market.question}</h2>
+        </div>
+
+        {leadingOutcome ? (
+          <div className="pui-share-card__quote">
+            <div>
+              <span className="pui-share-card__label">Leading outcome</span>
+              <strong>{leadingOutcome.name}</strong>
+            </div>
+            <div className="pui-share-card__price">
+              {probabilityToCents(leadingOutcome.price)}
+            </div>
+            <div className="pui-share-card__bar" aria-hidden="true">
+              <span style={{ width: probabilityWidth }} />
+            </div>
+          </div>
+        ) : null}
+      </div>
+
+      <dl className="pui-share-card__stats">
+        {stats.length ? (
+          stats.map((stat) => (
+            <div key={stat.label}>
+              <dt>{stat.label}</dt>
+              <dd>{stat.value}</dd>
+            </div>
+          ))
+        ) : (
+          <div>
+            <dt>Status</dt>
+            <dd>{market.status}</dd>
+          </div>
+        )}
+      </dl>
     </article>
   );
 }
-
