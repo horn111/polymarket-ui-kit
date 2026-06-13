@@ -1,0 +1,28 @@
+name: Component request
+description: Request a new Polymarket UI primitive or hook.
+title: "[Component]: "
+labels: ["enhancement", "component"]
+body:
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use case
+      description: What app or workflow needs this?
+    validations:
+      required: true
+  - type: textarea
+    id: desired-api
+    attributes:
+      label: Desired API
+      description: Share the props, hook return shape, or install flow you want.
+  - type: dropdown
+    id: distribution
+    attributes:
+      label: Preferred distribution
+      options:
+        - NPM package
+        - shadcn-style registry
+        - Both
+    validations:
+      required: true
+

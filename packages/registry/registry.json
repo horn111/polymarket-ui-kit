@@ -1,0 +1,60 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "polymarket-ui-kit",
+  "homepage": "https://polymarket-ui-kit.dev",
+  "items": [
+    {
+      "name": "market-card",
+      "type": "registry:component",
+      "title": "Market Card",
+      "description": "A compact live Polymarket market card with outcomes and metadata.",
+      "dependencies": ["@polymarket-ui-kit/core"],
+      "files": [
+        {
+          "path": "src/components/market-card.tsx",
+          "type": "registry:component",
+          "target": "components/polymarket/market-card.tsx"
+        },
+        {
+          "path": "src/lib/polymarket-format.ts",
+          "type": "registry:lib",
+          "target": "lib/polymarket-format.ts"
+        }
+      ]
+    },
+    {
+      "name": "orderbook-panel",
+      "type": "registry:component",
+      "title": "Orderbook Panel",
+      "description": "A bid/ask depth panel for Polymarket CLOB data.",
+      "dependencies": ["@polymarket-ui-kit/core"],
+      "files": [
+        {
+          "path": "src/components/orderbook-panel.tsx",
+          "type": "registry:component",
+          "target": "components/polymarket/orderbook-panel.tsx"
+        },
+        {
+          "path": "src/hooks/use-orderbook.ts",
+          "type": "registry:hook",
+          "target": "hooks/use-polymarket-orderbook.ts"
+        }
+      ]
+    },
+    {
+      "name": "share-card",
+      "type": "registry:component",
+      "title": "Share Card",
+      "description": "A social share card for market screenshots and OG image routes.",
+      "dependencies": ["@polymarket-ui-kit/core"],
+      "files": [
+        {
+          "path": "src/components/share-card.tsx",
+          "type": "registry:component",
+          "target": "components/polymarket/share-card.tsx"
+        }
+      ]
+    }
+  ]
+}
+

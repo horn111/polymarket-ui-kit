@@ -1,0 +1,26 @@
+{
+  "name": "@polymarket-ui-kit/registry",
+  "version": "0.0.0",
+  "description": "shadcn-style registry metadata and source files for Polymarket UI Kit.",
+  "type": "module",
+  "license": "MIT",
+  "files": ["dist", "registry.json", "src"],
+  "exports": {
+    "./registry.json": "./registry.json"
+  },
+  "scripts": {
+    "build": "tsx scripts/build-registry.ts",
+    "clean": "rimraf dist",
+    "lint": "eslint src scripts --ext .ts,.tsx",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm validate",
+    "validate": "tsx scripts/validate-registry.ts"
+  },
+  "dependencies": {
+    "@polymarket-ui-kit/core": "workspace:*",
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1"
+  }
+}

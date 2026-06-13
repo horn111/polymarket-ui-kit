@@ -1,0 +1,38 @@
+name: Bug report
+description: Report a rendering, data, accessibility, or packaging issue.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: Include the component, hook, or package that failed.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Link a repo, StackBlitz, or paste a short snippet.
+    validations:
+      required: true
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Surface
+      options:
+        - React package
+        - Core data adapter
+        - Registry item
+        - Docs or demo
+        - CLI
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      placeholder: "0.1.0"
+

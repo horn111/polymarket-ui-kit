@@ -1,0 +1,25 @@
+{
+  "name": "@polymarket-ui-kit/core",
+  "version": "0.0.0",
+  "description": "Typed Polymarket data adapters, formatters, and utilities for UI builders.",
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": false,
+  "files": ["dist"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rimraf dist",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --root ../.. tests/unit/core.test.ts"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1"
+  }
+}

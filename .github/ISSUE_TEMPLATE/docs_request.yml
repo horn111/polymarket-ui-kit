@@ -1,0 +1,18 @@
+name: Docs request
+description: Request or improve documentation, examples, or launch material.
+title: "[Docs]: "
+labels: ["documentation"]
+body:
+  - type: textarea
+    id: gap
+    attributes:
+      label: What is missing?
+      description: Tell us what confused you or what example would help.
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: Page or section
+      placeholder: README, theming guide, registry guide, etc.
+

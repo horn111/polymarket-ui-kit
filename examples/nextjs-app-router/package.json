@@ -1,0 +1,19 @@
+{
+  "name": "@polymarket-ui-kit/example-nextjs-app-router",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --turbopack --port 3010",
+    "build": "next build --turbopack",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "echo nextjs example smoke"
+  },
+  "dependencies": {
+    "@polymarket-ui-kit/core": "workspace:*",
+    "@polymarket-ui-kit/react": "workspace:*",
+    "next": "^15.1.7",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

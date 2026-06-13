@@ -1,0 +1,15 @@
+node_modules/
+.pnpm-store/
+.turbo/
+.cache/
+.next/
+dist/
+build/
+coverage/
+storybook-static/
+playwright-report/
+test-results/
+.env
+.env.*
+!.env.example
+*.tsbuildinfo

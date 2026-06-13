@@ -1,0 +1,20 @@
+[data-pui-theme="dark"] {
+  --pui-border: #28313d;
+  --pui-border-strong: #465466;
+  --pui-bg: #0f141b;
+  --pui-bg-muted: #151c25;
+  --pui-bg-strong: #1c2632;
+  --pui-text: #f4f7fb;
+  --pui-text-muted: #b6c2cf;
+  --pui-text-soft: #8996a3;
+  --pui-accent: #2dd4bf;
+  --pui-accent-soft: #123d3a;
+  --pui-positive: #4ade80;
+  --pui-positive-soft: #11351f;
+  --pui-negative: #f87171;
+  --pui-negative-soft: #3d1518;
+  --pui-warning: #facc15;
+  --pui-warning-soft: #3f3209;
+  --pui-shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
+}
+

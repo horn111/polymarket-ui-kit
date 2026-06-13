@@ -1,0 +1,25 @@
+{
+  "name": "@polymarket-ui-kit/storybook",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/run-storybook.mjs dev",
+    "build": "node scripts/run-storybook.mjs build",
+    "lint": "eslint stories --ext .ts,.tsx",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "echo storybook smoke"
+  },
+  "dependencies": {
+    "@polymarket-ui-kit/core": "workspace:*",
+    "@polymarket-ui-kit/react": "workspace:*",
+    "@storybook/addon-a11y": "^8.5.3",
+    "@storybook/addon-essentials": "^8.5.3",
+    "@storybook/addon-interactions": "^8.5.3",
+    "@storybook/react": "^8.5.3",
+    "@storybook/react-vite": "^8.5.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "storybook": "^8.5.3"
+  }
+}

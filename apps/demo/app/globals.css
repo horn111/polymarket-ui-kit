@@ -1,0 +1,28 @@
+@import "@polymarket-ui-kit/react/styles.css";
+@import "@polymarket-ui-kit/react/themes.css";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #f6f8fa;
+  color: #111827;
+  font-family: var(--pui-font-sans);
+  margin: 0;
+}
+
+.demo-shell {
+  display: grid;
+  gap: 24px;
+  margin: 0 auto;
+  max-width: 1160px;
+  padding: 24px;
+}
+
+.demo-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
