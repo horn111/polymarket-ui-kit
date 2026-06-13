@@ -1,316 +1,177 @@
-<svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="1200"
-  height="640"
-  viewBox="0 0 1200 640"
-  role="img"
-  aria-label="Polymarket UI Kit component preview"
->
-  <rect width="1200" height="640" fill="#f6f8fa" />
-  <rect
-    x="70"
-    y="70"
-    width="1060"
-    height="500"
-    rx="24"
-    fill="#ffffff"
-    stroke="#d8dee4"
-  />
-  <text
-    x="110"
-    y="140"
-    fill="#111827"
-    font-family="Inter, Arial, sans-serif"
-    font-size="54"
-    font-weight="800"
-  >
-    Polymarket UI Kit
-  </text>
-  <text
-    x="110"
-    y="188"
-    fill="#57606a"
-    font-family="Inter, Arial, sans-serif"
-    font-size="24"
-  >
-    React components, data hooks, and registry items for prediction market interfaces.
-  </text>
-  <rect
-    x="110"
-    y="240"
-    width="440"
-    height="260"
-    rx="14"
-    fill="#f6f8fa"
-    stroke="#d8dee4"
-  />
-  <text
-    x="138"
-    y="292"
-    fill="#111827"
-    font-family="Inter, Arial, sans-serif"
-    font-size="24"
-    font-weight="700"
-  >
-    Will this market resolve YES?
-  </text>
-  <rect
-    x="138"
-    y="330"
-    width="356"
-    height="52"
-    rx="8"
-    fill="#ccfbf1"
-    stroke="#0f766e"
-  />
-  <text
-    x="158"
-    y="363"
-    fill="#111827"
-    font-family="Inter, Arial, sans-serif"
-    font-size="20"
-  >
-    Yes
-  </text>
-  <text
-    x="430"
-    y="363"
-    fill="#111827"
-    font-family="Inter, Arial, sans-serif"
-    font-size="20"
-    font-weight="800"
-  >
-    64c
-  </text>
-  <rect
-    x="138"
-    y="398"
-    width="356"
-    height="52"
-    rx="8"
-    fill="#fee2e2"
-    stroke="#b91c1c"
-  />
-  <text
-    x="158"
-    y="431"
-    fill="#111827"
-    font-family="Inter, Arial, sans-serif"
-    font-size="20"
-  >
-    No
-  </text>
-  <text
-    x="430"
-    y="431"
-    fill="#111827"
-    font-family="Inter, Arial, sans-serif"
-    font-size="20"
-    font-weight="800"
-  >
-    36c
-  </text>
-  <rect
-    x="620"
-    y="220"
-    width="430"
-    height="328"
-    rx="14"
-    fill="#0d131a"
-    stroke="#263241"
-  />
-  <rect x="620" y="220" width="430" height="4" rx="2" fill="#2dd4bf" />
-  <rect x="716" y="220" width="96" height="4" fill="#f59e0b" />
-  <rect x="812" y="220" width="96" height="4" fill="#60a5fa" />
-  <text
-    x="650"
-    y="270"
-    fill="#5eead4"
-    font-family="Inter, Arial, sans-serif"
-    font-size="20"
-    font-weight="800"
-  >
-    Polymarket
-  </text>
-  <rect
-    x="780"
-    y="246"
-    width="112"
-    height="32"
-    rx="16"
-    fill="#123332"
-    stroke="#245c55"
-  />
-  <text
-    x="800"
-    y="268"
-    fill="#ccfbf1"
-    font-family="Inter, Arial, sans-serif"
-    font-size="15"
-    font-weight="700"
-  >
-    Live market
-  </text>
-  <text
-    x="930"
-    y="268"
-    fill="#a7b4c2"
-    font-family="Inter, Arial, sans-serif"
-    font-size="15"
-  >
-    ShareCard
-  </text>
-  <text
-    x="650"
-    y="316"
-    fill="#a7b4c2"
-    font-family="Inter, Arial, sans-serif"
-    font-size="15"
-  >
-    Politics
-  </text>
-  <text
-    x="650"
-    y="354"
-    fill="#f8fafc"
-    font-family="Inter, Arial, sans-serif"
-    font-size="28"
-    font-weight="850"
-  >
-    Who will win the 2028
-  </text>
-  <text
-    x="650"
-    y="390"
-    fill="#f8fafc"
-    font-family="Inter, Arial, sans-serif"
-    font-size="28"
-    font-weight="850"
-  >
-    US presidential election?
-  </text>
-  <rect
-    x="650"
-    y="414"
-    width="350"
-    height="58"
-    rx="8"
-    fill="#1a2430"
-    stroke="#344253"
-  />
-  <text
-    x="670"
-    y="440"
-    fill="#a7b4c2"
-    font-family="Inter, Arial, sans-serif"
-    font-size="14"
-  >
-    Leading outcome
-  </text>
-  <text
-    x="670"
-    y="462"
-    fill="#f8fafc"
-    font-family="Inter, Arial, sans-serif"
-    font-size="18"
-    font-weight="750"
-  >
-    Candidate A
-  </text>
-  <text
-    x="902"
-    y="462"
-    fill="#ffffff"
-    font-family="Inter, Arial, sans-serif"
-    font-size="46"
-    font-weight="900"
-  >
-    42c
-  </text>
-  <rect x="650" y="486" width="350" height="8" rx="4" fill="#334155" />
-  <rect x="650" y="486" width="147" height="8" rx="4" fill="#2dd4bf" />
-  <rect
-    x="650"
-    y="506"
-    width="104"
-    height="32"
-    rx="8"
-    fill="#172130"
-    stroke="#2b3746"
-  />
-  <text
-    x="666"
-    y="520"
-    fill="#a7b4c2"
-    font-family="Inter, Arial, sans-serif"
-    font-size="11"
-  >
-    Volume
-  </text>
-  <text
-    x="666"
-    y="535"
-    fill="#f8fafc"
-    font-family="Inter, Arial, sans-serif"
-    font-size="15"
-    font-weight="800"
-  >
-    $12.8M
-  </text>
-  <rect
-    x="772"
-    y="506"
-    width="104"
-    height="32"
-    rx="8"
-    fill="#172130"
-    stroke="#2b3746"
-  />
-  <text
-    x="788"
-    y="520"
-    fill="#a7b4c2"
-    font-family="Inter, Arial, sans-serif"
-    font-size="11"
-  >
-    Liquidity
-  </text>
-  <text
-    x="788"
-    y="535"
-    fill="#f8fafc"
-    font-family="Inter, Arial, sans-serif"
-    font-size="15"
-    font-weight="800"
-  >
-    $870K
-  </text>
-  <rect
-    x="894"
-    y="506"
-    width="104"
-    height="32"
-    rx="8"
-    fill="#172130"
-    stroke="#2b3746"
-  />
-  <text
-    x="910"
-    y="520"
-    fill="#a7b4c2"
-    font-family="Inter, Arial, sans-serif"
-    font-size="11"
-  >
-    Comments
-  </text>
-  <text
-    x="910"
-    y="535"
-    fill="#f8fafc"
-    font-family="Inter, Arial, sans-serif"
-    font-size="15"
-    font-weight="800"
-  >
-    1.8K
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" fill="none">
+  <style>
+    .label-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 11px; }
+    .label-sans { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .title-sans { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 800; letter-spacing: -0.02em; }
+    .code-text { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 13px; line-height: 20px; }
+  </style>
+
+  <!-- Background: Warm Paper / Alabaster -->
+  <rect width="1200" height="640" fill="#fafaf9" />
+
+  <!-- Layout Outer Frame -->
+  <rect x="30" y="30" width="1140" height="580" rx="6" stroke="#d4d4d8" stroke-width="1" />
+
+  <!-- Layout Dividers (Spec Grid) -->
+  <!-- Header divider -->
+  <line x1="30" y1="100" x2="1170" y2="100" stroke="#e4e4e7" stroke-width="1" />
+  <!-- Main vertical divider -->
+  <line x1="540" y1="100" x2="540" y2="610" stroke="#e4e4e7" stroke-width="1" />
+  <!-- Left horizontal divider -->
+  <line x1="30" y1="360" x2="540" y2="360" stroke="#e4e4e7" stroke-width="1" />
+  <!-- Right horizontal divider -->
+  <line x1="540" y1="340" x2="1170" y2="340" stroke="#e4e4e7" stroke-width="1" />
+
+  <!-- SECTION 00: HEADER / TITLE -->
+  <g class="label-sans">
+    <text x="60" y="70" fill="#1c1917" font-size="28" class="title-sans" font-weight="900">POLYMARKET UI KIT</text>
+    <text x="390" y="68" fill="#78716c" font-size="14" font-weight="400">Headless React components, data hooks &amp; shadcn-style registry items</text>
+    <text x="1140" y="68" fill="#a8a29e" font-size="11" class="label-mono" text-anchor="end" font-weight="600">v1.0.0 / SYSTEM_SPEC</text>
+  </g>
+
+  <!-- SECTION 01: BRANDING & SYSTEM INFO (Top Left) -->
+  <g transform="translate(60, 120)" class="label-sans">
+    <text x="0" y="15" fill="#a8a29e" font-size="11" class="label-mono" font-weight="700" letter-spacing="0.05em">01. DESIGN SYSTEM SPECIFICATION</text>
+    
+    <text x="0" y="44" fill="#1c1917" font-size="17" font-weight="700">Tailwind CSS • shadcn/ui • React components</text>
+    <text x="0" y="72" fill="#57534e" font-size="14" font-weight="400">
+      <tspan x="0" dy="0">A minimalist, type-safe registry designed to easily drop</tspan>
+      <tspan x="0" dy="22">prediction market UI into any React application. Simple default</tspan>
+      <tspan x="0" dy="22">styling with complete layout overrides via CSS variables.</tspan>
+    </text>
+
+    <!-- Atomic UI Elements Row -->
+    <g transform="translate(0, 150)">
+      <!-- BuilderBadge -->
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="130" height="24" rx="12" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="1" />
+        <text x="65" y="15" fill="#4338ca" font-size="10" font-weight="600" text-anchor="middle">by polymarket-ui</text>
+      </g>
+
+      <!-- FeePill -->
+      <g transform="translate(142, 0)">
+        <rect x="0" y="0" width="85" height="24" rx="12" fill="#f4f4f5" stroke="#e4e4e7" stroke-width="1" />
+        <text x="42.5" y="15" fill="#52525b" font-size="10" font-weight="600" text-anchor="middle">0.1% Fee</text>
+      </g>
+
+      <!-- StatusBadge -->
+      <g transform="translate(239, 0)">
+        <rect x="0" y="0" width="85" height="24" rx="12" fill="#e0f2fe" stroke="#bae6fd" stroke-width="1" />
+        <circle cx="12" cy="12" r="3" fill="#0284c7" />
+        <text x="47" y="15" fill="#0369a1" font-size="10" font-weight="600" text-anchor="middle">Resolved</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- SECTION 02: CODE SPEC (Bottom Left) -->
+  <g transform="translate(60, 380)" class="label-sans">
+    <text x="0" y="15" fill="#a8a29e" font-size="11" class="label-mono" font-weight="700" letter-spacing="0.05em">02. INTEGRATION SAMPLE</text>
+
+    <!-- Code Block Container -->
+    <rect x="0" y="30" width="420" height="165" rx="6" fill="#f5f5f4" stroke="#e7e5e4" stroke-width="1" />
+    
+    <!-- Code text (VS Code Light Style) -->
+    <g transform="translate(20, 50)" class="code-text" font-size="12">
+      <text x="0" y="12">
+        <tspan fill="#6b21a8">import</tspan> <tspan fill="#1c1917">{</tspan> <tspan fill="#b45309">MarketCard</tspan> <tspan fill="#1c1917">}</tspan> <tspan fill="#6b21a8">from</tspan> <tspan fill="#15803d">"@polymarket-ui/react"</tspan><tspan fill="#1c1917">;</tspan>
+      </text>
+
+      <text x="0" y="42">
+        <tspan fill="#6b21a8">export default function</tspan> <tspan fill="#1d4ed8">App</tspan><tspan fill="#1c1917">() {</tspan>
+      </text>
+      
+      <text x="18" y="66">
+        <tspan fill="#6b21a8">return</tspan> <tspan fill="#1c1917">(</tspan>
+      </text>
+
+      <text x="36" y="90">
+        <tspan fill="#1c1917">&lt;</tspan><tspan fill="#1d4ed8">MarketCard</tspan> <tspan fill="#ea580c">slug</tspan><tspan fill="#1c1917">=</tspan><tspan fill="#15803d">"btc-ath-2026"</tspan> <tspan fill="#ea580c">theme</tspan><tspan fill="#1c1917">=</tspan><tspan fill="#15803d">"light"</tspan> <tspan fill="#1c1917">/&gt;</tspan>
+      </text>
+
+      <text x="18" y="114">
+        <tspan fill="#1c1917">);</tspan>
+      </text>
+
+      <text x="0" y="138">
+        <tspan fill="#1c1917">}</tspan>
+      </text>
+    </g>
+  </g>
+
+  <!-- SECTION 03: COMPONENT PREVIEW: MARKET_CARD (Top Right) -->
+  <g transform="translate(615, 120)" class="label-sans">
+    <text x="0" y="15" fill="#a8a29e" font-size="11" class="label-mono" font-weight="700" letter-spacing="0.05em">03. COMPONENT: MARKET_CARD</text>
+
+    <!-- MarketCard Component Frame -->
+    <g transform="translate(0, 32)">
+      <rect x="0" y="0" width="480" height="165" rx="8" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5" />
+
+      <!-- Card Header -->
+      <g transform="translate(24, 20)">
+        <!-- Status Badge -->
+        <rect x="0" y="0" width="58" height="18" rx="9" fill="#e2fbe8" stroke="#86efac" stroke-width="1" />
+        <circle cx="8" cy="9" r="3" fill="#16a34a" />
+        <text x="18" y="13" fill="#166534" font-size="10" font-weight="600">Active</text>
+        
+        <!-- Category -->
+        <text x="70" y="13" fill="#a8a29e" font-size="11" class="label-mono" font-weight="600">CAT: CRYPTO</text>
+      </g>
+
+      <!-- Market Question -->
+      <text x="24" y="62" fill="#1c1917" font-size="16" font-weight="700">Will Bitcoin set a new All-Time High in 2026?</text>
+
+      <!-- Outcome Buttons -->
+      <!-- Yes Button -->
+      <g transform="translate(24, 82)">
+        <rect x="0" y="0" width="208" height="38" rx="6" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1" />
+        <text x="12" y="24" fill="#166534" font-size="13" font-weight="600">Yes</text>
+        <text x="196" y="24" fill="#166534" font-size="13" font-weight="700" text-anchor="end">68¢</text>
+      </g>
+      <!-- No Button -->
+      <g transform="translate(248, 82)">
+        <rect x="0" y="0" width="208" height="38" rx="6" fill="#fef2f2" stroke="#fecaca" stroke-width="1" />
+        <text x="12" y="24" fill="#991b1b" font-size="13" font-weight="600">No</text>
+        <text x="196" y="24" fill="#991b1b" font-size="13" font-weight="700" text-anchor="end">32¢</text>
+      </g>
+
+      <!-- Card Footer -->
+      <line x1="24" y1="136" x2="456" y2="136" stroke="#f4f4f5" stroke-width="1.5" />
+      <text x="24" y="151" fill="#a8a29e" font-size="10" font-weight="600">Volume: $15.4M</text>
+      <text x="456" y="151" fill="#a8a29e" font-size="10" font-weight="600" text-anchor="end">Ends Dec 31, 2026</text>
+    </g>
+  </g>
+
+  <!-- SECTION 04: COMPONENT PREVIEW: PROBABILITY_CHART (Bottom Right) -->
+  <g transform="translate(615, 360)" class="label-sans">
+    <text x="0" y="15" fill="#a8a29e" font-size="11" class="label-mono" font-weight="700" letter-spacing="0.05em">04. COMPONENT: PROBABILITY_CHART</text>
+
+    <!-- ProbabilityChart Frame -->
+    <g transform="translate(0, 30)">
+      <rect x="0" y="0" width="480" height="190" rx="8" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5" />
+
+      <!-- Chart Header -->
+      <text x="24" y="32" fill="#1c1917" font-size="14" font-weight="700">Price Trend</text>
+      <text x="456" y="32" fill="#0f766e" font-size="14" font-weight="700" text-anchor="end">68% probability</text>
+
+      <!-- Horizontal Grid Lines -->
+      <line x1="24" y1="65" x2="456" y2="65" stroke="#f4f4f5" stroke-width="1.5" />
+      <line x1="24" y1="100" x2="456" y2="100" stroke="#f4f4f5" stroke-width="1.5" />
+      <line x1="24" y1="135" x2="456" y2="135" stroke="#f4f4f5" stroke-width="1.5" />
+
+      <!-- Chart Line Fill -->
+      <path d="M 24 140 C 80 150, 110 100, 150 110 C 200 120, 230 60, 280 70 C 330 80, 350 42, 456 45 L 456 155 L 24 155 Z" fill="#f0fdfa" />
+
+      <!-- Chart Line Stroke -->
+      <path d="M 24 140 C 80 150, 110 100, 150 110 C 200 120, 230 60, 280 70 C 330 80, 350 42, 456 45" fill="none" stroke="#0f766e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+
+      <!-- X-Axis Labels -->
+      <g class="label-mono" font-size="10" font-weight="600" fill="#a8a29e" transform="translate(0, 174)">
+        <text x="24" y="0">JAN</text>
+        <text x="132" y="0" text-anchor="middle">FEB</text>
+        <text x="240" y="0" text-anchor="middle">MAR</text>
+        <text x="348" y="0" text-anchor="middle">APR</text>
+        <text x="456" y="0" text-anchor="end">MAY</text>
+      </g>
+    </g>
+  </g>
 </svg>

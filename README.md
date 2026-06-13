@@ -19,7 +19,13 @@
   <a href="#builder-and-grant-angle">Builder angle</a>
 </p>
 
-![Polymarket UI Kit preview](apps/docs/public/screenshots/hero.svg)
+<h3 align="center">Light Theme</h3>
+
+<img alt="Polymarket UI Kit preview (Light)" src="apps/docs/public/screenshots/hero.svg" width="100%">
+
+<h3 align="center">Dark Theme</h3>
+
+<img alt="Polymarket UI Kit preview (Dark)" src="apps/docs/public/screenshots/hero-dark.svg" width="100%">
 
 Build market cards, probability charts, orderbook panels, comment feeds, builder
 badges, fee previews, leaderboard tables, mobile trade previews, and social share
