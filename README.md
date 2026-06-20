@@ -226,6 +226,7 @@ The moat is not just visual polish. It is DX:
 
 ## Demo Links
 
+- Live demo: [polymarket-ui-kit-demo-fkan-chi.vercel.app](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/)
 - Docs app: `pnpm docs:dev`
 - Demo app: `pnpm demo:dev`
 - Storybook: `pnpm storybook`
