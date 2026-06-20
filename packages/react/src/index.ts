@@ -1,6 +1,7 @@
 "use client";
 
 export * from "./components/BuilderBadge";
+export * from "./components/BuilderFeeDisclosure";
 export * from "./components/CommentList";
 export * from "./components/FeePill";
 export * from "./components/LeaderboardTable";

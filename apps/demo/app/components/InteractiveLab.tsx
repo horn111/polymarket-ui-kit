@@ -9,14 +9,18 @@ import type {
   TraderLeaderboardRow,
 } from "@polymarket-ui-kit/core";
 import {
+  BuilderBadge,
+  BuilderFeeDisclosure,
   CommentList,
+  FeePill,
   LeaderboardTable,
   MarketCard,
   OrderbookPanel,
   ShareCard,
 } from "@polymarket-ui-kit/react";
+import { sampleBuilder } from "../../components/sample-builder";
 
-type DemoTab = "market" | "share" | "data" | "states";
+type DemoTab = "market" | "share" | "builder" | "data" | "states";
 type DemoState = "live" | "loading" | "error" | "empty";
 type DemoTheme = "light" | "dark";
 
@@ -266,24 +270,53 @@ export function MarketEmbed() {
 
       <div className="demo-lab__content">
         <div className="demo-lab__tabs" role="tablist" aria-label="Component preview">
-          {(["market", "share", "data", "states"] as DemoTab[]).map((item) => (
-            <button
-              aria-selected={tab === item}
-              data-active={tab === item ? "true" : undefined}
-              key={item}
-              onClick={() => setTab(item)}
-              role="tab"
-              type="button"
-            >
-              {item}
-            </button>
-          ))}
+          {(["market", "share", "builder", "data", "states"] as DemoTab[]).map(
+            (item) => (
+              <button
+                aria-selected={tab === item}
+                data-active={tab === item ? "true" : undefined}
+                key={item}
+                onClick={() => setTab(item)}
+                role="tab"
+                type="button"
+              >
+                {item}
+              </button>
+            ),
+          )}
         </div>
 
         <div className="demo-lab__preview" data-pui-theme={theme}>
           {tab === "market" ? <MarketCard market={market} points={points} /> : null}
           {tab === "share" ? (
             <ShareCard market={market} attribution="pui-kit/demo" />
+          ) : null}
+          {tab === "builder" ? (
+            <div className="demo-lab__builder-grid">
+              <BuilderFeeDisclosure
+                builder={sampleBuilder}
+                notional={100}
+                price={market.outcomes[0]?.price ?? undefined}
+                side="taker"
+              />
+              <div className="demo-builder-surface">
+                <BuilderBadge
+                  builder={sampleBuilder}
+                  feeBps={sampleBuilder.takerFeeBps}
+                  feeSide="taker"
+                  showCode
+                />
+                <FeePill
+                  input={{
+                    builderFeeSide: "taker",
+                    builderTakerFeeBps: sampleBuilder.takerFeeBps,
+                    notional: 100,
+                    price: market.outcomes[0]?.price ?? undefined,
+                  }}
+                  label="Estimated builder fee"
+                />
+              </div>
+            </div>
           ) : null}
           {tab === "data" ? (
             <div className="demo-lab__data-grid">

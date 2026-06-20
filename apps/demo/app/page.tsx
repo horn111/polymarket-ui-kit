@@ -6,6 +6,7 @@ import {
   ProbabilityChart,
 } from "@polymarket-ui-kit/react";
 import { InteractiveLab } from "./components/InteractiveLab";
+import { sampleBuilder } from "../components/sample-builder";
 import { samplePoints } from "../components/sample-data";
 
 const market: PolymarketMarket = {
@@ -103,16 +104,19 @@ export default function DemoHome() {
             </p>
             <div className="demo-pill-row">
               <BuilderBadge
-                builder={{
-                  code: "PUI",
-                  handle: "@polymarket-ui",
-                  name: "polymarket-ui",
-                  verified: false,
-                }}
+                builder={sampleBuilder}
+                feeBps={sampleBuilder.takerFeeBps}
+                feeSide="taker"
+                showCode
               />
               <FeePill
-                input={{ builderFeeBps: 10, notional: 100, platformFeeRate: 0 }}
-                label="0.1% Fee"
+                input={{
+                  builderFeeSide: "taker",
+                  builderTakerFeeBps: sampleBuilder.takerFeeBps,
+                  notional: 100,
+                  platformFeeRate: 0,
+                }}
+                label="Taker Fee"
               />
               <span className="demo-status-pill">Resolved</span>
             </div>

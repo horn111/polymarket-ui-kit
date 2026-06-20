@@ -109,34 +109,71 @@ export function MarketScreenshot({ market }) {
 }
 ```
 
+## Builder-Code-Aware UX
+
+Builder Codes are public `bytes32` identifiers used by host applications when they submit Polymarket CLOB V2 orders. This kit does not place orders, but it helps builders make attribution and fee disclosure clear before handing off a trade intent.
+
+```tsx
+import {
+  BuilderFeeDisclosure,
+  MobileTradeDrawer,
+  PolymarketProvider,
+} from "@polymarket-ui-kit/react";
+
+const builder = {
+  name: "Forecast Studio",
+  handle: "@forecast-studio",
+  code: process.env.NEXT_PUBLIC_POLY_BUILDER_CODE,
+  takerFeeBps: 25,
+  makerFeeBps: 10,
+};
+
+export function BuilderAwareMarket({ market }) {
+  return (
+    <PolymarketProvider builder={builder}>
+      <BuilderFeeDisclosure builder={builder} notional={100} side="taker" />
+      <MobileTradeDrawer
+        market={market}
+        onTradeIntent={(intent) => {
+          // Pass intent.builderCode into your own CLOB V2 order flow.
+        }}
+      />
+    </PolymarketProvider>
+  );
+}
+```
+
+Read the implementation notes in [docs/builder-codes.md](docs/builder-codes.md).
+
 ## Components
 
-| Component | Purpose | Status |
-| --- | --- | --- |
-| `MarketHeader` | Question, status, category, volume, expiry, builder badge | MVP |
-| `MarketCard` | Compact embeddable market card | MVP |
-| `ProbabilitySparkline` | Lightweight inline price movement | MVP |
-| `ProbabilityChart` | Multi-series probability chart | MVP |
-| `OrderbookPanel` | Bid/ask depth with spread and totals | MVP |
-| `OutcomeSwitcher` | Yes/No or multi-outcome selector | MVP |
-| `FeePill` | Platform and builder fee preview | MVP |
-| `CommentList` | Public market comments | MVP |
-| `BuilderBadge` | Builder identity and attribution surface | MVP |
-| `ShareCard` | X-ready market screenshot and OG card base | MVP |
-| `LeaderboardTable` | Trader leaderboard rows | MVP |
-| `MobileTradeDrawer` | Read-first trade intent preview | MVP |
+| Component              | Purpose                                                   | Status |
+| ---------------------- | --------------------------------------------------------- | ------ |
+| `MarketHeader`         | Question, status, category, volume, expiry, builder badge | MVP    |
+| `MarketCard`           | Compact embeddable market card                            | MVP    |
+| `ProbabilitySparkline` | Lightweight inline price movement                         | MVP    |
+| `ProbabilityChart`     | Multi-series probability chart                            | MVP    |
+| `OrderbookPanel`       | Bid/ask depth with spread and totals                      | MVP    |
+| `OutcomeSwitcher`      | Yes/No or multi-outcome selector                          | MVP    |
+| `FeePill`              | Platform and builder fee preview                          | MVP    |
+| `CommentList`          | Public market comments                                    | MVP    |
+| `BuilderBadge`         | Builder identity and attribution surface                  | MVP    |
+| `BuilderFeeDisclosure` | Builder code attribution and maker/taker fee disclosure   | MVP    |
+| `ShareCard`            | X-ready market screenshot and OG card base                | MVP    |
+| `LeaderboardTable`     | Trader leaderboard rows                                   | MVP    |
+| `MobileTradeDrawer`    | Read-first trade intent preview                           | MVP    |
 
 ## Data Architecture
 
 Polymarket UI Kit is read-first in v0. It defaults to public market data and
 does not place authenticated orders.
 
-| Source | Used for | Auth |
-| --- | --- | --- |
-| Gamma API | markets, events, search, comments, profiles | No |
-| Data API | positions, trades, leaderboards, builder analytics | No |
-| CLOB API | orderbooks, midpoints, spreads, price history | Public for market data |
-| CLOB WebSocket | live book and price updates | No for market channel |
+| Source         | Used for                                           | Auth                   |
+| -------------- | -------------------------------------------------- | ---------------------- |
+| Gamma API      | markets, events, search, comments, profiles        | No                     |
+| Data API       | positions, trades, leaderboards, builder analytics | No                     |
+| CLOB API       | orderbooks, midpoints, spreads, price history      | Public for market data |
+| CLOB WebSocket | live book and price updates                        | No for market channel  |
 
 The core package normalizes API responses into stable UI types so components can
 accept either preloaded server data or client-side hooks.
@@ -205,6 +242,7 @@ The repo includes:
 - [Grant strategy](docs/grant-strategy.md)
 - [Launch playbook](docs/launch-playbook.md)
 - [Tweet templates](docs/tweet-templates.md)
+- [Builder Codes notes](docs/builder-codes.md)
 
 ## Roadmap
 
@@ -223,4 +261,3 @@ tooling for builders using public Polymarket data and APIs.
 ## License
 
 MIT. See [LICENSE](LICENSE).
-

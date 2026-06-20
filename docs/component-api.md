@@ -11,6 +11,7 @@ The public React package exports:
 - `FeePill`
 - `CommentList`
 - `BuilderBadge`
+- `BuilderFeeDisclosure`
 - `ShareCard`
 - `LeaderboardTable`
 - `MobileTradeDrawer`
@@ -27,4 +28,3 @@ export function Embed({ market }) {
   return <MarketCard market={market} href={market.url} />;
 }
 ```
-

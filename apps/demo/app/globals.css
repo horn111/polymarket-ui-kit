@@ -572,6 +572,23 @@ a {
   min-height: 360px;
 }
 
+.demo-lab__builder-grid {
+  align-content: center;
+  display: grid;
+  gap: 16px;
+  width: 100%;
+}
+
+.demo-builder-surface {
+  background: var(--pui-bg);
+  border: 1px solid var(--pui-border);
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px;
+}
+
 .demo-lab__data-grid {
   align-content: start;
   display: grid;

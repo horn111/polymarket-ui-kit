@@ -8,12 +8,22 @@ export interface BuilderProfile {
   rank?: number | undefined;
 }
 
+export interface BuilderConfig extends BuilderProfile {
+  makerFeeBps?: number | undefined;
+  takerFeeBps?: number | undefined;
+}
+
+export type BuilderFeeSide = "maker" | "taker";
+
 export interface FeePreviewInput {
   notional: number;
-  price?: number;
-  size?: number;
-  platformFeeRate?: number;
-  builderFeeBps?: number;
+  price?: number | undefined;
+  size?: number | undefined;
+  platformFeeRate?: number | undefined;
+  builderFeeBps?: number | undefined;
+  builderFeeSide?: BuilderFeeSide | undefined;
+  builderMakerFeeBps?: number | undefined;
+  builderTakerFeeBps?: number | undefined;
 }
 
 export interface FeePreview {
@@ -22,4 +32,6 @@ export interface FeePreview {
   builderFee: number;
   totalFee: number;
   totalCost: number;
+  builderFeeBps: number;
+  builderFeeSide: BuilderFeeSide;
 }

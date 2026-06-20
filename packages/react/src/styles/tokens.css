@@ -105,6 +105,74 @@
   padding: 0.35rem 0.55rem;
 }
 
+.pui-badge code {
+  color: var(--pui-text-soft);
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.68rem;
+}
+
+.pui-builder-disclosure {
+  background: var(--pui-bg-muted);
+  border: 1px solid var(--pui-border);
+  border-radius: var(--pui-radius-md);
+  color: var(--pui-text);
+  display: grid;
+  gap: var(--pui-space-3);
+  padding: var(--pui-space-3);
+}
+
+.pui-builder-disclosure__status {
+  color: var(--pui-accent);
+  font-size: 0.75rem;
+  font-weight: 750;
+}
+
+.pui-builder-disclosure__identity {
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.pui-builder-disclosure__identity strong {
+  overflow-wrap: anywhere;
+}
+
+.pui-builder-disclosure__identity span {
+  color: var(--pui-text-muted);
+  font-size: 0.8125rem;
+}
+
+.pui-builder-disclosure__grid {
+  display: grid;
+  gap: var(--pui-space-2);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+}
+
+.pui-builder-disclosure__grid div {
+  min-width: 0;
+}
+
+.pui-builder-disclosure__grid dt {
+  color: var(--pui-text-muted);
+  font-size: 0.72rem;
+  margin-bottom: 0.2rem;
+}
+
+.pui-builder-disclosure__grid dd {
+  font-size: 0.8125rem;
+  font-weight: 750;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 520px) {
+  .pui-builder-disclosure__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .pui-grid {
   display: grid;
   gap: var(--pui-space-3);

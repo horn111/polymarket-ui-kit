@@ -1,6 +1,14 @@
-import type { MarketOutcome, PolymarketMarket } from "@polymarket-ui-kit/core";
+import type {
+  BuilderConfig,
+  BuilderFeeSide,
+  FeePreview,
+  MarketOutcome,
+  PolymarketMarket,
+} from "@polymarket-ui-kit/core";
 import { formatCurrency, previewFees } from "@polymarket-ui-kit/core";
 import { useMemo, useState } from "react";
+import { usePolymarketBuilder } from "../providers/PolymarketProvider";
+import { BuilderFeeDisclosure } from "./BuilderFeeDisclosure";
 import { FeePill } from "./FeePill";
 import { OutcomeSwitcher } from "./OutcomeSwitcher";
 
@@ -8,21 +16,31 @@ export interface TradeIntent {
   market: PolymarketMarket;
   outcome: MarketOutcome;
   notional: number;
+  builder?: BuilderConfig | undefined;
+  builderCode?: string | undefined;
+  builderFeeSide: BuilderFeeSide;
+  feePreview: FeePreview;
 }
 
 export interface MobileTradeDrawerProps {
   market: PolymarketMarket;
-  defaultNotional?: number;
-  builderFeeBps?: number;
+  defaultNotional?: number | undefined;
+  builder?: BuilderConfig | undefined;
+  builderFeeBps?: number | undefined;
+  builderFeeSide?: BuilderFeeSide | undefined;
   onTradeIntent?: (intent: TradeIntent) => void;
 }
 
 export function MobileTradeDrawer({
   market,
   defaultNotional = 25,
-  builderFeeBps = 0,
+  builder,
+  builderFeeBps,
+  builderFeeSide = "taker",
   onTradeIntent,
 }: MobileTradeDrawerProps) {
+  const providerBuilder = usePolymarketBuilder();
+  const effectiveBuilder = builder ?? providerBuilder ?? undefined;
   const [selectedOutcome, setSelectedOutcome] = useState<MarketOutcome | null>(
     market.outcomes[0] ?? null,
   );
@@ -33,8 +51,18 @@ export function MobileTradeDrawer({
         notional,
         price: selectedOutcome?.price ?? 0,
         builderFeeBps,
+        builderFeeSide,
+        builderMakerFeeBps: effectiveBuilder?.makerFeeBps,
+        builderTakerFeeBps: effectiveBuilder?.takerFeeBps,
       }),
-    [builderFeeBps, notional, selectedOutcome?.price],
+    [
+      builderFeeBps,
+      builderFeeSide,
+      effectiveBuilder?.makerFeeBps,
+      effectiveBuilder?.takerFeeBps,
+      notional,
+      selectedOutcome?.price,
+    ],
   );
 
   return (
@@ -44,6 +72,14 @@ export function MobileTradeDrawer({
           <strong>Trade preview</strong>
           <FeePill preview={feePreview} />
         </div>
+        {effectiveBuilder ? (
+          <BuilderFeeDisclosure
+            builder={effectiveBuilder}
+            notional={notional}
+            price={selectedOutcome?.price ?? undefined}
+            side={builderFeeSide}
+          />
+        ) : null}
         <OutcomeSwitcher
           outcomes={market.outcomes}
           value={selectedOutcome?.id}
@@ -73,7 +109,15 @@ export function MobileTradeDrawer({
           disabled={!selectedOutcome}
           onClick={() =>
             selectedOutcome
-              ? onTradeIntent?.({ market, outcome: selectedOutcome, notional })
+              ? onTradeIntent?.({
+                  market,
+                  outcome: selectedOutcome,
+                  notional,
+                  builder: effectiveBuilder,
+                  builderCode: effectiveBuilder?.code,
+                  builderFeeSide,
+                  feePreview,
+                })
               : undefined
           }
           type="button"
@@ -84,4 +128,3 @@ export function MobileTradeDrawer({
     </div>
   );
 }
-
