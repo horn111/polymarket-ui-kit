@@ -1,12 +1,13 @@
 import type { OrderbookSnapshot } from "@polymarket-ui-kit/core";
-import { useAsyncData } from "./useAsyncData";
+import { useAsyncData, type AsyncDataOptions } from "./useAsyncData";
 import { usePolymarketClient } from "../providers/PolymarketProvider";
+
+export type UseOrderbookOptions = AsyncDataOptions<OrderbookSnapshot>;
 
 export function useOrderbook(
   tokenId: string,
-  initialData?: OrderbookSnapshot | null,
+  input?: OrderbookSnapshot | null | UseOrderbookOptions,
 ) {
   const client = usePolymarketClient();
-  return useAsyncData(() => client.getOrderbook({ tokenId }), [client, tokenId], initialData);
+  return useAsyncData(() => client.getOrderbook({ tokenId }), [client, tokenId], input);
 }
-

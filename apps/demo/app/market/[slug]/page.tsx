@@ -4,19 +4,26 @@ import {
   OrderbookPanel,
 } from "@polymarket-ui-kit/react";
 import { sampleBuilder } from "../../../components/sample-builder";
-import {
-  sampleMarket,
-  sampleOrderbook,
-  samplePoints,
-} from "../../../components/sample-data";
+import { loadPublicMarketBundle } from "../../../components/live-data";
 
-export default function MarketPage({ params }: { params: { slug: string } }) {
-  const market = { ...sampleMarket, slug: params.slug };
+export const revalidate = 60;
+
+type MarketPageProps = {
+  params: Promise<{ slug: string }>;
+};
+
+export default async function MarketPage({ params }: MarketPageProps) {
+  const { slug } = await params;
+  const { market, orderbook, points, source } = await loadPublicMarketBundle(slug);
 
   return (
     <>
-      <MarketCard market={market} points={samplePoints} />
-      <OrderbookPanel orderbook={sampleOrderbook} />
+      <div className="demo-route-note" data-source={source}>
+        <span>{source === "live" ? "Live public data" : "Graceful fallback"}</span>
+        <strong>{market.question}</strong>
+      </div>
+      <MarketCard market={market} points={points} />
+      <OrderbookPanel orderbook={orderbook} />
       <MobileTradeDrawer
         builder={sampleBuilder}
         builderFeeSide="taker"

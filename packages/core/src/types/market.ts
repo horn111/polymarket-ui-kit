@@ -11,7 +11,27 @@ export interface MarketOutcome {
 export interface MarketPricePoint {
   timestamp: string;
   price: number;
-  outcomeId?: string;
+  outcomeId?: string | undefined;
+}
+
+export type PriceHistoryInterval = "max" | "all" | "1m" | "1w" | "1d" | "6h" | "1h";
+
+export interface PriceHistoryParams {
+  tokenId: string;
+  startTs?: number | undefined;
+  endTs?: number | undefined;
+  interval?: PriceHistoryInterval | undefined;
+  fidelity?: number | undefined;
+}
+
+export type ShareImageTheme = "light" | "dark";
+export type ShareImageFormat = "png" | "svg";
+
+export interface ShareCardSvgOptions {
+  theme?: ShareImageTheme | undefined;
+  attribution?: string | undefined;
+  width?: number | undefined;
+  height?: number | undefined;
 }
 
 export interface PolymarketMarket {

@@ -3,17 +3,18 @@ import {
   type LeaderboardParams,
   type TraderLeaderboardRow,
 } from "@polymarket-ui-kit/core";
-import { useAsyncData } from "./useAsyncData";
+import { useAsyncData, type AsyncDataOptions } from "./useAsyncData";
+
+export type UseLeaderboardOptions = AsyncDataOptions<TraderLeaderboardRow[]>;
 
 export function useLeaderboard(
   params: LeaderboardParams = { limit: 10, period: "month" },
-  initialData?: TraderLeaderboardRow[] | null,
+  input?: TraderLeaderboardRow[] | null | UseLeaderboardOptions,
 ) {
   const cacheKey = JSON.stringify(params);
   return useAsyncData(
     () => getTraderLeaderboard(params),
     [cacheKey],
-    initialData,
+    input,
   );
 }
-

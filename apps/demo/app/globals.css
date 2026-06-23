@@ -305,6 +305,30 @@ a {
 .demo-token-row,
 .demo-space-row,
 .demo-outcome-row,
+.demo-route-note {
+  background: #ffffff;
+  border: 1px solid #d6d3d1;
+  border-radius: 8px;
+  color: var(--demo-light-ink);
+  display: grid;
+  gap: 6px;
+  margin: 0 auto 18px;
+  max-width: 720px;
+  padding: 14px 16px;
+  width: min(100%, 720px);
+}
+
+.demo-route-note span {
+  color: #0f766e;
+  font-size: 0.72rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.demo-route-note strong {
+  font-size: 0.98rem;
+  line-height: 1.35;
+}
 .demo-route-row {
   display: flex;
   flex-wrap: wrap;
@@ -589,6 +613,72 @@ a {
   padding: 16px;
 }
 
+.demo-lab__export-grid {
+  align-content: center;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(280px, 1fr) minmax(260px, 0.72fr);
+  width: 100%;
+}
+
+.demo-lab__export-grid .pui-share-card {
+  min-height: 340px;
+}
+
+.demo-export-panel {
+  align-content: center;
+  background: var(--pui-bg);
+  border: 1px solid var(--pui-border);
+  border-radius: 8px;
+  color: var(--pui-text);
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+  padding: 22px;
+}
+
+.demo-export-panel span {
+  color: var(--pui-accent);
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.demo-export-panel strong {
+  font-size: 1.08rem;
+  line-height: 1.35;
+}
+
+.demo-export-panel code {
+  background: var(--pui-bg-muted);
+  border: 1px solid var(--pui-border);
+  border-radius: 6px;
+  color: var(--pui-text-muted);
+  display: block;
+  font-size: 0.76rem;
+  line-height: 1.5;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  padding: 10px;
+}
+
+.demo-export-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.demo-export-actions a {
+  background: var(--pui-text);
+  border: 1px solid var(--pui-text);
+  border-radius: 6px;
+  color: var(--pui-bg);
+  font-size: 0.82rem;
+  font-weight: 850;
+  min-height: 36px;
+  padding: 9px 12px;
+  text-decoration: none;
+}
 .demo-lab__data-grid {
   align-content: start;
   display: grid;
@@ -736,6 +826,10 @@ a {
     border-bottom: 0;
   }
 
+  .demo-lab__export-grid {
+    grid-template-columns: 1fr;
+  }
+
   .demo-lab__tabs {
     border-bottom: 1px solid var(--demo-light-line);
     border-right: 0;
@@ -772,6 +866,10 @@ a {
   .demo-lab__toolbar,
   .demo-lab__preview,
   .demo-lab__snippet,
+  .demo-lab__export-grid {
+    grid-template-columns: 1fr;
+  }
+
   .demo-lab__tabs {
     padding: 20px;
   }
@@ -790,6 +888,10 @@ a {
 
   .demo-lab__content {
     min-height: 0;
+  }
+
+  .demo-lab__export-grid {
+    grid-template-columns: 1fr;
   }
 
   .demo-lab__tabs {

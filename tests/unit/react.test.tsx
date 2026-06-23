@@ -9,7 +9,10 @@ import {
   OrderbookPanel,
   PolymarketProvider,
   ShareCard,
+  useMarket,
   usePolymarketBuilder,
+  usePriceHistory,
+  useShareImage,
 } from "@polymarket-ui-kit/react";
 import {
   fixtureComments,
@@ -61,6 +64,64 @@ function BuilderProbe() {
   const builder = usePolymarketBuilder();
   return <span>{builder?.code ?? "no-builder"}</span>;
 }
+
+function ShareImageProbe() {
+  const image = useShareImage({
+    attribution: "studio",
+    baseUrl: "https://example.com",
+    format: "svg",
+    slug: fixtureMarket.slug,
+    theme: "light",
+  });
+
+  return <a href={image.url}>{image.downloadName}</a>;
+}
+
+function PriceHistoryProbe() {
+  const history = usePriceHistory(
+    { tokenId: "token-yes", interval: "1w" },
+    { initialData: fixturePoints, refetchOnMount: false },
+  );
+
+  return <span>{history.data?.length ?? 0}</span>;
+}
+
+function DisabledMarketProbe() {
+  const market = useMarket(fixtureMarket.slug, { enabled: false });
+  return <span>{market.isLoading ? "loading" : "idle"}</span>;
+}
+
+describe("Public hooks", () => {
+  it("builds share image URLs with format, theme, and attribution", () => {
+    render(<ShareImageProbe />);
+    const link = screen.getByRole("link", { name: `${fixtureMarket.slug}.svg` });
+    const href = link.getAttribute("href") ?? "";
+
+    expect(href).toContain("https://example.com/api/og");
+    expect(href).toContain(`slug=${fixtureMarket.slug}`);
+    expect(href).toContain("format=svg");
+    expect(href).toContain("theme=light");
+    expect(href).toContain("attribution=studio");
+  });
+
+  it("uses initial price history without refetching on mount", () => {
+    render(<PriceHistoryProbe />);
+    expect(screen.getByText(String(fixturePoints.length))).toBeInTheDocument();
+  });
+
+  it("does not fetch disabled market hooks", () => {
+    const fetcher = vi.fn();
+
+    render(
+      <PolymarketProvider fetch={fetcher as typeof fetch}>
+        <DisabledMarketProbe />
+      </PolymarketProvider>,
+    );
+
+    expect(screen.getByText("idle")).toBeInTheDocument();
+    expect(fetcher).not.toHaveBeenCalled();
+  });
+});
 
 describe("Builder-code-aware UX", () => {
   it("renders builder fee disclosure", () => {

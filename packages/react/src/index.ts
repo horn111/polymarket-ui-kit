@@ -19,6 +19,7 @@ export * from "./hooks/useMarket";
 export * from "./hooks/useMarketWebSocket";
 export * from "./hooks/useMarkets";
 export * from "./hooks/useOrderbook";
+export * from "./hooks/usePriceHistory";
 export * from "./hooks/useShareImage";
 export * from "./providers/PolymarketProvider";
 export * from "./providers/ThemeProvider";

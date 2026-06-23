@@ -1,13 +1,14 @@
 import type { ListCommentsParams, MarketComment } from "@polymarket-ui-kit/core";
-import { useAsyncData } from "./useAsyncData";
+import { useAsyncData, type AsyncDataOptions } from "./useAsyncData";
 import { usePolymarketClient } from "../providers/PolymarketProvider";
+
+export type UseCommentsOptions = AsyncDataOptions<MarketComment[]>;
 
 export function useComments(
   params: ListCommentsParams,
-  initialData?: MarketComment[] | null,
+  input?: MarketComment[] | null | UseCommentsOptions,
 ) {
   const client = usePolymarketClient();
   const cacheKey = JSON.stringify(params);
-  return useAsyncData(() => client.listComments(params), [client, cacheKey], initialData);
+  return useAsyncData(() => client.listComments(params), [client, cacheKey], input);
 }
-

@@ -17,10 +17,11 @@ import {
   MarketCard,
   OrderbookPanel,
   ShareCard,
+  useShareImage,
 } from "@polymarket-ui-kit/react";
 import { sampleBuilder } from "../../components/sample-builder";
 
-type DemoTab = "market" | "share" | "builder" | "data" | "states";
+type DemoTab = "market" | "share" | "builder" | "export" | "data" | "states";
 type DemoState = "live" | "loading" | "error" | "empty";
 type DemoTheme = "light" | "dark";
 
@@ -204,6 +205,18 @@ export function InteractiveLab() {
   const market = markets.find((item) => item.slug === marketSlug) ?? markets[0]!;
   const points = useMemo(() => makePoints(market), [market]);
   const orderbook = useMemo(() => makeOrderbook(market), [market]);
+  const pngShareImage = useShareImage({
+    attribution: "pui-kit/demo",
+    format: "png",
+    slug: market.slug,
+    theme,
+  });
+  const svgShareImage = useShareImage({
+    attribution: "pui-kit/demo",
+    format: "svg",
+    slug: market.slug,
+    theme,
+  });
   const snippet = `import {
   MarketCard,
 } from "@polymarket-ui-kit/react";
@@ -270,7 +283,7 @@ export function MarketEmbed() {
 
       <div className="demo-lab__content">
         <div className="demo-lab__tabs" role="tablist" aria-label="Component preview">
-          {(["market", "share", "builder", "data", "states"] as DemoTab[]).map(
+          {(["market", "share", "builder", "export", "data", "states"] as DemoTab[]).map(
             (item) => (
               <button
                 aria-selected={tab === item}
@@ -315,6 +328,24 @@ export function MarketEmbed() {
                   }}
                   label="Estimated builder fee"
                 />
+              </div>
+            </div>
+          ) : null}
+          {tab === "export" ? (
+            <div className="demo-lab__export-grid">
+              <ShareCard market={market} attribution="pui-kit/demo" />
+              <div className="demo-export-panel">
+                <span>OG / Share export</span>
+                <strong>Generate a live social card from the same market data.</strong>
+                <div className="demo-export-actions">
+                  <a href={pngShareImage.url} rel="noreferrer" target="_blank">
+                    PNG route
+                  </a>
+                  <a href={svgShareImage.url} rel="noreferrer" target="_blank">
+                    SVG route
+                  </a>
+                </div>
+                <code>{`/api/og?slug=${market.slug}&format=png`}</code>
               </div>
             </div>
           ) : null}

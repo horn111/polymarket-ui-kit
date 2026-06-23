@@ -1,6 +1,10 @@
 import { fetchJson } from "../utils/fetcher";
 import { asNumber, isRecord } from "../utils/invariant";
 import type {
+  MarketPricePoint,
+  PriceHistoryParams,
+} from "../types/market";
+import type {
   OrderbookAdapterOptions,
   OrderbookLevel,
   OrderbookParams,
@@ -30,6 +34,58 @@ function normalizeLevels(value: unknown): OrderbookLevel[] {
   });
 
   return levels.filter((level): level is OrderbookLevel => level !== null);
+}
+
+function toIsoTimestamp(value: unknown): string | null {
+  const numeric = asNumber(value);
+
+  if (numeric !== null) {
+    const milliseconds = numeric < 1_000_000_000_000 ? numeric * 1000 : numeric;
+    const date = new Date(milliseconds);
+    return Number.isNaN(date.getTime()) ? null : date.toISOString();
+  }
+
+  if (typeof value === "string" && value.trim() !== "") {
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? value : date.toISOString();
+  }
+
+  return null;
+}
+
+export function normalizePriceHistory(
+  value: unknown,
+  outcomeId?: string | undefined,
+): MarketPricePoint[] {
+  const payload = isRecord(value)
+    ? value.history ?? value.prices ?? value.data
+    : value;
+
+  if (!Array.isArray(payload)) {
+    return [];
+  }
+
+  const points = payload.map((item): MarketPricePoint | null => {
+    const record = isRecord(item) ? item : {};
+    const timestamp = toIsoTimestamp(
+      record.t ?? record.timestamp ?? record.time ?? record.date,
+    );
+    const price = asNumber(record.p ?? record.price ?? record.value);
+
+    if (!timestamp || price === null) {
+      return null;
+    }
+
+    const point: MarketPricePoint = { timestamp, price };
+
+    if (outcomeId !== undefined) {
+      point.outcomeId = outcomeId;
+    }
+
+    return point;
+  });
+
+  return points.filter((point): point is MarketPricePoint => point !== null);
 }
 
 export async function getOrderbook(
@@ -77,4 +133,25 @@ export async function getMidpoint(
   );
 
   return isRecord(data) ? asNumber(data.mid ?? data.midpoint) : null;
+}
+
+export async function getPriceHistory(
+  params: PriceHistoryParams,
+  options: OrderbookAdapterOptions = {},
+): Promise<MarketPricePoint[]> {
+  const data = await fetchJson<unknown>(
+    `${options.clobBaseUrl ?? CLOB_BASE_URL}/prices-history`,
+    {
+      fetch: options.fetch,
+      query: {
+        market: params.tokenId,
+        startTs: params.startTs,
+        endTs: params.endTs,
+        interval: params.interval,
+        fidelity: params.fidelity,
+      },
+    },
+  );
+
+  return normalizePriceHistory(data, params.tokenId);
 }

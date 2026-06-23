@@ -1,76 +1,284 @@
-import { sampleMarket } from "../../../components/sample-data";
+import { ImageResponse } from "next/og";
+import {
+  clampProbability,
+  createShareCardSvg,
+  formatCompactNumber,
+  probabilityToCents,
+  type ShareImageFormat,
+  type ShareImageTheme,
+} from "@polymarket-ui-kit/core";
+import { loadPublicMarket } from "../../../components/live-data";
 
-function escapeSvg(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+export const runtime = "edge";
+export const revalidate = 300;
+
+const imageSize = {
+  width: 1200,
+  height: 630,
+};
+
+const themeTokens = {
+  dark: {
+    page: "#f6f8fa",
+    card: "#0d131a",
+    cardStroke: "#263241",
+    accent: "#2dd4bf",
+    accentSoft: "#123332",
+    accentStroke: "#245c55",
+    text: "#f8fafc",
+    muted: "#a7b4c2",
+    surface: "#1a2430",
+    surfaceStroke: "#344253",
+    barTrack: "#334155",
+  },
+  light: {
+    page: "#f7f8f5",
+    card: "#ffffff",
+    cardStroke: "#dce3e8",
+    accent: "#0f766e",
+    accentSoft: "#dff9ef",
+    accentStroke: "#b7ead7",
+    text: "#0f172a",
+    muted: "#667085",
+    surface: "#f8fafc",
+    surfaceStroke: "#d8e0e7",
+    barTrack: "#dbe5ea",
+  },
+};
+
+function resolveTheme(value: string | null): ShareImageTheme {
+  return value === "light" ? "light" : "dark";
 }
 
-function splitText(value: string, maxLength: number): string[] {
-  const lines: string[] = [];
-  let current = "";
-
-  for (const word of value.split(" ")) {
-    const next = current ? `${current} ${word}` : word;
-
-    if (next.length > maxLength && current) {
-      lines.push(current);
-      current = word;
-    } else {
-      current = next;
-    }
-  }
-
-  if (current) {
-    lines.push(current);
-  }
-
-  return lines.slice(0, 3);
+function resolveFormat(value: string | null): ShareImageFormat {
+  return value === "svg" ? "svg" : "png";
 }
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const slug = searchParams.get("slug") ?? sampleMarket.slug;
-  const market = { ...sampleMarket, slug };
-  const outcome = market.outcomes[0];
-  const probability = Math.round(Math.min(1, Math.max(0, outcome?.price ?? 0)) * 100);
-  const questionLines = splitText(market.question, 34)
-    .map(
-      (line, index) =>
-        `<text x="112" y="${222 + index * 64}" fill="#f8fafc" font-family="Inter, Arial" font-size="54" font-weight="850">${escapeSvg(line)}</text>`,
-    )
-    .join("");
+  const slug = searchParams.get("slug") ?? "who-will-win-the-2028-us-presidential-election";
+  const theme = resolveTheme(searchParams.get("theme"));
+  const format = resolveFormat(searchParams.get("format"));
+  const attribution = searchParams.get("attribution") ?? "polymarket-ui-kit";
+  const { market, source } = await loadPublicMarket(slug);
 
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#f6f8fa"/>
-  <rect x="70" y="70" width="1060" height="490" rx="28" fill="#0d131a" stroke="#263241"/>
-  <rect x="70" y="70" width="1060" height="8" rx="4" fill="#2dd4bf"/>
-  <rect x="280" y="70" width="210" height="8" fill="#f59e0b"/>
-  <rect x="490" y="70" width="210" height="8" fill="#60a5fa"/>
-  <text x="112" y="142" fill="#5eead4" font-family="Inter, Arial" font-size="32" font-weight="800">Polymarket</text>
-  <rect x="320" y="108" width="158" height="44" rx="22" fill="#123332" stroke="#245c55"/>
-  <text x="350" y="138" fill="#ccfbf1" font-family="Inter, Arial" font-size="22" font-weight="700">Live market</text>
-  <text x="936" y="138" fill="#a7b4c2" font-family="Inter, Arial" font-size="22">polymarket-ui-kit</text>
-  <text x="112" y="192" fill="#a7b4c2" font-family="Inter, Arial" font-size="22">${escapeSvg(market.category ?? "Prediction market")}</text>
-  ${questionLines}
-  <rect x="112" y="398" width="520" height="100" rx="12" fill="#1a2430" stroke="#344253"/>
-  <text x="142" y="438" fill="#a7b4c2" font-family="Inter, Arial" font-size="22">Leading outcome</text>
-  <text x="142" y="472" fill="#f8fafc" font-family="Inter, Arial" font-size="30" font-weight="750">${escapeSvg(outcome?.name ?? "Outcome")}</text>
-  <text x="470" y="476" fill="#ffffff" font-family="Inter, Arial" font-size="76" font-weight="900">${probability}c</text>
-  <rect x="688" y="408" width="330" height="18" rx="9" fill="#334155"/>
-  <rect x="688" y="408" width="${Math.round(330 * (probability / 100))}" height="18" rx="9" fill="#2dd4bf"/>
-  <text x="688" y="470" fill="#a7b4c2" font-family="Inter, Arial" font-size="22">Volume</text>
-  <text x="688" y="508" fill="#f8fafc" font-family="Inter, Arial" font-size="36" font-weight="850">$12.8M</text>
-  <text x="850" y="470" fill="#a7b4c2" font-family="Inter, Arial" font-size="22">Liquidity</text>
-  <text x="850" y="508" fill="#f8fafc" font-family="Inter, Arial" font-size="36" font-weight="850">$870K</text>
-  </svg>`;
+  if (format === "svg") {
+    const svg = createShareCardSvg(market, { theme, attribution });
 
-  return new Response(svg, {
-    headers: {
-      "content-type": "image/svg+xml",
-      "cache-control": "public, max-age=3600",
-    },
-  });
+    return new Response(svg, {
+      headers: {
+        "content-type": "image/svg+xml; charset=utf-8",
+        "cache-control": "public, max-age=300, stale-while-revalidate=3600",
+      },
+    });
+  }
+
+  const tokens = themeTokens[theme];
+  const leadingOutcome = market.outcomes[0];
+  const probability = leadingOutcome ? clampProbability(leadingOutcome.price ?? 0) : 0;
+  const stats = [
+    market.volume ? { label: "Volume", value: formatCompactNumber(market.volume) } : null,
+    market.liquidity
+      ? { label: "Liquidity", value: formatCompactNumber(market.liquidity) }
+      : null,
+    market.commentCount
+      ? { label: "Comments", value: formatCompactNumber(market.commentCount) }
+      : null,
+  ].filter((item): item is { label: string; value: string } => Boolean(item));
+  const visibleStats = stats.length
+    ? stats.slice(0, 2)
+    : [{ label: "Status", value: market.status }];
+
+  const response = new ImageResponse(
+    (
+      <div
+        style={{
+          alignItems: "center",
+          background: tokens.page,
+          display: "flex",
+          fontFamily: "Inter, Arial, sans-serif",
+          height: "100%",
+          justifyContent: "center",
+          width: "100%",
+        }}
+      >
+        <div
+          style={{
+            background: tokens.card,
+            border: `1px solid ${tokens.cardStroke}`,
+            borderRadius: 28,
+            display: "flex",
+            flexDirection: "column",
+            height: 490,
+            overflow: "hidden",
+            padding: "38px 42px",
+            position: "relative",
+            width: 1060,
+          }}
+        >
+          <div
+            style={{
+              background: tokens.accent,
+              display: "flex",
+              height: 8,
+              left: 0,
+              position: "absolute",
+              top: 0,
+              width: 1060,
+            }}
+          />
+          <div
+            style={{
+              background: "#f59e0b",
+              display: "flex",
+              height: 8,
+              left: 210,
+              position: "absolute",
+              top: 0,
+              width: 210,
+            }}
+          />
+          <div
+            style={{
+              background: "#60a5fa",
+              display: "flex",
+              height: 8,
+              left: 420,
+              position: "absolute",
+              top: 0,
+              width: 210,
+            }}
+          />
+
+          <div
+            style={{
+              alignItems: "center",
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
+            <div style={{ alignItems: "center", display: "flex", gap: 20 }}>
+              <span
+                style={{
+                  color: tokens.accent,
+                  fontSize: 32,
+                  fontWeight: 800,
+                }}
+              >
+                Polymarket
+              </span>
+              <span
+                style={{
+                  background: tokens.accentSoft,
+                  border: `1px solid ${tokens.accentStroke}`,
+                  borderRadius: 999,
+                  color: tokens.accent,
+                  fontSize: 22,
+                  fontWeight: 700,
+                  padding: "9px 26px",
+                }}
+              >
+                {source === "live" ? "Live market" : "Fixture fallback"}
+              </span>
+            </div>
+            <span style={{ color: tokens.muted, fontSize: 22 }}>{attribution}</span>
+          </div>
+
+          <span
+            style={{
+              color: tokens.muted,
+              fontSize: 22,
+              marginTop: 34,
+            }}
+          >
+            {market.category ?? "Prediction market"}
+          </span>
+
+          <div
+            style={{
+              color: tokens.text,
+              display: "flex",
+              flexDirection: "column",
+              fontSize: 54,
+              fontWeight: 850,
+              lineHeight: 1.08,
+              marginTop: 20,
+              maxWidth: 790,
+              whiteSpace: "pre-wrap",
+            }}
+          >
+            {market.question}
+          </div>
+
+          <div
+            style={{
+              alignItems: "center",
+              display: "flex",
+              justifyContent: "space-between",
+              marginTop: "auto",
+              width: "100%",
+            }}
+          >
+            <div
+              style={{
+                alignItems: "center",
+                background: tokens.surface,
+                border: `1px solid ${tokens.surfaceStroke}`,
+                borderRadius: 12,
+                display: "flex",
+                height: 100,
+                justifyContent: "space-between",
+                padding: "0 30px",
+                width: 520,
+              }}
+            >
+              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                <span style={{ color: tokens.muted, fontSize: 22 }}>Leading outcome</span>
+                <strong style={{ color: tokens.text, fontSize: 30 }}>
+                  {leadingOutcome?.name ?? "Outcome"}
+                </strong>
+              </div>
+              <strong style={{ color: tokens.text, fontSize: 76, fontWeight: 900 }}>
+                {probabilityToCents(leadingOutcome?.price)}
+              </strong>
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 28, width: 390 }}>
+              <div
+                style={{
+                  background: tokens.barTrack,
+                  borderRadius: 999,
+                  display: "flex",
+                  height: 18,
+                  overflow: "hidden",
+                  width: 330,
+                }}
+              >
+                <span
+                  style={{
+                    background: tokens.accent,
+                    display: "flex",
+                    width: `${Math.round(probability * 100)}%`,
+                  }}
+                />
+              </div>
+              <div style={{ display: "flex", gap: 46 }}>
+                {visibleStats.map((stat) => (
+                  <div key={stat.label} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                    <span style={{ color: tokens.muted, fontSize: 22 }}>{stat.label}</span>
+                    <strong style={{ color: tokens.text, fontSize: 38 }}>{stat.value}</strong>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ),
+    imageSize,
+  );
+
+  response.headers.set("cache-control", "public, max-age=300, stale-while-revalidate=3600");
+  return response;
 }

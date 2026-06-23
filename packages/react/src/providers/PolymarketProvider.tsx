@@ -1,6 +1,7 @@
 import {
   getMarketBySlug,
   getOrderbook,
+  getPriceHistory,
   listComments,
   listMarkets,
   type BuilderConfig,
@@ -9,6 +10,7 @@ import {
   type MarketAdapterOptions,
   type OrderbookAdapterOptions,
   type OrderbookParams,
+  type PriceHistoryParams,
 } from "@polymarket-ui-kit/core";
 import { createContext, useContext, useMemo, type PropsWithChildren } from "react";
 
@@ -17,6 +19,7 @@ export interface PolymarketClient {
   getMarketBySlug: typeof getMarketBySlug;
   listComments: typeof listComments;
   getOrderbook: typeof getOrderbook;
+  getPriceHistory: typeof getPriceHistory;
 }
 
 export interface PolymarketProviderProps extends PropsWithChildren {
@@ -39,14 +42,16 @@ export function PolymarketProvider({
 }: PolymarketProviderProps) {
   const client = useMemo<PolymarketClient>(() => {
     const marketOptions: MarketAdapterOptions = { fetch, gammaBaseUrl };
-    const orderbookOptions: OrderbookAdapterOptions = { fetch, clobBaseUrl };
+    const clobOptions: OrderbookAdapterOptions = { fetch, clobBaseUrl };
 
     return {
       listMarkets: (params?: ListMarketsParams) => listMarkets(params, marketOptions),
       getMarketBySlug: (slug: string) => getMarketBySlug(slug, marketOptions),
       listComments: (params?: ListCommentsParams) =>
         listComments(params, marketOptions),
-      getOrderbook: (params: OrderbookParams) => getOrderbook(params, orderbookOptions),
+      getOrderbook: (params: OrderbookParams) => getOrderbook(params, clobOptions),
+      getPriceHistory: (params: PriceHistoryParams) =>
+        getPriceHistory(params, clobOptions),
     };
   }, [clobBaseUrl, fetch, gammaBaseUrl]);
 
@@ -68,6 +73,7 @@ export function usePolymarketClient(): PolymarketClient {
       getMarketBySlug: (slug: string) => getMarketBySlug(slug),
       listComments: (params?: ListCommentsParams) => listComments(params),
       getOrderbook: (params: OrderbookParams) => getOrderbook(params),
+      getPriceHistory: (params: PriceHistoryParams) => getPriceHistory(params),
     };
   }
 

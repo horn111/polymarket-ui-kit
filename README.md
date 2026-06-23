@@ -12,10 +12,10 @@
 </p>
 
 <p align="center">
-  <a href="#60-second-quickstart">Quickstart</a> ·
-  <a href="#components">Components</a> ·
-  <a href="#data-architecture">Data</a> ·
-  <a href="#ssrisr">SSR/ISR</a> ·
+  <a href="#60-second-quickstart">Quickstart</a> В·
+  <a href="#components">Components</a> В·
+  <a href="#data-architecture">Data</a> В·
+  <a href="#ssrisr">SSR/ISR</a> В·
   <a href="#builder-and-grant-angle">Builder angle</a>
 </p>
 
@@ -109,6 +109,57 @@ export function MarketScreenshot({ market }) {
 }
 ```
 
+## Real Public Hooks And Share Export
+
+The kit now ships public, no-auth hooks for live market data, depth, comments,
+leaderboards, and historical CLOB price points. Hooks accept either old-style
+`initialData` or an options object for SSR/ISR fallbacks.
+
+```tsx
+import { MarketCard, useMarket, usePriceHistory } from "@polymarket-ui-kit/react";
+
+export function LiveMarket({ slug, tokenId, initialMarket }) {
+  const market = useMarket(slug, {
+    initialData: initialMarket,
+    refetchOnMount: false,
+    refetchIntervalMs: 60_000,
+  });
+  const history = usePriceHistory({ tokenId, interval: "1w", fidelity: 60 });
+
+  if (!market.data) return <div>Market unavailable</div>;
+  return <MarketCard market={market.data} points={history.data ?? []} />;
+}
+```
+
+For social previews and media embeds, generate PNG or SVG share images from the
+same market data.
+
+```tsx
+import { useShareImage } from "@polymarket-ui-kit/react";
+
+export function ShareLinks({ slug }) {
+  const png = useShareImage({ slug, format: "png", theme: "light" });
+  const svg = useShareImage({ slug, format: "svg", theme: "light" });
+
+  return <a href={png.url}>Open share image</a>;
+}
+```
+
+Server-side SVG export is framework-agnostic:
+
+```tsx
+import { createShareCardSvg, getMarketBySlug } from "@polymarket-ui-kit/core";
+
+export async function GET(request: Request) {
+  const slug = new URL(request.url).searchParams.get("slug")!;
+  const market = await getMarketBySlug(slug);
+  return new Response(createShareCardSvg(market, { theme: "light" }), {
+    headers: { "content-type": "image/svg+xml" },
+  });
+}
+```
+
+Read the deeper notes in [docs/share-export.md](docs/share-export.md).
 ## Builder-Code-Aware UX
 
 Builder Codes are public `bytes32` identifiers used by host applications when they submit Polymarket CLOB V2 orders. This kit does not place orders, but it helps builders make attribution and fee disclosure clear before handing off a trade intent.
@@ -172,7 +223,7 @@ does not place authenticated orders.
 | -------------- | -------------------------------------------------- | ---------------------- |
 | Gamma API      | markets, events, search, comments, profiles        | No                     |
 | Data API       | positions, trades, leaderboards, builder analytics | No                     |
-| CLOB API       | orderbooks, midpoints, spreads, price history      | Public for market data |
+| CLOB API       | orderbooks, midpoints, spreads, `prices-history`   | Public for market data |
 | CLOB WebSocket | live book and price updates                        | No for market channel  |
 
 The core package normalizes API responses into stable UI types so components can
@@ -227,6 +278,8 @@ The moat is not just visual polish. It is DX:
 ## Demo Links
 
 - Live demo: [polymarket-ui-kit-demo-fkan-chi.vercel.app](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/)
+- Demo OG PNG: [api/og](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/api/og?slug=who-will-win-the-2028-us-presidential-election&theme=light&format=png)
+- Demo OG SVG: [api/og?format=svg](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/api/og?slug=who-will-win-the-2028-us-presidential-election&theme=light&format=svg)
 - Docs app: `pnpm docs:dev`
 - Demo app: `pnpm demo:dev`
 - Storybook: `pnpm storybook`
