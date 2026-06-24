@@ -308,16 +308,42 @@
 }
 
 .pui-share-card {
-  background: linear-gradient(145deg, #0d131a 0%, #111827 52%, #162033 100%);
-  border-color: #263241;
-  box-shadow: 0 22px 46px rgba(15, 23, 42, 0.26);
-  color: #f8fafc;
+  --pui-share-card-bg: linear-gradient(180deg, #ffffff 0%, #f8faf7 100%);
+  --pui-share-card-border: #d8dee4;
+  --pui-share-card-shadow: 0 18px 42px rgba(15, 23, 42, 0.1);
+  --pui-share-card-brand: #0f766e;
+  --pui-share-card-muted: #667085;
+  --pui-share-card-status-bg: #e6fbf3;
+  --pui-share-card-status-border: #b7ead7;
+  --pui-share-card-status-text: #0f766e;
+  --pui-share-card-surface: #f8fafc;
+  --pui-share-card-surface-border: #d8dee4;
+  --pui-share-card-track: #dbe5ea;
+  background: var(--pui-share-card-bg);
+  border-color: var(--pui-share-card-border);
+  box-shadow: var(--pui-share-card-shadow);
+  color: var(--pui-text);
   display: grid;
   gap: var(--pui-space-5);
   min-height: 300px;
   overflow: hidden;
   padding: var(--pui-space-5);
   position: relative;
+}
+
+[data-pui-theme="dark"] .pui-share-card,
+.pui-share-card[data-pui-theme="dark"] {
+  --pui-share-card-bg: linear-gradient(145deg, #0d131a 0%, #111827 56%, #162033 100%);
+  --pui-share-card-border: #263241;
+  --pui-share-card-shadow: 0 22px 46px rgba(0, 0, 0, 0.32);
+  --pui-share-card-brand: #5eead4;
+  --pui-share-card-muted: #a7b4c2;
+  --pui-share-card-status-bg: rgba(94, 234, 212, 0.12);
+  --pui-share-card-status-border: rgba(94, 234, 212, 0.28);
+  --pui-share-card-status-text: #ccfbf1;
+  --pui-share-card-surface: rgba(255, 255, 255, 0.055);
+  --pui-share-card-surface-border: rgba(226, 232, 240, 0.1);
+  --pui-share-card-track: rgba(148, 163, 184, 0.22);
 }
 
 .pui-share-card::before {
@@ -354,27 +380,27 @@
 }
 
 .pui-share-card__brand {
-  color: #5eead4;
+  color: var(--pui-share-card-brand);
   font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0;
 }
 
 .pui-share-card__status {
-  background: rgba(94, 234, 212, 0.12);
-  border: 1px solid rgba(94, 234, 212, 0.28);
+  background: var(--pui-share-card-status-bg);
+  border: 1px solid var(--pui-share-card-status-border);
   border-radius: 999px;
-  color: #ccfbf1;
+  color: var(--pui-share-card-status-text);
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 750;
   line-height: 1;
-  padding: 0.35rem 0.5rem;
+  padding: 0.38rem 0.58rem;
 }
 
 .pui-share-card__attribution,
 .pui-share-card__label,
 .pui-share-card__stats dt {
-  color: #a7b4c2;
+  color: var(--pui-share-card-muted);
   font-size: 0.76rem;
 }
 
@@ -389,16 +415,16 @@
 }
 
 .pui-share-card__market h2 {
-  color: #f8fafc;
-  font-size: clamp(1.35rem, 4vw, 1.9rem);
+  color: var(--pui-text);
+  font-size: clamp(1.4rem, 4vw, 1.95rem);
   font-weight: 850;
-  line-height: 1.12;
+  line-height: 1.08;
   margin: 0;
 }
 
 .pui-share-card__quote {
-  background: rgba(255, 255, 255, 0.055);
-  border: 1px solid rgba(226, 232, 240, 0.1);
+  background: var(--pui-share-card-surface);
+  border: 1px solid var(--pui-share-card-surface-border);
   border-radius: var(--pui-radius-md);
   display: grid;
   gap: var(--pui-space-3);
@@ -406,14 +432,14 @@
 }
 
 .pui-share-card__quote strong {
-  color: #f8fafc;
+  color: var(--pui-text);
   display: block;
   font-size: 1rem;
   margin-top: 0.25rem;
 }
 
 .pui-share-card__price {
-  color: #ffffff;
+  color: var(--pui-text);
   font-size: 3.25rem;
   font-weight: 900;
   letter-spacing: 0;
@@ -421,7 +447,7 @@
 }
 
 .pui-share-card__bar {
-  background: rgba(148, 163, 184, 0.22);
+  background: var(--pui-share-card-track);
   border-radius: 999px;
   height: 0.5rem;
   overflow: hidden;
@@ -442,20 +468,19 @@
 }
 
 .pui-share-card__stats div {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(226, 232, 240, 0.09);
+  background: var(--pui-share-card-surface);
+  border: 1px solid var(--pui-share-card-surface-border);
   border-radius: var(--pui-radius-sm);
   min-width: 0;
   padding: 0.65rem 0.7rem;
 }
 
 .pui-share-card__stats dd {
-  color: #f8fafc;
+  color: var(--pui-text);
   font-size: 0.98rem;
   font-weight: 800;
   margin: 0.18rem 0 0;
 }
-
 .pui-trade-drawer {
   bottom: 0;
   left: 0;

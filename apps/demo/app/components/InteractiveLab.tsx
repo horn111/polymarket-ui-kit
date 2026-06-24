@@ -217,6 +217,7 @@ export function InteractiveLab() {
     slug: market.slug,
     theme,
   });
+  const exportPath = `/api/og?slug=${market.slug}&theme=${theme}&format=png`;
   const snippet = `import {
   MarketCard,
 } from "@polymarket-ui-kit/react";
@@ -281,7 +282,7 @@ export function MarketEmbed() {
         </button>
       </div>
 
-      <div className="demo-lab__content">
+      <div className="demo-lab__content" data-tab={tab}>
         <div className="demo-lab__tabs" role="tablist" aria-label="Component preview">
           {(["market", "share", "builder", "export", "data", "states"] as DemoTab[]).map(
             (item) => (
@@ -302,7 +303,18 @@ export function MarketEmbed() {
         <div className="demo-lab__preview" data-pui-theme={theme}>
           {tab === "market" ? <MarketCard market={market} points={points} /> : null}
           {tab === "share" ? (
-            <ShareCard market={market} attribution="pui-kit/demo" />
+            <div className="demo-share-stage">
+              <ShareCard market={market} attribution="pui-kit/demo" />
+              <div className="demo-share-meta" aria-label="Share card metadata">
+                <span>{theme} theme</span>
+                <span>{market.category ?? "Market"}</span>
+                <span>
+                  {market.outcomes[0]?.price
+                    ? `${Math.round(market.outcomes[0].price * 100)}c`
+                    : "live"}
+                </span>
+              </div>
+            </div>
           ) : null}
           {tab === "builder" ? (
             <div className="demo-lab__builder-grid">
@@ -333,10 +345,16 @@ export function MarketEmbed() {
           ) : null}
           {tab === "export" ? (
             <div className="demo-lab__export-grid">
-              <ShareCard market={market} attribution="pui-kit/demo" />
+              <ShareCard
+                className="demo-export-card"
+                market={market}
+                attribution="pui-kit/demo"
+              />
               <div className="demo-export-panel">
-                <span>OG / Share export</span>
-                <strong>Generate a live social card from the same market data.</strong>
+                <div className="demo-export-panel__header">
+                  <span>OG / SHARE EXPORT</span>
+                  <strong>One slug. PNG + SVG.</strong>
+                </div>
                 <div className="demo-export-actions">
                   <a href={pngShareImage.url} rel="noreferrer" target="_blank">
                     PNG route
@@ -345,7 +363,21 @@ export function MarketEmbed() {
                     SVG route
                   </a>
                 </div>
-                <code>{`/api/og?slug=${market.slug}&format=png`}</code>
+                <div className="demo-export-specs" aria-label="Export details">
+                  <div>
+                    <span>Theme</span>
+                    <strong>{theme}</strong>
+                  </div>
+                  <div>
+                    <span>Source</span>
+                    <strong>public</strong>
+                  </div>
+                  <div>
+                    <span>Fallback</span>
+                    <strong>ready</strong>
+                  </div>
+                </div>
+                <code>{exportPath}</code>
               </div>
             </div>
           ) : null}

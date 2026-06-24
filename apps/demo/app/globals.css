@@ -546,6 +546,20 @@ a {
   min-height: 560px;
 }
 
+.demo-lab__content[data-tab="share"],
+.demo-lab__content[data-tab="export"] {
+  grid-template-columns: 180px minmax(0, 1fr);
+}
+
+.demo-lab__content[data-tab="share"] .demo-lab__snippet,
+.demo-lab__content[data-tab="export"] .demo-lab__snippet {
+  display: none;
+}
+
+.demo-lab__content[data-tab="share"] .demo-lab__preview,
+.demo-lab__content[data-tab="export"] .demo-lab__preview {
+  padding: 34px;
+}
 .demo-lab__tabs {
   border-right: 1px solid var(--demo-light-line);
   display: grid;
@@ -613,43 +627,154 @@ a {
   padding: 16px;
 }
 
-.demo-lab__export-grid {
+.demo-share-stage {
   align-content: center;
   display: grid;
-  gap: 18px;
-  grid-template-columns: minmax(280px, 1fr) minmax(260px, 0.72fr);
+  gap: 14px;
+  justify-items: center;
+  width: 100%;
+}
+
+.demo-share-stage .pui-share-card {
+  max-width: 640px;
+  min-height: 390px;
+  width: 100%;
+}
+
+.demo-share-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.demo-share-meta span {
+  background: #ffffff;
+  border: 1px solid #d6d3d1;
+  border-radius: 999px;
+  color: #57534e;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.42rem 0.62rem;
+  text-transform: uppercase;
+}
+
+[data-pui-theme="dark"] .demo-share-meta span {
+  background: #101720;
+  border-color: #263241;
+  color: #a7b4c2;
+}
+
+.demo-lab__export-grid {
+  align-items: stretch;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: minmax(360px, 1fr) minmax(280px, 0.72fr);
+  justify-self: center;
+  max-width: 900px;
   width: 100%;
 }
 
 .demo-lab__export-grid .pui-share-card {
-  min-height: 340px;
+  min-height: 410px;
 }
 
 .demo-export-panel {
-  align-content: center;
-  background: var(--pui-bg);
-  border: 1px solid var(--pui-border);
+  align-content: stretch;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid #d8dee4;
   border-radius: 8px;
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08);
   color: var(--pui-text);
   display: grid;
-  gap: 16px;
+  gap: 18px;
+  grid-template-rows: auto auto auto minmax(0, 1fr);
   min-width: 0;
   padding: 22px;
 }
 
-.demo-export-panel span {
+[data-pui-theme="dark"] .demo-export-panel {
+  background: linear-gradient(145deg, #0d131a 0%, #111827 100%);
+  border-color: #263241;
+  box-shadow: 0 22px 46px rgba(0, 0, 0, 0.3);
+}
+
+.demo-export-panel__header {
+  display: grid;
+  gap: 8px;
+}
+
+.demo-export-panel__header span {
   color: var(--pui-accent);
-  font-size: 0.78rem;
-  font-weight: 850;
+  font-size: 0.74rem;
+  font-weight: 900;
   text-transform: uppercase;
 }
 
-.demo-export-panel strong {
-  font-size: 1.08rem;
-  line-height: 1.35;
+.demo-export-panel__header strong {
+  color: var(--pui-text);
+  font-size: 1.42rem;
+  font-weight: 900;
+  line-height: 1.08;
+}
+
+.demo-export-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.demo-export-actions a {
+  align-items: center;
+  background: var(--pui-text);
+  border: 1px solid var(--pui-text);
+  border-radius: 6px;
+  color: var(--pui-bg);
+  display: inline-flex;
+  font-size: 0.82rem;
+  font-weight: 850;
+  min-height: 38px;
+  padding: 0 13px;
+  text-decoration: none;
+}
+
+.demo-export-actions a:nth-child(2) {
+  background: transparent;
+  border-color: var(--pui-border-strong);
+  color: var(--pui-text);
+}
+
+.demo-export-specs {
+  border-bottom: 1px solid var(--pui-border);
+  border-top: 1px solid var(--pui-border);
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 14px 0;
+}
+
+.demo-export-specs div {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.demo-export-specs span {
+  color: var(--pui-text-muted);
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.demo-export-specs strong {
+  color: var(--pui-text);
+  font-size: 0.9rem;
+  font-weight: 850;
+  text-transform: capitalize;
 }
 
 .demo-export-panel code {
+  align-self: end;
   background: var(--pui-bg-muted);
   border: 1px solid var(--pui-border);
   border-radius: 6px;
@@ -662,23 +787,6 @@ a {
   padding: 10px;
 }
 
-.demo-export-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.demo-export-actions a {
-  background: var(--pui-text);
-  border: 1px solid var(--pui-text);
-  border-radius: 6px;
-  color: var(--pui-bg);
-  font-size: 0.82rem;
-  font-weight: 850;
-  min-height: 36px;
-  padding: 9px 12px;
-  text-decoration: none;
-}
 .demo-lab__data-grid {
   align-content: start;
   display: grid;
