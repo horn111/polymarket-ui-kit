@@ -25,6 +25,10 @@ type DemoTab = "market" | "share" | "builder" | "export" | "data" | "states";
 type DemoState = "live" | "loading" | "error" | "empty";
 type DemoTheme = "light" | "dark";
 
+interface InteractiveLabProps {
+  theme: DemoTheme;
+}
+
 const markets: PolymarketMarket[] = [
   {
     id: "btc-ath-2026",
@@ -185,20 +189,19 @@ function MessageState({ tone }: { tone: "empty" | "error" }) {
   return (
     <div className="demo-message-state" data-tone={tone}>
       <strong>
-        {tone === "error" ? "Market data unavailable" : "No market selected"}
+        {tone === "error" ? "MARKET DATA UNAVAILABLE" : "NO MARKET SELECTED"}
       </strong>
       <p>
         {tone === "error"
-          ? "Components keep layout stable and expose a clear fallback state."
-          : "Empty states are part of the UI kit, not an afterthought."}
+          ? "Fallback states preserve the grid and keep the interface operational."
+          : "Empty states remain structural, not decorative."}
       </p>
     </div>
   );
 }
 
-export function InteractiveLab() {
+export function InteractiveLab({ theme }: InteractiveLabProps) {
   const [marketSlug, setMarketSlug] = useState(markets[0]?.slug ?? "");
-  const [theme, setTheme] = useState<DemoTheme>("light");
   const [tab, setTab] = useState<DemoTab>("market");
   const [state, setState] = useState<DemoState>("live");
   const [copied, setCopied] = useState(false);
@@ -218,17 +221,10 @@ export function InteractiveLab() {
     theme,
   });
   const exportPath = `/api/og?slug=${market.slug}&theme=${theme}&format=png`;
-  const snippet = `import {
-  MarketCard,
-} from "@polymarket-ui-kit/react";
+  const snippet = `import { MarketCard } from "@polymarket-ui-kit/react";
 
-export function MarketEmbed() {
-  return (
-    <MarketCard
-      market={market}
-      points={points}
-    />
-  );
+export function MarketEmbed({ market, points }) {
+  return <MarketCard market={market} points={points} />;
 }`;
 
   async function copySnippet() {
@@ -244,14 +240,14 @@ export function MarketEmbed() {
 
   return (
     <section className="demo-lab" aria-labelledby="interactive-lab-title">
-      <div className="demo-lab__heading">
-        <p className="demo-kicker">05. INTERACTIVE LAB</p>
-        <h2 id="interactive-lab-title">Builder Preview Lab</h2>
-      </div>
+      <header className="demo-lab__heading">
+        <p className="demo-kicker">08 / OPERATOR CONSOLE</p>
+        <h2 id="interactive-lab-title">BUILDER PREVIEW LAB</h2>
+      </header>
 
       <div className="demo-lab__toolbar">
         <label>
-          Market
+          MARKET INPUT
           <select
             onChange={(event) => setMarketSlug(event.target.value)}
             value={marketSlug}
@@ -264,54 +260,40 @@ export function MarketEmbed() {
           </select>
         </label>
 
-        <div className="demo-segmented" role="group" aria-label="Theme">
-          {(["light", "dark"] as DemoTheme[]).map((item) => (
-            <button
-              data-active={theme === item ? "true" : undefined}
-              key={item}
-              onClick={() => setTheme(item)}
-              type="button"
-            >
-              {item}
-            </button>
-          ))}
-        </div>
-
         <button className="demo-copy-button" onClick={copySnippet} type="button">
-          {copied ? "Copied" : "Copy snippet"}
+          {copied ? "COPIED" : "COPY SNIPPET"}
         </button>
       </div>
 
       <div className="demo-lab__content" data-tab={tab}>
-        <div className="demo-lab__tabs" role="tablist" aria-label="Component preview">
+        <nav className="demo-lab__tabs" aria-label="Component preview">
           {(["market", "share", "builder", "export", "data", "states"] as DemoTab[]).map(
             (item) => (
               <button
-                aria-selected={tab === item}
+                aria-current={tab === item ? "page" : undefined}
                 data-active={tab === item ? "true" : undefined}
                 key={item}
                 onClick={() => setTab(item)}
-                role="tab"
                 type="button"
               >
                 {item}
               </button>
             ),
           )}
-        </div>
+        </nav>
 
-        <div className="demo-lab__preview" data-pui-theme={theme}>
+        <div className="demo-lab__preview">
           {tab === "market" ? <MarketCard market={market} points={points} /> : null}
           {tab === "share" ? (
             <div className="demo-share-stage">
               <ShareCard market={market} attribution="pui-kit/demo" />
               <div className="demo-share-meta" aria-label="Share card metadata">
-                <span>{theme} theme</span>
-                <span>{market.category ?? "Market"}</span>
+                <span>{theme.toUpperCase()} SUBSTRATE</span>
+                <span>{market.category ?? "MARKET"}</span>
                 <span>
                   {market.outcomes[0]?.price
-                    ? `${Math.round(market.outcomes[0].price * 100)}c`
-                    : "live"}
+                    ? `${Math.round(market.outcomes[0].price * 100)}C`
+                    : "LIVE"}
                 </span>
               </div>
             </div>
@@ -353,28 +335,28 @@ export function MarketEmbed() {
               <div className="demo-export-panel">
                 <div className="demo-export-panel__header">
                   <span>OG / SHARE EXPORT</span>
-                  <strong>One slug. PNG + SVG.</strong>
+                  <strong>ONE SLUG. PNG + SVG.</strong>
                 </div>
                 <div className="demo-export-actions">
                   <a href={pngShareImage.url} rel="noreferrer" target="_blank">
-                    PNG route
+                    PNG ROUTE
                   </a>
                   <a href={svgShareImage.url} rel="noreferrer" target="_blank">
-                    SVG route
+                    SVG ROUTE
                   </a>
                 </div>
                 <div className="demo-export-specs" aria-label="Export details">
                   <div>
-                    <span>Theme</span>
-                    <strong>{theme}</strong>
+                    <span>SUBSTRATE</span>
+                    <strong>{theme === "dark" ? "DARK" : "PRINT"}</strong>
                   </div>
                   <div>
-                    <span>Source</span>
-                    <strong>public</strong>
+                    <span>SOURCE</span>
+                    <strong>PUBLIC</strong>
                   </div>
                   <div>
-                    <span>Fallback</span>
-                    <strong>ready</strong>
+                    <span>FALLBACK</span>
+                    <strong>READY</strong>
                   </div>
                 </div>
                 <code>{exportPath}</code>

@@ -1,13 +1,19 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import type { PolymarketMarket } from "@polymarket-ui-kit/core";
 import {
   BuilderBadge,
+  BuilderFeeDisclosure,
   FeePill,
   MarketCard,
+  OrderbookPanel,
   ProbabilityChart,
+  ShareCard,
 } from "@polymarket-ui-kit/react";
 import { InteractiveLab } from "./components/InteractiveLab";
 import { sampleBuilder } from "../components/sample-builder";
-import { samplePoints } from "../components/sample-data";
+import { sampleOrderbook, samplePoints } from "../components/sample-data";
 
 const market: PolymarketMarket = {
   id: "btc-ath-2026",
@@ -46,63 +52,142 @@ const chartSeries = [
   {
     id: "yes",
     label: "Yes",
-    color: "#0f766e",
+    color: "#2dd4bf",
     points: trendPoints,
   },
 ];
 
-const routeLinks = [
-  { label: "Market route", href: `/market/${market.slug}` },
-  { label: "Embed route", href: `/embed/${market.slug}` },
-  { label: "OG image", href: `/api/og?slug=${market.slug}` },
-];
+function getRouteLinks(theme: DemoTheme) {
+  return [
+    { label: "MARKET ROUTE", href: `/market/${market.slug}` },
+    { label: "EMBED ROUTE", href: `/embed/${market.slug}` },
+    { label: "OG PNG", href: `/api/og?slug=${market.slug}&theme=${theme}&format=png` },
+    { label: "OG SVG", href: `/api/og?slug=${market.slug}&theme=${theme}&format=svg` },
+  ];
+}
 
-function OutcomeButton({
-  active,
-  disabled,
-  label,
-  price,
-}: {
-  active?: boolean;
-  disabled?: boolean;
-  label: string;
-  price: string;
-}) {
+type DemoTheme = "light" | "dark";
+
+function SpecCell({ label, value }: { label: string; value: string }) {
   return (
-    <div
-      className="demo-outcome"
-      data-active={active ? "true" : undefined}
-      data-disabled={disabled ? "true" : undefined}
-    >
+    <div className="demo-spec-cell">
       <span>{label}</span>
-      <strong>{price}</strong>
+      <strong>{value}</strong>
     </div>
   );
 }
 
 export default function DemoHome() {
+  const [theme, setTheme] = useState<DemoTheme>("light");
+  const routeLinks = getRouteLinks(theme);
+
+  useEffect(() => {
+    document.documentElement.dataset.demoTheme = theme;
+    return () => {
+      delete document.documentElement.dataset.demoTheme;
+    };
+  }, [theme]);
+
   return (
     <>
-      <section
-        className="demo-board demo-board--light"
-        aria-label="Light theme system spec"
-      >
-        <header className="demo-board__header">
-          <h1>POLYMARKET UI KIT</h1>
-          <p>Headless React components, data hooks & shadcn-style registry items</p>
-          <span>v1.0.0 / SYSTEM_SPEC</span>
+      <section className="demo-industrial" aria-label="Polymarket UI Kit system sheet">
+        <header className="demo-industrial__masthead">
+          <span>POLYMARKET UI KIT</span>
+          <span>PUBLIC BUILD / REV 0.4</span>
+          <span>READ-FIRST INTERFACE</span>
+          <div className="demo-theme-toggle" role="group" aria-label="Demo theme">
+            {(["light", "dark"] as DemoTheme[]).map((item) => (
+              <button
+                data-active={theme === item ? "true" : undefined}
+                key={item}
+                onClick={() => setTheme(item)}
+                type="button"
+              >
+                {item}
+              </button>
+            ))}
+          </div>
         </header>
 
-        <div className="demo-board__grid demo-board__grid--light">
-          <article className="demo-panel demo-panel--intro">
-            <p className="demo-kicker">01. DESIGN SYSTEM SPECIFICATION</p>
-            <h2>Tailwind CSS - shadcn/ui - React components</h2>
+        <div className="demo-industrial__hero">
+          <div className="demo-hero-copy">
+            <p className="demo-kicker">01 / INDUSTRIAL MARKET INTERFACE</p>
+            <h1>PUBLIC MARKET UI LAYER</h1>
             <p>
-              A minimalist, type-safe registry designed to easily drop prediction market
-              UI into any React application. Simple default styling with complete layout
-              overrides via CSS variables.
+              React primitives, data hooks, builder-code disclosure, and share export
+              surfaces for Polymarket-native products.
             </p>
-            <div className="demo-pill-row">
+          </div>
+          <div className="demo-hero-index" aria-hidden="true">
+            01
+          </div>
+        </div>
+
+        <div className="demo-spec-grid" aria-label="System capabilities">
+          <SpecCell label="COMPONENTS" value="12" />
+          <SpecCell label="DATA MODE" value="PUBLIC" />
+          <SpecCell label="EXPORT" value="PNG/SVG" />
+          <SpecCell label="ORDERS" value="NONE" />
+        </div>
+
+        <div className="demo-industrial__grid">
+          <article className="demo-module demo-module--market">
+            <div className="demo-module__label">
+              <span>02</span>
+              <strong>MARKET CARD</strong>
+            </div>
+            <MarketCard market={market} points={trendPoints} />
+          </article>
+
+          <article className="demo-module demo-module--code">
+            <div className="demo-module__label">
+              <span>03</span>
+              <strong>INTEGRATION SAMPLE</strong>
+            </div>
+            <pre>
+              <code>{`import { MarketCard } from "@polymarket-ui-kit/react";
+
+export function Surface({ market, points }) {
+  return <MarketCard market={market} points={points} />;
+}`}</code>
+            </pre>
+            <nav aria-label="Demo routes" className="demo-route-row">
+              {routeLinks.map((link) => (
+                <a href={link.href} key={link.href}>
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+          </article>
+
+          <article className="demo-module demo-module--chart">
+            <div className="demo-module__label">
+              <span>04</span>
+              <strong>PRICE HISTORY</strong>
+            </div>
+            <ProbabilityChart height={210} series={chartSeries} />
+          </article>
+
+          <article className="demo-module demo-module--share">
+            <div className="demo-module__label">
+              <span>05</span>
+              <strong>SHARE EXPORT</strong>
+            </div>
+            <ShareCard market={market} attribution="pui-kit/demo" />
+          </article>
+
+          <article className="demo-module demo-module--builder">
+            <div className="demo-module__label">
+              <span>06</span>
+              <strong>BUILDER DISCLOSURE</strong>
+            </div>
+            <BuilderFeeDisclosure
+              builder={sampleBuilder}
+              notional={100}
+              price={market.outcomes[0]?.price ?? undefined}
+              side="taker"
+            />
+            <div className="demo-builder-inline">
               <BuilderBadge
                 builder={sampleBuilder}
                 feeBps={sampleBuilder.takerFeeBps}
@@ -114,121 +199,24 @@ export default function DemoHome() {
                   builderFeeSide: "taker",
                   builderTakerFeeBps: sampleBuilder.takerFeeBps,
                   notional: 100,
-                  platformFeeRate: 0,
+                  price: market.outcomes[0]?.price ?? undefined,
                 }}
-                label="Taker Fee"
+                label="Estimated builder fee"
               />
-              <span className="demo-status-pill">Resolved</span>
             </div>
           </article>
 
-          <article className="demo-panel demo-panel--market">
-            <p className="demo-kicker">03. COMPONENT: MARKET_CARD</p>
-            <MarketCard market={market} points={trendPoints} />
-          </article>
-
-          <article className="demo-panel demo-panel--code">
-            <p className="demo-kicker">02. INTEGRATION SAMPLE</p>
-            <pre>
-              <code>{`import { MarketCard } from "@polymarket-ui-kit/react";
-
-export default function App() {
-  return (
-    <MarketCard slug="btc-ath-2026" theme="light" />
-  );
-}`}</code>
-            </pre>
-          </article>
-
-          <article className="demo-panel demo-panel--chart">
-            <div className="demo-panel__topline">
-              <p className="demo-kicker">04. COMPONENT: PROBABILITY_CHART</p>
-              <strong>68% probability</strong>
+          <article className="demo-module demo-module--book">
+            <div className="demo-module__label">
+              <span>07</span>
+              <strong>ORDERBOOK SNAPSHOT</strong>
             </div>
-            <ProbabilityChart height={155} series={chartSeries} />
+            <OrderbookPanel orderbook={sampleOrderbook} />
           </article>
         </div>
       </section>
 
-      <h2 className="demo-theme-title">Dark Theme</h2>
-
-      <section
-        className="demo-board demo-board--dark"
-        aria-label="Dark theme design system"
-        data-pui-theme="dark"
-      >
-        <header className="demo-board__header">
-          <h1>POLYMARKET UI KIT / DESIGN SYSTEM</h1>
-          <p>Design token specification and interactive component states</p>
-          <span>v1.0.0 / SYSTEM_SPEC</span>
-        </header>
-
-        <div className="demo-board__grid demo-board__grid--dark">
-          <article className="demo-panel demo-panel--tokens">
-            <p className="demo-kicker">01. DESIGN TOKENS</p>
-            <h3>COLOR PALETTE</h3>
-            <div className="demo-token-row">
-              <span data-token="accent">--pui-accent</span>
-              <span data-token="positive">--pui-positive</span>
-              <span data-token="negative">--pui-negative</span>
-            </div>
-            <h3>TYPOGRAPHY SCALE</h3>
-            <ul className="demo-token-list">
-              <li>
-                <code>xs: 12px</code> active status, categories
-              </li>
-              <li>
-                <code>sm: 14px</code> volume, dates, small buttons
-              </li>
-              <li>
-                <code>base: 16px</code> market titles, main labels
-              </li>
-              <li>
-                <code>lg: 18px</code> headers, odds titles
-              </li>
-            </ul>
-            <h3>SPACING SCALE</h3>
-            <div className="demo-space-row">
-              <span>space-1</span>
-              <span>space-2</span>
-              <span>space-3</span>
-              <span>space-4</span>
-            </div>
-          </article>
-
-          <article className="demo-panel demo-panel--variants">
-            <p className="demo-kicker">03. COMPONENT VARIANTS: OUTCOME_BUTTON</p>
-            <div className="demo-outcome-row">
-              <OutcomeButton label="Yes" price="68c" />
-              <OutcomeButton active label="Yes" price="68c" />
-              <OutcomeButton disabled label="No" price="32c" />
-            </div>
-          </article>
-
-          <article className="demo-panel demo-panel--dark-code">
-            <p className="demo-kicker">02. REACT IMPLEMENTATION</p>
-            <pre>
-              <code>{`import { MarketCard } from "@polymarket-ui-kit/react";
-
-<MarketCard slug="btc-ath-2026" theme="dark" />`}</code>
-            </pre>
-            <nav aria-label="Demo routes" className="demo-route-row">
-              {routeLinks.map((link) => (
-                <a href={link.href} key={link.href}>
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-          </article>
-
-          <article className="demo-panel demo-panel--dark-market">
-            <p className="demo-kicker">04. COMPONENT: MARKET_CARD (DARK THEME)</p>
-            <MarketCard market={market} points={trendPoints} />
-          </article>
-        </div>
-      </section>
-
-      <InteractiveLab />
+      <InteractiveLab theme={theme} />
     </>
   );
 }

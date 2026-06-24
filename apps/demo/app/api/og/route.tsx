@@ -129,7 +129,7 @@ export async function GET(request: Request) {
           />
           <div
             style={{
-              background: "#f59e0b",
+              background: "#2dd4bf",
               display: "flex",
               height: 8,
               left: 210,
