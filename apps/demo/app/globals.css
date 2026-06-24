@@ -794,6 +794,28 @@ html[data-demo-theme="dark"] .demo-shell .pui-share-card {
   background: var(--demo-red);
 }
 
+.demo-shell .pui-orderbook {
+  --pui-positive-soft: #2dd4bf;
+  --pui-negative-soft: #ff5f73;
+}
+
+.demo-shell .pui-orderbook__side > .pui-muted {
+  color: var(--demo-ink);
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.demo-shell .pui-orderbook__row {
+  background: var(--demo-paper);
+  border: 1px solid color-mix(in srgb, var(--demo-line) 36%, transparent);
+  font-weight: 850;
+  min-height: 34px;
+}
+
+.demo-shell .pui-orderbook__row span:not(.pui-orderbook__depth) {
+  color: var(--demo-ink);
+}
+
 .demo-shell .pui-sparkline path,
 .demo-shell .pui-chart path {
   color: var(--demo-red);
