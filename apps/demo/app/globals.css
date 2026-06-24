@@ -13,12 +13,12 @@
   --demo-line: #050505;
   --demo-red: #2dd4bf;
   --demo-soft-red: #ccfbf1;
-  --demo-action-bg: #050505;
-  --demo-action-fg: #f4f4f0;
-  --demo-action-alt-bg: #f4f4f0;
+  --demo-action-bg: #f4f4f0;
+  --demo-action-fg: #050505;
+  --demo-action-alt-bg: #ffffff;
   --demo-action-alt-fg: #050505;
-  --demo-code-bg: #050505;
-  --demo-code-fg: #f4f4f0;
+  --demo-code-bg: #fbfaf5;
+  --demo-code-fg: #050505;
 }
 
 html[data-demo-theme="dark"] {
