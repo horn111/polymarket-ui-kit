@@ -78,7 +78,7 @@ function SpecCell({ label, value }: { label: string; value: string }) {
 }
 
 export default function DemoHome() {
-  const [theme, setTheme] = useState<DemoTheme>("light");
+  const [theme, setTheme] = useState<DemoTheme>("dark");
   const routeLinks = getRouteLinks(theme);
 
   useEffect(() => {
@@ -95,6 +95,14 @@ export default function DemoHome() {
           <span>POLYMARKET UI KIT</span>
           <span>PUBLIC BUILD / REV 0.4</span>
           <span>READ-FIRST INTERFACE</span>
+          <a
+            className="demo-star-link"
+            href="https://github.com/horn111/polymarket-ui-kit"
+            rel="noreferrer"
+            target="_blank"
+          >
+            Star Repo
+          </a>
           <div className="demo-theme-toggle" role="group" aria-label="Demo theme">
             {(["light", "dark"] as DemoTheme[]).map((item) => (
               <button
