@@ -97,11 +97,15 @@ describe("share image export", () => {
     });
     const svg = createShareCardSvg(market, {
       attribution: "test-studio",
+      statusLabel: "Fixture fallback",
       theme: "light",
     });
 
     expect(svg).toContain('role="img"');
     expect(svg).toContain("test-studio");
+    expect(svg).toContain("Fixture fallback");
+    expect(svg).toContain("#2dd4bf");
+    expect(svg).not.toContain("#f59e0b");
     expect(svg).toContain("&lt;script&gt;");
     expect(svg).not.toContain("<script>");
   });

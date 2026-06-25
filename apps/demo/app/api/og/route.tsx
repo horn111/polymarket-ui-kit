@@ -63,7 +63,11 @@ export async function GET(request: Request) {
   const { market, source } = await loadPublicMarket(slug);
 
   if (format === "svg") {
-    const svg = createShareCardSvg(market, { theme, attribution });
+    const svg = createShareCardSvg(market, {
+      attribution,
+      statusLabel: source === "live" ? "Live market" : "Fixture fallback",
+      theme,
+    });
 
     return new Response(svg, {
       headers: {

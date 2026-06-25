@@ -30,6 +30,7 @@ export type ShareImageFormat = "png" | "svg";
 export interface ShareCardSvgOptions {
   theme?: ShareImageTheme | undefined;
   attribution?: string | undefined;
+  statusLabel?: string | undefined;
   width?: number | undefined;
   height?: number | undefined;
 }

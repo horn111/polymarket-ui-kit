@@ -86,13 +86,15 @@ export function createShareCardSvg(
   const height = options.height ?? DEFAULT_HEIGHT;
   const theme = themes[options.theme ?? "dark"];
   const attribution = options.attribution ?? "polymarket-ui-kit";
+  const statusLabel = options.statusLabel ?? "Live market";
+  const statusBadgeWidth = Math.max(158, statusLabel.length * 13 + 52);
   const leadingOutcome = market.outcomes[0];
   const probability = leadingOutcome ? clampProbability(leadingOutcome.price ?? 0) : 0;
   const probabilityWidth = Math.round(330 * probability);
   const questionLines = splitText(market.question, 34, 3)
     .map(
       (line, index) =>
-        `<text x="112" y="${228 + index * 64}" fill="${theme.text}" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="850">${escapeSvg(line)}</text>`,
+        `<text x="112" y="${248 + index * 64}" fill="${theme.text}" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="850">${escapeSvg(line)}</text>`,
     )
     .join("\n  ");
   const stats = [
@@ -112,16 +114,23 @@ export function createShareCardSvg(
     .join("\n  ");
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${DEFAULT_WIDTH} ${DEFAULT_HEIGHT}" role="img" aria-label="${escapeSvg(market.question)}">
+  <defs>
+    <clipPath id="pui-share-card-clip">
+      <rect x="70" y="70" width="1060" height="490" rx="28"/>
+    </clipPath>
+  </defs>
   <rect width="1200" height="630" fill="${theme.page}"/>
   <rect x="70" y="70" width="1060" height="490" rx="28" fill="${theme.card}" stroke="${theme.cardStroke}"/>
-  <rect x="70" y="70" width="1060" height="8" rx="4" fill="${theme.accent}"/>
-  <rect x="280" y="70" width="210" height="8" fill="#f59e0b"/>
-  <rect x="490" y="70" width="210" height="8" fill="#60a5fa"/>
+  <g clip-path="url(#pui-share-card-clip)">
+    <rect x="70" y="70" width="1060" height="8" fill="${theme.accent}"/>
+    <rect x="280" y="70" width="210" height="8" fill="#2dd4bf"/>
+    <rect x="490" y="70" width="210" height="8" fill="#60a5fa"/>
+  </g>
   <text x="112" y="142" fill="${theme.accent}" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="800">Polymarket</text>
-  <rect x="320" y="108" width="158" height="44" rx="22" fill="${theme.accentSoft}" stroke="${theme.accentStroke}"/>
-  <text x="350" y="138" fill="${theme.accent}" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">Live market</text>
+  <rect x="320" y="108" width="${statusBadgeWidth}" height="44" rx="22" fill="${theme.accentSoft}" stroke="${theme.accentStroke}"/>
+  <text x="350" y="138" fill="${theme.accent}" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">${escapeSvg(statusLabel)}</text>
   <text x="936" y="138" fill="${theme.muted}" font-family="Inter, Arial, sans-serif" font-size="22">${escapeSvg(truncate(attribution, 24))}</text>
-  <text x="112" y="192" fill="${theme.muted}" font-family="Inter, Arial, sans-serif" font-size="22">${escapeSvg(market.category ?? "Prediction market")}</text>
+  <text x="112" y="188" fill="${theme.muted}" font-family="Inter, Arial, sans-serif" font-size="22">${escapeSvg(market.category ?? "Prediction market")}</text>
   ${questionLines}
   <rect x="112" y="398" width="520" height="100" rx="12" fill="${theme.surface}" stroke="${theme.surfaceStroke}"/>
   <text x="142" y="438" fill="${theme.muted}" font-family="Inter, Arial, sans-serif" font-size="22">Leading outcome</text>

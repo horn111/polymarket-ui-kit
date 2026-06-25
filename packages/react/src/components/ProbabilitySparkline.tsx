@@ -38,10 +38,10 @@ export function ProbabilitySparkline({
     <svg
       aria-label={ariaLabel}
       className={cx("pui-sparkline", className)}
+      preserveAspectRatio="none"
       role="img"
       viewBox="0 0 160 42"
     >
-      <path d="M0 41 H160" stroke="var(--pui-border)" strokeWidth="1" />
       {polyline ? (
         <polyline
           fill="none"
@@ -55,4 +55,3 @@ export function ProbabilitySparkline({
     </svg>
   );
 }
-

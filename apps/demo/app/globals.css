@@ -88,13 +88,47 @@ a {
 }
 
 .demo-star-link {
-  background: var(--demo-red);
-  color: #050505;
-  font-size: 0.84rem;
+  background: #050505;
+  box-shadow: inset 0 0 0 4px var(--demo-red);
+  color: var(--demo-red);
+  font-size: 0.88rem;
   font-weight: 950;
+  gap: 10px;
   justify-content: center;
   min-height: 54px;
+  min-width: 146px;
   text-decoration: none;
+}
+
+.demo-star-link::after {
+  background: transparent;
+  content: "\2605";
+  display: block;
+  font-size: 0.9rem;
+  height: auto;
+  line-height: 1;
+  width: auto;
+}
+
+.demo-star-link:hover,
+.demo-star-link:focus-visible {
+  background: var(--demo-red);
+  box-shadow: inset 0 0 0 4px #050505;
+  color: #050505;
+  outline: 0;
+}
+
+html[data-demo-theme="dark"] .demo-star-link {
+  background: var(--demo-red);
+  box-shadow: inset 0 0 0 4px #050505;
+  color: #050505;
+}
+
+html[data-demo-theme="dark"] .demo-star-link:hover,
+html[data-demo-theme="dark"] .demo-star-link:focus-visible {
+  background: #050505;
+  box-shadow: inset 0 0 0 4px var(--demo-red);
+  color: var(--demo-red);
 }
 
 .demo-theme-toggle {
@@ -324,6 +358,20 @@ a {
   color: var(--demo-action-alt-fg);
 }
 
+.demo-route-row a,
+.demo-route-row a:nth-child(even),
+.demo-export-actions a,
+.demo-export-actions a:nth-child(2) {
+  background: var(--demo-red);
+  color: #050505;
+}
+
+.demo-route-row a:hover,
+.demo-export-actions a:hover {
+  background: var(--demo-action-bg);
+  color: var(--demo-action-fg);
+}
+
 html[data-demo-theme="dark"] .demo-route-row a,
 html[data-demo-theme="dark"] .demo-export-actions a,
 html[data-demo-theme="dark"] .demo-copy-button {
@@ -335,6 +383,20 @@ html[data-demo-theme="dark"] .demo-route-row a:nth-child(even),
 html[data-demo-theme="dark"] .demo-export-actions a:nth-child(2) {
   background: var(--demo-action-alt-bg);
   color: var(--demo-action-alt-fg);
+}
+
+html[data-demo-theme="dark"] .demo-route-row a,
+html[data-demo-theme="dark"] .demo-route-row a:nth-child(even),
+html[data-demo-theme="dark"] .demo-export-actions a,
+html[data-demo-theme="dark"] .demo-export-actions a:nth-child(2) {
+  background: var(--demo-red);
+  color: #050505;
+}
+
+html[data-demo-theme="dark"] .demo-route-row a:hover,
+html[data-demo-theme="dark"] .demo-export-actions a:hover {
+  background: var(--demo-action-bg);
+  color: var(--demo-action-fg);
 }
 
 .demo-builder-inline,
@@ -754,6 +816,12 @@ html[data-demo-theme="dark"] .demo-shell .pui-outcome-button[aria-pressed="true"
   box-shadow: none;
 }
 
+.demo-shell .pui-market-card {
+  gap: 14px;
+  max-width: 520px;
+  padding: 18px;
+}
+
 .demo-shell .pui-market-title,
 .demo-shell .pui-share-card__market h2 {
   color: var(--demo-ink);
@@ -774,6 +842,22 @@ html[data-demo-theme="dark"] .demo-shell .pui-outcome-button[aria-pressed="true"
   color: var(--demo-muted);
 }
 
+.demo-shell .pui-market-meta {
+  align-items: stretch;
+  display: grid;
+  gap: 6px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.demo-shell .pui-market-meta span {
+  border: 1px solid color-mix(in srgb, var(--demo-line) 34%, transparent);
+  color: var(--demo-ink);
+  font-size: 0.72rem;
+  font-weight: 850;
+  min-width: 0;
+  padding: 7px 8px;
+}
+
 .demo-shell .pui-outcome-button[aria-pressed="true"] {
   background: var(--demo-soft-red);
   border-color: var(--demo-red);
@@ -782,6 +866,16 @@ html[data-demo-theme="dark"] .demo-shell .pui-outcome-button[aria-pressed="true"
 .demo-shell .pui-sparkline,
 .demo-shell .pui-share-card__brand {
   color: var(--demo-red);
+}
+
+.demo-shell .pui-market-card .pui-sparkline {
+  display: block;
+  height: 72px;
+  width: 100%;
+}
+
+.demo-shell .pui-market-card .pui-sparkline polyline {
+  stroke-width: 4px;
 }
 
 .demo-shell .pui-share-card {

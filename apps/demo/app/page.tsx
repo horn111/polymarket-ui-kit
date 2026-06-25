@@ -59,8 +59,8 @@ const chartSeries = [
 
 function getRouteLinks(theme: DemoTheme) {
   return [
-    { label: "MARKET ROUTE", href: `/market/${market.slug}` },
-    { label: "EMBED ROUTE", href: `/embed/${market.slug}` },
+    { label: "MARKET ROUTE", href: `/market/${market.slug}?theme=${theme}` },
+    { label: "EMBED ROUTE", href: `/embed/${market.slug}?theme=${theme}` },
     { label: "OG PNG", href: `/api/og?slug=${market.slug}&theme=${theme}&format=png` },
     { label: "OG SVG", href: `/api/og?slug=${market.slug}&theme=${theme}&format=svg` },
   ];
