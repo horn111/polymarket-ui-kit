@@ -427,8 +427,17 @@ html[data-demo-theme="dark"] .demo-export-actions a:hover {
 
 .demo-combo-lab {
   align-content: start;
-  grid-template-columns: minmax(280px, 0.65fr) minmax(360px, 1fr);
+  grid-template-columns: minmax(300px, 0.52fr) minmax(580px, 1fr);
   width: 100%;
+}
+
+.demo-combo-lab .pui-combo-builder-card__grid {
+  grid-template-columns: minmax(260px, 1fr) minmax(260px, 0.86fr);
+}
+
+.demo-combo-lab .pui-combo-picker,
+.demo-combo-lab .pui-combo-builder-card__side {
+  min-width: 0;
 }
 
 .demo-combo-intent-readout {
@@ -511,11 +520,13 @@ html[data-demo-theme="dark"] .demo-lab__snippet {
 }
 
 .demo-lab__content[data-tab="share"],
+.demo-lab__content[data-tab="combo"],
 .demo-lab__content[data-tab="export"] {
   grid-template-columns: 180px minmax(0, 1fr);
 }
 
 .demo-lab__content[data-tab="share"] .demo-lab__snippet,
+.demo-lab__content[data-tab="combo"] .demo-lab__snippet,
 .demo-lab__content[data-tab="export"] .demo-lab__snippet {
   display: none;
 }
