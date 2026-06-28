@@ -1,4 +1,5 @@
 export * from "./adapters/clob";
+export * from "./adapters/combos";
 export * from "./adapters/data-api";
 export * from "./adapters/gamma";
 export * from "./adapters/websocket";
@@ -7,6 +8,7 @@ export * from "./format/dates";
 export * from "./format/probability";
 export * from "./types/builder";
 export * from "./types/comments";
+export * from "./types/combo";
 export * from "./types/market";
 export * from "./types/orderbook";
 export * from "./utils/fees";

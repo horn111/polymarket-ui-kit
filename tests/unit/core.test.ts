@@ -1,9 +1,13 @@
 import {
+  buildComboIntent,
   createShareCardSvg,
   formatCurrency,
   formatProbability,
   getBuilderFeeBps,
+  listComboMarkets,
   getPriceHistory,
+  normalizeComboMarket,
+  normalizeComboMarketsPage,
   normalizeMarket,
   normalizePriceHistory,
   previewFees,
@@ -81,6 +85,92 @@ describe("core adapters", () => {
     expect(requestedUrl).toContain("interval=1h");
     expect(requestedUrl).toContain("fidelity=5");
     expect(points[0]?.price).toBe(0.64);
+  });
+});
+
+describe("combo-aware core", () => {
+  const rawComboMarket = {
+    id: "combo-market-1",
+    condition_id: "condition-1",
+    slug: "will-btc-and-eth-rally",
+    question: "Will BTC and ETH both rally this month?",
+    category: "Crypto",
+    volume: "1500000",
+    tags: [{ label: "crypto" }, "combo"],
+    position_ids: ["position-yes", "position-no"],
+    outcomes: ["Yes", "No"],
+    outcome_prices: ["0.41", "0.59"],
+  };
+
+  it("normalizes combo market legs by shared array index", () => {
+    const combo = normalizeComboMarket(rawComboMarket);
+
+    expect(combo.conditionId).toBe("condition-1");
+    expect(combo.title).toBe("Will BTC and ETH both rally this month?");
+    expect(combo.tags).toEqual(["crypto", "combo"]);
+    expect(combo.outcomes[0]).toMatchObject({
+      name: "Yes",
+      positionId: "position-yes",
+      price: 0.41,
+    });
+    expect(combo.outcomes[1]).toMatchObject({
+      name: "No",
+      positionId: "position-no",
+      price: 0.59,
+    });
+  });
+
+  it("normalizes combo market pages from public API shapes", () => {
+    const page = normalizeComboMarketsPage({
+      data: [rawComboMarket],
+      next_cursor: "next-page",
+    });
+
+    expect(page.markets).toHaveLength(1);
+    expect(page.nextCursor).toBe("next-page");
+  });
+
+  it("fetches combo markets from the public RFQ catalog endpoint", async () => {
+    const fetcher = vi.fn(async () =>
+      new Response(JSON.stringify({ data: [rawComboMarket] }), {
+        headers: { "content-type": "application/json" },
+        status: 200,
+      }),
+    );
+
+    const page = await listComboMarkets(
+      { cursor: "abc", exclude: ["one", "two"], limit: 5 },
+      { combosBaseUrl: "https://example.com", fetch: fetcher as typeof fetch },
+    );
+    const requestedUrl = String(fetcher.mock.calls[0]?.[0]);
+
+    expect(requestedUrl).toContain("https://example.com/v1/rfq/combo-markets");
+    expect(requestedUrl).toContain("limit=5");
+    expect(requestedUrl).toContain("cursor=abc");
+    expect(requestedUrl).toContain("exclude=one%2Ctwo");
+    expect(page.markets[0]?.outcomes[0]?.positionId).toBe("position-yes");
+  });
+
+  it("builds combo intents for host-side RFQ flows", () => {
+    const market = normalizeComboMarket(rawComboMarket);
+    const intent = buildComboIntent({
+      builderCode: "0xabc",
+      legs: [{ market, outcome: market.outcomes[0]! }],
+      size: 25,
+    });
+
+    expect(intent).toMatchObject({
+      builderCode: "0xabc",
+      direction: "BUY",
+      side: "YES",
+      size: 25,
+      source: "ui-kit",
+    });
+    expect(intent.legs[0]).toMatchObject({
+      conditionId: "condition-1",
+      positionId: "position-yes",
+      price: 0.41,
+    });
   });
 });
 

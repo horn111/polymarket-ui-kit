@@ -5,6 +5,8 @@ import type { PolymarketMarket } from "@polymarket-ui-kit/core";
 import {
   BuilderBadge,
   BuilderFeeDisclosure,
+  ComboBuilderCard,
+  ComboShareCard,
   FeePill,
   MarketCard,
   OrderbookPanel,
@@ -13,6 +15,7 @@ import {
 } from "@polymarket-ui-kit/react";
 import { InteractiveLab } from "./components/InteractiveLab";
 import { sampleBuilder } from "../components/sample-builder";
+import { sampleComboLegs, sampleComboMarkets } from "../components/sample-combos";
 import { sampleOrderbook, samplePoints } from "../components/sample-data";
 
 const market: PolymarketMarket = {
@@ -132,8 +135,8 @@ export default function DemoHome() {
         </div>
 
         <div className="demo-spec-grid" aria-label="System capabilities">
-          <SpecCell label="COMPONENTS" value="12" />
-          <SpecCell label="DATA MODE" value="PUBLIC" />
+          <SpecCell label="COMPONENTS" value="18" />
+          <SpecCell label="COMBOS" value="INTENT" />
           <SpecCell label="EXPORT" value="PNG/SVG" />
           <SpecCell label="ORDERS" value="NONE" />
         </div>
@@ -220,6 +223,27 @@ export function Surface({ market, points }) {
               <strong>ORDERBOOK SNAPSHOT</strong>
             </div>
             <OrderbookPanel orderbook={sampleOrderbook} />
+          </article>
+
+          <article className="demo-module demo-module--combo">
+            <div className="demo-module__label">
+              <span>08</span>
+              <strong>COMBO-AWARE SURFACE</strong>
+            </div>
+            <div className="demo-combo-showcase">
+              <ComboShareCard
+                legs={sampleComboLegs}
+                title="BTC ATH + Fed cut combo"
+                attribution="pui-kit/demo"
+              />
+              <ComboBuilderCard
+                builderCode={sampleBuilder.code}
+                initialLegs={sampleComboLegs}
+                markets={sampleComboMarkets}
+                onComboIntent={() => undefined}
+                size={25}
+              />
+            </div>
           </article>
         </div>
       </section>

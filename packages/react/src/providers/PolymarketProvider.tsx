@@ -2,10 +2,13 @@ import {
   getMarketBySlug,
   getOrderbook,
   getPriceHistory,
+  listComboMarkets,
   listComments,
   listMarkets,
   type BuilderConfig,
+  type ComboMarketAdapterOptions,
   type ListCommentsParams,
+  type ListComboMarketsParams,
   type ListMarketsParams,
   type MarketAdapterOptions,
   type OrderbookAdapterOptions,
@@ -20,6 +23,7 @@ export interface PolymarketClient {
   listComments: typeof listComments;
   getOrderbook: typeof getOrderbook;
   getPriceHistory: typeof getPriceHistory;
+  listComboMarkets: typeof listComboMarkets;
 }
 
 export interface PolymarketProviderProps extends PropsWithChildren {
@@ -27,6 +31,7 @@ export interface PolymarketProviderProps extends PropsWithChildren {
   gammaBaseUrl?: string;
   dataBaseUrl?: string;
   clobBaseUrl?: string;
+  combosBaseUrl?: string;
   builder?: BuilderConfig;
 }
 
@@ -38,11 +43,13 @@ export function PolymarketProvider({
   fetch,
   gammaBaseUrl,
   clobBaseUrl,
+  combosBaseUrl,
   builder,
 }: PolymarketProviderProps) {
   const client = useMemo<PolymarketClient>(() => {
     const marketOptions: MarketAdapterOptions = { fetch, gammaBaseUrl };
     const clobOptions: OrderbookAdapterOptions = { fetch, clobBaseUrl };
+    const comboOptions: ComboMarketAdapterOptions = { fetch, combosBaseUrl };
 
     return {
       listMarkets: (params?: ListMarketsParams) => listMarkets(params, marketOptions),
@@ -52,8 +59,10 @@ export function PolymarketProvider({
       getOrderbook: (params: OrderbookParams) => getOrderbook(params, clobOptions),
       getPriceHistory: (params: PriceHistoryParams) =>
         getPriceHistory(params, clobOptions),
+      listComboMarkets: (params?: ListComboMarketsParams) =>
+        listComboMarkets(params, comboOptions),
     };
-  }, [clobBaseUrl, fetch, gammaBaseUrl]);
+  }, [clobBaseUrl, combosBaseUrl, fetch, gammaBaseUrl]);
 
   return (
     <PolymarketContext.Provider value={client}>
@@ -74,6 +83,7 @@ export function usePolymarketClient(): PolymarketClient {
       listComments: (params?: ListCommentsParams) => listComments(params),
       getOrderbook: (params: OrderbookParams) => getOrderbook(params),
       getPriceHistory: (params: PriceHistoryParams) => getPriceHistory(params),
+      listComboMarkets: (params?: ListComboMarketsParams) => listComboMarkets(params),
     };
   }
 

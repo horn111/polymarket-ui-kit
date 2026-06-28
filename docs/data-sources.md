@@ -26,6 +26,18 @@ GET https://clob.polymarket.com/prices-history?market=<asset-id>&interval=1w&fid
 normalizes the current `{ history: [{ t, p }] }` response into
 `MarketPricePoint[]`.
 
+## Combo RFQ API
+
+Used for public combo-market discovery:
+
+```txt
+GET https://combos-rfq-api.polymarket.com/v1/rfq/combo-markets
+```
+
+The UI kit uses the public catalog only. Authenticated RFQ quote submission,
+maker flows, and quoter gateway infrastructure are intentionally left to host
+applications.
+
 ## WebSocket
 
 The market channel is planned for near-real-time book and price updates. Hooks

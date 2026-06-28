@@ -1,4 +1,6 @@
 import type {
+  ComboLegMarket,
+  ComboSelectionLeg,
   MarketComment,
   MarketPricePoint,
   OrderbookSnapshot,
@@ -76,3 +78,60 @@ export const fixtureRows: TraderLeaderboardRow[] = [
   }
 ];
 
+export const fixtureComboMarkets: ComboLegMarket[] = [
+  {
+    id: "combo-crypto",
+    conditionId: "condition-crypto",
+    slug: "btc-and-eth-ath",
+    title: "Will BTC and ETH both set new highs in 2026?",
+    category: "Crypto",
+    image: null,
+    icon: null,
+    volume: 2500000,
+    liquidity: 500000,
+    active: true,
+    tags: ["crypto", "combo"],
+    outcomes: [
+      { id: "combo-crypto-yes", name: "Yes", price: 0.41, positionId: "position-yes" },
+      { id: "combo-crypto-no", name: "No", price: 0.59, positionId: "position-no" },
+    ],
+  },
+  {
+    id: "combo-politics",
+    conditionId: "condition-politics",
+    slug: "election-and-turnout",
+    title: "Will turnout and the winning party both clear the line?",
+    category: "Politics",
+    image: null,
+    icon: null,
+    volume: 900000,
+    liquidity: 120000,
+    active: true,
+    tags: ["politics", "combo"],
+    outcomes: [
+      {
+        id: "combo-politics-yes",
+        name: "Yes",
+        price: 0.34,
+        positionId: "position-politics-yes",
+      },
+      {
+        id: "combo-politics-no",
+        name: "No",
+        price: 0.66,
+        positionId: "position-politics-no",
+      },
+    ],
+  },
+];
+
+export const fixtureComboLegs: ComboSelectionLeg[] = [
+  {
+    market: fixtureComboMarkets[0]!,
+    outcome: fixtureComboMarkets[0]!.outcomes[0]!,
+  },
+  {
+    market: fixtureComboMarkets[1]!,
+    outcome: fixtureComboMarkets[1]!.outcomes[0]!,
+  },
+];

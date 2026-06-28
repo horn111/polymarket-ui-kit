@@ -12,6 +12,8 @@ import {
   BuilderBadge,
   BuilderFeeDisclosure,
   CommentList,
+  ComboBuilderCard,
+  ComboShareCard,
   FeePill,
   LeaderboardTable,
   MarketCard,
@@ -20,8 +22,16 @@ import {
   useShareImage,
 } from "@polymarket-ui-kit/react";
 import { sampleBuilder } from "../../components/sample-builder";
+import { sampleComboLegs, sampleComboMarkets } from "../../components/sample-combos";
 
-type DemoTab = "market" | "share" | "builder" | "export" | "data" | "states";
+type DemoTab =
+  | "market"
+  | "share"
+  | "builder"
+  | "combo"
+  | "export"
+  | "data"
+  | "states";
 type DemoState = "live" | "loading" | "error" | "empty";
 type DemoTheme = "light" | "dark";
 
@@ -205,6 +215,7 @@ export function InteractiveLab({ theme }: InteractiveLabProps) {
   const [tab, setTab] = useState<DemoTab>("market");
   const [state, setState] = useState<DemoState>("live");
   const [copied, setCopied] = useState(false);
+  const [comboIntentLabel, setComboIntentLabel] = useState("NO INTENT EMITTED");
   const market = markets.find((item) => item.slug === marketSlug) ?? markets[0]!;
   const points = useMemo(() => makePoints(market), [market]);
   const orderbook = useMemo(() => makeOrderbook(market), [market]);
@@ -221,7 +232,14 @@ export function InteractiveLab({ theme }: InteractiveLabProps) {
     theme,
   });
   const exportPath = `/api/og?slug=${market.slug}&theme=${theme}&format=png`;
-  const snippet = `import { MarketCard } from "@polymarket-ui-kit/react";
+  const snippet =
+    tab === "combo"
+      ? `import { ComboBuilderCard } from "@polymarket-ui-kit/react";
+
+export function ComboSurface({ markets }) {
+  return <ComboBuilderCard markets={markets} onComboIntent={sendIntent} />;
+}`
+      : `import { MarketCard } from "@polymarket-ui-kit/react";
 
 export function MarketEmbed({ market, points }) {
   return <MarketCard market={market} points={points} />;
@@ -267,7 +285,7 @@ export function MarketEmbed({ market, points }) {
 
       <div className="demo-lab__content" data-tab={tab}>
         <nav className="demo-lab__tabs" aria-label="Component preview">
-          {(["market", "share", "builder", "export", "data", "states"] as DemoTab[]).map(
+          {(["market", "share", "builder", "combo", "export", "data", "states"] as DemoTab[]).map(
             (item) => (
               <button
                 aria-current={tab === item ? "page" : undefined}
@@ -323,6 +341,27 @@ export function MarketEmbed({ market, points }) {
                   label="Estimated builder fee"
                 />
               </div>
+            </div>
+          ) : null}
+          {tab === "combo" ? (
+            <div className="demo-combo-lab">
+              <ComboShareCard
+                legs={sampleComboLegs}
+                title="BTC ATH + Fed cut combo"
+                attribution="pui-kit/demo"
+              />
+              <ComboBuilderCard
+                builderCode={sampleBuilder.code}
+                initialLegs={sampleComboLegs}
+                markets={sampleComboMarkets}
+                onComboIntent={(intent) => {
+                  setComboIntentLabel(
+                    `${intent.legs.length} legs / ${intent.direction} / ${intent.source}`,
+                  );
+                }}
+                size={25}
+              />
+              <div className="demo-combo-intent-readout">{comboIntentLabel}</div>
             </div>
           ) : null}
           {tab === "export" ? (

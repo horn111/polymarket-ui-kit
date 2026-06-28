@@ -160,6 +160,33 @@ export async function GET(request: Request) {
 ```
 
 Read the deeper notes in [docs/share-export.md](docs/share-export.md).
+
+## Combo-Aware UI
+
+Combos turn multiple market legs into one richer prediction surface. The kit now
+ships the read-first UI layer for that workflow: public combo-market discovery,
+leg picking, combo share cards, and typed intent payloads for host apps.
+
+```tsx
+import { ComboBuilderCard, useComboMarkets } from "@polymarket-ui-kit/react";
+
+export function ComboSurface() {
+  const combos = useComboMarkets({ limit: 12 });
+
+  return (
+    <ComboBuilderCard
+      markets={combos.data?.markets ?? []}
+      onComboIntent={(intent) => {
+        // Host apps pass intent.legs[].positionId into their own RFQ flow.
+      }}
+    />
+  );
+}
+```
+
+No quote submission, no signing, no hidden order placement. Read the notes in
+[docs/combos.md](docs/combos.md).
+
 ## Builder-Code-Aware UX
 
 Builder Codes are public `bytes32` identifiers used by host applications when they submit Polymarket CLOB V2 orders. This kit does not place orders, but it helps builders make attribution and fee disclosure clear before handing off a trade intent.
@@ -208,6 +235,11 @@ Read the implementation notes in [docs/builder-codes.md](docs/builder-codes.md).
 | `OutcomeSwitcher`      | Yes/No or multi-outcome selector                          | MVP    |
 | `FeePill`              | Platform and builder fee preview                          | MVP    |
 | `CommentList`          | Public market comments                                    | MVP    |
+| `ComboBuilderCard`     | Combo leg picker, selected legs, and intent preview       | MVP    |
+| `ComboLegPicker`       | Public combo-market leg selection                         | MVP    |
+| `ComboLegList`         | Selected combo legs with outcome and price context        | MVP    |
+| `ComboIntentPreview`   | Typed combo intent handoff for host apps                  | MVP    |
+| `ComboShareCard`       | Social/embed surface for selected combo legs              | MVP    |
 | `BuilderBadge`         | Builder identity and attribution surface                  | MVP    |
 | `BuilderFeeDisclosure` | Builder code attribution and maker/taker fee disclosure   | MVP    |
 | `ShareCard`            | X-ready market screenshot and OG card base                | MVP    |
@@ -225,6 +257,7 @@ does not place authenticated orders.
 | Data API       | positions, trades, leaderboards, builder analytics | No                     |
 | CLOB API       | orderbooks, midpoints, spreads, `prices-history`   | Public for market data |
 | CLOB WebSocket | live book and price updates                        | No for market channel  |
+| Combo RFQ API  | public combo market discovery                      | No for catalog         |
 
 The core package normalizes API responses into stable UI types so components can
 accept either preloaded server data or client-side hooks.
@@ -297,6 +330,7 @@ The repo includes:
 - [Launch playbook](docs/launch-playbook.md)
 - [Tweet templates](docs/tweet-templates.md)
 - [Builder Codes notes](docs/builder-codes.md)
+- [Combo-aware UI notes](docs/combos.md)
 
 ## Roadmap
 

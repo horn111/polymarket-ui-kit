@@ -299,6 +299,10 @@ html[data-demo-theme="dark"] .demo-star-link:focus-visible {
   grid-column: span 6;
 }
 
+.demo-module--combo {
+  grid-column: 1 / -1;
+}
+
 .demo-module__label {
   align-items: center;
   border-bottom: 2px solid var(--demo-line);
@@ -405,6 +409,40 @@ html[data-demo-theme="dark"] .demo-export-actions a:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+.demo-combo-showcase,
+.demo-combo-lab {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(280px, 0.75fr) minmax(360px, 1.25fr);
+}
+
+.demo-combo-showcase .pui-combo-share-card,
+.demo-combo-lab .pui-combo-share-card {
+  align-self: stretch;
+  max-width: none;
+  width: 100%;
+}
+
+.demo-combo-lab {
+  align-content: start;
+  grid-template-columns: minmax(280px, 0.65fr) minmax(360px, 1fr);
+  width: 100%;
+}
+
+.demo-combo-intent-readout {
+  background: var(--demo-red);
+  border: 2px solid var(--demo-line);
+  color: #050505;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.78rem;
+  font-weight: 950;
+  grid-column: 1 / -1;
+  min-height: 42px;
+  padding: 12px 14px;
+  text-transform: uppercase;
 }
 
 .demo-lab__heading {
@@ -780,6 +818,12 @@ html[data-demo-theme="dark"] .demo-lab__snippet {
 .demo-shell .pui-outcome-button,
 .demo-shell .pui-badge,
 .demo-shell .pui-button,
+.demo-shell .pui-combo-outcome,
+.demo-shell .pui-combo-picker__market,
+.demo-shell .pui-combo-leg,
+.demo-shell .pui-combo-intent__stats div,
+.demo-shell .pui-combo-share-card__legs div,
+.demo-shell .pui-combo-share-card__legs span,
 .demo-shell .pui-share-card__status,
 .demo-shell .pui-share-card__quote,
 .demo-shell .pui-share-card__stats div,
@@ -794,6 +838,61 @@ html[data-demo-theme="dark"] .demo-lab__snippet {
   border-color: var(--demo-line);
   box-shadow: none;
   color: var(--demo-ink);
+}
+
+.demo-shell .pui-combo-builder-card__header h3,
+.demo-shell .pui-combo-picker__market-copy strong,
+.demo-shell .pui-combo-leg__copy strong,
+.demo-shell .pui-combo-share-card__hero h2,
+.demo-shell .pui-combo-share-card__hero strong,
+.demo-shell .pui-combo-share-card__legs strong,
+.demo-shell .pui-combo-intent__stats dd {
+  color: var(--demo-ink);
+  font-weight: 950;
+}
+
+.demo-shell .pui-combo-section-heading span,
+.demo-shell .pui-combo-builder-card__header span,
+.demo-shell .pui-combo-share-card__topline strong,
+.demo-shell .pui-combo-leg__index {
+  color: var(--demo-red);
+}
+
+.demo-shell .pui-combo-builder-card__header > strong,
+.demo-shell .pui-combo-outcome[data-selected="true"],
+.demo-shell .pui-combo-share-card__legs span {
+  background: var(--demo-red);
+  border-color: var(--demo-line);
+  color: #050505;
+}
+
+.demo-shell .pui-combo-search input,
+.demo-shell .pui-combo-picker__market,
+.demo-shell .pui-combo-leg,
+.demo-shell .pui-combo-outcome,
+.demo-shell .pui-combo-intent__stats div,
+.demo-shell .pui-combo-share-card__legs div {
+  background: var(--demo-paper);
+  border-color: var(--demo-line);
+  color: var(--demo-ink);
+}
+
+.demo-shell .pui-combo-picker__market-copy span,
+.demo-shell .pui-combo-picker__market-copy small,
+.demo-shell .pui-combo-leg__copy span,
+.demo-shell .pui-combo-intent p,
+.demo-shell .pui-combo-intent__stats dt,
+.demo-shell .pui-combo-share-card__topline span,
+.demo-shell .pui-combo-share-card__hero span,
+.demo-shell .pui-combo-share-card__legs small,
+.demo-shell .pui-combo-section-heading strong {
+  color: var(--demo-muted);
+}
+
+.demo-shell .pui-combo-share-card {
+  background:
+    linear-gradient(90deg, var(--demo-red) 0 8px, transparent 8px),
+    var(--demo-paper);
 }
 
 html[data-demo-theme="dark"] .demo-shell .pui-card,
@@ -1042,9 +1141,15 @@ html[data-demo-theme="dark"] .demo-shell .pui-share-card {
   .demo-module--code,
   .demo-module--chart,
   .demo-module--builder,
-  .demo-module--book {
+  .demo-module--book,
+  .demo-module--combo {
     border-right: 0;
     grid-column: 1 / -1;
+  }
+
+  .demo-combo-showcase,
+  .demo-combo-lab {
+    grid-template-columns: 1fr;
   }
 
   .demo-lab__tabs {

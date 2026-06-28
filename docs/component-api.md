@@ -13,6 +13,11 @@ and theme utilities.
 - `OutcomeSwitcher`
 - `FeePill`
 - `CommentList`
+- `ComboBuilderCard`
+- `ComboIntentPreview`
+- `ComboLegList`
+- `ComboLegPicker`
+- `ComboShareCard`
 - `BuilderBadge`
 - `BuilderFeeDisclosure`
 - `ShareCard`
@@ -29,6 +34,8 @@ render useful empty and fallback states when data is missing.
 - `useOrderbook`
 - `usePriceHistory`
 - `useComments`
+- `useComboMarkets`
+- `useComboSelection`
 - `useLeaderboard`
 - `useShareImage`
 - `usePolymarketBuilder`
@@ -53,10 +60,12 @@ const market = useMarket(slug, {
 - `getMarketBySlug`
 - `listMarkets`
 - `listComments`
+- `listComboMarkets`
 - `getOrderbook`
 - `getPriceHistory`
 - `normalizePriceHistory`
 - `createShareCardSvg`
+- `buildComboIntent`
 - formatters and fee preview helpers
 
 ## Example

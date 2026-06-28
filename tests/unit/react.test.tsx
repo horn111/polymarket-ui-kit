@@ -3,6 +3,8 @@ import { describe, expect, it, vi } from "vitest";
 import {
   BuilderFeeDisclosure,
   CommentList,
+  ComboBuilderCard,
+  ComboShareCard,
   LeaderboardTable,
   MarketCard,
   MobileTradeDrawer,
@@ -10,12 +12,15 @@ import {
   PolymarketProvider,
   ShareCard,
   useMarket,
+  useComboMarkets,
   usePolymarketBuilder,
   usePriceHistory,
   useShareImage,
 } from "@polymarket-ui-kit/react";
 import {
   fixtureComments,
+  fixtureComboLegs,
+  fixtureComboMarkets,
   fixtureMarket,
   fixtureOrderbook,
   fixturePoints,
@@ -86,6 +91,18 @@ function PriceHistoryProbe() {
   return <span>{history.data?.length ?? 0}</span>;
 }
 
+function ComboMarketsProbe() {
+  const combos = useComboMarkets(
+    { limit: 2 },
+    {
+      initialData: { markets: fixtureComboMarkets },
+      refetchOnMount: false,
+    },
+  );
+
+  return <span>{combos.data?.markets.length ?? 0}</span>;
+}
+
 function DisabledMarketProbe() {
   const market = useMarket(fixtureMarket.slug, { enabled: false });
   return <span>{market.isLoading ? "loading" : "idle"}</span>;
@@ -120,6 +137,50 @@ describe("Public hooks", () => {
 
     expect(screen.getByText("idle")).toBeInTheDocument();
     expect(fetcher).not.toHaveBeenCalled();
+  });
+
+  it("uses initial combo markets without refetching on mount", () => {
+    render(<ComboMarketsProbe />);
+    expect(screen.getByText(String(fixtureComboMarkets.length))).toBeInTheDocument();
+  });
+});
+
+describe("Combo-aware UI", () => {
+  it("renders a combo share card", () => {
+    render(<ComboShareCard legs={fixtureComboLegs} title="Combo preview" />);
+
+    expect(screen.getByText("Polymarket Combo")).toBeInTheDocument();
+    expect(screen.getByText("Combo preview")).toBeInTheDocument();
+    expect(screen.getByText(fixtureComboLegs[0]!.market.title)).toBeInTheDocument();
+  });
+
+  it("emits combo intents from selected public legs", () => {
+    const onComboIntent = vi.fn();
+
+    render(
+      <ComboBuilderCard
+        builderCode="0xabc"
+        markets={fixtureComboMarkets}
+        onComboIntent={onComboIntent}
+        size={10}
+      />,
+    );
+
+    fireEvent.click(screen.getAllByRole("button", { name: /Yes/i })[0]!);
+    fireEvent.click(screen.getByRole("button", { name: /Emit combo intent/i }));
+
+    expect(onComboIntent).toHaveBeenCalledTimes(1);
+    expect(onComboIntent.mock.calls[0]?.[0]).toMatchObject({
+      builderCode: "0xabc",
+      size: 10,
+      source: "ui-kit",
+      legs: [
+        {
+          conditionId: fixtureComboMarkets[0]!.conditionId,
+          positionId: fixtureComboMarkets[0]!.outcomes[0]!.positionId,
+        },
+      ],
+    });
   });
 });
 
