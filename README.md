@@ -8,32 +8,37 @@
 <h1 align="center">Polymarket UI Kit</h1>
 
 <p align="center">
-  <strong>Drop-in React components, public data hooks, and copy-in registry items for Polymarket apps.</strong>
+  <strong>Drop-in React components, public data hooks, Combo-aware UI, and copy-in registry items for Polymarket apps.</strong>
 </p>
 
 <p align="center">
-  <a href="#60-second-quickstart">Quickstart</a> В·
-  <a href="#components">Components</a> В·
-  <a href="#data-architecture">Data</a> В·
-  <a href="#ssrisr">SSR/ISR</a> В·
+  <a href="#60-second-quickstart">Quickstart</a> &middot;
+  <a href="#components">Components</a> &middot;
+  <a href="#data-architecture">Data</a> &middot;
+  <a href="#ssrisr">SSR/ISR</a> &middot;
   <a href="#builder-and-grant-angle">Builder angle</a>
 </p>
 
-<h3 align="center">Light</h3>
+<h3 align="center">Light Design Preview</h3>
 
 <img alt="Polymarket UI Kit preview (Light)" src="apps/docs/public/screenshots/hero.svg?v=1" width="100%">
 
-<h3 align="center">Dark</h3>
+<h3 align="center">Dark Design Preview</h3>
 
 <img alt="Polymarket UI Kit preview (Dark)" src="apps/docs/public/screenshots/hero-dark.svg?v=1" width="100%">
 
 Build market cards, probability charts, orderbook panels, comment feeds, builder
-badges, fee previews, leaderboard tables, mobile trade previews, and social share
-cards without rebuilding the same Polymarket UI layer from scratch.
+badges, fee previews, leaderboard tables, combo leg pickers, mobile trade
+previews, and social share cards without rebuilding the same Polymarket UI layer
+from scratch.
 
 This project is built for frontend developers, media tools, embeddings, dashboard
 builders, content products, and research portals that need Polymarket-native UI
 with strong defaults and clean escape hatches.
+
+The static SVGs above are design previews. The live demo is the source of truth
+for the current brutalist demo, Builder-Code UX, real public hooks, share export,
+and Combo-aware surfaces.
 
 ## Turn Any Polymarket Link Into A Live Market Card
 
@@ -54,17 +59,27 @@ export function LiveMarketCard({ slug }: { slug: string }) {
 
 ## 60-Second Quickstart
 
-Install the React package:
+Install target for the first npm prerelease:
 
 ```bash
 pnpm add @polymarket-ui-kit/react
 ```
 
-Or copy a component into a shadcn-style project:
+Run the current repo locally today:
+
+```bash
+pnpm install
+pnpm demo:dev
+```
+
+Hosted registry target for shadcn-style projects:
 
 ```bash
 npx shadcn@latest add https://polymarket-ui-kit.dev/r/market-card.json
 ```
+
+Until hosted registry endpoints are live, registry source files live in
+`packages/registry` and can be validated with `pnpm registry:validate`.
 
 Import styles once:
 
@@ -306,6 +321,7 @@ The moat is not just visual polish. It is DX:
 - Storybook and visual states
 - shadcn-style copy-in registry
 - launch-ready share cards
+- combo-aware leg picking and intent payloads
 - builder-code-aware fee and attribution surfaces
 
 ## Demo Links

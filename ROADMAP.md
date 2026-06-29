@@ -3,8 +3,9 @@
 ## v0.1 - Presentation-grade MVP
 
 - Monorepo scaffold with core, React, registry, CLI, docs, demo, Storybook.
-- 12 React components with typed props and light/dark themes.
+- 18 React components with typed props and light/dark themes.
 - Public data adapters for Gamma, Data API, CLOB, and market WebSocket.
+- Combo-aware public market discovery, leg picking, share cards, and intent payloads.
 - Registry items for `market-card`, `orderbook-panel`, and `share-card`.
 - README, launch docs, grant docs, and contribution templates.
 
@@ -28,4 +29,3 @@
 - More chart variants and market collections.
 - Builder analytics cards.
 - Accessibility snapshots and visual regression baselines.
-
