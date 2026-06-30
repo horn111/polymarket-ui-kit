@@ -60,6 +60,31 @@ const chartSeries = [
   },
 ];
 
+const grantStats = [
+  { label: "Components", value: "18" },
+  { label: "Trading", value: "None" },
+  { label: "Builder UX", value: "Visible" },
+  { label: "Combos", value: "Intent" },
+];
+
+const grantUseCases = [
+  {
+    label: "BLOG EMBED",
+    title: "Turn a market link into a live context block.",
+    text: "Readable odds, metadata, price history, and share surface for editorial pages.",
+  },
+  {
+    label: "DASHBOARD WIDGET",
+    title: "Drop public market primitives into research tools.",
+    text: "Cards, orderbooks, comments, leaderboards, and fallback states without auth.",
+  },
+  {
+    label: "SOCIAL CARD",
+    title: "Export market-native visuals for distribution.",
+    text: "PNG/SVG cards for X posts, newsletters, reports, and embeds.",
+  },
+];
+
 function getRouteLinks(theme: DemoTheme) {
   return [
     { label: "MARKET ROUTE", href: `/market/${market.slug}?theme=${theme}` },
@@ -245,6 +270,74 @@ export function Surface({ market, points }) {
               />
             </div>
           </article>
+        </div>
+      </section>
+
+      <section className="demo-grant" aria-labelledby="grant-builders-title">
+        <div className="demo-grant__hero">
+          <div>
+            <p className="demo-kicker">09 / GRANT READY BUILD</p>
+            <h2 id="grant-builders-title">DISTRIBUTION UI LAYER</h2>
+            <p>
+              Polymarket UI Kit helps builders bring markets into blogs,
+              dashboards, embeds, media tools, and social surfaces without
+              rebuilding the same frontend layer.
+            </p>
+          </div>
+          <div className="demo-grant__stamp" aria-hidden="true">
+            BUILDERS
+          </div>
+        </div>
+
+        <div className="demo-grant__stats" aria-label="Grant readiness status">
+          {grantStats.map((item) => (
+            <SpecCell key={item.label} label={item.label} value={item.value} />
+          ))}
+        </div>
+
+        <div className="demo-grant__grid">
+          <article className="demo-grant__panel demo-grant__panel--wide">
+            <div className="demo-module__label">
+              <span>10</span>
+              <strong>BUILT FOR DISTRIBUTION</strong>
+            </div>
+            <p>
+              The kit is read-first by default: public hooks, SSR-friendly props,
+              graceful fallback states, share export, Builder-Code-aware
+              attribution, and Combo-aware intent payloads. Host apps keep
+              control of signing, RFQ, and order placement.
+            </p>
+            <div className="demo-grant__links">
+              <a href="https://github.com/horn111/polymarket-ui-kit" rel="noreferrer" target="_blank">
+                Repo
+              </a>
+              <a
+                href="https://github.com/horn111/polymarket-ui-kit/blob/main/docs/grant-application.md"
+                rel="noreferrer"
+                target="_blank"
+              >
+                Grant Draft
+              </a>
+              <a
+                href="https://github.com/horn111/polymarket-ui-kit/blob/main/docs/demo-script.md"
+                rel="noreferrer"
+                target="_blank"
+              >
+                Demo Script
+              </a>
+            </div>
+          </article>
+
+          {grantUseCases.map((item, index) => (
+            <article className="demo-grant__panel" key={item.label}>
+              <div className="demo-module__label">
+                <span>{String(index + 11).padStart(2, "0")}</span>
+                <strong>{item.label}</strong>
+              </div>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
         </div>
       </section>
 

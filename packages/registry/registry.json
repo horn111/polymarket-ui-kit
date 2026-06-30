@@ -54,7 +54,25 @@
           "target": "components/polymarket/share-card.tsx"
         }
       ]
+    },
+    {
+      "name": "combo-share-card",
+      "type": "registry:component",
+      "title": "Combo Share Card",
+      "description": "A social share card for selected Polymarket combo legs.",
+      "dependencies": ["@polymarket-ui-kit/core"],
+      "files": [
+        {
+          "path": "src/components/combo-share-card.tsx",
+          "type": "registry:component",
+          "target": "components/polymarket/combo-share-card.tsx"
+        },
+        {
+          "path": "src/lib/polymarket-format.ts",
+          "type": "registry:lib",
+          "target": "lib/polymarket-format.ts"
+        }
+      ]
     }
   ]
 }
-

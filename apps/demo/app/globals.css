@@ -61,6 +61,7 @@ a {
 }
 
 .demo-industrial,
+.demo-grant,
 .demo-lab {
   background: var(--demo-paper);
   border: 2px solid var(--demo-line);
@@ -452,6 +453,118 @@ html[data-demo-theme="dark"] .demo-export-actions a:hover {
   min-height: 42px;
   padding: 12px 14px;
   text-transform: uppercase;
+}
+
+.demo-grant__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  min-height: 280px;
+}
+
+.demo-grant__hero > div:first-child {
+  align-content: end;
+  border-right: 2px solid var(--demo-line);
+  display: grid;
+  gap: 16px;
+  padding: 30px;
+}
+
+.demo-grant__hero h2 {
+  color: var(--demo-ink);
+  font-size: 4.7rem;
+  font-weight: 950;
+  letter-spacing: 0;
+  line-height: 0.92;
+  margin: 0;
+  max-width: 880px;
+  text-transform: uppercase;
+}
+
+.demo-grant__hero p:last-child,
+.demo-grant__panel p {
+  color: var(--demo-ink);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.demo-grant__stamp {
+  align-items: center;
+  color: var(--demo-red);
+  display: flex;
+  font-size: 2.7rem;
+  font-weight: 950;
+  justify-content: center;
+  line-height: 0.9;
+  padding: 24px;
+  text-align: center;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+}
+
+.demo-grant__stats {
+  border-top: 2px solid var(--demo-line);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.demo-grant__grid {
+  border-top: 2px solid var(--demo-line);
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.demo-grant__panel {
+  border-right: 2px solid var(--demo-line);
+  display: grid;
+  gap: 16px;
+  grid-column: span 4;
+  min-width: 0;
+  padding: 22px;
+}
+
+.demo-grant__panel--wide {
+  background: var(--demo-paper-dark);
+  grid-column: 1 / -1;
+}
+
+.demo-grant__panel h3 {
+  color: var(--demo-ink);
+  font-size: 1.5rem;
+  font-weight: 950;
+  line-height: 1;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.demo-grant__links {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 4px;
+}
+
+.demo-grant__links a {
+  align-items: center;
+  background: var(--demo-red);
+  border: 2px solid var(--demo-line);
+  color: #050505;
+  display: inline-flex;
+  font-size: 0.78rem;
+  font-weight: 950;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 12px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.demo-grant__links a:hover,
+.demo-grant__links a:focus-visible {
+  background: var(--demo-action-bg);
+  color: var(--demo-action-fg);
+  outline: 0;
 }
 
 .demo-lab__heading {
@@ -1047,17 +1160,28 @@ html[data-demo-theme="dark"] .demo-shell .pui-share-card {
 
 @media (max-width: 1040px) {
   .demo-industrial__hero,
+  .demo-grant__hero,
   .demo-lab__content,
   .demo-lab__content[data-tab="share"],
+  .demo-lab__content[data-tab="combo"],
   .demo-lab__content[data-tab="export"],
   .demo-lab__toolbar {
     grid-template-columns: 1fr;
   }
 
   .demo-hero-copy,
+  .demo-grant__hero > div:first-child,
   .demo-lab__tabs,
   .demo-lab__snippet {
     border-right: 0;
+  }
+
+  .demo-grant__stamp {
+    border-top: 2px solid var(--demo-line);
+    font-size: 4rem;
+    justify-content: flex-start;
+    min-height: 110px;
+    writing-mode: horizontal-tb;
   }
 
   .demo-lab__tabs {
@@ -1095,7 +1219,9 @@ html[data-demo-theme="dark"] .demo-shell .pui-share-card {
 
   .demo-industrial__masthead,
   .demo-industrial__hero,
+  .demo-grant__hero,
   .demo-spec-grid,
+  .demo-grant__stats,
   .demo-route-row,
   .demo-export-actions,
   .demo-export-specs,
@@ -1107,6 +1233,7 @@ html[data-demo-theme="dark"] .demo-shell .pui-share-card {
   .demo-star-link,
   .demo-theme-toggle,
   .demo-spec-cell,
+  .demo-grant__panel,
   .demo-export-specs div,
   .demo-route-row a,
   .demo-segmented button {
@@ -1117,6 +1244,7 @@ html[data-demo-theme="dark"] .demo-shell .pui-share-card {
   .demo-star-link,
   .demo-theme-toggle,
   .demo-spec-cell,
+  .demo-grant__panel,
   .demo-export-specs div,
   .demo-route-row a,
   .demo-segmented button {
@@ -1136,7 +1264,8 @@ html[data-demo-theme="dark"] .demo-shell .pui-share-card {
     padding: 22px;
   }
 
-  .demo-hero-copy h1 {
+  .demo-hero-copy h1,
+  .demo-grant__hero h2 {
     font-size: 3.2rem;
   }
 
@@ -1153,9 +1282,15 @@ html[data-demo-theme="dark"] .demo-shell .pui-share-card {
   .demo-module--chart,
   .demo-module--builder,
   .demo-module--book,
-  .demo-module--combo {
+  .demo-module--combo,
+  .demo-grant__panel,
+  .demo-grant__panel--wide {
     border-right: 0;
     grid-column: 1 / -1;
+  }
+
+  .demo-grant__links {
+    grid-template-columns: 1fr;
   }
 
   .demo-combo-showcase,

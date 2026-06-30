@@ -88,6 +88,18 @@ import "@polymarket-ui-kit/react/styles.css";
 import "@polymarket-ui-kit/react/themes.css";
 ```
 
+## Current Status
+
+| Surface | Status |
+| ------- | ------ |
+| Live demo | Deployed |
+| Local development | Ready with `pnpm install` and `pnpm demo:dev` |
+| React package | First npm prerelease planned |
+| Core package | First npm prerelease planned |
+| Hosted registry | Planned |
+| Registry source | Available in `packages/registry` |
+| Authenticated trading | Out of scope for v0 |
+
 ## Copy-Paste Examples
 
 Market card:
@@ -340,9 +352,22 @@ This is an independent open-source project for the Polymarket ecosystem. The
 goal is to help more teams build market-native interfaces, distribute markets
 into vertical apps, and make builder-code-aware UX easier to ship.
 
+Grant submission checklist:
+
+- Repo: [github.com/horn111/polymarket-ui-kit](https://github.com/horn111/polymarket-ui-kit)
+- Live demo: [polymarket-ui-kit-demo-fkan-chi.vercel.app](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/)
+- X account: [x.com/debythm](https://x.com/debythm)
+- Grant application draft: [docs/grant-application.md](docs/grant-application.md)
+- 60-second demo script: [docs/demo-script.md](docs/demo-script.md)
+- Screenshot checklist: [docs/screenshot-checklist.md](docs/screenshot-checklist.md)
+
 The repo includes:
 
+- [Grant application draft](docs/grant-application.md)
 - [Grant strategy](docs/grant-strategy.md)
+- [Grant tweet thread](docs/grant-tweet-thread.md)
+- [Demo script](docs/demo-script.md)
+- [Screenshot checklist](docs/screenshot-checklist.md)
 - [Launch playbook](docs/launch-playbook.md)
 - [Tweet templates](docs/tweet-templates.md)
 - [Builder Codes notes](docs/builder-codes.md)
