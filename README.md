@@ -98,6 +98,7 @@ import "@polymarket-ui-kit/react/themes.css";
 | Core package | First npm prerelease planned |
 | Hosted registry | Planned |
 | Registry source | Available in `packages/registry` |
+| Advanced Builder Flow | Dry-run example available in `examples/clob-v2-builder-flow` |
 | Authenticated trading | Out of scope for v0 |
 
 ## Copy-Paste Examples
@@ -250,6 +251,38 @@ export function BuilderAwareMarket({ market }) {
 
 Read the implementation notes in [docs/builder-codes.md](docs/builder-codes.md).
 
+## Advanced: Verifiable Builder Flow
+
+For grant reviewers and builders testing attribution, the repo includes an
+advanced host-app example that converts a UI Kit `TradeIntent` into a CLOB V2
+market-order draft with `builderCode` attached.
+
+```tsx
+import { buildClobV2MarketOrderDraft } from "@polymarket-ui-kit/core";
+
+const draft = buildClobV2MarketOrderDraft({
+  builderCode: intent.builderCode,
+  market: intent.market,
+  notional: intent.notional,
+  outcome: intent.outcome,
+});
+```
+
+The example is dry-run by default. Live submission is server-only and requires
+`POLY_ENABLE_LIVE_ORDERS=true` plus explicit CLOB/wallet env vars.
+
+Builder attribution is verifiable after a matched fill:
+`TradeIntent -> CLOB V2 order with builderCode -> fill -> OrderFilled event -> builder field`.
+
+Run it locally:
+
+```powershell
+pnpm.cmd --filter @polymarket-ui-kit/example-clob-v2-builder-flow dev
+```
+
+Read the verification notes in
+[docs/verifiable-builder-flow.md](docs/verifiable-builder-flow.md).
+
 ## Components
 
 | Component              | Purpose                                                   | Status |
@@ -357,6 +390,7 @@ Grant submission checklist:
 - Repo: [github.com/horn111/polymarket-ui-kit](https://github.com/horn111/polymarket-ui-kit)
 - Live demo: [polymarket-ui-kit-demo-fkan-chi.vercel.app](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/)
 - X account: [x.com/debythm](https://x.com/debythm)
+- Advanced Builder Flow: [examples/clob-v2-builder-flow](examples/clob-v2-builder-flow)
 - Grant application draft: [docs/grant-application.md](docs/grant-application.md)
 - 60-second demo script: [docs/demo-script.md](docs/demo-script.md)
 - Screenshot checklist: [docs/screenshot-checklist.md](docs/screenshot-checklist.md)
@@ -371,6 +405,7 @@ The repo includes:
 - [Launch playbook](docs/launch-playbook.md)
 - [Tweet templates](docs/tweet-templates.md)
 - [Builder Codes notes](docs/builder-codes.md)
+- [Verifiable Builder Flow](docs/verifiable-builder-flow.md)
 - [Combo-aware UI notes](docs/combos.md)
 
 ## Roadmap

@@ -23,6 +23,7 @@
 - Hosted docs and registry endpoints.
 - Demo gallery with media, research, and dashboard examples.
 - Polymarket Builders submission pack and launch thread.
+- Advanced dry-run Builder Flow example for CLOB V2 builder attribution.
 
 ## Later
 

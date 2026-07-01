@@ -65,6 +65,7 @@ const market = useMarket(slug, {
 - `getPriceHistory`
 - `normalizePriceHistory`
 - `createShareCardSvg`
+- `buildClobV2MarketOrderDraft`
 - `buildComboIntent`
 - formatters and fee preview helpers
 

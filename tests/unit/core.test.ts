@@ -1,5 +1,7 @@
 import {
   buildComboIntent,
+  buildClobV2MarketOrderDraft,
+  ClobV2OrderDraftError,
   createShareCardSvg,
   formatCurrency,
   formatProbability,
@@ -85,6 +87,89 @@ describe("core adapters", () => {
     expect(requestedUrl).toContain("interval=1h");
     expect(requestedUrl).toContain("fidelity=5");
     expect(points[0]?.price).toBe(0.64);
+  });
+
+  it("builds CLOB V2 market order drafts with builder attribution", () => {
+    const market = normalizeMarket({
+      id: "1",
+      slug: "sample",
+      question: "Will it work?",
+      active: true,
+      outcomes: '["Yes","No"]',
+      outcomePrices: '["0.7","0.3"]',
+      clobTokenIds: '["yes-token","no-token"]',
+    });
+    const draft = buildClobV2MarketOrderDraft({
+      market,
+      outcome: market.outcomes[0]!,
+      notional: 25,
+      builderCode:
+        "0x00000000000000000000000000000000000000000000000000000000000000f5",
+    });
+
+    expect(draft).toMatchObject({
+      amount: 25,
+      builderCode:
+        "0x00000000000000000000000000000000000000000000000000000000000000f5",
+      marketSlug: "sample",
+      orderType: "FOK",
+      outcomeId: "0",
+      price: 0.7,
+      side: "BUY",
+      tokenID: "yes-token",
+    });
+  });
+
+  it("rejects CLOB V2 market order drafts without builder code", () => {
+    const market = normalizeMarket({
+      id: "1",
+      question: "Will it work?",
+      active: true,
+      outcomes: '["Yes","No"]',
+      outcomePrices: '["0.7","0.3"]',
+      clobTokenIds: '["yes-token","no-token"]',
+    });
+
+    expect(() =>
+      buildClobV2MarketOrderDraft({
+        market,
+        outcome: market.outcomes[0]!,
+        notional: 25,
+      }),
+    ).toThrowError(ClobV2OrderDraftError);
+  });
+
+  it("rejects CLOB V2 market order drafts without token id", () => {
+    expect(() =>
+      buildClobV2MarketOrderDraft({
+        builderCode:
+          "0x00000000000000000000000000000000000000000000000000000000000000f5",
+        notional: 25,
+        outcome: { id: "yes", name: "Yes", price: 0.7 },
+      }),
+    ).toThrowError(ClobV2OrderDraftError);
+  });
+
+  it("rejects CLOB V2 market order drafts with invalid notional", () => {
+    expect(() =>
+      buildClobV2MarketOrderDraft({
+        builderCode:
+          "0x00000000000000000000000000000000000000000000000000000000000000f5",
+        notional: 0,
+        outcome: { id: "yes", name: "Yes", price: 0.7, tokenId: "yes-token" },
+      }),
+    ).toThrowError(ClobV2OrderDraftError);
+  });
+
+  it("rejects CLOB V2 market order drafts without price guard", () => {
+    expect(() =>
+      buildClobV2MarketOrderDraft({
+        builderCode:
+          "0x00000000000000000000000000000000000000000000000000000000000000f5",
+        notional: 25,
+        outcome: { id: "yes", name: "Yes", price: null, tokenId: "yes-token" },
+      }),
+    ).toThrowError(ClobV2OrderDraftError);
   });
 });
 

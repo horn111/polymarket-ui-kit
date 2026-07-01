@@ -41,12 +41,20 @@ RFQ flows."
 "The grant would support the first public release cycle: npm prerelease, hosted
 registry endpoints, a demo gallery, stronger docs, and accessibility hardening."
 
+## Optional 60-70s: Verifiable Builder Flow
+
+"For reviewers who want the deeper integration path, the repo includes a dry-run
+CLOB V2 Builder Flow example. The UI kit emits a typed intent, the host app
+builds an order draft with builderCode, and matched fills can be verified
+through the builder field on the relevant fill event."
+
 ## Screenshot Checklist
 
 - README hero and quickstart.
 - Demo home first viewport.
 - Builder Disclosure section.
 - Combo-aware section.
+- Advanced Builder Flow example.
 - Interactive lab Combo tab.
 - OG PNG export route.
 - OG SVG export route.

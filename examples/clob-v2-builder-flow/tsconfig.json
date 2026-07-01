@@ -1,0 +1,26 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "incremental": true,
+    "jsx": "preserve",
+    "baseUrl": "../..",
+    "paths": {
+      "@polymarket-ui-kit/core": ["packages/core/src/index.ts"],
+      "@polymarket-ui-kit/react": ["packages/react/src/index.ts"]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

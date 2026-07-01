@@ -78,6 +78,8 @@ the host app.
   history.
 - Builder-Code-aware disclosure and trade-intent payloads.
 - Combo-aware market discovery, leg picker, share card, and intent payloads.
+- Advanced dry-run Builder Flow example that maps UI intent to a CLOB V2 order
+  draft with `builderCode` attached.
 - PNG/SVG share export route.
 - Registry package with copy-in items for shadcn-style apps.
 
@@ -100,8 +102,21 @@ Support continued development of the open-source Polymarket distribution UI
 layer: package release, hosted registry, docs, examples, accessibility hardening,
 and builder-focused demo surfaces.
 
+## Verifiable Builder Flow
+
+The repo includes an advanced dry-run example for grant reviewers and builders:
+`examples/clob-v2-builder-flow`.
+
+It shows the path from UI intent to host-owned CLOB V2 submission:
+
+`TradeIntent -> market-order draft with builderCode -> optional server-side live submission -> matched fill -> OrderFilled builder attribution`.
+
+Live order submission is disabled unless the host app sets
+`POLY_ENABLE_LIVE_ORDERS=true` and provides server-only CLOB/wallet env vars.
+
 ## Safety / Scope Boundary
 
 This project is independent open-source frontend tooling. It is not affiliated
 with Polymarket. It is read-first by default and does not place authenticated
-orders, submit RFQ quotes, sign messages, or auto-attach Builder Codes.
+orders from the core or React packages, submit RFQ quotes, sign messages, or
+auto-attach Builder Codes.

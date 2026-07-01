@@ -18,6 +18,30 @@ A Builder Code only matters when the host application submits an order through i
 
 For content embeds, blog cards, dashboards, and social previews, this kit can show attribution and estimated fees, but no fee is charged unless an actual attributed order is submitted and matched.
 
+## From Intent To Attributed Order
+
+`MobileTradeDrawer` emits a typed `TradeIntent`. Host apps can convert that
+intent into a CLOB V2 market-order draft with
+`buildClobV2MarketOrderDraft`:
+
+```ts
+import { buildClobV2MarketOrderDraft } from "@polymarket-ui-kit/core";
+
+const draft = buildClobV2MarketOrderDraft({
+  builderCode: intent.builderCode,
+  market: intent.market,
+  notional: intent.notional,
+  outcome: intent.outcome,
+});
+```
+
+The helper preserves `builderCode` and outcome `tokenId`, but it does not sign
+or post the order. Matched fills can be verified through Polymarket's
+`OrderFilled` event builder attribution.
+
+See [Verifiable Builder Flow](verifiable-builder-flow.md) for the dry-run/live
+advanced example.
+
 ## Example
 
 ```tsx

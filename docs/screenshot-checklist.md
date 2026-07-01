@@ -10,6 +10,7 @@ Capture these before grant submission and launch posts.
 - Share Export module.
 - Builder Disclosure module.
 - Combo-Aware Surface module.
+- Advanced Builder Flow example.
 - Interactive Lab `combo` tab.
 - OG PNG route.
 - OG SVG route.

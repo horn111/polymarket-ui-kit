@@ -64,7 +64,7 @@ const grantStats = [
   { label: "Components", value: "18" },
   { label: "Trading", value: "None" },
   { label: "Builder UX", value: "Visible" },
-  { label: "Combos", value: "Intent" },
+  { label: "Proof path", value: "Dry-run" },
 ];
 
 const grantUseCases = [
@@ -82,6 +82,11 @@ const grantUseCases = [
     label: "SOCIAL CARD",
     title: "Export market-native visuals for distribution.",
     text: "PNG/SVG cards for X posts, newsletters, reports, and embeds.",
+  },
+  {
+    label: "BUILDER FLOW",
+    title: "Show the verifiable path without trading in the demo.",
+    text: "A dry-run example maps UI intent to a CLOB V2 order draft with builderCode.",
   },
 ];
 
@@ -304,8 +309,9 @@ export function Surface({ market, points }) {
             <p>
               The kit is read-first by default: public hooks, SSR-friendly props,
               graceful fallback states, share export, Builder-Code-aware
-              attribution, and Combo-aware intent payloads. Host apps keep
-              control of signing, RFQ, and order placement.
+              attribution, Combo-aware intent payloads, and an advanced dry-run
+              Builder Flow example. Host apps keep control of signing, RFQ, and
+              order placement.
             </p>
             <div className="demo-grant__links">
               <a href="https://github.com/horn111/polymarket-ui-kit" rel="noreferrer" target="_blank">
@@ -324,6 +330,13 @@ export function Surface({ market, points }) {
                 target="_blank"
               >
                 Demo Script
+              </a>
+              <a
+                href="https://github.com/horn111/polymarket-ui-kit/tree/main/examples/clob-v2-builder-flow"
+                rel="noreferrer"
+                target="_blank"
+              >
+                Advanced Flow
               </a>
             </div>
           </article>
