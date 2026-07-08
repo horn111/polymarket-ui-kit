@@ -62,6 +62,7 @@ a {
 
 .demo-industrial,
 .demo-grant,
+.demo-studio,
 .demo-lab {
   background: var(--demo-paper);
   border: 2px solid var(--demo-line);
@@ -75,17 +76,33 @@ a {
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   font-size: 0.76rem;
   font-weight: 800;
-  grid-template-columns: minmax(0, 1fr) auto auto auto auto;
+  grid-template-columns: minmax(0, 1fr) auto auto auto auto auto;
   min-height: 54px;
   text-transform: uppercase;
 }
 
 .demo-industrial__masthead span,
+.demo-studio-link,
 .demo-star-link {
   align-items: center;
   border-right: 2px solid var(--demo-line);
   display: flex;
   padding: 0 18px;
+}
+
+.demo-studio-link {
+  background: var(--demo-paper);
+  color: var(--demo-ink);
+  font-weight: 950;
+  min-height: 54px;
+  text-decoration: none;
+}
+
+.demo-studio-link:hover,
+.demo-studio-link:focus-visible {
+  background: var(--demo-red);
+  color: #050505;
+  outline: 0;
 }
 
 .demo-star-link {
@@ -461,7 +478,14 @@ html[data-demo-theme="dark"] .demo-export-actions a:hover {
   min-height: 280px;
 }
 
-.demo-grant__hero > div:first-child {
+.demo-studio__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  min-height: 310px;
+}
+
+.demo-grant__hero > div:first-child,
+.demo-studio__hero > div:first-child {
   align-content: end;
   border-right: 2px solid var(--demo-line);
   display: grid;
@@ -469,7 +493,8 @@ html[data-demo-theme="dark"] .demo-export-actions a:hover {
   padding: 30px;
 }
 
-.demo-grant__hero h2 {
+.demo-grant__hero h2,
+.demo-studio__hero h1 {
   color: var(--demo-ink);
   font-size: 4.7rem;
   font-weight: 950;
@@ -481,6 +506,7 @@ html[data-demo-theme="dark"] .demo-export-actions a:hover {
 }
 
 .demo-grant__hero p:last-child,
+.demo-studio__hero p:last-child,
 .demo-grant__panel p {
   color: var(--demo-ink);
   font-size: 1rem;
@@ -489,7 +515,8 @@ html[data-demo-theme="dark"] .demo-export-actions a:hover {
   margin: 0;
 }
 
-.demo-grant__stamp {
+.demo-grant__stamp,
+.demo-studio__stamp {
   align-items: center;
   color: var(--demo-red);
   display: flex;
@@ -501,6 +528,134 @@ html[data-demo-theme="dark"] .demo-export-actions a:hover {
   text-align: center;
   text-transform: uppercase;
   writing-mode: vertical-rl;
+}
+
+.demo-studio__stamp {
+  font-size: 6.4rem;
+  writing-mode: horizontal-tb;
+}
+
+.demo-studio__controls {
+  border-top: 2px solid var(--demo-line);
+  display: grid;
+  grid-template-columns: minmax(280px, 1.4fr) minmax(180px, 0.7fr) minmax(200px, 0.8fr) minmax(260px, 1fr);
+}
+
+.demo-studio__controls label {
+  border-right: 2px solid var(--demo-line);
+  display: grid;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.74rem;
+  font-weight: 900;
+  gap: 8px;
+  min-width: 0;
+  padding: 18px;
+  text-transform: uppercase;
+}
+
+.demo-studio__controls label:last-child {
+  border-right: 0;
+}
+
+.demo-studio__controls input,
+.demo-studio__controls select {
+  appearance: none;
+  background: var(--demo-paper);
+  border: 2px solid var(--demo-line);
+  color: var(--demo-ink);
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 850;
+  min-height: 44px;
+  min-width: 0;
+  padding: 0 12px;
+}
+
+.demo-studio__switchboard {
+  border-top: 2px solid var(--demo-line);
+  display: grid;
+  grid-template-columns: minmax(220px, 0.7fr) minmax(320px, 1fr);
+}
+
+.demo-studio__theme {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+}
+
+.demo-studio__theme:first-child {
+  border-right: 2px solid var(--demo-line);
+}
+
+.demo-studio__theme button {
+  background: var(--demo-paper);
+  border: 0;
+  border-right: 2px solid var(--demo-line);
+  color: var(--demo-ink);
+  cursor: pointer;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.78rem;
+  font-weight: 950;
+  min-height: 52px;
+  text-transform: uppercase;
+}
+
+.demo-studio__theme button:last-child {
+  border-right: 0;
+}
+
+.demo-studio__theme button[data-active="true"] {
+  background: var(--demo-red);
+  color: #050505;
+}
+
+.demo-studio__workspace {
+  border-top: 2px solid var(--demo-line);
+  display: grid;
+  grid-template-columns: minmax(360px, 1fr) minmax(360px, 1fr);
+}
+
+.demo-studio__preview {
+  align-content: start;
+  border-right: 2px solid var(--demo-line);
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+  padding: 24px;
+}
+
+.demo-studio__preview iframe,
+.demo-studio__preview img {
+  background: var(--demo-paper-dark);
+  border: 2px solid var(--demo-line);
+  display: block;
+  width: 100%;
+}
+
+.demo-studio__preview iframe {
+  min-height: 460px;
+}
+
+.demo-studio__preview img {
+  height: auto;
+}
+
+.demo-studio__error {
+  align-content: center;
+  background: var(--demo-paper-dark);
+  border: 2px solid var(--demo-line);
+  color: var(--demo-ink);
+  display: grid;
+  font-weight: 850;
+  min-height: 260px;
+  padding: 24px;
+}
+
+.demo-studio__outputs {
+  border: 0;
+  border-radius: 0;
 }
 
 .demo-grant__stats {
@@ -939,6 +1094,8 @@ html[data-demo-theme="dark"] .demo-lab__snippet {
 .demo-shell .pui-card,
 .demo-shell .pui-panel,
 .demo-shell .pui-builder-disclosure,
+.demo-shell .pui-embed-snippet-panel,
+.demo-shell .pui-embed-snippet-panel__block,
 .demo-shell .pui-outcome-button,
 .demo-shell .pui-badge,
 .demo-shell .pui-button,
@@ -961,6 +1118,43 @@ html[data-demo-theme="dark"] .demo-lab__snippet {
   background: var(--demo-paper);
   border-color: var(--demo-line);
   box-shadow: none;
+  color: var(--demo-ink);
+}
+
+.demo-shell .pui-embed-snippet-panel {
+  background: var(--demo-paper);
+  color: var(--demo-ink);
+}
+
+.demo-shell .pui-embed-snippet-panel__header h3,
+.demo-shell .pui-embed-snippet-panel__block code {
+  color: var(--demo-ink);
+  font-weight: 850;
+}
+
+.demo-shell .pui-embed-snippet-panel__header span,
+.demo-shell .pui-embed-snippet-panel__block button {
+  color: var(--demo-red);
+}
+
+.demo-shell .pui-embed-snippet-panel__header strong,
+.demo-shell .pui-embed-snippet-panel__block span {
+  color: var(--demo-muted);
+}
+
+.demo-shell .pui-embed-snippet-panel__block {
+  background: var(--demo-paper);
+  border: 2px solid var(--demo-line);
+}
+
+.demo-shell .pui-embed-snippet-panel__block > div {
+  background: var(--demo-paper-dark);
+  border-bottom: 2px solid var(--demo-line);
+}
+
+.demo-shell .pui-embed-snippet-panel__error {
+  background: var(--demo-soft-red);
+  border: 2px solid var(--demo-line);
   color: var(--demo-ink);
 }
 
@@ -1161,6 +1355,10 @@ html[data-demo-theme="dark"] .demo-shell .pui-share-card {
 @media (max-width: 1040px) {
   .demo-industrial__hero,
   .demo-grant__hero,
+  .demo-studio__hero,
+  .demo-studio__controls,
+  .demo-studio__switchboard,
+  .demo-studio__workspace,
   .demo-lab__content,
   .demo-lab__content[data-tab="share"],
   .demo-lab__content[data-tab="combo"],
@@ -1171,6 +1369,8 @@ html[data-demo-theme="dark"] .demo-shell .pui-share-card {
 
   .demo-hero-copy,
   .demo-grant__hero > div:first-child,
+  .demo-studio__hero > div:first-child,
+  .demo-studio__preview,
   .demo-lab__tabs,
   .demo-lab__snippet {
     border-right: 0;
@@ -1182,6 +1382,11 @@ html[data-demo-theme="dark"] .demo-shell .pui-share-card {
     justify-content: flex-start;
     min-height: 110px;
     writing-mode: horizontal-tb;
+  }
+
+  .demo-studio__stamp {
+    border-top: 2px solid var(--demo-line);
+    justify-content: flex-start;
   }
 
   .demo-lab__tabs {
@@ -1220,6 +1425,10 @@ html[data-demo-theme="dark"] .demo-shell .pui-share-card {
   .demo-industrial__masthead,
   .demo-industrial__hero,
   .demo-grant__hero,
+  .demo-studio__hero,
+  .demo-studio__controls,
+  .demo-studio__switchboard,
+  .demo-studio__workspace,
   .demo-spec-grid,
   .demo-grant__stats,
   .demo-route-row,
@@ -1230,8 +1439,11 @@ html[data-demo-theme="dark"] .demo-shell .pui-share-card {
   }
 
   .demo-industrial__masthead span,
+  .demo-studio-link,
   .demo-star-link,
   .demo-theme-toggle,
+  .demo-studio__controls label,
+  .demo-studio__theme:first-child,
   .demo-spec-cell,
   .demo-grant__panel,
   .demo-export-specs div,
@@ -1241,8 +1453,11 @@ html[data-demo-theme="dark"] .demo-shell .pui-share-card {
   }
 
   .demo-industrial__masthead span,
+  .demo-studio-link,
   .demo-star-link,
   .demo-theme-toggle,
+  .demo-studio__controls label,
+  .demo-studio__theme:first-child,
   .demo-spec-cell,
   .demo-grant__panel,
   .demo-export-specs div,
@@ -1265,7 +1480,8 @@ html[data-demo-theme="dark"] .demo-shell .pui-share-card {
   }
 
   .demo-hero-copy h1,
-  .demo-grant__hero h2 {
+  .demo-grant__hero h2,
+  .demo-studio__hero h1 {
     font-size: 3.2rem;
   }
 

@@ -25,7 +25,7 @@ export default function HomePage() {
           </div>
           <pre className="docs-code">
             <code>{`pnpm add @polymarket-ui-kit/react
-npx shadcn@latest add https://polymarket-ui-kit.dev/r/market-card.json`}</code>
+npx shadcn@latest add https://polymarket-ui-kit-demo-fkan-chi.vercel.app/r/market-card.json`}</code>
           </pre>
         </div>
         <MarketCard market={sampleMarket} points={samplePoints} />
@@ -40,4 +40,3 @@ npx shadcn@latest add https://polymarket-ui-kit.dev/r/market-card.json`}</code>
     </>
   );
 }
-

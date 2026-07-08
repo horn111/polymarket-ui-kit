@@ -10,9 +10,9 @@ for many lightweight builders is a polished frontend layer that makes markets
 easy to embed, explain, and share across external products.
 
 Polymarket UI Kit gives builders reusable React primitives, public data hooks,
-Builder-Code-aware disclosure, share/export surfaces, and Combo-aware UI. The
-project helps markets travel into blogs, dashboards, research portals, media
-tools, and social posts.
+Link-to-Embed Studio, Builder-Code-aware disclosure, share/export surfaces, and
+Combo-aware UI. The project helps markets travel into blogs, dashboards,
+research portals, media tools, and social posts.
 
 ## Problem
 
@@ -29,6 +29,7 @@ Ship an open-source read-first UI kit:
 - Drop-in components for markets, orderbooks, charts, comments, and share cards.
 - Builder-Code-aware attribution and fee preview UX.
 - Combo-aware leg picking, share cards, and typed intent payloads.
+- Link-to-Embed Studio for iframe, React, OG, and registry outputs.
 - shadcn-style registry items for teams that want to own copied code.
 
 ## Audience
@@ -42,7 +43,7 @@ Ship an open-source read-first UI kit:
 ## Adoption Path
 
 1. Builder finds the repo from X, GitHub, or the live demo.
-2. Builder tries the demo or local dev flow.
+2. Builder pastes a market link into Studio or tries the local dev flow.
 3. Builder copies a component or installs the first npm prerelease.
 4. Builder embeds market cards, share cards, or Combo surfaces in their product.
 5. Builder optionally wires emitted intents into their own CLOB/RFQ integration.
@@ -52,7 +53,7 @@ Ship an open-source read-first UI kit:
 Funding would support the first public release cycle:
 
 - npm prerelease for core and React packages.
-- hosted registry endpoints.
+- custom registry domain and more Studio presets.
 - demo gallery for blogs, dashboards, embeds, social cards, and Combo surfaces.
 - accessibility and visual state hardening.
 - stronger docs for caching, SSR/ISR, public data fallbacks, and builder codes.

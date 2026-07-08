@@ -5,6 +5,7 @@ import {
   CommentList,
   ComboBuilderCard,
   ComboShareCard,
+  EmbedSnippetPanel,
   LeaderboardTable,
   MarketCard,
   MobileTradeDrawer,
@@ -142,6 +143,50 @@ describe("Public hooks", () => {
   it("uses initial combo markets without refetching on mount", () => {
     render(<ComboMarketsProbe />);
     expect(screen.getByText(String(fixtureComboMarkets.length))).toBeInTheDocument();
+  });
+});
+
+describe("Embed distribution panel", () => {
+  it("renders iframe, React, registry, PNG, and SVG outputs", () => {
+    render(
+      <EmbedSnippetPanel
+        attribution="forecast studio"
+        baseUrl="https://demo.example"
+        input="https://polymarket.com/event/will-bitcoin-hit-100k-in-2026?ref=x"
+        surface="share-card"
+        theme="light"
+      />,
+    );
+
+    expect(screen.getByText("will-bitcoin-hit-100k-in-2026")).toBeInTheDocument();
+    expect(screen.getByText(/<iframe/)).toBeInTheDocument();
+    expect(screen.getByText(/ShareCard/)).toBeInTheDocument();
+    expect(screen.getByText(/format=png/)).toBeInTheDocument();
+    expect(screen.getByText(/format=svg/)).toBeInTheDocument();
+    expect(screen.getByText(/npx shadcn@latest add/)).toBeInTheDocument();
+  });
+
+  it("renders invalid input states and disables copy actions", () => {
+    render(<EmbedSnippetPanel input="https://example.com/event/nope" />);
+
+    expect(screen.getByRole("alert")).toHaveTextContent("Only polymarket.com URLs");
+    for (const button of screen.getAllByRole("button", { name: "Copy" })) {
+      expect(button).toBeDisabled();
+    }
+  });
+
+  it("shows builder codes only as public attribution data", () => {
+    render(
+      <EmbedSnippetPanel
+        builderCode="0x00000000000000000000000000000000000000000000000000000000000000f5"
+        input="will-bitcoin-hit-100k-in-2026"
+        surface="builder-disclosure"
+      />,
+    );
+
+    expect(screen.getByText(/BuilderFeeDisclosure/)).toBeInTheDocument();
+    expect(screen.queryByText(/private key/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/place order/i)).not.toBeInTheDocument();
   });
 });
 

@@ -36,7 +36,29 @@ Copy-in components are better when your app needs design control.
 
 Polymarket UI Kit now has shadcn-style registry installs:
 
-`npx shadcn@latest add https://polymarket-ui-kit.dev/r/market-card.json`
+`npx shadcn@latest add https://polymarket-ui-kit-demo-fkan-chi.vercel.app/r/market-card.json`
+
+## Link-to-Embed Studio update
+
+Polymarket links should become distribution surfaces, not static previews.
+
+New in Polymarket UI Kit:
+
+Link-to-Embed Studio.
+
+Paste a Polymarket URL and get:
+
+- live iframe embed
+- React snippet
+- OG PNG/SVG routes
+- shadcn registry command
+- optional public Builder Code attribution
+
+No hidden order placement.
+Just a cleaner path from market link to blog, dashboard, social card, or app.
+
+Repo: https://github.com/horn111/polymarket-ui-kit
+Demo: https://polymarket-ui-kit-demo-fkan-chi.vercel.app/studio
 
 ## Grant angle
 
@@ -45,4 +67,3 @@ Builders need distribution-ready interfaces.
 
 Polymarket UI Kit turns market data into reusable cards, charts, orderbooks,
 comments, and share images for apps, media products, and research portals.
-

@@ -20,7 +20,15 @@ Show the demo home:
 "The kit is read-first. It uses public market data defaults and graceful fallback
 states. It does not place orders."
 
-## 25-38s: Builder-Code UX
+## 25-35s: Link-To-Embed Studio
+
+Show `/studio`:
+
+"Paste a Polymarket link and the kit generates a live iframe, React snippet,
+OG PNG/SVG routes, and registry command. This is the distribution layer for
+blogs, dashboards, media tools, and lightweight builder apps."
+
+## 35-45s: Builder-Code UX
 
 Show Builder Disclosure:
 
@@ -28,7 +36,7 @@ Show Builder Disclosure:
 their host app handles an order flow. The UI emits intent payloads; it does not
 submit orders."
 
-## 38-50s: Combo-Aware UI
+## 45-55s: Combo-Aware UI
 
 Show Combo-aware surface:
 
@@ -36,10 +44,11 @@ Show Combo-aware surface:
 discovery, leg selection, combo share cards, and typed intent payloads for host
 RFQ flows."
 
-## 50-60s: Ask
+## 55-60s: Ask
 
 "The grant would support the first public release cycle: npm prerelease, hosted
-registry endpoints, a demo gallery, stronger docs, and accessibility hardening."
+registry custom domain, more embed presets, stronger docs, and accessibility
+hardening."
 
 ## Optional 60-70s: Verifiable Builder Flow
 
@@ -52,6 +61,7 @@ through the builder field on the relevant fill event."
 
 - README hero and quickstart.
 - Demo home first viewport.
+- Link-to-Embed Studio.
 - Builder Disclosure section.
 - Combo-aware section.
 - Advanced Builder Flow example.

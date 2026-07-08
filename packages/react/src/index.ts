@@ -8,6 +8,7 @@ export * from "./components/ComboIntentPreview";
 export * from "./components/ComboLegList";
 export * from "./components/ComboLegPicker";
 export * from "./components/ComboShareCard";
+export * from "./components/EmbedSnippetPanel";
 export * from "./components/FeePill";
 export * from "./components/LeaderboardTable";
 export * from "./components/MarketCard";

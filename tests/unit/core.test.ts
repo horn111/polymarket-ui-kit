@@ -1,7 +1,11 @@
 import {
   buildComboIntent,
   buildClobV2MarketOrderDraft,
+  buildEmbedUrl,
   ClobV2OrderDraftError,
+  buildIframeSnippet,
+  buildReactSnippet,
+  buildShareImageUrl,
   createShareCardSvg,
   formatCurrency,
   formatProbability,
@@ -12,7 +16,9 @@ import {
   normalizeComboMarketsPage,
   normalizeMarket,
   normalizePriceHistory,
+  PolymarketEmbedError,
   previewFees,
+  resolvePolymarketSlug,
   withQuery,
 } from "@polymarket-ui-kit/core";
 import { describe, expect, it, vi } from "vitest";
@@ -283,6 +289,103 @@ describe("share image export", () => {
     expect(svg).not.toContain("#f59e0b");
     expect(svg).toContain("&lt;script&gt;");
     expect(svg).not.toContain("<script>");
+  });
+});
+
+describe("distribution embed helpers", () => {
+  it("resolves plain Polymarket slugs", () => {
+    expect(resolvePolymarketSlug("Will-Bitcoin-Hit-100k-In-2026")).toBe(
+      "will-bitcoin-hit-100k-in-2026",
+    );
+  });
+
+  it("resolves Polymarket event URLs", () => {
+    expect(
+      resolvePolymarketSlug("https://polymarket.com/event/will-bitcoin-hit-100k-in-2026"),
+    ).toBe("will-bitcoin-hit-100k-in-2026");
+  });
+
+  it("strips query and hash from Polymarket URLs", () => {
+    expect(
+      resolvePolymarketSlug(
+        "https://polymarket.com/event/will-bitcoin-hit-100k-in-2026?ref=builder#comments",
+      ),
+    ).toBe("will-bitcoin-hit-100k-in-2026");
+  });
+
+  it("rejects invalid embed inputs", () => {
+    expect(() => resolvePolymarketSlug("https://example.com/event/x")).toThrowError(
+      PolymarketEmbedError,
+    );
+    expect(() => resolvePolymarketSlug("not a slug")).toThrowError(PolymarketEmbedError);
+  });
+
+  it("builds iframe snippets with encoded embed routes", () => {
+    const snippet = buildIframeSnippet({
+      attribution: "builder studio",
+      baseUrl: "https://demo.example",
+      slug: "will-bitcoin-hit-100k-in-2026",
+      surface: "share-card",
+      theme: "light",
+    });
+
+    expect(snippet).toContain("iframe");
+    expect(snippet).toContain("https://demo.example/embed/will-bitcoin-hit-100k-in-2026");
+    expect(snippet).toContain("surface=share-card");
+    expect(snippet).toContain("theme=light");
+    expect(snippet).toContain("attribution=builder+studio");
+  });
+
+  it("builds React snippets for the selected surface", () => {
+    expect(
+      buildReactSnippet({
+        slug: "will-bitcoin-hit-100k-in-2026",
+        surface: "share-card",
+      }),
+    ).toContain("ShareCard");
+    expect(
+      buildReactSnippet({
+        builderCode:
+          "0x00000000000000000000000000000000000000000000000000000000000000f5",
+        slug: "will-bitcoin-hit-100k-in-2026",
+        surface: "builder-disclosure",
+      }),
+    ).toContain("BuilderFeeDisclosure");
+  });
+
+  it("builds OG PNG and SVG URLs with theme and attribution", () => {
+    const png = buildShareImageUrl({
+      attribution: "forecast studio",
+      baseUrl: "https://demo.example",
+      format: "png",
+      slug: "will-bitcoin-hit-100k-in-2026",
+      theme: "light",
+    });
+    const svg = buildShareImageUrl({
+      attribution: "forecast studio",
+      baseUrl: "https://demo.example",
+      format: "svg",
+      slug: "will-bitcoin-hit-100k-in-2026",
+      theme: "light",
+    });
+
+    expect(png).toContain("format=png");
+    expect(svg).toContain("format=svg");
+    expect(png).toContain("theme=light");
+    expect(svg).toContain("attribution=forecast+studio");
+  });
+
+  it("builds deterministic embed URLs", () => {
+    expect(
+      buildEmbedUrl({
+        builderCode: "0xabc",
+        slug: "will-bitcoin-hit-100k-in-2026",
+        surface: "builder-disclosure",
+        theme: "dark",
+      }),
+    ).toBe(
+      "/embed/will-bitcoin-hit-100k-in-2026?surface=builder-disclosure&theme=dark&builderCode=0xabc",
+    );
   });
 });
 

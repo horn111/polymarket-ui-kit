@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@polymarket-ui-kit/core": "workspace:*",
+    "@polymarket-ui-kit/registry": "workspace:*",
     "@polymarket-ui-kit/react": "workspace:*",
     "next": "^15.1.7",
     "react": "^19.0.0",

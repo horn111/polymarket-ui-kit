@@ -775,6 +775,119 @@
   font-weight: 800;
   margin: 0.18rem 0 0;
 }
+
+.pui-embed-snippet-panel {
+  background: var(--pui-bg);
+  border: 1px solid var(--pui-border);
+  border-radius: var(--pui-radius-md);
+  color: var(--pui-text);
+  display: grid;
+  gap: var(--pui-space-4);
+  padding: var(--pui-space-4);
+}
+
+.pui-embed-snippet-panel__header {
+  align-items: start;
+  display: flex;
+  gap: var(--pui-space-4);
+  justify-content: space-between;
+}
+
+.pui-embed-snippet-panel__header div {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.pui-embed-snippet-panel__header span {
+  color: var(--pui-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.pui-embed-snippet-panel__header h3 {
+  font-size: 1.2rem;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.pui-embed-snippet-panel__header strong {
+  color: var(--pui-text-muted);
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.pui-embed-snippet-panel__error {
+  background: var(--pui-warning-soft);
+  border: 1px solid var(--pui-warning);
+  border-radius: var(--pui-radius-sm);
+  color: var(--pui-text);
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: var(--pui-space-3);
+}
+
+.pui-embed-snippet-panel__grid {
+  display: grid;
+  gap: var(--pui-space-3);
+}
+
+.pui-embed-snippet-panel__block {
+  border: 1px solid var(--pui-border);
+  border-radius: var(--pui-radius-sm);
+  display: grid;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.pui-embed-snippet-panel__block > div {
+  align-items: center;
+  background: var(--pui-bg-muted);
+  border-bottom: 1px solid var(--pui-border);
+  display: flex;
+  justify-content: space-between;
+  min-height: 2.35rem;
+  padding: 0 var(--pui-space-3);
+}
+
+.pui-embed-snippet-panel__block span {
+  color: var(--pui-text-muted);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.pui-embed-snippet-panel__block button {
+  background: transparent;
+  border: 0;
+  color: var(--pui-accent);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 0;
+}
+
+.pui-embed-snippet-panel__block button:disabled {
+  color: var(--pui-text-soft);
+  cursor: not-allowed;
+}
+
+.pui-embed-snippet-panel__block code {
+  color: var(--pui-text);
+  display: block;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  min-height: 2.6rem;
+  overflow: auto;
+  padding: var(--pui-space-3);
+  white-space: pre-wrap;
+}
 .pui-trade-drawer {
   bottom: 0;
   left: 0;

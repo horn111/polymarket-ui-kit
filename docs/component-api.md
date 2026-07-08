@@ -18,6 +18,7 @@ and theme utilities.
 - `ComboLegList`
 - `ComboLegPicker`
 - `ComboShareCard`
+- `EmbedSnippetPanel`
 - `BuilderBadge`
 - `BuilderFeeDisclosure`
 - `ShareCard`
@@ -65,6 +66,12 @@ const market = useMarket(slug, {
 - `getPriceHistory`
 - `normalizePriceHistory`
 - `createShareCardSvg`
+- `resolvePolymarketSlug`
+- `buildEmbedUrl`
+- `buildShareImageUrl`
+- `buildIframeSnippet`
+- `buildReactSnippet`
+- `buildRegistryCommand`
 - `buildClobV2MarketOrderDraft`
 - `buildComboIntent`
 - formatters and fee preview helpers

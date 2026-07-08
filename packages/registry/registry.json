@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "polymarket-ui-kit",
-  "homepage": "https://polymarket-ui-kit.dev",
+  "homepage": "https://polymarket-ui-kit-demo-fkan-chi.vercel.app",
   "items": [
     {
       "name": "market-card",
@@ -71,6 +71,20 @@
           "path": "src/lib/polymarket-format.ts",
           "type": "registry:lib",
           "target": "lib/polymarket-format.ts"
+        }
+      ]
+    },
+    {
+      "name": "embed-studio",
+      "type": "registry:component",
+      "title": "Embed Studio",
+      "description": "A paste-a-Polymarket-link studio that outputs iframe, React, OG, and registry snippets.",
+      "dependencies": ["@polymarket-ui-kit/core"],
+      "files": [
+        {
+          "path": "src/components/embed-studio.tsx",
+          "type": "registry:component",
+          "target": "components/polymarket/embed-studio.tsx"
         }
       ]
     }

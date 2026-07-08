@@ -9,8 +9,8 @@ The thesis is simple:
 Polymarket has APIs.
 Builders still need a distribution UI layer.
 
-Market cards, public hooks, share export, Builder-Code UX, and Combo-aware
-components should not be rebuilt from scratch every time.
+Market cards, public hooks, Link-to-Embed Studio, share export, Builder-Code UX,
+and Combo-aware components should not be rebuilt from scratch every time.
 
 Repo: https://github.com/horn111/polymarket-ui-kit
 Demo: https://polymarket-ui-kit-demo-fkan-chi.vercel.app/
@@ -30,8 +30,9 @@ need to make markets readable, embeddable, and shareable.
 
 What ships now:
 
-- 18 React components
+- 19 React components
 - public market hooks
+- Link-to-Embed Studio
 - CLOB price history
 - PNG/SVG share export
 - Builder-Code-aware fee disclosure
@@ -58,8 +59,8 @@ Prediction markets need better distribution surfaces.
 Next milestones:
 
 - first npm prerelease
-- hosted registry endpoints
-- demo gallery
+- custom registry domain
+- more Studio presets
 - combo-ready embeds
 - better SSR/cache docs
 - accessibility and visual-state hardening

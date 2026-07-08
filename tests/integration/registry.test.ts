@@ -6,8 +6,9 @@ describe("registry metadata", () => {
     expect(registry.items.map((item) => item.name)).toEqual([
       "market-card",
       "orderbook-panel",
-      "share-card"
+      "share-card",
+      "combo-share-card",
+      "embed-studio",
     ]);
   });
 });
-

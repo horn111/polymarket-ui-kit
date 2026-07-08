@@ -1,27 +1,64 @@
-import { ShareCard } from "@polymarket-ui-kit/react";
+import {
+  BuilderFeeDisclosure,
+  MarketCard,
+  ShareCard,
+} from "@polymarket-ui-kit/react";
 import { RouteThemeSync } from "../../components/RouteThemeSync";
-import { loadPublicMarket } from "../../../components/live-data";
+import { sampleBuilder } from "../../../components/sample-builder";
+import { loadPublicMarketBundle } from "../../../components/live-data";
 
 export const revalidate = 60;
 
 type EmbedPageProps = {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ theme?: string }>;
+  searchParams: Promise<{
+    attribution?: string;
+    builderCode?: string;
+    surface?: string;
+    theme?: string;
+  }>;
 };
 
 function resolveTheme(value: string | undefined): "light" | "dark" {
   return value === "light" ? "light" : "dark";
 }
 
+function resolveSurface(value: string | undefined) {
+  if (value === "market-card" || value === "builder-disclosure") {
+    return value;
+  }
+
+  return "share-card";
+}
+
 export default async function EmbedPage({ params, searchParams }: EmbedPageProps) {
   const { slug } = await params;
-  const theme = resolveTheme((await searchParams).theme);
-  const { market } = await loadPublicMarket(slug);
+  const query = await searchParams;
+  const theme = resolveTheme(query.theme);
+  const surface = resolveSurface(query.surface);
+  const attribution = query.attribution ?? "pui-kit/demo";
+  const builder = query.builderCode
+    ? { ...sampleBuilder, code: query.builderCode }
+    : sampleBuilder;
+  const { market, points } = await loadPublicMarketBundle(slug);
 
   return (
     <>
       <RouteThemeSync theme={theme} />
-      <ShareCard market={market} />
+      {surface === "market-card" ? (
+        <MarketCard market={market} points={points} />
+      ) : null}
+      {surface === "share-card" ? (
+        <ShareCard market={market} attribution={attribution} />
+      ) : null}
+      {surface === "builder-disclosure" ? (
+        <BuilderFeeDisclosure
+          builder={builder}
+          notional={100}
+          price={market.outcomes[0]?.price ?? undefined}
+          side="taker"
+        />
+      ) : null}
     </>
   );
 }

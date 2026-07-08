@@ -61,7 +61,7 @@ const chartSeries = [
 ];
 
 const grantStats = [
-  { label: "Components", value: "18" },
+  { label: "Components", value: "19" },
   { label: "Trading", value: "None" },
   { label: "Builder UX", value: "Visible" },
   { label: "Proof path", value: "Dry-run" },
@@ -128,6 +128,9 @@ export default function DemoHome() {
           <span>POLYMARKET UI KIT</span>
           <span>PUBLIC BUILD / REV 0.4</span>
           <span>READ-FIRST INTERFACE</span>
+          <a className="demo-studio-link" href="/studio">
+            Studio
+          </a>
           <a
             className="demo-star-link"
             href="https://github.com/horn111/polymarket-ui-kit"
@@ -165,7 +168,7 @@ export default function DemoHome() {
         </div>
 
         <div className="demo-spec-grid" aria-label="System capabilities">
-          <SpecCell label="COMPONENTS" value="18" />
+          <SpecCell label="COMPONENTS" value="19" />
           <SpecCell label="COMBOS" value="INTENT" />
           <SpecCell label="EXPORT" value="PNG/SVG" />
           <SpecCell label="ORDERS" value="NONE" />
@@ -317,6 +320,9 @@ export function Surface({ market, points }) {
               <a href="https://github.com/horn111/polymarket-ui-kit" rel="noreferrer" target="_blank">
                 Repo
               </a>
+              <a href="/studio">
+                Studio
+              </a>
               <a
                 href="https://github.com/horn111/polymarket-ui-kit/blob/main/docs/grant-application.md"
                 rel="noreferrer"
@@ -330,13 +336,6 @@ export function Surface({ market, points }) {
                 target="_blank"
               >
                 Demo Script
-              </a>
-              <a
-                href="https://github.com/horn111/polymarket-ui-kit/tree/main/examples/clob-v2-builder-flow"
-                rel="noreferrer"
-                target="_blank"
-              >
-                Advanced Flow
               </a>
             </div>
           </article>

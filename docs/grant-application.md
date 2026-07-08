@@ -38,8 +38,8 @@ their authenticated CLOB or RFQ flow.
 ## Short Description
 
 Open-source React UI kit for Polymarket builders: market cards, public data
-hooks, CLOB price history charts, OG/share export, Builder-Code-aware fee
-disclosure, and Combo-aware UI primitives.
+hooks, CLOB price history charts, Link-to-Embed Studio, OG/share export,
+Builder-Code-aware fee disclosure, and Combo-aware UI primitives.
 
 The goal is to help dashboards, blogs, media products, embeds, and lightweight
 apps bring users into Polymarket without rebuilding the same frontend layer from
@@ -60,6 +60,11 @@ builders read-first components and hooks that can be dropped into external
 surfaces while keeping trading, signing, RFQ flows, and Builder Code handling in
 the host app.
 
+The new Link-to-Embed Studio turns a Polymarket URL into a live iframe, React
+snippet, OG PNG/SVG links, and shadcn-style registry command. This makes the
+project easier to evaluate and easier for builders, blogs, dashboards, and media
+tools to try quickly.
+
 ## Why This Helps Polymarket
 
 - More teams can embed Polymarket-native surfaces outside polymarket.com.
@@ -73,7 +78,9 @@ the host app.
 ## Current Status
 
 - Live demo deployed.
-- 18 React components.
+- 19 React components.
+- Link-to-Embed Studio route for copy-ready iframe, React, OG, and registry
+  outputs.
 - Public data hooks for markets, depth, comments, leaderboards, and CLOB price
   history.
 - Builder-Code-aware disclosure and trade-intent payloads.
@@ -81,16 +88,15 @@ the host app.
 - Advanced dry-run Builder Flow example that maps UI intent to a CLOB V2 order
   draft with `builderCode` attached.
 - PNG/SVG share export route.
-- Registry package with copy-in items for shadcn-style apps.
+- Hosted registry routes on the live demo domain plus registry source files.
 
 ## 30-Day Milestones
 
 - Publish the first npm prerelease for `@polymarket-ui-kit/core` and
   `@polymarket-ui-kit/react`.
-- Host registry endpoints for `market-card`, `orderbook-panel`, `share-card`,
-  and `combo-share-card`.
-- Add a demo gallery for blog embeds, dashboard widgets, social cards, and
-  Combo-aware surfaces.
+- Move hosted registry endpoints from the Vercel demo domain to a custom domain.
+- Expand Link-to-Embed Studio with more blog, dashboard, social card, and
+  Combo-aware presets.
 - Improve docs for SSR/ISR, caching, rate-limit handling, and public data
   fallbacks.
 - Collect traction signals: GitHub stars, X impressions, demo visits, external

@@ -8,12 +8,13 @@
 <h1 align="center">Polymarket UI Kit</h1>
 
 <p align="center">
-  <strong>Drop-in React components, public data hooks, Combo-aware UI, and copy-in registry items for Polymarket apps.</strong>
+  <strong>Drop-in React components, public data hooks, Link-to-Embed Studio, Combo-aware UI, and copy-in registry items for Polymarket apps.</strong>
 </p>
 
 <p align="center">
   <a href="#60-second-quickstart">Quickstart</a> &middot;
   <a href="#components">Components</a> &middot;
+  <a href="#link-to-embed-studio">Studio</a> &middot;
   <a href="#data-architecture">Data</a> &middot;
   <a href="#ssrisr">SSR/ISR</a> &middot;
   <a href="#builder-and-grant-angle">Builder angle</a>
@@ -75,11 +76,11 @@ pnpm demo:dev
 Hosted registry target for shadcn-style projects:
 
 ```bash
-npx shadcn@latest add https://polymarket-ui-kit.dev/r/market-card.json
+npx shadcn@latest add https://polymarket-ui-kit-demo-fkan-chi.vercel.app/r/market-card.json
 ```
 
-Until hosted registry endpoints are live, registry source files live in
-`packages/registry` and can be validated with `pnpm registry:validate`.
+The current hosted registry lives on the Vercel demo domain. A custom registry
+domain is planned after the first public release.
 
 Import styles once:
 
@@ -96,10 +97,41 @@ import "@polymarket-ui-kit/react/themes.css";
 | Local development | Ready with `pnpm install` and `pnpm demo:dev` |
 | React package | First npm prerelease planned |
 | Core package | First npm prerelease planned |
-| Hosted registry | Planned |
+| Hosted registry | Live on the Vercel demo domain |
 | Registry source | Available in `packages/registry` |
 | Advanced Builder Flow | Dry-run example available in `examples/clob-v2-builder-flow` |
 | Authenticated trading | Out of scope for v0 |
+
+## Link-To-Embed Studio
+
+Paste a Polymarket URL or slug and generate a live iframe, React snippet, OG
+PNG/SVG links, and shadcn-style registry command from one surface.
+
+Live Studio:
+[polymarket-ui-kit-demo-fkan-chi.vercel.app/studio](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/studio)
+
+```tsx
+import {
+  buildIframeSnippet,
+  buildShareImageUrl,
+  resolvePolymarketSlug,
+} from "@polymarket-ui-kit/core";
+
+const slug = resolvePolymarketSlug(
+  "https://polymarket.com/event/who-will-win-the-2028-us-presidential-election",
+);
+
+const iframe = buildIframeSnippet({
+  slug,
+  baseUrl: "https://your-app.com",
+  surface: "share-card",
+  theme: "dark",
+});
+
+const ogPng = buildShareImageUrl({ slug, format: "png", theme: "dark" });
+```
+
+Read the implementation notes in [docs/embed-studio.md](docs/embed-studio.md).
 
 ## Copy-Paste Examples
 
@@ -300,6 +332,7 @@ Read the verification notes in
 | `ComboLegList`         | Selected combo legs with outcome and price context        | MVP    |
 | `ComboIntentPreview`   | Typed combo intent handoff for host apps                  | MVP    |
 | `ComboShareCard`       | Social/embed surface for selected combo legs              | MVP    |
+| `EmbedSnippetPanel`    | Copy-ready iframe, React, OG, and registry outputs        | MVP    |
 | `BuilderBadge`         | Builder identity and attribution surface                  | MVP    |
 | `BuilderFeeDisclosure` | Builder code attribution and maker/taker fee disclosure   | MVP    |
 | `ShareCard`            | X-ready market screenshot and OG card base                | MVP    |
@@ -365,6 +398,7 @@ The moat is not just visual polish. It is DX:
 - SSR/ISR-friendly APIs
 - Storybook and visual states
 - shadcn-style copy-in registry
+- link-to-embed studio and snippet generation
 - launch-ready share cards
 - combo-aware leg picking and intent payloads
 - builder-code-aware fee and attribution surfaces
@@ -372,6 +406,9 @@ The moat is not just visual polish. It is DX:
 ## Demo Links
 
 - Live demo: [polymarket-ui-kit-demo-fkan-chi.vercel.app](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/)
+- Link-to-Embed Studio: [studio](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/studio)
+- Hosted registry: [registry.json](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/registry.json)
+- Registry item: [embed-studio.json](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/r/embed-studio.json)
 - Demo OG PNG: [api/og](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/api/og?slug=who-will-win-the-2028-us-presidential-election&theme=light&format=png)
 - Demo OG SVG: [api/og?format=svg](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/api/og?slug=who-will-win-the-2028-us-presidential-election&theme=light&format=svg)
 - Docs app: `pnpm docs:dev`
@@ -389,6 +426,7 @@ Grant submission checklist:
 
 - Repo: [github.com/horn111/polymarket-ui-kit](https://github.com/horn111/polymarket-ui-kit)
 - Live demo: [polymarket-ui-kit-demo-fkan-chi.vercel.app](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/)
+- Link-to-Embed Studio: [studio](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/studio)
 - X account: [x.com/debythm](https://x.com/debythm)
 - Advanced Builder Flow: [examples/clob-v2-builder-flow](examples/clob-v2-builder-flow)
 - Grant application draft: [docs/grant-application.md](docs/grant-application.md)
@@ -407,6 +445,7 @@ The repo includes:
 - [Builder Codes notes](docs/builder-codes.md)
 - [Verifiable Builder Flow](docs/verifiable-builder-flow.md)
 - [Combo-aware UI notes](docs/combos.md)
+- [Link-to-Embed Studio](docs/embed-studio.md)
 
 ## Roadmap
 
