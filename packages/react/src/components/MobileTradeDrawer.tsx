@@ -68,7 +68,7 @@ export function MobileTradeDrawer({
   return (
     <div className="pui-trade-drawer">
       <section className="pui-panel pui-stack pui-trade-drawer__inner">
-        <div className="pui-row" style={{ justifyContent: "space-between" }}>
+        <div className="pui-row pui-between">
           <strong>Trade preview</strong>
           <FeePill preview={feePreview} />
         </div>
@@ -88,18 +88,10 @@ export function MobileTradeDrawer({
         <label className="pui-stack">
           <span className="pui-muted">Notional</span>
           <input
+            className="pui-input"
             inputMode="decimal"
             min={1}
             onChange={(event) => setNotional(Number(event.target.value))}
-            style={{
-              background: "var(--pui-bg-muted)",
-              border: "1px solid var(--pui-border)",
-              borderRadius: "var(--pui-radius-sm)",
-              color: "var(--pui-text)",
-              font: "inherit",
-              minHeight: "2.5rem",
-              padding: "0 var(--pui-space-3)",
-            }}
             type="number"
             value={notional}
           />

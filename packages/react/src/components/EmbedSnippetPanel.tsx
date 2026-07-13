@@ -31,6 +31,15 @@ interface SnippetBlockProps {
   value: string;
 }
 
+type OutputTab = "embed" | "react" | "og" | "registry";
+
+const outputTabs: Array<{ label: string; value: OutputTab }> = [
+  { label: "Embed", value: "embed" },
+  { label: "React", value: "react" },
+  { label: "OG", value: "og" },
+  { label: "Registry", value: "registry" },
+];
+
 function SnippetBlock({ copied, disabled, label, onCopy, value }: SnippetBlockProps) {
   return (
     <div className="pui-embed-snippet-panel__block">
@@ -56,6 +65,7 @@ export function EmbedSnippetPanel({
   theme = "dark",
 }: EmbedSnippetPanelProps) {
   const [copied, setCopied] = useState<string | null>(null);
+  const [outputTab, setOutputTab] = useState<OutputTab>("embed");
   const resolved = useMemo(() => {
     try {
       const slug = resolvePolymarketSlug(input);
@@ -128,10 +138,29 @@ export function EmbedSnippetPanel({
       <header className="pui-embed-snippet-panel__header">
         <div>
           <span>Distribution outputs</span>
-          <h3>Link to live embed</h3>
+          <h3>{outputTabs.find((item) => item.value === outputTab)?.label} output</h3>
         </div>
         <strong>{resolved.slug ?? "Invalid input"}</strong>
       </header>
+
+      <div
+        className="pui-embed-snippet-panel__tabs"
+        role="tablist"
+        aria-label="Output format"
+      >
+        {outputTabs.map((item) => (
+          <button
+            aria-selected={outputTab === item.value}
+            data-active={outputTab === item.value ? "true" : undefined}
+            key={item.value}
+            onClick={() => setOutputTab(item.value)}
+            role="tab"
+            type="button"
+          >
+            {item.label}
+          </button>
+        ))}
+      </div>
 
       {resolved.error ? (
         <div className="pui-embed-snippet-panel__error" role="alert">
@@ -139,42 +168,52 @@ export function EmbedSnippetPanel({
         </div>
       ) : null}
 
-      <div className="pui-embed-snippet-panel__grid">
-        <SnippetBlock
-          copied={copied}
-          disabled={!resolved.outputs}
-          label="iframe"
-          onCopy={copyValue}
-          value={resolved.outputs?.iframe ?? ""}
-        />
-        <SnippetBlock
-          copied={copied}
-          disabled={!resolved.outputs}
-          label="React"
-          onCopy={copyValue}
-          value={resolved.outputs?.react ?? ""}
-        />
-        <SnippetBlock
-          copied={copied}
-          disabled={!resolved.outputs}
-          label="OG PNG"
-          onCopy={copyValue}
-          value={resolved.outputs?.ogPng ?? ""}
-        />
-        <SnippetBlock
-          copied={copied}
-          disabled={!resolved.outputs}
-          label="OG SVG"
-          onCopy={copyValue}
-          value={resolved.outputs?.ogSvg ?? ""}
-        />
-        <SnippetBlock
-          copied={copied}
-          disabled={!resolved.outputs}
-          label="Registry"
-          onCopy={copyValue}
-          value={resolved.outputs?.registry ?? ""}
-        />
+      <div className="pui-embed-snippet-panel__grid" role="tabpanel">
+        {outputTab === "embed" ? (
+          <SnippetBlock
+            copied={copied}
+            disabled={!resolved.outputs}
+            label="iframe"
+            onCopy={copyValue}
+            value={resolved.outputs?.iframe ?? ""}
+          />
+        ) : null}
+        {outputTab === "react" ? (
+          <SnippetBlock
+            copied={copied}
+            disabled={!resolved.outputs}
+            label="React"
+            onCopy={copyValue}
+            value={resolved.outputs?.react ?? ""}
+          />
+        ) : null}
+        {outputTab === "og" ? (
+          <>
+            <SnippetBlock
+              copied={copied}
+              disabled={!resolved.outputs}
+              label="OG PNG"
+              onCopy={copyValue}
+              value={resolved.outputs?.ogPng ?? ""}
+            />
+            <SnippetBlock
+              copied={copied}
+              disabled={!resolved.outputs}
+              label="OG SVG"
+              onCopy={copyValue}
+              value={resolved.outputs?.ogSvg ?? ""}
+            />
+          </>
+        ) : null}
+        {outputTab === "registry" ? (
+          <SnippetBlock
+            copied={copied}
+            disabled={!resolved.outputs}
+            label="Registry"
+            onCopy={copyValue}
+            value={resolved.outputs?.registry ?? ""}
+          />
+        ) : null}
       </div>
     </section>
   );

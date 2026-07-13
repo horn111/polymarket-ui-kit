@@ -1,5 +1,6 @@
 @import "@polymarket-ui-kit/react/styles.css";
 @import "@polymarket-ui-kit/react/themes.css";
+@import "./civic.css";
 
 * {
   box-sizing: border-box;
@@ -538,7 +539,9 @@ html[data-demo-theme="dark"] .demo-export-actions a:hover {
 .demo-studio__controls {
   border-top: 2px solid var(--demo-line);
   display: grid;
-  grid-template-columns: minmax(280px, 1.4fr) minmax(180px, 0.7fr) minmax(200px, 0.8fr) minmax(260px, 1fr);
+  grid-template-columns:
+    minmax(280px, 1.4fr) minmax(180px, 0.7fr) minmax(200px, 0.8fr)
+    minmax(260px, 1fr);
 }
 
 .demo-studio__controls label {
@@ -1209,8 +1212,7 @@ html[data-demo-theme="dark"] .demo-lab__snippet {
 
 .demo-shell .pui-combo-share-card {
   background:
-    linear-gradient(90deg, var(--demo-red) 0 8px, transparent 8px),
-    var(--demo-paper);
+    linear-gradient(90deg, var(--demo-red) 0 8px, transparent 8px), var(--demo-paper);
 }
 
 html[data-demo-theme="dark"] .demo-shell .pui-card,
@@ -1524,5 +1526,285 @@ html[data-demo-theme="dark"] .demo-shell .pui-share-card {
 
   .demo-lab__preview {
     padding: 18px;
+  }
+}
+
+/* Civic overrides must follow the legacy demo rules. */
+:root,
+html[data-demo-theme="light"],
+html[data-demo-theme="dark"] {
+  --demo-paper: var(--pui-canvas);
+  --demo-paper-dark: var(--pui-bg-muted);
+  --demo-ink: var(--pui-text);
+  --demo-muted: var(--pui-text-muted);
+  --demo-line: var(--pui-border);
+  --demo-red: var(--pui-accent);
+  --demo-soft-red: var(--pui-accent-soft);
+}
+
+body {
+  background: var(--pui-canvas);
+  color: var(--pui-text);
+  overflow-x: hidden;
+}
+
+.demo-shell {
+  display: block;
+  margin: 0 auto;
+  max-width: 1480px;
+  padding: 0 clamp(1rem, 3vw, 2.75rem) 2rem;
+  width: 100%;
+}
+
+.demo-studio,
+.demo-lab {
+  background: var(--pui-bg);
+  border: 1px solid var(--pui-border);
+  border-radius: var(--pui-radius-lg);
+  box-shadow: var(--pui-shadow);
+  margin: clamp(3rem, 7vw, 7rem) 0;
+  overflow: hidden;
+}
+
+.demo-lab__tabs button[data-active="true"],
+.demo-studio__theme button[data-active="true"] {
+  background: var(--pui-accent-soft);
+  color: var(--pui-accent);
+}
+
+.demo-shell .pui-card,
+.demo-shell .pui-panel,
+.demo-shell .pui-builder-disclosure,
+.demo-shell .pui-embed-snippet-panel {
+  background: var(--pui-bg);
+  border: 1px solid var(--pui-border);
+  border-radius: var(--pui-radius-md);
+  box-shadow: 0 1px 2px rgba(23, 48, 77, 0.03);
+  color: var(--pui-text);
+}
+
+.demo-shell .pui-market-title,
+.demo-shell .pui-share-card__market h2 {
+  font-family: var(--pui-font-serif);
+  font-weight: 650;
+}
+
+.demo-shell .pui-market-meta {
+  align-items: center;
+  display: flex;
+  gap: var(--pui-space-2);
+}
+
+.demo-shell .pui-market-meta span {
+  border: 0;
+  color: var(--pui-text-muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0;
+}
+
+.demo-shell .pui-market-card {
+  gap: var(--pui-space-4);
+  max-width: 28rem;
+  padding: var(--pui-space-4);
+}
+
+.demo-shell .pui-share-card {
+  --pui-share-card-bg: var(--pui-bg);
+  --pui-share-card-border: var(--pui-border);
+  --pui-share-card-shadow: var(--pui-shadow);
+  --pui-share-card-brand: var(--pui-accent);
+  --pui-share-card-muted: var(--pui-text-muted);
+  --pui-share-card-status-bg: var(--pui-positive-soft);
+  --pui-share-card-status-border: var(--pui-positive);
+  --pui-share-card-status-text: var(--pui-positive);
+  --pui-share-card-surface: var(--pui-bg-muted);
+  --pui-share-card-surface-border: var(--pui-border);
+  --pui-share-card-track: var(--pui-bg-strong);
+}
+
+.demo-shell .pui-share-card::before {
+  height: 4px;
+}
+.demo-shell .pui-orderbook {
+  --pui-positive-soft: color-mix(in srgb, var(--pui-live) 16%, var(--pui-bg));
+  --pui-negative-soft: color-mix(in srgb, var(--pui-negative) 16%, var(--pui-bg));
+}
+.demo-shell .pui-orderbook__side > .pui-muted {
+  color: var(--pui-text-muted);
+  font-weight: 700;
+  text-transform: none;
+}
+.demo-shell .pui-orderbook__row {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--pui-border);
+}
+.demo-shell .pui-combo-share-card {
+  background: var(--pui-bg);
+}
+
+.civic-showcase > article > .pui-card,
+.civic-showcase > article > .pui-panel {
+  max-width: none;
+  width: 100%;
+}
+
+/* Civic Studio: the tooling surface follows the same calm institutional language. */
+.demo-studio__hero {
+  background: linear-gradient(135deg, var(--pui-bg), var(--pui-bg-muted));
+  grid-template-columns: minmax(0, 1fr) 230px;
+  min-height: 250px;
+}
+
+.demo-studio__hero > div:first-child {
+  align-content: center;
+  border-right: 1px solid var(--pui-border);
+  gap: var(--pui-space-4);
+  padding: clamp(1.75rem, 4vw, 3rem);
+}
+
+.demo-studio__hero h1 {
+  font-size: clamp(2.7rem, 5vw, 4.7rem);
+  font-weight: 760;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+  max-width: 900px;
+  text-transform: none;
+}
+
+.demo-studio__hero p:last-child {
+  color: var(--pui-text-muted);
+  font-size: 1rem;
+  font-weight: 500;
+  max-width: 780px;
+}
+
+.demo-studio__stamp {
+  background: var(--pui-accent-soft);
+  color: var(--pui-accent);
+  font-size: 1rem;
+  letter-spacing: 0.22em;
+  writing-mode: vertical-rl;
+}
+
+.demo-studio__controls,
+.demo-studio__switchboard,
+.demo-studio__workspace {
+  border-top: 1px solid var(--pui-border);
+}
+
+.demo-studio__controls {
+  grid-template-columns:
+    minmax(280px, 1.5fr) minmax(180px, 0.7fr) minmax(190px, 0.8fr)
+    minmax(240px, 1fr);
+}
+
+.demo-studio__controls label {
+  border-right: 1px solid var(--pui-border);
+  color: var(--pui-text-muted);
+  font-family: var(--pui-font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.07em;
+  padding: 1rem;
+}
+
+.demo-studio__controls input,
+.demo-studio__controls select {
+  background: var(--pui-bg-muted);
+  border: 1px solid var(--pui-border);
+  border-radius: var(--pui-radius-sm);
+  color: var(--pui-text);
+  font-family: var(--pui-font-sans);
+  font-weight: 600;
+}
+
+.demo-studio__theme:first-child,
+.demo-studio__theme button {
+  border-color: var(--pui-border);
+  border-width: 1px;
+}
+
+.demo-studio__theme button {
+  color: var(--pui-text-muted);
+  font-family: var(--pui-font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+}
+
+.demo-studio__workspace {
+  grid-template-columns: minmax(360px, 1fr) minmax(360px, 0.92fr);
+}
+
+.demo-studio__preview {
+  border-right: 1px solid var(--pui-border);
+  padding: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+.demo-studio__preview iframe,
+.demo-studio__preview img {
+  border: 1px solid var(--pui-border);
+  border-radius: var(--pui-radius-md);
+}
+
+.demo-studio__outputs {
+  background: transparent;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+@media (max-width: 960px) {
+  .demo-studio__hero,
+  .demo-studio__workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .demo-studio__stamp {
+    display: none;
+  }
+
+  .demo-studio__hero > div:first-child,
+  .demo-studio__preview {
+    border-right: 0;
+  }
+
+  .demo-studio__preview {
+    border-bottom: 1px solid var(--pui-border);
+  }
+
+  .demo-studio__controls {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .demo-studio__controls label:nth-child(2) {
+    border-right: 0;
+  }
+
+  .demo-studio__controls label:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--pui-border);
+  }
+}
+
+@media (max-width: 620px) {
+  .demo-studio {
+    margin: 1rem 0;
+  }
+
+  .demo-studio__hero h1 {
+    font-size: clamp(2.35rem, 13vw, 3.2rem);
+  }
+
+  .demo-studio__controls,
+  .demo-studio__switchboard {
+    grid-template-columns: 1fr;
+  }
+
+  .demo-studio__controls label,
+  .demo-studio__controls label:nth-child(2),
+  .demo-studio__theme:first-child {
+    border-bottom: 1px solid var(--pui-border);
+    border-right: 0;
   }
 }

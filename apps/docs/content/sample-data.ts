@@ -1,7 +1,9 @@
 import type {
+  EvidenceItem,
   MarketPricePoint,
   OrderbookSnapshot,
   PolymarketMarket,
+  PollMarketComparisonRow,
 } from "@polymarket-ui-kit/core";
 
 export const sampleMarket: PolymarketMarket = {
@@ -27,19 +29,61 @@ export const sampleMarket: PolymarketMarket = {
   bestAsk: 0.43,
   outcomes: [
     { id: "yes", name: "Candidate A", price: 0.42, tokenId: "token-yes" },
-    { id: "no", name: "Field", price: 0.58, tokenId: "token-no" }
+    { id: "no", name: "Field", price: 0.58, tokenId: "token-no" },
   ],
   clobTokenIds: ["token-yes", "token-no"],
   tags: ["politics"],
-  url: "https://polymarket.com/event/who-will-win-the-2028-us-presidential-election"
+  url: "https://polymarket.com/event/who-will-win-the-2028-us-presidential-election",
 };
+
+export const sampleEvidence: EvidenceItem[] = [
+  {
+    id: "calendar",
+    title: "Election certification calendar",
+    publisher: "Sample state election board",
+    kind: "official",
+  },
+  {
+    id: "survey",
+    title: "Illustrative registered-voter survey",
+    publisher: "Demo research desk",
+    kind: "poll",
+  },
+  {
+    id: "methodology",
+    title: "Turnout baseline methodology",
+    publisher: "Civic model lab",
+    kind: "model",
+  },
+];
+
+export const samplePollRows: PollMarketComparisonRow[] = [
+  {
+    id: "candidate-a",
+    label: "Candidate A",
+    pollShare: 0.39,
+    marketProbability: 0.42,
+    sampleSize: 1287,
+    marginOfErrorPoints: 2.8,
+    asOf: "Illustrative data",
+  },
+  {
+    id: "field",
+    label: "Field",
+    pollShare: 0.61,
+    marketProbability: 0.58,
+    sampleSize: 1287,
+    marginOfErrorPoints: 2.8,
+    asOf: "Illustrative data",
+  },
+];
 
 export const samplePoints: MarketPricePoint[] = [
   { timestamp: "2026-06-01T00:00:00Z", price: 0.34 },
   { timestamp: "2026-06-02T00:00:00Z", price: 0.36 },
   { timestamp: "2026-06-03T00:00:00Z", price: 0.33 },
   { timestamp: "2026-06-04T00:00:00Z", price: 0.39 },
-  { timestamp: "2026-06-05T00:00:00Z", price: 0.42 }
+  { timestamp: "2026-06-05T00:00:00Z", price: 0.42 },
 ];
 
 export const sampleOrderbook: OrderbookSnapshot = {
@@ -47,15 +91,14 @@ export const sampleOrderbook: OrderbookSnapshot = {
   bids: [
     { price: 0.41, size: 1200, total: 1200 },
     { price: 0.4, size: 900, total: 2100 },
-    { price: 0.39, size: 600, total: 2700 }
+    { price: 0.39, size: 600, total: 2700 },
   ],
   asks: [
     { price: 0.43, size: 1100, total: 1100 },
     { price: 0.44, size: 700, total: 1800 },
-    { price: 0.45, size: 500, total: 2300 }
+    { price: 0.45, size: 500, total: 2300 },
   ],
   spread: 0.02,
   mid: 0.42,
-  updatedAt: "2026-06-09T00:00:00Z"
+  updatedAt: "2026-06-09T00:00:00Z",
 };
-

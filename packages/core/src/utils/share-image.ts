@@ -7,30 +7,30 @@ const DEFAULT_HEIGHT = 630;
 
 const themes = {
   dark: {
-    page: "#f6f8fa",
-    card: "#0d131a",
-    cardStroke: "#263241",
-    accent: "#2dd4bf",
-    accentSoft: "#123332",
-    accentStroke: "#245c55",
-    text: "#f8fafc",
-    muted: "#a7b4c2",
-    surface: "#1a2430",
-    surfaceStroke: "#344253",
-    barTrack: "#334155",
+    page: "#071523",
+    card: "#0d2033",
+    cardStroke: "#28425c",
+    accent: "#6f9cff",
+    accentSoft: "#183764",
+    accentStroke: "#426da9",
+    text: "#f3f7fc",
+    muted: "#a9b9ca",
+    surface: "#132940",
+    surfaceStroke: "#28425c",
+    barTrack: "#1a334d",
   },
   light: {
-    page: "#f7f8f5",
+    page: "#f4f7fb",
     card: "#ffffff",
-    cardStroke: "#dce3e8",
-    accent: "#0f766e",
-    accentSoft: "#dff9ef",
-    accentStroke: "#b7ead7",
-    text: "#0f172a",
-    muted: "#667085",
-    surface: "#f8fafc",
-    surfaceStroke: "#d8e0e7",
-    barTrack: "#dbe5ea",
+    cardStroke: "#d7e1ec",
+    accent: "#1e63f3",
+    accentSoft: "#e5edff",
+    accentStroke: "#b8ccfa",
+    text: "#0b1d33",
+    muted: "#52657b",
+    surface: "#f4f7fb",
+    surfaceStroke: "#d7e1ec",
+    barTrack: "#e3ebf5",
   },
 };
 
@@ -43,7 +43,9 @@ function escapeSvg(value: string): string {
 }
 
 function truncate(value: string, maxLength: number): string {
-  return value.length > maxLength ? `${value.slice(0, Math.max(0, maxLength - 3))}...` : value;
+  return value.length > maxLength
+    ? `${value.slice(0, Math.max(0, maxLength - 3))}...`
+    : value;
 }
 
 function splitText(value: string, maxLength: number, maxLines: number): string[] {
@@ -94,7 +96,7 @@ export function createShareCardSvg(
   const questionLines = splitText(market.question, 34, 3)
     .map(
       (line, index) =>
-        `<text x="112" y="${248 + index * 64}" fill="${theme.text}" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="850">${escapeSvg(line)}</text>`,
+        `<text x="112" y="${248 + index * 64}" fill="${theme.text}" font-family="Source Serif 4, Georgia, serif" font-size="54" font-weight="650">${escapeSvg(line)}</text>`,
     )
     .join("\n  ");
   const stats = [
@@ -123,8 +125,7 @@ export function createShareCardSvg(
   <rect x="70" y="70" width="1060" height="490" rx="28" fill="${theme.card}" stroke="${theme.cardStroke}"/>
   <g clip-path="url(#pui-share-card-clip)">
     <rect x="70" y="70" width="1060" height="8" fill="${theme.accent}"/>
-    <rect x="280" y="70" width="210" height="8" fill="#2dd4bf"/>
-    <rect x="490" y="70" width="210" height="8" fill="#60a5fa"/>
+    <circle cx="1094" cy="112" r="7" fill="#0f9f91"/>
   </g>
   <text x="112" y="142" fill="${theme.accent}" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="800">Polymarket</text>
   <rect x="320" y="108" width="${statusBadgeWidth}" height="44" rx="22" fill="${theme.accentSoft}" stroke="${theme.accentStroke}"/>

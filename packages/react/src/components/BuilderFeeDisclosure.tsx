@@ -43,7 +43,7 @@ export function BuilderFeeDisclosure({
 
   return (
     <section className={cx("pui-builder-disclosure", className)}>
-      <div className="pui-row" style={{ justifyContent: "space-between" }}>
+      <div className="pui-row pui-between">
         <span className="pui-builder-disclosure__status">
           {builder.code ? "Builder code attached" : "Builder code not attached"}
         </span>
