@@ -37,7 +37,7 @@ export function StudioClient() {
   const [origin, setOrigin] = useState("");
   const [outputMode, setOutputMode] = useState<OutputMode>("embed");
   const [surface, setSurface] = useState<EmbedSurface>("share-card");
-  const [theme, setTheme] = useState<ShareImageTheme>("dark");
+  const [theme, setTheme] = useState<ShareImageTheme>("light");
 
   useEffect(() => {
     setOrigin(window.location.origin);
@@ -101,25 +101,24 @@ export function StudioClient() {
       <section className="demo-studio" aria-labelledby="studio-title">
         <header className="demo-studio__hero">
           <div>
-            <p className="demo-kicker">01 / LINK-TO-EMBED STUDIO</p>
-            <h1 id="studio-title">PASTE MARKET. SHIP SURFACE.</h1>
+            <p className="demo-kicker">
+              <a href="/">Polymarket UI Kit</a> · Embed Studio
+            </p>
+            <h1 id="studio-title">Paste a market. Publish a credible surface.</h1>
             <p>
-              Turn a Polymarket URL into a live iframe, React snippet, share
-              image, and registry command without adding order placement.
+              Turn a Polymarket URL into a live iframe, React snippet, source-aware
+              share image, and registry command without adding order placement.
             </p>
           </div>
           <div className="demo-studio__stamp" aria-hidden="true">
-            DIST
+            CIVIC
           </div>
         </header>
 
         <div className="demo-studio__controls" aria-label="Embed controls">
           <label>
             MARKET URL OR SLUG
-            <input
-              onChange={(event) => setInput(event.target.value)}
-              value={input}
-            />
+            <input onChange={(event) => setInput(event.target.value)} value={input} />
           </label>
           <label>
             SURFACE
@@ -152,7 +151,7 @@ export function StudioClient() {
 
         <div className="demo-studio__switchboard">
           <div className="demo-studio__theme" role="group" aria-label="Theme">
-            {(["dark", "light"] as ShareImageTheme[]).map((item) => (
+            {(["light", "dark"] as ShareImageTheme[]).map((item) => (
               <button
                 data-active={theme === item ? "true" : undefined}
                 key={item}
@@ -180,8 +179,8 @@ export function StudioClient() {
         <div className="demo-studio__workspace">
           <div className="demo-studio__preview">
             <div className="demo-module__label">
-              <span>02</span>
-              <strong>LIVE PREVIEW</strong>
+              <span aria-hidden="true">●</span>
+              <strong>Live preview</strong>
             </div>
             {resolved.error ? (
               <div className="demo-studio__error" role="alert">

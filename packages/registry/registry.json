@@ -87,6 +87,34 @@
           "target": "components/polymarket/embed-studio.tsx"
         }
       ]
+    },
+    {
+      "name": "evidence-rail",
+      "type": "registry:component",
+      "title": "Evidence Rail",
+      "description": "A source-aware evidence rail for official records, polls, models, and reporting.",
+      "dependencies": ["@polymarket-ui-kit/core"],
+      "files": [
+        {
+          "path": "src/components/evidence-rail.tsx",
+          "type": "registry:component",
+          "target": "components/polymarket/evidence-rail.tsx"
+        }
+      ]
+    },
+    {
+      "name": "poll-market-comparison",
+      "type": "registry:component",
+      "title": "Poll Market Comparison",
+      "description": "A responsive comparison of polling shares and market probabilities.",
+      "dependencies": ["@polymarket-ui-kit/core"],
+      "files": [
+        {
+          "path": "src/components/poll-market-comparison.tsx",
+          "type": "registry:component",
+          "target": "components/polymarket/poll-market-comparison.tsx"
+        }
+      ]
     }
   ]
 }

@@ -20,19 +20,24 @@ function LevelRow({
   maxTotal: number;
   side: "bid" | "ask";
 }) {
-  const width = maxTotal > 0 ? `${Math.min(100, (level.total ?? level.size) / maxTotal * 100)}%` : "0%";
-  const color = side === "bid" ? "var(--pui-positive-soft)" : "var(--pui-negative-soft)";
-
+  const width =
+    maxTotal > 0
+      ? `${Math.min(100, ((level.total ?? level.size) / maxTotal) * 100)}%`
+      : "0%";
   return (
     <div className="pui-orderbook__row">
-      <span className="pui-orderbook__depth" style={{ background: color, width }} />
+      <span className="pui-orderbook__depth" data-side={side} style={{ width }} />
       <span>{formatProbability(level.price)}</span>
       <span>{level.size.toLocaleString("en-US", { maximumFractionDigits: 2 })}</span>
     </div>
   );
 }
 
-export function OrderbookPanel({ orderbook, depth = 8, className }: OrderbookPanelProps) {
+export function OrderbookPanel({
+  orderbook,
+  depth = 8,
+  className,
+}: OrderbookPanelProps) {
   if (!orderbook) {
     return (
       <EmptyState
@@ -53,7 +58,7 @@ export function OrderbookPanel({ orderbook, depth = 8, className }: OrderbookPan
 
   return (
     <section className={cx("pui-panel pui-orderbook", className)}>
-      <div className="pui-row" style={{ justifyContent: "space-between" }}>
+      <div className="pui-row pui-between">
         <strong>Orderbook</strong>
         <span className="pui-muted">
           {orderbook.spread === null || orderbook.spread === undefined
@@ -65,17 +70,26 @@ export function OrderbookPanel({ orderbook, depth = 8, className }: OrderbookPan
         <div className="pui-orderbook__side">
           <span className="pui-muted">Bids</span>
           {bids.map((level) => (
-            <LevelRow key={`bid-${level.price}-${level.size}`} level={level} maxTotal={maxTotal} side="bid" />
+            <LevelRow
+              key={`bid-${level.price}-${level.size}`}
+              level={level}
+              maxTotal={maxTotal}
+              side="bid"
+            />
           ))}
         </div>
         <div className="pui-orderbook__side">
           <span className="pui-muted">Asks</span>
           {asks.map((level) => (
-            <LevelRow key={`ask-${level.price}-${level.size}`} level={level} maxTotal={maxTotal} side="ask" />
+            <LevelRow
+              key={`ask-${level.price}-${level.size}`}
+              level={level}
+              maxTotal={maxTotal}
+              side="ask"
+            />
           ))}
         </div>
       </div>
     </section>
   );
 }
-

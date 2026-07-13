@@ -285,7 +285,8 @@ describe("share image export", () => {
     expect(svg).toContain('role="img"');
     expect(svg).toContain("test-studio");
     expect(svg).toContain("Fixture fallback");
-    expect(svg).toContain("#2dd4bf");
+    expect(svg).toContain("#1e63f3");
+    expect(svg).toContain("#0f9f91");
     expect(svg).not.toContain("#f59e0b");
     expect(svg).toContain("&lt;script&gt;");
     expect(svg).not.toContain("<script>");

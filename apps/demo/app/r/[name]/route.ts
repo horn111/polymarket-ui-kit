@@ -14,7 +14,9 @@ export async function GET(
 ) {
   const { name: rawName } = await params;
   const name = normalizeName(rawName);
-  const item = registry.items.find((candidate: RegistryItem) => candidate.name === name);
+  const item = registry.items.find(
+    (candidate: RegistryItem) => candidate.name === name,
+  );
 
   if (!item) {
     return Response.json(

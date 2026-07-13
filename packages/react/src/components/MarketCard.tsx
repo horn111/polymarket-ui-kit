@@ -22,7 +22,12 @@ export function MarketCard({
   const content = (
     <article className={cx("pui-card pui-market-card", className)}>
       {market.image ? (
-        <img alt="" className="pui-market-card__media" loading="lazy" src={market.image} />
+        <img
+          alt=""
+          className="pui-market-card__media"
+          loading="lazy"
+          src={market.image}
+        />
       ) : null}
       <MarketHeader market={market} />
       <OutcomeSwitcher
@@ -38,9 +43,8 @@ export function MarketCard({
   }
 
   return (
-    <a href={href} style={{ color: "inherit", textDecoration: "none" }}>
+    <a className="pui-card-link" href={href}>
       {content}
     </a>
   );
 }
-

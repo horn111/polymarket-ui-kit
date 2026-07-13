@@ -15,7 +15,7 @@ export interface MarketHeaderProps {
 export function MarketHeader({ market, builder, className }: MarketHeaderProps) {
   return (
     <header className={cx("pui-stack", className)}>
-      <div className="pui-row" style={{ justifyContent: "space-between" }}>
+      <div className="pui-row pui-between">
         <span className="pui-badge">{market.status}</span>
         {builder ? <BuilderBadge builder={builder} /> : null}
       </div>
@@ -23,10 +23,11 @@ export function MarketHeader({ market, builder, className }: MarketHeaderProps) 
       <div className="pui-market-meta">
         {market.category ? <span>{market.category}</span> : null}
         {market.endDate ? <span>Ends {formatRelativeTime(market.endDate)}</span> : null}
-        {market.volume ? <span>{formatCompactNumber(market.volume)} volume</span> : null}
+        {market.volume ? (
+          <span>{formatCompactNumber(market.volume)} volume</span>
+        ) : null}
         {market.commentCount ? <span>{market.commentCount} comments</span> : null}
       </div>
     </header>
   );
 }
-

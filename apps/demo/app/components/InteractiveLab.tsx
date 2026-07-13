@@ -2,10 +2,12 @@
 
 import { useMemo, useState } from "react";
 import type {
+  EvidenceItem,
   MarketComment,
   MarketPricePoint,
   OrderbookSnapshot,
   PolymarketMarket,
+  PollMarketComparisonRow,
   TraderLeaderboardRow,
 } from "@polymarket-ui-kit/core";
 import {
@@ -14,10 +16,12 @@ import {
   CommentList,
   ComboBuilderCard,
   ComboShareCard,
+  EvidenceRail,
   FeePill,
   LeaderboardTable,
   MarketCard,
   OrderbookPanel,
+  PollMarketComparison,
   ShareCard,
   useShareImage,
 } from "@polymarket-ui-kit/react";
@@ -26,6 +30,8 @@ import { sampleComboLegs, sampleComboMarkets } from "../../components/sample-com
 
 type DemoTab =
   | "market"
+  | "evidence"
+  | "polls"
   | "share"
   | "builder"
   | "combo"
@@ -41,48 +47,48 @@ interface InteractiveLabProps {
 
 const markets: PolymarketMarket[] = [
   {
-    id: "btc-ath-2026",
-    slug: "btc-ath-2026",
-    question: "Will Bitcoin set a new All-Time High in 2026?",
-    description: "Demo crypto market.",
-    category: "Crypto",
+    id: "midterm-turnout-2026",
+    slug: "midterm-turnout-2026",
+    question: "Will voter turnout in the 2026 U.S. midterm elections exceed 2022?",
+    description: "Illustrative politics market.",
+    category: "Politics",
     image: null,
     icon: null,
     status: "open",
     active: true,
     closed: false,
     archived: false,
-    endDate: "2026-12-31T23:59:59Z",
-    volume: 15400000,
-    liquidity: 1240000,
-    commentCount: 842,
+    endDate: "2026-11-03T23:59:59Z",
+    volume: 15482000,
+    liquidity: 1247000,
+    commentCount: 814,
     outcomes: [
-      { id: "yes", name: "Yes", price: 0.68, tokenId: "btc-yes" },
-      { id: "no", name: "No", price: 0.32, tokenId: "btc-no" },
+      { id: "yes", name: "Yes", price: 0.61, tokenId: "turnout-yes" },
+      { id: "no", name: "No", price: 0.39, tokenId: "turnout-no" },
     ],
-    clobTokenIds: ["btc-yes", "btc-no"],
+    clobTokenIds: ["turnout-yes", "turnout-no"],
   },
   {
-    id: "fed-cut-2026",
-    slug: "fed-cut-2026",
-    question: "Will the Fed cut rates at the next meeting?",
-    description: "Demo macro market.",
-    category: "Macro",
+    id: "senate-control-2026",
+    slug: "senate-control-2026",
+    question: "Will one party hold a U.S. Senate majority after the 2026 elections?",
+    description: "Illustrative politics market.",
+    category: "Politics",
     image: null,
     icon: null,
     status: "open",
     active: true,
     closed: false,
     archived: false,
-    endDate: "2026-09-16T18:00:00Z",
-    volume: 5800000,
-    liquidity: 420000,
-    commentCount: 321,
+    endDate: "2026-11-04T18:00:00Z",
+    volume: 5830000,
+    liquidity: 426000,
+    commentCount: 327,
     outcomes: [
-      { id: "yes", name: "Yes", price: 0.57, tokenId: "fed-yes" },
-      { id: "no", name: "No", price: 0.43, tokenId: "fed-no" },
+      { id: "yes", name: "Yes", price: 0.54, tokenId: "senate-yes" },
+      { id: "no", name: "No", price: 0.46, tokenId: "senate-no" },
     ],
-    clobTokenIds: ["fed-yes", "fed-no"],
+    clobTokenIds: ["senate-yes", "senate-no"],
   },
   {
     id: "election-2028",
@@ -109,10 +115,52 @@ const markets: PolymarketMarket[] = [
 ];
 
 const pointsByMarket: Record<string, number[]> = {
-  "btc-ath-2026": [0.38, 0.43, 0.52, 0.56, 0.68],
-  "fed-cut-2026": [0.52, 0.55, 0.61, 0.58, 0.57],
+  "midterm-turnout-2026": [0.48, 0.52, 0.57, 0.59, 0.61],
+  "senate-control-2026": [0.49, 0.51, 0.56, 0.52, 0.54],
   "who-will-win-the-2028-us-presidential-election": [0.34, 0.36, 0.33, 0.39, 0.42],
 };
+
+const evidenceItems: EvidenceItem[] = [
+  {
+    id: "calendar",
+    title: "Election certification calendar",
+    publisher: "Sample state election board",
+    kind: "official",
+  },
+  {
+    id: "survey",
+    title: "Illustrative registered-voter survey",
+    publisher: "Demo research desk",
+    kind: "poll",
+  },
+  {
+    id: "model",
+    title: "Turnout baseline methodology",
+    publisher: "Civic model lab",
+    kind: "model",
+  },
+];
+
+const pollComparisonRows: PollMarketComparisonRow[] = [
+  {
+    id: "yes",
+    label: "Yes",
+    pollShare: 0.58,
+    marketProbability: 0.61,
+    sampleSize: 1287,
+    marginOfErrorPoints: 2.8,
+    asOf: "Illustrative data",
+  },
+  {
+    id: "no",
+    label: "No",
+    pollShare: 0.42,
+    marketProbability: 0.39,
+    sampleSize: 1287,
+    marginOfErrorPoints: 2.8,
+    asOf: "Illustrative data",
+  },
+];
 
 const comments: MarketComment[] = [
   {
@@ -233,13 +281,25 @@ export function InteractiveLab({ theme }: InteractiveLabProps) {
   });
   const exportPath = `/api/og?slug=${market.slug}&theme=${theme}&format=png`;
   const snippet =
-    tab === "combo"
-      ? `import { ComboBuilderCard } from "@polymarket-ui-kit/react";
+    tab === "evidence"
+      ? `import { EvidenceRail } from "@polymarket-ui-kit/react";
+
+export function Context({ sources }) {
+  return <EvidenceRail items={sources} />;
+}`
+      : tab === "polls"
+        ? `import { PollMarketComparison } from "@polymarket-ui-kit/react";
+
+export function Compare({ rows }) {
+  return <PollMarketComparison rows={rows} />;
+}`
+        : tab === "combo"
+          ? `import { ComboBuilderCard } from "@polymarket-ui-kit/react";
 
 export function ComboSurface({ markets }) {
   return <ComboBuilderCard markets={markets} onComboIntent={sendIntent} />;
 }`
-      : `import { MarketCard } from "@polymarket-ui-kit/react";
+          : `import { MarketCard } from "@polymarket-ui-kit/react";
 
 export function MarketEmbed({ market, points }) {
   return <MarketCard market={market} points={points} />;
@@ -259,8 +319,8 @@ export function MarketEmbed({ market, points }) {
   return (
     <section className="demo-lab" aria-labelledby="interactive-lab-title">
       <header className="demo-lab__heading">
-        <p className="demo-kicker">08 / OPERATOR CONSOLE</p>
-        <h2 id="interactive-lab-title">BUILDER PREVIEW LAB</h2>
+        <p className="demo-kicker">Interactive component lab</p>
+        <h2 id="interactive-lab-title">Test the Civic Forecast system.</h2>
       </header>
 
       <div className="demo-lab__toolbar">
@@ -285,23 +345,35 @@ export function MarketEmbed({ market, points }) {
 
       <div className="demo-lab__content" data-tab={tab}>
         <nav className="demo-lab__tabs" aria-label="Component preview">
-          {(["market", "share", "builder", "combo", "export", "data", "states"] as DemoTab[]).map(
-            (item) => (
-              <button
-                aria-current={tab === item ? "page" : undefined}
-                data-active={tab === item ? "true" : undefined}
-                key={item}
-                onClick={() => setTab(item)}
-                type="button"
-              >
-                {item}
-              </button>
-            ),
-          )}
+          {(
+            [
+              "market",
+              "evidence",
+              "polls",
+              "share",
+              "builder",
+              "combo",
+              "export",
+              "data",
+              "states",
+            ] as DemoTab[]
+          ).map((item) => (
+            <button
+              aria-current={tab === item ? "page" : undefined}
+              data-active={tab === item ? "true" : undefined}
+              key={item}
+              onClick={() => setTab(item)}
+              type="button"
+            >
+              {item}
+            </button>
+          ))}
         </nav>
 
         <div className="demo-lab__preview">
           {tab === "market" ? <MarketCard market={market} points={points} /> : null}
+          {tab === "evidence" ? <EvidenceRail items={evidenceItems} /> : null}
+          {tab === "polls" ? <PollMarketComparison rows={pollComparisonRows} /> : null}
           {tab === "share" ? (
             <div className="demo-share-stage">
               <ShareCard market={market} attribution="pui-kit/demo" />

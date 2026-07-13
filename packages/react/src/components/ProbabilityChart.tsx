@@ -58,10 +58,14 @@ export function ProbabilityChart({
           />
         ))}
       </svg>
-      <div className="pui-row" style={{ flexWrap: "wrap" }}>
+      <div className="pui-row pui-wrap">
         {series.map((item) => (
           <span className="pui-badge" key={item.id}>
-            <span aria-hidden style={{ background: item.color, borderRadius: 999, height: 8, width: 8 }} />
+            <span
+              aria-hidden
+              className="pui-legend-dot"
+              style={{ background: item.color }}
+            />
             {item.label}
           </span>
         ))}
@@ -69,4 +73,3 @@ export function ProbabilityChart({
     </div>
   );
 }
-

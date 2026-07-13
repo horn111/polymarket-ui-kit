@@ -11,6 +11,7 @@ interface RouteThemeSyncProps {
 export function RouteThemeSync({ theme }: RouteThemeSyncProps) {
   useEffect(() => {
     document.documentElement.dataset.demoTheme = theme;
+    document.documentElement.dataset.puiTheme = theme;
   }, [theme]);
 
   return null;

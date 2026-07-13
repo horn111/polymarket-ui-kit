@@ -22,13 +22,13 @@
 
 <h3 align="center">Light Design Preview</h3>
 
-<img alt="Polymarket UI Kit preview (Light)" src="apps/docs/public/screenshots/hero.svg?v=1" width="100%">
+<img alt="Polymarket UI Kit preview (Light)" src="apps/docs/public/screenshots/hero.svg?v=2" width="100%">
 
 <h3 align="center">Dark Design Preview</h3>
 
-<img alt="Polymarket UI Kit preview (Dark)" src="apps/docs/public/screenshots/hero-dark.svg?v=1" width="100%">
+<img alt="Polymarket UI Kit preview (Dark)" src="apps/docs/public/screenshots/hero-dark.svg?v=2" width="100%">
 
-Build market cards, probability charts, orderbook panels, comment feeds, builder
+Build market cards, evidence rails, poll comparisons, probability charts, orderbook panels, comment feeds, builder
 badges, fee previews, leaderboard tables, combo leg pickers, mobile trade
 previews, and social share cards without rebuilding the same Polymarket UI layer
 from scratch.
@@ -91,16 +91,16 @@ import "@polymarket-ui-kit/react/themes.css";
 
 ## Current Status
 
-| Surface | Status |
-| ------- | ------ |
-| Live demo | Deployed |
-| Local development | Ready with `pnpm install` and `pnpm demo:dev` |
-| React package | First npm prerelease planned |
-| Core package | First npm prerelease planned |
-| Hosted registry | Live on the Vercel demo domain |
-| Registry source | Available in `packages/registry` |
+| Surface               | Status                                                       |
+| --------------------- | ------------------------------------------------------------ |
+| Live demo             | Deployed                                                     |
+| Local development     | Ready with `pnpm install` and `pnpm demo:dev`                |
+| React package         | First npm prerelease planned                                 |
+| Core package          | First npm prerelease planned                                 |
+| Hosted registry       | Live on the Vercel demo domain                               |
+| Registry source       | Available in `packages/registry`                             |
 | Advanced Builder Flow | Dry-run example available in `examples/clob-v2-builder-flow` |
-| Authenticated trading | Out of scope for v0 |
+| Authenticated trading | Out of scope for v0                                          |
 
 ## Link-To-Embed Studio
 
@@ -320,6 +320,8 @@ Read the verification notes in
 | Component              | Purpose                                                   | Status |
 | ---------------------- | --------------------------------------------------------- | ------ |
 | `MarketHeader`         | Question, status, category, volume, expiry, builder badge | MVP    |
+| `EvidenceRail`         | Official, poll, model, news, and other source context     | MVP    |
+| `PollMarketComparison` | Responsive poll-share and market-probability comparison   | MVP    |
 | `MarketCard`           | Compact embeddable market card                            | MVP    |
 | `ProbabilitySparkline` | Lightweight inline price movement                         | MVP    |
 | `ProbabilityChart`     | Multi-series probability chart                            | MVP    |

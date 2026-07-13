@@ -1,191 +1,28 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" fill="none">
+  <rect width="1200" height="640" fill="#071523"/>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="20" stdDeviation="24" flood-color="#000814" flood-opacity=".38"/></filter>
+    <linearGradient id="chart" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#46C7BA"/><stop offset="1" stop-color="#7AE0D4"/></linearGradient>
+  </defs>
   <style>
-    .label-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 11px; }
-    .label-sans { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    .title-sans { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 800; letter-spacing: -0.02em; }
-    .code-text { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 13px; line-height: 20px; }
+    .sans{font-family:"Instrument Sans",Inter,Arial,sans-serif}.serif{font-family:"Source Serif 4",Georgia,serif}.nav{font-size:13px;font-weight:700}.muted{fill:#A9B9CA}.label{font-size:12px;font-weight:700}.title{font-size:58px;font-weight:760;letter-spacing:-2.8px}.question{font-size:34px;font-weight:650;letter-spacing:-.7px}.meta{font-size:11px}.value{font-size:22px;font-weight:800}.proof{font-size:20px;font-weight:800}
   </style>
-
-  <!-- Background: Deep Carbon / Zinc-950 -->
-  <rect width="1200" height="640" fill="#09090b" />
-
-  <!-- Layout Outer Frame -->
-  <rect x="30" y="30" width="1140" height="580" rx="6" stroke="#27272a" stroke-width="1" />
-
-  <!-- Layout Dividers (Spec Grid) -->
-  <!-- Header divider -->
-  <line x1="30" y1="100" x2="1170" y2="100" stroke="#27272a" stroke-width="1" />
-  <!-- Main vertical divider -->
-  <line x1="540" y1="100" x2="540" y2="610" stroke="#27272a" stroke-width="1" />
-  <!-- Left horizontal divider -->
-  <line x1="30" y1="420" x2="540" y2="420" stroke="#27272a" stroke-width="1" />
-  <!-- Right horizontal divider -->
-  <line x1="540" y1="310" x2="1170" y2="310" stroke="#27272a" stroke-width="1" />
-
-  <!-- SECTION 00: HEADER / TITLE -->
-  <g class="label-sans">
-    <text x="60" y="70" fill="#fafafa" font-size="24" class="title-sans" font-weight="900">POLYMARKET UI KIT / DESIGN SYSTEM</text>
-    <text x="540" y="68" fill="#a1a1aa" font-size="14" font-weight="400">Design token specification and interactive component states</text>
-    <text x="1140" y="68" fill="#71717a" font-size="11" class="label-mono" text-anchor="end" font-weight="600">v1.0.0 / SYSTEM_SPEC</text>
-  </g>
-
-  <!-- SECTION 01: DESIGN TOKENS (Top Left) -->
-  <g transform="translate(60, 120)" class="label-sans">
-    <text x="0" y="15" fill="#71717a" font-size="11" class="label-mono" font-weight="700" letter-spacing="0.05em">01. DESIGN TOKENS</text>
-    
-    <!-- Color Palette -->
-    <text x="0" y="44" fill="#a1a1aa" font-size="11" class="label-mono" font-weight="700">COLOR PALETTE</text>
-    
-    <g transform="translate(0, 56)">
-      <!-- Accent -->
-      <g transform="translate(0, 0)">
-        <rect x="0" y="0" width="36" height="24" rx="4" fill="#2dd4bf" />
-        <text x="46" y="16" fill="#fafafa" font-size="11" font-weight="600">--pui-accent</text>
-      </g>
-      <!-- Positive -->
-      <g transform="translate(150, 0)">
-        <rect x="0" y="0" width="36" height="24" rx="4" fill="#4ade80" />
-        <text x="46" y="16" fill="#fafafa" font-size="11" font-weight="600">--pui-positive</text>
-      </g>
-      <!-- Negative -->
-      <g transform="translate(300, 0)">
-        <rect x="0" y="0" width="36" height="24" rx="4" fill="#f87171" />
-        <text x="46" y="16" fill="#fafafa" font-size="11" font-weight="600">--pui-negative</text>
-      </g>
-    </g>
-
-    <!-- Typography Scale -->
-    <text x="0" y="116" fill="#a1a1aa" font-size="11" class="label-mono" font-weight="700">TYPOGRAPHY SCALE</text>
-    <g transform="translate(0, 130)" font-size="12" fill="#e4e4e7" font-weight="500">
-      <text x="0" y="12"><tspan fill="#71717a" font-family="monospace">xs: 12px</tspan> (0.75rem)  →  Active status, categories</text>
-      <text x="0" y="34"><tspan fill="#71717a" font-family="monospace">sm: 14px</tspan> (0.875rem) →  Volume, ends date, small buttons</text>
-      <text x="0" y="56"><tspan fill="#71717a" font-family="monospace">base: 16px</tspan> (1.00rem) →  Market titles, main labels</text>
-      <text x="0" y="78"><tspan fill="#71717a" font-family="monospace">lg: 18px</tspan> (1.125rem) →  Large headers, odds titles</text>
-    </g>
-
-    <!-- Spacing Scale -->
-    <text x="0" y="240" fill="#a1a1aa" font-size="11" class="label-mono" font-weight="700">SPACING SCALE</text>
-    <g transform="translate(0, 252)">
-      <!-- Space 1 -->
-      <rect x="0" y="0" width="80" height="20" rx="4" fill="#18181b" stroke="#27272a" stroke-width="1" />
-      <text x="40" y="13" fill="#a1a1aa" font-size="9" class="label-mono" text-anchor="middle" font-weight="600">space-1 (4px)</text>
-
-      <!-- Space 2 -->
-      <rect x="90" y="0" width="80" height="20" rx="4" fill="#18181b" stroke="#27272a" stroke-width="1" />
-      <text x="130" y="13" fill="#a1a1aa" font-size="9" class="label-mono" text-anchor="middle" font-weight="600">space-2 (8px)</text>
-
-      <!-- Space 3 -->
-      <rect x="180" y="0" width="85" height="20" rx="4" fill="#18181b" stroke="#27272a" stroke-width="1" />
-      <text x="222.5" y="13" fill="#a1a1aa" font-size="9" class="label-mono" text-anchor="middle" font-weight="600">space-3 (12px)</text>
-
-      <!-- Space 4 -->
-      <rect x="275" y="0" width="85" height="20" rx="4" fill="#18181b" stroke="#27272a" stroke-width="1" />
-      <text x="317.5" y="13" fill="#a1a1aa" font-size="9" class="label-mono" text-anchor="middle" font-weight="600">space-4 (16px)</text>
-    </g>
-  </g>
-
-  <!-- SECTION 02: CODE SPEC (Bottom Left) -->
-  <g transform="translate(60, 440)" class="label-sans">
-    <text x="0" y="15" fill="#71717a" font-size="11" class="label-mono" font-weight="700" letter-spacing="0.05em">02. REACT IMPLEMENTATION</text>
-
-    <!-- Code Block Container -->
-    <rect x="0" y="30" width="420" height="110" rx="6" fill="#090d16" stroke="#1e293b" stroke-width="1" />
-    
-    <!-- Code text (VS Code Dark Style) -->
-    <g transform="translate(20, 50)" class="code-text" font-size="12">
-      <text x="0" y="12">
-        <tspan fill="#c084fc">import</tspan> <tspan fill="#f1f5f9">{</tspan> <tspan fill="#facc15">MarketCard</tspan> <tspan fill="#f1f5f9">}</tspan> <tspan fill="#c084fc">from</tspan> <tspan fill="#4ade80">"@polymarket-ui/react"</tspan><tspan fill="#f1f5f9">;</tspan>
-      </text>
-
-      <text x="0" y="42">
-        <tspan fill="#60a5fa">&lt;</tspan><tspan fill="#facc15">MarketCard</tspan> <tspan fill="#f87171">slug</tspan><tspan fill="#f1f5f9">=</tspan><tspan fill="#4ade80">"btc-ath-2026"</tspan> <tspan fill="#f87171">theme</tspan><tspan fill="#f1f5f9">=</tspan><tspan fill="#4ade80">"dark"</tspan> <tspan fill="#60a5fa">/&gt;</tspan>
-      </text>
-    </g>
-  </g>
-
-  <!-- SECTION 03: COMPONENT VARIANTS (Top Right) -->
-  <g transform="translate(570, 120)" class="label-sans">
-    <text x="0" y="15" fill="#71717a" font-size="11" class="label-mono" font-weight="700" letter-spacing="0.05em">03. COMPONENT VARIANTS: OUTCOME_BUTTON</text>
-
-    <!-- Default State -->
-    <g transform="translate(0, 32)">
-      <rect x="0" y="0" width="180" height="38" rx="6" fill="#0f141b" stroke="#28313d" stroke-width="1.5" />
-      <text x="12" y="24" fill="#b6c2cf" font-size="13" font-weight="600">Yes</text>
-      <text x="168" y="24" fill="#8996a3" font-size="13" font-weight="700" text-anchor="end">68¢</text>
-      <text x="0" y="52" fill="#71717a" font-size="9" class="label-mono">[Variant: Default]</text>
-    </g>
-
-    <!-- Active State -->
-    <g transform="translate(195, 32)">
-      <rect x="0" y="0" width="180" height="38" rx="6" fill="#11351f" stroke="#4ade80" stroke-width="1.5" />
-      <text x="12" y="24" fill="#4ade80" font-size="13" font-weight="600">Yes</text>
-      <text x="168" y="24" fill="#4ade80" font-size="13" font-weight="700" text-anchor="end">68¢</text>
-      <text x="0" y="52" fill="#71717a" font-size="9" class="label-mono">[Variant: Active]</text>
-    </g>
-
-    <!-- Disabled State -->
-    <g transform="translate(390, 32)">
-      <rect x="0" y="0" width="180" height="38" rx="6" fill="#0f141b" stroke="#28313d" stroke-opacity="0.3" stroke-width="1" />
-      <text x="12" y="24" fill="#8996a3" fill-opacity="0.4" font-size="13" font-weight="600">No</text>
-      <text x="168" y="24" fill="#8996a3" fill-opacity="0.4" font-size="13" font-weight="700" text-anchor="end">32¢</text>
-      <text x="0" y="52" fill="#71717a" font-size="9" class="label-mono">[Variant: Disabled]</text>
-    </g>
-  </g>
-
-  <!-- SECTION 04: COMPONENT PREVIEW: MARKET_CARD (Bottom Right) -->
-  <g transform="translate(570, 310)" class="label-sans">
-    <text x="0" y="15" fill="#71717a" font-size="11" class="label-mono" font-weight="700" letter-spacing="0.05em">04. COMPONENT: MARKET_CARD (DARK THEME)</text>
-
-    <!-- MarketCard Component Frame -->
-    <g transform="translate(0, 32)">
-      <rect x="0" y="0" width="580" height="195" rx="8" fill="#0f141b" stroke="#28313d" stroke-width="1.5" />
-
-      <!-- Card Header -->
-      <g transform="translate(24, 20)">
-        <!-- Status Badge -->
-        <rect x="0" y="0" width="58" height="18" rx="9" fill="#11351f" stroke="#22c55e" stroke-opacity="0.3" stroke-width="1" />
-        <circle cx="8" cy="9" r="3" fill="#4ade80" />
-        <text x="18" y="13" fill="#4ade80" font-size="10" font-weight="600">Active</text>
-        
-        <!-- Category -->
-        <text x="70" y="13" fill="#8996a3" font-size="11" class="label-mono" font-weight="600">CAT: CRYPTO</text>
-      </g>
-
-      <!-- Builder Badge (indigo) -->
-      <g transform="translate(456, 20)">
-        <rect x="0" y="0" width="100" height="18" rx="9" fill="#1e1b4b" stroke="#4338ca" stroke-width="1" />
-        <text x="50" y="12" fill="#c7d2fe" font-size="9" font-weight="600" text-anchor="middle">by polymarket-ui</text>
-      </g>
-
-      <!-- Market Question -->
-      <text x="24" y="62" fill="#f4f7fb" font-size="16" font-weight="700">Will Bitcoin set a new All-Time High in 2026?</text>
-
-      <!-- Outcome Buttons -->
-      <!-- Yes Button (Active) -->
-      <g transform="translate(24, 82)">
-        <rect x="0" y="0" width="258" height="38" rx="6" fill="#11351f" stroke="#4ade80" stroke-width="1.5" />
-        <text x="12" y="24" fill="#4ade80" font-size="13" font-weight="600">Yes</text>
-        <text x="246" y="24" fill="#4ade80" font-size="13" font-weight="700" text-anchor="end">68¢</text>
-      </g>
-      <!-- No Button (Default) -->
-      <g transform="translate(298, 82)">
-        <rect x="0" y="0" width="258" height="38" rx="6" fill="#151c25" stroke="#28313d" stroke-width="1" />
-        <text x="12" y="24" fill="#b6c2cf" font-size="13" font-weight="600">No</text>
-        <text x="246" y="24" fill="#8996a3" font-size="13" font-weight="700" text-anchor="end">32¢</text>
-      </g>
-
-      <!-- Sparkline chart built inside the card -->
-      <g transform="translate(24, 130)">
-        <!-- Trendline Fill -->
-        <path d="M 0 25 C 50 20, 100 28, 150 15 C 200 5, 270 20, 350 10 C 400 3, 480 8, 532 5 L 532 30 L 0 30 Z" fill="#11351f" fill-opacity="0.3" />
-        <!-- Trendline Stroke -->
-        <path d="M 0 25 C 50 20, 100 28, 150 15 C 200 5, 270 20, 350 10 C 400 3, 480 8, 532 5" fill="none" stroke="#4ade80" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-      </g>
-
-      <!-- Card Footer -->
-      <line x1="24" y1="166" x2="556" y2="166" stroke="#28313d" stroke-width="1" />
-      <text x="24" y="181" fill="#8996a3" font-size="10" font-weight="600">Volume: $15.4M</text>
-      <text x="556" y="181" fill="#8996a3" font-size="10" font-weight="600" text-anchor="end">Ends Dec 31, 2026</text>
-    </g>
+  <g class="sans">
+    <rect x="38" y="24" width="12" height="12" rx="2" fill="#6F9CFF"/>
+    <text x="64" y="36" fill="#F3F7FC" font-size="15" font-weight="800">Polymarket UI Kit</text>
+    <g class="nav" fill="#A9B9CA"><text x="806" y="36">Components</text><text x="905" y="36">Lab</text><text x="950" y="36">Studio</text><text x="1013" y="36">GitHub</text></g>
+    <rect x="1080" y="17" width="82" height="30" rx="15" fill="#0D2033" stroke="#28425C"/>
+    <text x="1093" y="36" fill="#A9B9CA" font-size="11">light</text><text x="1130" y="36" fill="#F3F7FC" font-size="11" font-weight="800">dark</text>
+    <path d="M38 64H1162" stroke="#28425C"/>
+    <circle cx="44" cy="130" r="4" fill="#46C7BA"/><text x="56" y="134" fill="#6F9CFF" class="label">Civic Forecast · politics-first release</text>
+    <text x="38" y="205" fill="#F3F7FC" class="title">Publish evidence-</text><text x="38" y="263" fill="#F3F7FC" class="title">backed market</text><text x="38" y="321" fill="#F3F7FC" class="title">interfaces.</text>
+    <text x="38" y="362" class="muted" font-size="16">Open-source React primitives, public data tools, and</text><text x="38" y="386" class="muted" font-size="16">distribution surfaces for clear political markets.</text>
+    <rect x="38" y="417" width="142" height="46" rx="8" fill="#6F9CFF"/><text x="61" y="446" fill="#071523" font-size="14" font-weight="800">Try Studio</text><text x="153" y="446" fill="#071523" font-size="18">→</text><text x="201" y="446" fill="#A9B9CA" font-size="13" font-weight="700">View on GitHub ↗</text>
+    <g filter="url(#shadow)"><rect x="538" y="103" width="624" height="404" rx="18" fill="#0D2033" stroke="#28425C"/></g>
+    <circle cx="570" cy="133" r="4" fill="#46C7BA"/><text x="582" y="137" class="muted meta">Fallback market fixture</text><text x="1123" y="137" class="muted meta" text-anchor="end">Politics</text>
+    <text x="570" y="190" fill="#F3F7FC" class="serif question">Who will win the 2028</text><text x="570" y="229" fill="#F3F7FC" class="serif question">US presidential election?</text>
+    <path d="M570 252H1130" stroke="#28425C"/><text x="570" y="279" class="muted meta">Candidate A</text><text x="570" y="304" fill="#46C7BA" class="value">42%</text><text x="1130" y="279" class="muted meta" text-anchor="end">Resolution</text><text x="1130" y="301" fill="#F3F7FC" font-size="13" font-weight="800" text-anchor="end">Nov 8, 2028</text>
+    <rect x="570" y="326" width="560" height="135" rx="10" fill="#091A2B" stroke="#28425C"/><path d="M570 371H1130M570 416H1130" stroke="#1A334D" stroke-dasharray="4 6"/><path d="M570 411C622 410 652 403 701 407C750 411 783 420 829 410C876 399 900 384 949 386C1002 388 1062 377 1130 372" stroke="url(#chart)" stroke-width="4" stroke-linecap="round"/><circle cx="580" cy="482" r="4" fill="#46C7BA"/><text x="592" y="486" fill="#A9B9CA" font-size="11" font-weight="700">Candidate A</text>
+    <path d="M38 534H1162" stroke="#28425C"/><text x="38" y="575" fill="#F3F7FC" class="proof">21</text><text x="38" y="596" class="muted meta">typed React components</text><path d="M305 550V610" stroke="#28425C"/><text x="334" y="575" fill="#F3F7FC" class="proof">public</text><text x="334" y="596" class="muted meta">no-auth data defaults</text><path d="M610 550V610" stroke="#28425C"/><text x="640" y="575" fill="#F3F7FC" class="proof">PNG + SVG</text><text x="640" y="596" class="muted meta">share export</text><path d="M915 550V610" stroke="#28425C"/><text x="945" y="575" fill="#F3F7FC" class="proof">7</text><text x="945" y="596" class="muted meta">copy-in registry items</text>
   </g>
 </svg>

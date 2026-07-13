@@ -19,13 +19,13 @@ export function CommentList({ comments, limit = 5 }: CommentListProps) {
 
   return (
     <section className="pui-panel pui-stack">
-      <div className="pui-row" style={{ justifyContent: "space-between" }}>
+      <div className="pui-row pui-between">
         <strong>Comments</strong>
         <span className="pui-muted">{comments.length}</span>
       </div>
       {comments.slice(0, limit).map((comment) => (
         <article className="pui-comment" key={comment.id}>
-          <div className="pui-row" style={{ justifyContent: "space-between" }}>
+          <div className="pui-row pui-between">
             <strong>
               {comment.profile?.name ??
                 comment.profile?.pseudonym ??
@@ -34,10 +34,9 @@ export function CommentList({ comments, limit = 5 }: CommentListProps) {
             </strong>
             <span className="pui-muted">{formatRelativeTime(comment.createdAt)}</span>
           </div>
-          <p style={{ margin: 0 }}>{comment.body}</p>
+          <p className="pui-reset-margin">{comment.body}</p>
         </article>
       ))}
     </section>
   );
 }
-

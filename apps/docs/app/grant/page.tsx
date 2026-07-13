@@ -5,8 +5,8 @@ export default function GrantPage() {
       <div className="pui-stack">
         <p className="docs-copy">
           Polymarket UI Kit helps more teams ship market-native interfaces: media
-          embeds, vertical dashboards, research portals, and builder-code-aware
-          trading surfaces.
+          embeds, vertical dashboards, research portals, and builder-code-aware trading
+          surfaces.
         </p>
         <ul>
           <li>Open-source React primitives and copy-in registry items.</li>
@@ -18,4 +18,3 @@ export default function GrantPage() {
     </section>
   );
 }
-

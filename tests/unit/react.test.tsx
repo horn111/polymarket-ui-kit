@@ -6,11 +6,13 @@ import {
   ComboBuilderCard,
   ComboShareCard,
   EmbedSnippetPanel,
+  EvidenceRail,
   LeaderboardTable,
   MarketCard,
   MobileTradeDrawer,
   OrderbookPanel,
   PolymarketProvider,
+  PollMarketComparison,
   ShareCard,
   useMarket,
   useComboMarkets,
@@ -55,6 +57,73 @@ describe("React components", () => {
   it("renders leaderboard rows", () => {
     render(<LeaderboardTable rows={fixtureRows} />);
     expect(screen.getByText("Top Builder")).toBeInTheDocument();
+  });
+
+  it("renders evidence sources and respects maxVisible", () => {
+    render(
+      <EvidenceRail
+        items={[
+          {
+            id: "official",
+            title: "Certification calendar",
+            publisher: "State election board",
+            kind: "official",
+          },
+          {
+            id: "poll",
+            title: "Sample voter survey",
+            publisher: "Demo research desk",
+            kind: "poll",
+          },
+          {
+            id: "model",
+            title: "Turnout scenario",
+            publisher: "Civic model lab",
+            kind: "model",
+          },
+        ]}
+        maxVisible={2}
+      />,
+    );
+
+    expect(screen.getByText("Certification calendar")).toBeInTheDocument();
+    expect(screen.getByText("Sample voter survey")).toBeInTheDocument();
+    expect(screen.queryByText("Turnout scenario")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("1 more sources")).toBeInTheDocument();
+  });
+
+  it("renders evidence and comparison empty states", () => {
+    render(
+      <>
+        <EvidenceRail items={[]} />
+        <PollMarketComparison rows={[]} />
+      </>,
+    );
+
+    expect(screen.getByText("No evidence sources")).toBeInTheDocument();
+    expect(screen.getByText("No comparison data")).toBeInTheDocument();
+  });
+
+  it("renders null-safe poll and market comparison rows", () => {
+    render(
+      <PollMarketComparison
+        rows={[
+          {
+            id: "long-outcome",
+            label:
+              "A deliberately long outcome label that must wrap without breaking the table",
+            pollShare: null,
+            marketProbability: 0.614,
+            sampleSize: 1287,
+            marginOfErrorPoints: 2.8,
+          },
+        ]}
+      />,
+    );
+
+    expect(screen.getByText(/deliberately long outcome/)).toBeInTheDocument();
+    expect(screen.getByText("61%")).toBeInTheDocument();
+    expect(screen.getByText("No comparison")).toBeInTheDocument();
   });
 });
 
@@ -160,9 +229,15 @@ describe("Embed distribution panel", () => {
 
     expect(screen.getByText("will-bitcoin-hit-100k-in-2026")).toBeInTheDocument();
     expect(screen.getByText(/<iframe/)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("tab", { name: "React" }));
     expect(screen.getByText(/ShareCard/)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("tab", { name: "OG" }));
     expect(screen.getByText(/format=png/)).toBeInTheDocument();
     expect(screen.getByText(/format=svg/)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("tab", { name: "Registry" }));
     expect(screen.getByText(/npx shadcn@latest add/)).toBeInTheDocument();
   });
 
@@ -184,6 +259,7 @@ describe("Embed distribution panel", () => {
       />,
     );
 
+    fireEvent.click(screen.getByRole("tab", { name: "React" }));
     expect(screen.getByText(/BuilderFeeDisclosure/)).toBeInTheDocument();
     expect(screen.queryByText(/private key/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/place order/i)).not.toBeInTheDocument();

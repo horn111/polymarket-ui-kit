@@ -2,6 +2,9 @@
 
 Polymarket UI Kit supports two share-image paths:
 
+The Civic Forecast renderer uses the same light/dark semantic palette as the
+React components and keeps existing URL parameters backward compatible.
+
 - `ShareCard` renders a React component that can be embedded in app surfaces.
 - `createShareCardSvg` returns a framework-agnostic SVG string for API routes,
   workers, static generation, and fixture generation.

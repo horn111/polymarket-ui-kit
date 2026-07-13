@@ -1,8 +1,4 @@
-import {
-  BuilderFeeDisclosure,
-  MarketCard,
-  ShareCard,
-} from "@polymarket-ui-kit/react";
+import { BuilderFeeDisclosure, MarketCard, ShareCard } from "@polymarket-ui-kit/react";
 import { RouteThemeSync } from "../../components/RouteThemeSync";
 import { sampleBuilder } from "../../../components/sample-builder";
 import { loadPublicMarketBundle } from "../../../components/live-data";
@@ -45,20 +41,22 @@ export default async function EmbedPage({ params, searchParams }: EmbedPageProps
   return (
     <>
       <RouteThemeSync theme={theme} />
-      {surface === "market-card" ? (
-        <MarketCard market={market} points={points} />
-      ) : null}
-      {surface === "share-card" ? (
-        <ShareCard market={market} attribution={attribution} />
-      ) : null}
-      {surface === "builder-disclosure" ? (
-        <BuilderFeeDisclosure
-          builder={builder}
-          notional={100}
-          price={market.outcomes[0]?.price ?? undefined}
-          side="taker"
-        />
-      ) : null}
+      <div className="civic-embed-surface">
+        {surface === "market-card" ? (
+          <MarketCard market={market} points={points} />
+        ) : null}
+        {surface === "share-card" ? (
+          <ShareCard market={market} attribution={attribution} />
+        ) : null}
+        {surface === "builder-disclosure" ? (
+          <BuilderFeeDisclosure
+            builder={builder}
+            notional={100}
+            price={market.outcomes[0]?.price ?? undefined}
+            side="taker"
+          />
+        ) : null}
+      </div>
     </>
   );
 }

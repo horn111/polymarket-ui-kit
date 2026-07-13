@@ -27,6 +27,27 @@ export interface PriceHistoryParams {
 export type ShareImageTheme = "light" | "dark";
 export type ShareImageFormat = "png" | "svg";
 
+export type EvidenceKind = "official" | "poll" | "model" | "news" | "other";
+
+export interface EvidenceItem {
+  id: string;
+  title: string;
+  publisher: string;
+  href?: string | undefined;
+  publishedAt?: string | undefined;
+  kind?: EvidenceKind | undefined;
+}
+
+export interface PollMarketComparisonRow {
+  id: string;
+  label: string;
+  pollShare: number | null;
+  marketProbability: number | null;
+  sampleSize?: number | undefined;
+  marginOfErrorPoints?: number | undefined;
+  asOf?: string | undefined;
+}
+
 export interface ShareCardSvgOptions {
   theme?: ShareImageTheme | undefined;
   attribution?: string | undefined;
