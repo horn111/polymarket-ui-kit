@@ -39,6 +39,18 @@ type DemoTab =
   | "data"
   | "states";
 type DemoState = "live" | "loading" | "error" | "empty";
+
+const labTabs: Array<{ label: string; value: DemoTab }> = [
+  { label: "Market", value: "market" },
+  { label: "Evidence", value: "evidence" },
+  { label: "Poll comparison", value: "polls" },
+  { label: "Share", value: "share" },
+  { label: "Builder", value: "builder" },
+  { label: "Combo", value: "combo" },
+  { label: "Export", value: "export" },
+  { label: "Market data", value: "data" },
+  { label: "States", value: "states" },
+];
 type DemoTheme = "light" | "dark";
 
 interface InteractiveLabProps {
@@ -233,7 +245,7 @@ function makeOrderbook(market: PolymarketMarket): OrderbookSnapshot {
 
 function SkeletonState() {
   return (
-    <div className="demo-state-card" aria-label="Loading preview">
+    <div className="civic-lab__state-card" aria-label="Loading preview">
       <span />
       <strong />
       <p />
@@ -245,9 +257,9 @@ function SkeletonState() {
 
 function MessageState({ tone }: { tone: "empty" | "error" }) {
   return (
-    <div className="demo-message-state" data-tone={tone}>
+    <div className="civic-lab__message" data-tone={tone}>
       <strong>
-        {tone === "error" ? "MARKET DATA UNAVAILABLE" : "NO MARKET SELECTED"}
+        {tone === "error" ? "Market data unavailable" : "No market selected"}
       </strong>
       <p>
         {tone === "error"
@@ -263,7 +275,7 @@ export function InteractiveLab({ theme }: InteractiveLabProps) {
   const [tab, setTab] = useState<DemoTab>("market");
   const [state, setState] = useState<DemoState>("live");
   const [copied, setCopied] = useState(false);
-  const [comboIntentLabel, setComboIntentLabel] = useState("NO INTENT EMITTED");
+  const [comboIntentLabel, setComboIntentLabel] = useState("No intent emitted");
   const market = markets.find((item) => item.slug === marketSlug) ?? markets[0]!;
   const points = useMemo(() => makePoints(market), [market]);
   const orderbook = useMemo(() => makeOrderbook(market), [market]);
@@ -317,15 +329,19 @@ export function MarketEmbed({ market, points }) {
   }
 
   return (
-    <section className="demo-lab" aria-labelledby="interactive-lab-title">
-      <header className="demo-lab__heading">
-        <p className="demo-kicker">Interactive component lab</p>
+    <section className="civic-lab" aria-labelledby="interactive-lab-title">
+      <header className="civic-lab__heading">
+        <p>Interactive component lab</p>
         <h2 id="interactive-lab-title">Test the Civic Forecast system.</h2>
+        <span>
+          Switch fixtures, inspect component states, and copy the same typed React
+          surface.
+        </span>
       </header>
 
-      <div className="demo-lab__toolbar">
+      <div className="civic-lab__toolbar">
         <label>
-          MARKET INPUT
+          <span>Market fixture</span>
           <select
             onChange={(event) => setMarketSlug(event.target.value)}
             value={marketSlug}
@@ -338,48 +354,37 @@ export function MarketEmbed({ market, points }) {
           </select>
         </label>
 
-        <button className="demo-copy-button" onClick={copySnippet} type="button">
-          {copied ? "COPIED" : "COPY SNIPPET"}
+        <button onClick={copySnippet} type="button">
+          {copied ? "Copied" : "Copy React snippet"}
         </button>
       </div>
 
-      <div className="demo-lab__content" data-tab={tab}>
-        <nav className="demo-lab__tabs" aria-label="Component preview">
-          {(
-            [
-              "market",
-              "evidence",
-              "polls",
-              "share",
-              "builder",
-              "combo",
-              "export",
-              "data",
-              "states",
-            ] as DemoTab[]
-          ).map((item) => (
-            <button
-              aria-current={tab === item ? "page" : undefined}
-              data-active={tab === item ? "true" : undefined}
-              key={item}
-              onClick={() => setTab(item)}
-              type="button"
-            >
-              {item}
-            </button>
-          ))}
-        </nav>
+      <nav className="civic-lab__tabs" aria-label="Component preview" role="tablist">
+        {labTabs.map((item) => (
+          <button
+            aria-selected={tab === item.value}
+            data-active={tab === item.value ? "true" : undefined}
+            key={item.value}
+            onClick={() => setTab(item.value)}
+            role="tab"
+            type="button"
+          >
+            {item.label}
+          </button>
+        ))}
+      </nav>
 
-        <div className="demo-lab__preview">
+      <div className="civic-lab__content" data-tab={tab}>
+        <div className="civic-lab__preview" role="tabpanel">
           {tab === "market" ? <MarketCard market={market} points={points} /> : null}
           {tab === "evidence" ? <EvidenceRail items={evidenceItems} /> : null}
           {tab === "polls" ? <PollMarketComparison rows={pollComparisonRows} /> : null}
           {tab === "share" ? (
-            <div className="demo-share-stage">
+            <div className="civic-lab__share-stage">
               <ShareCard market={market} attribution="pui-kit/demo" />
-              <div className="demo-share-meta" aria-label="Share card metadata">
-                <span>{theme.toUpperCase()} SUBSTRATE</span>
-                <span>{market.category ?? "MARKET"}</span>
+              <div className="civic-lab__share-meta" aria-label="Share card metadata">
+                <span>{theme === "dark" ? "Dark theme" : "Light theme"}</span>
+                <span>{market.category ?? "Market"}</span>
                 <span>
                   {market.outcomes[0]?.price
                     ? `${Math.round(market.outcomes[0].price * 100)}C`
@@ -389,14 +394,14 @@ export function MarketEmbed({ market, points }) {
             </div>
           ) : null}
           {tab === "builder" ? (
-            <div className="demo-lab__builder-grid">
+            <div className="civic-lab__builder-grid">
               <BuilderFeeDisclosure
                 builder={sampleBuilder}
                 notional={100}
                 price={market.outcomes[0]?.price ?? undefined}
                 side="taker"
               />
-              <div className="demo-builder-surface">
+              <div className="civic-lab__builder-surface">
                 <BuilderBadge
                   builder={sampleBuilder}
                   feeBps={sampleBuilder.takerFeeBps}
@@ -416,7 +421,7 @@ export function MarketEmbed({ market, points }) {
             </div>
           ) : null}
           {tab === "combo" ? (
-            <div className="demo-combo-lab">
+            <div className="civic-lab__combo">
               <ComboShareCard
                 legs={sampleComboLegs}
                 title="BTC ATH + Fed cut combo"
@@ -433,41 +438,41 @@ export function MarketEmbed({ market, points }) {
                 }}
                 size={25}
               />
-              <div className="demo-combo-intent-readout">{comboIntentLabel}</div>
+              <div className="civic-lab__intent">{comboIntentLabel}</div>
             </div>
           ) : null}
           {tab === "export" ? (
-            <div className="demo-lab__export-grid">
+            <div className="civic-lab__export-grid">
               <ShareCard
-                className="demo-export-card"
+                className="civic-lab__export-card"
                 market={market}
                 attribution="pui-kit/demo"
               />
-              <div className="demo-export-panel">
-                <div className="demo-export-panel__header">
-                  <span>OG / SHARE EXPORT</span>
-                  <strong>ONE SLUG. PNG + SVG.</strong>
+              <div className="civic-lab__export-panel">
+                <div className="civic-lab__export-header">
+                  <span>Share export</span>
+                  <strong>One slug. PNG + SVG.</strong>
                 </div>
-                <div className="demo-export-actions">
+                <div className="civic-lab__export-actions">
                   <a href={pngShareImage.url} rel="noreferrer" target="_blank">
-                    PNG ROUTE
+                    Open PNG route
                   </a>
                   <a href={svgShareImage.url} rel="noreferrer" target="_blank">
-                    SVG ROUTE
+                    Open SVG route
                   </a>
                 </div>
-                <div className="demo-export-specs" aria-label="Export details">
+                <div className="civic-lab__export-specs" aria-label="Export details">
                   <div>
-                    <span>SUBSTRATE</span>
-                    <strong>{theme === "dark" ? "DARK" : "PRINT"}</strong>
+                    <span>Theme</span>
+                    <strong>{theme === "dark" ? "Dark" : "Light"}</strong>
                   </div>
                   <div>
-                    <span>SOURCE</span>
-                    <strong>PUBLIC</strong>
+                    <span>Source</span>
+                    <strong>Public</strong>
                   </div>
                   <div>
-                    <span>FALLBACK</span>
-                    <strong>READY</strong>
+                    <span>Fallback</span>
+                    <strong>Ready</strong>
                   </div>
                 </div>
                 <code>{exportPath}</code>
@@ -475,15 +480,19 @@ export function MarketEmbed({ market, points }) {
             </div>
           ) : null}
           {tab === "data" ? (
-            <div className="demo-lab__data-grid">
+            <div className="civic-lab__data-grid">
               <OrderbookPanel orderbook={orderbook} />
               <CommentList comments={comments} />
               <LeaderboardTable rows={leaderboardRows} />
             </div>
           ) : null}
           {tab === "states" ? (
-            <div className="demo-lab__states">
-              <div className="demo-segmented" role="group" aria-label="Render state">
+            <div className="civic-lab__states">
+              <div
+                className="civic-lab__segmented"
+                role="group"
+                aria-label="Render state"
+              >
                 {(["live", "loading", "error", "empty"] as DemoState[]).map((item) => (
                   <button
                     data-active={state === item ? "true" : undefined}
@@ -503,7 +512,7 @@ export function MarketEmbed({ market, points }) {
           ) : null}
         </div>
 
-        <pre className="demo-lab__snippet">
+        <pre className="civic-lab__snippet">
           <code>{snippet}</code>
         </pre>
       </div>
