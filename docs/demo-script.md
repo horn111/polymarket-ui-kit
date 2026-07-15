@@ -10,7 +10,7 @@ surfaces without rebuilding the same UI from scratch."
 
 ## 10-25s: Core Surfaces
 
-Show the demo home:
+Show the calibrated demo home after the mechanical hero plates settle:
 
 - Market card.
 - Price history.
@@ -22,7 +22,7 @@ states. It does not place orders."
 
 ## 25-35s: Link-To-Embed Studio
 
-Show `/studio`:
+Show `/studio` as one continuous calibration workspace:
 
 "Paste a Polymarket link and the kit generates a live iframe, React snippet,
 OG PNG/SVG routes, and registry command. This is the distribution layer for

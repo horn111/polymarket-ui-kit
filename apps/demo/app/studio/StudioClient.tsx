@@ -37,7 +37,7 @@ export function StudioClient() {
   const [origin, setOrigin] = useState("");
   const [outputMode, setOutputMode] = useState<OutputMode>("embed");
   const [surface, setSurface] = useState<EmbedSurface>("share-card");
-  const [theme, setTheme] = useState<ShareImageTheme>("light");
+  const [theme, setTheme] = useState<ShareImageTheme>("dark");
 
   useEffect(() => {
     setOrigin(window.location.origin);
@@ -102,16 +102,16 @@ export function StudioClient() {
         <header className="demo-studio__hero">
           <div>
             <p className="demo-kicker">
-              <a href="/">Polymarket UI Kit</a> · Embed Studio
+              <a href="/">Polymarket UI Kit</a> / Calibration Studio
             </p>
-            <h1 id="studio-title">Paste a market. Publish a credible surface.</h1>
+            <h1 id="studio-title">Calibrate once. Publish everywhere.</h1>
             <p>
-              Turn a Polymarket URL into a live iframe, React snippet, source-aware
-              share image, and registry command without adding order placement.
+              Turn one market URL into a live embed, React surface, share plate, and
+              registry command from a single controlled workspace.
             </p>
           </div>
           <div className="demo-studio__stamp" aria-hidden="true">
-            CIVIC
+            CAL / 01
           </div>
         </header>
 

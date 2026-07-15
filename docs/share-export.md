@@ -2,8 +2,9 @@
 
 Polymarket UI Kit supports two share-image paths:
 
-The Civic Forecast renderer uses the same light/dark semantic palette as the
-React components and keeps existing URL parameters backward compatible.
+The renderer uses the same Mechanical Probability materials, copper calibration
+signal, and light/dark semantic palette as the React components. Existing URL
+parameters remain backward compatible.
 
 - `ShareCard` renders a React component that can be embedded in app surfaces.
 - `createShareCardSvg` returns a framework-agnostic SVG string for API routes,
@@ -12,8 +13,8 @@ React components and keeps existing URL parameters backward compatible.
 The demo app exposes both from one endpoint:
 
 ```txt
-/api/og?slug=<market-slug>&theme=light&format=png
-/api/og?slug=<market-slug>&theme=light&format=svg
+/api/og?slug=<market-slug>&theme=dark&format=png
+/api/og?slug=<market-slug>&theme=dark&format=svg
 ```
 
 ## Why This Matters
@@ -31,7 +32,7 @@ import { createShareCardSvg, getMarketBySlug } from "@polymarket-ui-kit/core";
 const market = await getMarketBySlug("who-will-win-the-2028-us-presidential-election");
 const svg = createShareCardSvg(market, {
   attribution: "your-product.com",
-  theme: "light",
+  theme: "dark",
 });
 ```
 
@@ -44,8 +45,8 @@ is deterministic and does not require React.
 import { useShareImage } from "@polymarket-ui-kit/react";
 
 export function ShareActions({ slug }: { slug: string }) {
-  const png = useShareImage({ slug, format: "png", theme: "light" });
-  const svg = useShareImage({ slug, format: "svg", theme: "light" });
+  const png = useShareImage({ slug, format: "png", theme: "dark" });
+  const svg = useShareImage({ slug, format: "svg", theme: "dark" });
 
   return (
     <>

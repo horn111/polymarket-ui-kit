@@ -45,6 +45,7 @@ export function ProbabilitySparkline({
       {polyline ? (
         <polyline
           fill="none"
+          pathLength={1}
           points={polyline}
           stroke={color}
           strokeLinecap="round"

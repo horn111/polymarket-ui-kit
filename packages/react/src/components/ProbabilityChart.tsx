@@ -36,11 +36,17 @@ export function ProbabilityChart({
   const width = 560;
 
   return (
-    <div className={cx("pui-panel pui-stack", className)}>
-      <svg role="img" aria-label="Probability chart" viewBox={`0 0 ${width} ${height}`}>
+    <div className={cx("pui-panel pui-stack pui-probability-chart", className)}>
+      <svg
+        className="pui-probability-chart__plot"
+        role="img"
+        aria-label="Probability chart"
+        viewBox={`0 0 ${width} ${height}`}
+      >
         {[0.25, 0.5, 0.75].map((line) => (
           <path
             d={`M0 ${height - line * height} H${width}`}
+            className="pui-probability-chart__grid"
             key={line}
             stroke="var(--pui-border)"
             strokeDasharray="4 6"
@@ -49,8 +55,10 @@ export function ProbabilityChart({
         {series.map((item) => (
           <path
             d={seriesPath(item.points, width, height)}
+            className="pui-probability-chart__series"
             fill="none"
             key={item.id}
+            pathLength={1}
             stroke={item.color}
             strokeLinecap="round"
             strokeLinejoin="round"

@@ -2,6 +2,7 @@ import type { PolymarketMarket } from "@polymarket-ui-kit/core";
 import { MarketCard } from "@polymarket-ui-kit/react";
 import "@polymarket-ui-kit/react/styles.css";
 import "@polymarket-ui-kit/react/themes.css";
+import "./demo.css";
 
 const market: PolymarketMarket = {
   id: "vite-example",
@@ -19,6 +20,11 @@ const market: PolymarketMarket = {
 };
 
 export function App() {
-  return <MarketCard market={market} />;
+  return (
+    <main className="example-shell" data-pui-theme="dark">
+      <span>Vite + React / calibrated example</span>
+      <h1>Portable by construction.</h1>
+      <MarketCard market={market} />
+    </main>
+  );
 }
-

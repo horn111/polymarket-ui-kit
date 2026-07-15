@@ -1,7 +1,8 @@
 # Theming
 
-The React package ships the politics-first Civic Forecast token system. Light
-is the presentation default; dark remains a fully supported color scheme.
+The React package ships the Mechanical Probability token system used by the
+Polymarket UI Kit and its Civic Forecast edition. Dark is the showcase default;
+light is a complete ceramic counterpart rather than a fallback.
 
 ```tsx
 import "@polymarket-ui-kit/react/styles.css";
@@ -23,12 +24,18 @@ supported for backward compatibility:
 
 ```css
 :root {
-  --pui-primary: #1e63f3;
-  --pui-live: #0f9f91;
-  --pui-font-sans: "Instrument Sans", system-ui, sans-serif;
-  --pui-font-serif: "Source Serif 4", Georgia, serif;
+  --pui-primary: oklch(0.68 0.105 50);
+  --pui-live: oklch(0.76 0.105 170);
+  --pui-font-display: "PUI Unbounded", sans-serif;
+  --pui-font-sans: "PUI Schibsted Grotesk", system-ui, sans-serif;
+  --pui-font-mono: "PUI Chivo Mono", monospace;
 }
 ```
 
-The package references these fonts but does not download them. Host apps may
-self-host the families or rely on the documented fallbacks.
+The package includes locally hosted OFL variable fonts for deterministic demos,
+docs, Storybook, embeds, and registry previews. Hosts can override any family
+while retaining the semantic display/UI/mono roles.
+
+Purple, violet, chartreuse, and party-coded red/blue are intentionally absent
+from the master palette. Copper indicates calibrated interaction, teal is
+reserved for live/positive state, and coral is reserved for negative state.

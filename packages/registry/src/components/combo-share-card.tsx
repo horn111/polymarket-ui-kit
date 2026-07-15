@@ -16,19 +16,19 @@ export function ComboShareCard({
       : legs.reduce((probability, leg) => probability * (leg.outcome.price ?? 0), 1);
 
   return (
-    <article className="grid max-w-2xl gap-6 overflow-hidden rounded-lg border border-slate-200 bg-white p-6 text-slate-950 shadow-lg">
+    <article className="grid max-w-2xl gap-6 overflow-hidden rounded-md border border-zinc-700 bg-gradient-to-br from-zinc-800 via-zinc-950 to-zinc-900 p-6 text-stone-100 shadow-2xl tabular-nums">
       <div className="flex items-center justify-between gap-3">
-        <strong className="text-sm font-extrabold text-teal-700">
+        <strong className="text-sm font-black tracking-tight">
           Polymarket Combo
         </strong>
-        <span className="text-xs text-slate-500">{attribution}</span>
+        <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-zinc-400">{attribution}</span>
       </div>
 
       <div className="flex items-start justify-between gap-5">
         <h2 className="max-w-md text-3xl font-black leading-none">{title}</h2>
         <div className="text-right">
-          <span className="text-xs text-slate-500">Reference</span>
-          <strong className="block text-4xl font-black leading-none">
+          <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-zinc-400">Reference</span>
+          <strong className="block text-4xl font-black leading-none tracking-[-0.06em] text-orange-300">
             {formatProbability(reference)}
           </strong>
         </div>
@@ -37,14 +37,14 @@ export function ComboShareCard({
       <div className="grid gap-2">
         {legs.slice(0, 4).map(({ market, outcome }) => (
           <div
-            className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-md border border-slate-200 p-3"
+            className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-sm border border-zinc-700 bg-zinc-950/70 p-3"
             key={outcome.positionId}
           >
-            <span className="rounded-full bg-teal-50 px-2 py-1 text-xs font-extrabold text-teal-700">
+            <span className="border border-orange-300/30 bg-orange-300/10 px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.08em] text-orange-300">
               {outcome.name}
             </span>
             <strong className="text-sm leading-tight">{market.title}</strong>
-            <span className="text-xs font-extrabold text-slate-500">
+            <span className="font-mono text-xs font-extrabold text-zinc-400">
               {formatProbability(outcome.price)}
             </span>
           </div>

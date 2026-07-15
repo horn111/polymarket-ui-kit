@@ -17,16 +17,16 @@ export default function HomePage() {
       <section className="docs-hero">
         <div className="docs-hero__copy">
           <span className="docs-edition">
-            <i /> Civic Forecast documentation
+            <i /> Civic Forecast / calibrated documentation
           </span>
-          <h1>Build credible market interfaces.</h1>
+          <h1>Engineer probability with context.</h1>
           <p>
-            Typed React components, public data hooks, source-aware context, and
-            distribution tooling for Polymarket builders.
+            A precise component system for sourced markets, public data, and every
+            distribution surface around them.
           </p>
           <div className="docs-actions">
             <a className="docs-button" href="/components">
-              Browse components
+              Explore components
             </a>
             <a
               className="docs-link"
@@ -48,8 +48,8 @@ npx shadcn@latest add https://polymarket-ui-kit-demo-fkan-chi.vercel.app/r/evide
 
       <section className="docs-section">
         <header>
-          <span>Politics-first release</span>
-          <h2>Probability with context.</h2>
+          <span>Politics edition / category-neutral core</span>
+          <h2>One material system. Every surface.</h2>
         </header>
         <div className="docs-feature-stack">
           <PollMarketComparison rows={samplePollRows} />

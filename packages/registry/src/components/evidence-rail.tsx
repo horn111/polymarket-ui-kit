@@ -17,7 +17,7 @@ export function EvidenceRail({
 }) {
   if (items.length === 0) {
     return (
-      <section className="rounded-xl border bg-background p-4">
+      <section className="rounded-md border border-border/70 bg-background p-5 shadow-xl">
         <strong>No evidence sources</strong>
         <p className="mt-1 text-sm text-muted-foreground">
           Add official records, polls, models, or reporting.
@@ -27,7 +27,7 @@ export function EvidenceRail({
   }
 
   return (
-    <section aria-label={title} className="rounded-xl border bg-background p-4">
+    <section aria-label={title} className="rounded-md border border-border/70 bg-gradient-to-br from-background via-muted/20 to-background p-5 shadow-xl">
       <div className="mb-4 flex items-center justify-between gap-3">
         <strong>{title}</strong>
         <span className="text-sm text-muted-foreground">{items.length} sources</span>
@@ -36,7 +36,7 @@ export function EvidenceRail({
         {items.slice(0, 4).map((item) => {
           const content = (
             <>
-              <span className="text-xs font-semibold text-primary">
+              <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-primary">
                 {kindLabels[item.kind ?? "other"]}
               </span>
               <strong className="text-sm leading-snug">{item.title}</strong>
@@ -45,7 +45,7 @@ export function EvidenceRail({
           );
           return item.href ? (
             <a
-              className="grid min-w-60 gap-1 rounded-lg border bg-muted/40 p-3 transition hover:bg-muted"
+              className="grid min-h-36 min-w-60 gap-2 rounded-sm border border-border/70 bg-muted/35 p-4 transition hover:bg-muted"
               href={item.href}
               key={item.id}
               rel="noreferrer"
@@ -54,7 +54,7 @@ export function EvidenceRail({
             </a>
           ) : (
             <article
-              className="grid min-w-60 gap-1 rounded-lg border bg-muted/40 p-3"
+              className="grid min-h-36 min-w-60 gap-2 rounded-sm border border-border/70 bg-muted/35 p-4"
               key={item.id}
             >
               {content}

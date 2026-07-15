@@ -2,19 +2,22 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Civic Forecast · Polymarket UI Kit",
+  title: "Polymarket UI Kit · Civic Forecast",
   description:
-    "Evidence-first React components and distribution surfaces for Polymarket builders.",
+    "A premium open-source React instrument for sourced prediction-market interfaces.",
+  icons: {
+    icon: "/icon.svg",
+  },
   openGraph: {
-    title: "Civic Forecast · Polymarket UI Kit",
-    description: "Politics-first, source-aware market interface primitives.",
+    title: "Polymarket UI Kit · Civic Forecast",
+    description: "Mechanical, source-aware market interfaces for builders.",
     type: "website",
   },
 };
 
 export default function DemoLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html data-demo-theme="light" data-pui-theme="light" lang="en">
+    <html data-demo-theme="dark" data-pui-theme="dark" lang="en">
       <body>
         <a className="demo-skip-link" href="#main-content">
           Skip to content

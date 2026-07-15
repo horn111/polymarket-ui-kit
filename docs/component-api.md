@@ -9,8 +9,6 @@ and theme utilities.
 - `MarketCard`
 - `EvidenceRail`
 - `PollMarketComparison`
-- `EvidenceRail`
-- `PollMarketComparison`
 - `ProbabilitySparkline`
 - `ProbabilityChart`
 - `OrderbookPanel`
@@ -31,19 +29,6 @@ and theme utilities.
 
 All components accept typed data from `@polymarket-ui-kit/core`. Components must
 render useful empty and fallback states when data is missing.
-
-## Evidence and poll context
-
-`EvidenceRail` accepts host-provided `EvidenceItem[]` and renders official
-records, polls, models, reporting, and other sources. `PollMarketComparison`
-accepts `PollMarketComparisonRow[]` with `0..1` poll shares and market
-probabilities. These are display contracts only; the kit does not fetch or
-endorse external political data.
-
-```tsx
-<EvidenceRail items={verifiedSources} maxVisible={4} />
-<PollMarketComparison rows={comparisonRows} />
-```
 
 ## Evidence and poll context
 

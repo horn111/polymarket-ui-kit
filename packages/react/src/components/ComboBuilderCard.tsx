@@ -52,11 +52,18 @@ export function ComboBuilderCard({
       </header>
 
       {isLoading ? (
-        <EmptyState title="Loading combo markets" description="Fetching public combo legs." />
+        <EmptyState
+          data-state="loading"
+          description="Fetching public combo legs."
+          role="status"
+          title="Loading combo markets"
+        />
       ) : error ? (
         <EmptyState
-          title="Combo markets unavailable"
+          data-state="error"
           description="Render fallback data or retry from the host app."
+          role="alert"
+          title="Combo markets unavailable"
         />
       ) : (
         <div className="pui-combo-builder-card__grid">

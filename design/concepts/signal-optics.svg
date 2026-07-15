@@ -1,0 +1,194 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1200" viewBox="0 0 1920 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Signal Optics concept board for Polymarket UI Kit</title>
+  <desc id="desc">Premium dark interface direction using optical apertures, smoked cyan light, data refraction, a desktop hero, mobile view, market card, studio fragment, palette and six motion frames.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#030609"/>
+      <stop offset="0.54" stop-color="#071014"/>
+      <stop offset="1" stop-color="#07161b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#b8fbff" stop-opacity=".92"/>
+      <stop offset=".22" stop-color="#77e6ef" stop-opacity=".54"/>
+      <stop offset=".58" stop-color="#35a9bb" stop-opacity=".13"/>
+      <stop offset="1" stop-color="#071014" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b9fbff" stop-opacity=".22"/>
+      <stop offset=".5" stop-color="#4ecad8" stop-opacity=".04"/>
+      <stop offset="1" stop-color="#c8fdff" stop-opacity=".13"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#53d4b5"/>
+      <stop offset=".58" stop-color="#89eef4"/>
+      <stop offset="1" stop-color="#d8fdff"/>
+    </linearGradient>
+    <filter id="blur40"><feGaussianBlur stdDeviation="40"/></filter>
+    <filter id="shadow"><feDropShadow dx="0" dy="24" stdDeviation="30" flood-color="#000" flood-opacity=".55"/></filter>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#8eeef5" stroke-opacity=".045"/>
+    </pattern>
+    <style>
+      .ui{font-family:Geologica,"Segoe UI",Arial,sans-serif;fill:#eaf9fb}.mono{font-family:"Azeret Mono",Consolas,monospace;fill:#91aeb4}.label{font-size:12px;letter-spacing:.12em}.small{font-size:13px}.body{font-size:16px;fill:#91aeb4}.hair{stroke:#8eeef5;stroke-opacity:.16}.panel{fill:#0b151a;stroke:#8eeef5;stroke-opacity:.14}.panel2{fill:#0e1b21;stroke:#8eeef5;stroke-opacity:.18}.num{font-variant-numeric:tabular-nums}.cap{font-size:11px;letter-spacing:.1em;fill:#74dce6}.muted{fill:#6f8990}.bright{fill:#bafaff}.live{fill:#53d4b5}.accent{fill:#82eaf2}
+    </style>
+  </defs>
+
+  <rect width="1920" height="1200" fill="#020507"/>
+  <circle cx="990" cy="260" r="420" fill="url(#glow)" opacity=".16" filter="url(#blur40)"/>
+  <text x="40" y="48" class="ui" font-size="26" font-weight="650">01 / SIGNAL OPTICS</text>
+  <text x="40" y="75" class="mono label">PRECISION · ATMOSPHERE · LUCIDITY</text>
+  <g transform="translate(1650 30)">
+    <path d="M0 22L22 0 44 22 22 44Z" fill="none" stroke="#87edf3" stroke-width="2"/>
+    <path d="M9 22L22 9 35 22 22 35Z" fill="url(#glass)" stroke="#bafaff" stroke-opacity=".65"/>
+    <circle cx="22" cy="22" r="3" fill="#bafaff"/>
+    <text x="58" y="18" class="ui small" font-weight="650">Polymarket UI Kit</text>
+    <text x="58" y="38" class="mono" font-size="10">CIVIC FORECAST / POLITICS EDITION</text>
+  </g>
+
+  <!-- Desktop hero -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="108" width="1100" height="540" rx="26" fill="url(#bg)" stroke="#8eeef5" stroke-opacity=".18"/>
+  </g>
+  <rect x="40" y="108" width="1100" height="540" rx="26" fill="url(#grid)"/>
+  <g transform="translate(76 138)">
+    <g>
+      <path d="M0 14L14 0 28 14 14 28Z" fill="none" stroke="#87edf3"/>
+      <circle cx="14" cy="14" r="4" fill="#87edf3"/>
+      <text x="40" y="19" class="ui small" font-weight="650">Polymarket UI Kit</text>
+      <text x="696" y="19" class="ui small muted">Components</text>
+      <text x="790" y="19" class="ui small muted">Studio</text>
+      <text x="850" y="19" class="ui small muted">Docs</text>
+      <rect x="908" y="0" width="80" height="30" rx="15" fill="#102228" stroke="#8eeef5" stroke-opacity=".2"/>
+      <text x="929" y="20" class="ui" font-size="11">DARK</text>
+    </g>
+    <line x1="0" y1="50" x2="988" y2="50" class="hair"/>
+    <text x="0" y="100" class="mono cap">CIVIC FORECAST · LIVE SYSTEM</text>
+    <text x="0" y="174" class="ui" font-size="62" font-weight="610" letter-spacing="-2">Make probability</text>
+    <text x="0" y="238" class="ui" font-size="62" font-weight="610" letter-spacing="-2">feel credible.</text>
+    <text x="0" y="282" class="ui body">A React system for sourced markets, public data</text>
+    <text x="0" y="306" class="ui body">and distribution-ready surfaces.</text>
+    <rect x="0" y="342" width="142" height="46" rx="9" fill="#bafaff"/>
+    <text x="26" y="371" class="ui" font-size="14" font-weight="700" style="fill:#061014">Try Studio</text>
+    <text x="160" y="371" class="ui small accent">Explore the kit ↗</text>
+    <g transform="translate(0 425)">
+      <circle cx="4" cy="-2" r="4" fill="#53d4b5"/>
+      <text x="18" y="2" class="mono" font-size="10">LIVE PUBLIC MARKET · SAMPLE EVIDENCE</text>
+      <text x="0" y="26" class="ui" font-size="12" fill="#91aeb4">No party-coded defaults · Public adapters · Accessible motion</text>
+    </g>
+  </g>
+  <g transform="translate(690 194)">
+    <circle cx="205" cy="100" r="150" fill="url(#glow)" opacity=".56"/>
+    <g transform="translate(205 100)" fill="url(#glass)" stroke="#aef6fb" stroke-opacity=".38">
+      <path d="M0-116C42-116 74-90 96-54L35-20C27-34 16-43 0-43Z"/>
+      <path d="M100-58C121-22 119 18 99 56L37 21C45 7 45-7 37-21Z"/>
+      <path d="M96 61C74 98 41 118 0 118V44C16 44 27 35 35 21Z"/>
+      <path d="M-3 118C-44 117-78 95-99 58L-37 21C-29 35-18 44-3 44Z"/>
+      <path d="M-101 54C-121 17-119-23-98-59L-36-21C-44-7-44 7-36 21Z"/>
+      <path d="M-94-64C-72-99-39-117 2-116V-43C-14-43-25-35-34-20Z"/>
+    </g>
+    <circle cx="205" cy="100" r="38" fill="#061014" stroke="#c8fdff" stroke-opacity=".45"/>
+    <text x="186" y="106" class="mono" font-size="14" fill="#d7fdff">42%</text>
+    <path d="M-10 288C78 270 116 300 201 274S337 248 426 259" fill="none" stroke="url(#line)" stroke-width="2.5"/>
+    <path d="M-10 306H426" class="hair"/>
+  </g>
+  <g transform="translate(628 430)">
+    <rect width="466" height="178" rx="18" class="panel"/>
+    <text x="22" y="28" class="mono cap">LIVE / POLITICS</text>
+    <text x="22" y="58" class="ui" font-size="21" font-weight="620">Who will win the 2028 U.S.</text>
+    <text x="22" y="82" class="ui" font-size="21" font-weight="620">presidential election?</text>
+    <line x1="22" y1="99" x2="444" y2="99" class="hair"/>
+    <text x="22" y="122" class="ui small muted">Candidate A</text><text x="380" y="124" class="ui num live" font-size="18" font-weight="720">42%</text>
+    <rect x="22" y="136" width="422" height="4" rx="2" fill="#19343b"/><rect x="22" y="136" width="177" height="4" rx="2" fill="#86ebf2"/>
+    <text x="22" y="162" class="mono" font-size="9">EVIDENCE 04</text><text x="356" y="162" class="mono" font-size="9">UPDATED 16:42 UTC</text>
+  </g>
+
+  <!-- Mobile -->
+  <g filter="url(#shadow)"><rect x="1170" y="108" width="250" height="540" rx="30" fill="url(#bg)" stroke="#8eeef5" stroke-opacity=".24"/></g>
+  <rect x="1184" y="123" width="222" height="512" rx="20" fill="url(#grid)" opacity=".8"/>
+  <g transform="translate(1202 146)">
+    <path d="M0 10L10 0 20 10 10 20Z" fill="none" stroke="#87edf3"/><circle cx="10" cy="10" r="3" fill="#87edf3"/>
+    <text x="30" y="14" class="ui" font-size="10" font-weight="650">POLYMARKET UI KIT</text>
+    <text x="0" y="62" class="mono" font-size="8">CIVIC FORECAST</text>
+    <text x="0" y="104" class="ui" font-size="30" font-weight="620">Make probability</text>
+    <text x="0" y="137" class="ui" font-size="30" font-weight="620">feel credible.</text>
+    <text x="0" y="170" class="ui" font-size="11" fill="#91aeb4">Sourced market surfaces for builders.</text>
+    <rect x="0" y="190" width="186" height="38" rx="8" fill="#bafaff"/><text x="58" y="214" class="ui" font-size="11" font-weight="700" style="fill:#061014">TRY STUDIO</text>
+    <circle cx="94" cy="286" r="72" fill="url(#glow)" opacity=".48"/>
+    <circle cx="94" cy="286" r="48" fill="none" stroke="#8eeef5" stroke-opacity=".36" stroke-width="13" stroke-dasharray="90 212" transform="rotate(-78 94 286)"/>
+    <text x="75" y="292" class="mono" font-size="14" fill="#d7fdff">42%</text>
+    <rect x="0" y="372" width="186" height="86" rx="12" class="panel"/>
+    <text x="12" y="394" class="mono" font-size="7">LIVE MARKET</text>
+    <text x="12" y="417" class="ui" font-size="11" font-weight="620">2028 U.S. election</text>
+    <path d="M12 438C48 430 80 450 116 434S151 424 174 428" fill="none" stroke="#82eaf2" stroke-width="1.5"/>
+  </g>
+
+  <!-- Market card -->
+  <g transform="translate(1450 108)">
+    <rect width="430" height="250" rx="20" class="panel"/>
+    <text x="20" y="28" class="mono cap">MARKETCARD / DEFAULT</text>
+    <text x="20" y="62" class="ui" font-size="19" font-weight="620">Will voter turnout exceed 2022?</text>
+    <text x="20" y="84" class="ui" font-size="11" fill="#6f8990">Politics · closes Nov 03 · $5.8M volume</text>
+    <rect x="20" y="104" width="390" height="48" rx="9" class="panel2"/>
+    <text x="34" y="133" class="ui small">Yes</text><text x="360" y="134" class="ui num accent" font-size="18" font-weight="720">67¢</text>
+    <rect x="20" y="160" width="390" height="48" rx="9" fill="#0a1216" stroke="#8eeef5" stroke-opacity=".08"/>
+    <text x="34" y="189" class="ui small muted">No</text><text x="363" y="190" class="ui num muted" font-size="17" font-weight="700">33¢</text>
+    <path d="M20 232C76 226 118 238 171 220S261 210 316 218 372 201 410 205" fill="none" stroke="url(#line)" stroke-width="2"/>
+  </g>
+
+  <!-- Studio -->
+  <g transform="translate(1450 390)">
+    <rect width="430" height="258" rx="20" class="panel"/>
+    <text x="20" y="28" class="mono cap">STUDIO / OPTICAL WORKSPACE</text>
+    <rect x="20" y="46" width="390" height="40" rx="8" fill="#071014" stroke="#8eeef5" stroke-opacity=".2"/>
+    <text x="34" y="71" class="mono" font-size="9">polymarket.com/event/2028-us-election</text>
+    <g transform="translate(20 102)">
+      <rect width="238" height="132" rx="12" class="panel2"/>
+      <text x="14" y="22" class="mono" font-size="8">LIVE PREVIEW</text>
+      <circle cx="58" cy="75" r="32" fill="url(#glow)" opacity=".45"/>
+      <circle cx="58" cy="75" r="22" fill="none" stroke="#82eaf2" stroke-width="7" stroke-dasharray="42 96"/>
+      <text x="103" y="63" class="ui" font-size="11">Candidate A</text><text x="103" y="86" class="ui accent" font-size="24" font-weight="720">42%</text>
+      <path d="M103 104C133 96 160 110 190 96 206 89 218 91 224 90" fill="none" stroke="#82eaf2"/>
+    </g>
+    <g transform="translate(270 102)">
+      <rect width="140" height="132" rx="12" fill="#071014" stroke="#8eeef5" stroke-opacity=".12"/>
+      <text x="12" y="22" class="mono" font-size="8">OUTPUT</text>
+      <text x="12" y="50" class="ui small bright">Embed</text><line x1="12" y1="61" x2="128" y2="61" class="hair"/>
+      <text x="12" y="82" class="ui small muted">React</text><line x1="12" y1="93" x2="128" y2="93" class="hair"/>
+      <text x="12" y="114" class="ui small muted">OG / Registry</text>
+    </g>
+  </g>
+
+  <!-- Palette and system -->
+  <g transform="translate(40 688)">
+    <text x="0" y="20" class="ui" font-size="19" font-weight="650">Material &amp; palette</text>
+    <g transform="translate(0 42)">
+      <rect width="84" height="58" rx="10" fill="#05080c" stroke="#bafaff" stroke-opacity=".16"/><text x="0" y="78" class="mono" font-size="9">OBSIDIAN</text>
+      <rect x="98" width="84" height="58" rx="10" fill="#0e1b21" stroke="#bafaff" stroke-opacity=".16"/><text x="98" y="78" class="mono" font-size="9">SMOKE</text>
+      <rect x="196" width="84" height="58" rx="10" fill="#bafaff"/><text x="196" y="78" class="mono" font-size="9">ICE</text>
+      <rect x="294" width="84" height="58" rx="10" fill="#53d4b5"/><text x="294" y="78" class="mono" font-size="9">LIVE</text>
+      <rect x="392" width="84" height="58" rx="10" fill="#ff7f72"/><text x="392" y="78" class="mono" font-size="9">NEGATIVE</text>
+    </g>
+    <g transform="translate(570 0)">
+      <text class="ui" y="20" font-size="19" font-weight="650">Type</text>
+      <text y="65" class="ui" font-size="31" font-weight="620">Geologica Variable</text>
+      <text y="94" class="mono" font-size="12">AZERET MONO · 42.8% · 16:42 UTC</text>
+    </g>
+    <g transform="translate(1110 0)">
+      <text class="ui" y="20" font-size="19" font-weight="650">Rules</text>
+      <text y="54" class="ui small muted">01  Glass only at focal moments</text>
+      <text y="78" class="ui small muted">02  Opaque data surfaces stay readable</text>
+      <text y="102" class="ui small muted">03  Light follows probability, never decoration</text>
+    </g>
+  </g>
+
+  <!-- Motion storyboard -->
+  <text x="40" y="858" class="ui" font-size="19" font-weight="650">Web-motion storyboard / 0–1800 ms</text>
+  <g transform="translate(40 880)">
+    <g><rect width="292" height="250" rx="16" class="panel"/><text x="16" y="24" class="mono" font-size="9">00 / 0 MS · DARK HOLD</text><circle cx="146" cy="126" r="16" fill="#82eaf2" opacity=".12"/><circle cx="146" cy="126" r="4" fill="#bafaff"/><text x="16" y="226" class="ui small muted">A single optical center appears.</text></g>
+    <g transform="translate(306)"><rect width="292" height="250" rx="16" class="panel"/><text x="16" y="24" class="mono" font-size="9">01 / 180 MS · APERTURE</text><circle cx="146" cy="126" r="78" fill="url(#glow)" opacity=".35"/><circle cx="146" cy="126" r="40" fill="none" stroke="#82eaf2" stroke-width="12" stroke-dasharray="66 186"/><text x="16" y="226" class="ui small muted">Blades open with optical drag.</text></g>
+    <g transform="translate(612)"><rect width="292" height="250" rx="16" class="panel"/><text x="16" y="24" class="mono" font-size="9">02 / 420 MS · WORDMARK</text><path d="M74 121H218" stroke="#82eaf2" stroke-opacity=".3"/><text x="72" y="108" class="ui" font-size="19" font-weight="650">POLYMARKET</text><text x="105" y="138" class="mono" font-size="9">UI KIT / CIVIC</text><text x="16" y="226" class="ui small muted">Type resolves through the focal plane.</text></g>
+    <g transform="translate(918)"><rect width="292" height="250" rx="16" class="panel"/><text x="16" y="24" class="mono" font-size="9">03 / 760 MS · DATA DRAW</text><path d="M36 157C83 142 117 166 160 138S223 118 256 125" fill="none" stroke="url(#line)" stroke-width="2"/><circle cx="256" cy="125" r="4" fill="#bafaff"/><text x="112" y="104" class="ui num" font-size="25">42%</text><text x="16" y="226" class="ui small muted">The current value pulls history into view.</text></g>
+    <g transform="translate(1224)"><rect width="292" height="250" rx="16" class="panel"/><text x="16" y="24" class="mono" font-size="9">04 / 1120 MS · EVIDENCE</text><rect x="32" y="78" width="228" height="34" rx="8" class="panel2"/><rect x="32" y="122" width="228" height="34" rx="8" class="panel2"/><text x="48" y="100" class="ui" font-size="10">Official resolution rules</text><text x="48" y="144" class="ui" font-size="10">Illustrative polling context</text><text x="16" y="226" class="ui small muted">Sources lock to the market plane.</text></g>
+    <g transform="translate(1530)"><rect width="292" height="250" rx="16" class="panel"/><text x="16" y="24" class="mono" font-size="9">05 / 1800 MS · LIVE HOLD</text><circle cx="52" cy="88" r="4" fill="#53d4b5"/><text x="66" y="92" class="mono" font-size="9">LIVE PUBLIC MARKET</text><rect x="34" y="120" width="224" height="42" rx="9" fill="#bafaff"/><text x="102" y="146" class="ui" font-size="11" font-weight="700" style="fill:#061014">TRY STUDIO</text><text x="16" y="226" class="ui small muted">Motion settles; interface remains calm.</text></g>
+  </g>
+</svg>

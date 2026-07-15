@@ -3,24 +3,23 @@ import { formatCompact, formatProbability } from "../lib/polymarket-format";
 
 export function MarketCard({ market }: { market: PolymarketMarket }) {
   return (
-    <article className="rounded-lg border bg-background p-4 shadow-sm">
-      <div className="mb-3 flex items-center justify-between gap-3 text-sm text-muted-foreground">
+    <article className="relative grid gap-4 overflow-hidden rounded-md border border-border/70 bg-gradient-to-br from-background via-muted/25 to-background p-5 shadow-2xl tabular-nums">
+      <div className="flex items-center justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
         <span>{market.status}</span>
         {market.volume ? <span>{formatCompact(market.volume)} volume</span> : null}
       </div>
-      <h3 className="mb-4 text-base font-semibold leading-snug">{market.question}</h3>
+      <h3 className="text-xl font-black leading-[1.08] tracking-[-0.035em]">{market.question}</h3>
       <div className="grid gap-2">
         {market.outcomes.map((outcome) => (
           <div
-            className="flex items-center justify-between rounded-md border bg-muted/40 px-3 py-2"
+            className="flex min-h-12 items-center justify-between rounded-sm border border-border/70 bg-background/80 px-3 py-2"
             key={outcome.id}
           >
             <span>{outcome.name}</span>
-            <strong>{formatProbability(outcome.price)}</strong>
+            <strong className="font-mono text-primary">{formatProbability(outcome.price)}</strong>
           </div>
         ))}
       </div>
     </article>
   );
 }
-
