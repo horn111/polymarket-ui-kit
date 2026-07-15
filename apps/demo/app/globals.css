@@ -143,8 +143,9 @@
   }
 
   .civic-hero__stage {
-    min-height: 43rem;
-    overflow: clip;
+    align-items: center;
+    display: grid;
+    min-width: 0;
     perspective: 1200px;
     position: relative;
   }
@@ -336,7 +337,6 @@
     color: var(--pui-ink-inverse);
   }
 
-  .civic-edition,
   .civic-caption,
   .civic-developer > div > span,
   .civic-section__heading > div > span,
@@ -349,20 +349,6 @@
     font-size: 0.62rem;
     letter-spacing: 0.09em;
     text-transform: uppercase;
-  }
-
-  .civic-edition {
-    align-items: center;
-    display: flex;
-    gap: 0.6rem;
-  }
-
-  .civic-edition > span {
-    background: var(--pui-live);
-    border-radius: 50%;
-    box-shadow: 0 0 0 4px var(--pui-live-soft);
-    height: 0.4rem;
-    width: 0.4rem;
   }
 
   .civic-hero__copy h1,
@@ -444,108 +430,6 @@
     line-height: 1.4;
   }
 
-  .civic-instrument {
-    height: 26rem;
-    pointer-events: none;
-    position: absolute;
-    right: 0;
-    top: -4.5rem;
-    width: min(38rem, 78%);
-    z-index: 0;
-  }
-
-  .civic-instrument::before {
-    background: radial-gradient(circle, var(--pui-primary-soft), transparent 66%);
-    content: "";
-    filter: blur(20px);
-    inset: 8% 2% 0 12%;
-    position: absolute;
-  }
-
-  .civic-instrument canvas,
-  .civic-instrument__poster {
-    height: 100%;
-    inset: 0;
-    position: absolute;
-    width: 100%;
-  }
-
-  .civic-instrument canvas {
-    opacity: 0;
-    transition: opacity 320ms var(--pui-ease-control);
-  }
-
-  .civic-instrument[data-ready="true"] canvas {
-    opacity: 1;
-  }
-
-  .civic-instrument__poster {
-    perspective: 900px;
-    transition: opacity 260ms var(--pui-ease-control);
-  }
-
-  .civic-instrument[data-ready="true"] .civic-instrument__poster {
-    opacity: 0;
-  }
-
-  .civic-instrument__poster span,
-  .civic-instrument__poster i,
-  .civic-instrument__poster b {
-    border: 1px solid var(--pui-border-strong);
-    border-radius: var(--pui-radius-md);
-    display: block;
-    position: absolute;
-    transform: rotateX(10deg) rotateY(-24deg) rotateZ(-3deg);
-  }
-
-  .civic-instrument__poster span {
-    background: var(--pui-metal-raised);
-    height: 62%;
-    left: 18%;
-    top: 15%;
-    width: 47%;
-  }
-
-  .civic-instrument__poster i {
-    background: var(--pui-ceramic);
-    height: 48%;
-    left: 43%;
-    top: 21%;
-    width: 43%;
-  }
-
-  .civic-instrument__poster b {
-    background: var(--pui-primary);
-    border: 0;
-    height: 2px;
-    left: 29%;
-    top: 45%;
-    width: 53%;
-  }
-
-  .civic-instrument__readout {
-    bottom: 5rem;
-    display: grid;
-    gap: 0.1rem;
-    position: absolute;
-    right: 2rem;
-    text-align: right;
-  }
-
-  .civic-instrument__readout span {
-    color: var(--pui-text-soft);
-    font-family: var(--pui-font-mono);
-    font-size: 0.5rem;
-    letter-spacing: 0.08em;
-  }
-
-  .civic-instrument__readout strong {
-    color: var(--pui-primary-hover);
-    font-family: var(--pui-font-display);
-    font-size: 2rem;
-    letter-spacing: -0.06em;
-  }
-
   .civic-hero__market {
     background:
       linear-gradient(130deg, transparent 0 62%, var(--pui-primary-soft) 62% 73%, transparent 73%),
@@ -555,13 +439,10 @@
     box-shadow: var(--pui-elevation-2);
     display: grid;
     gap: 1.15rem;
-    margin-left: 1.5rem;
     padding: clamp(1rem, 2.5vw, 1.6rem);
-    position: absolute;
-    right: 0;
-    top: 9.5rem;
+    position: relative;
     transform: rotateY(-2deg) rotateX(0.6deg);
-    width: calc(100% - 1.5rem);
+    width: 100%;
     z-index: 2;
   }
 
@@ -1341,10 +1222,6 @@
     animation-delay: 220ms;
   }
 
-  .civic-hero__copy > :nth-child(5) {
-    animation-delay: 300ms;
-  }
-
   .civic-hero__stage {
     animation-delay: 140ms;
     animation-duration: 1120ms;
@@ -1415,15 +1292,6 @@
 
   .civic-hero__copy {
     max-width: 42rem;
-  }
-
-  .civic-hero__stage {
-    min-height: 44rem;
-  }
-
-  .civic-instrument {
-    right: -2rem;
-    width: 68%;
   }
 
   .civic-proof {
@@ -1523,27 +1391,8 @@
     min-height: 3.6rem;
   }
 
-  .civic-hero__stage {
-    min-height: 50rem;
-  }
-
-  .civic-instrument {
-    height: 19rem;
-    right: -1rem;
-    top: -1rem;
-    width: 95%;
-  }
-
-  .civic-instrument__readout {
-    bottom: 3.5rem;
-    right: 1rem;
-  }
-
   .civic-hero__market {
-    margin-left: 0;
-    top: 12rem;
     transform: none;
-    width: 100%;
   }
 
   .civic-market-quote,

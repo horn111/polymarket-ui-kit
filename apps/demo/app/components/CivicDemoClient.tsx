@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import dynamic from "next/dynamic";
 import type {
   EvidenceItem,
   MarketPricePoint,
@@ -18,30 +17,6 @@ import {
   ShareCard,
 } from "@polymarket-ui-kit/react";
 import { InteractiveLab } from "./InteractiveLab";
-
-const HeroInstrument = dynamic(
-  () => import("./HeroInstrument").then((module) => module.HeroInstrument),
-  {
-    loading: () => <HeroInstrumentPoster />,
-    ssr: false,
-  },
-);
-
-function HeroInstrumentPoster() {
-  return (
-    <div aria-hidden="true" className="civic-instrument is-poster">
-      <div className="civic-instrument__poster">
-        <span />
-        <i />
-        <b />
-      </div>
-      <div className="civic-instrument__readout">
-        <span>CAL / 01</span>
-        <strong>42.0</strong>
-      </div>
-    </div>
-  );
-}
 
 type DemoTheme = "light" | "dark";
 
@@ -111,7 +86,6 @@ const proof = [
 
 export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
   const [theme, setTheme] = useState<DemoTheme>("dark");
-  const [instrumentActive, setInstrumentActive] = useState(false);
   const market = bundle.market;
   const points = bundle.points;
   const chartSeries = useMemo(
@@ -130,13 +104,6 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
     document.documentElement.dataset.demoTheme = theme;
     document.documentElement.dataset.puiTheme = theme;
   }, [theme]);
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const timeout = window.setTimeout(() => setInstrumentActive(true), 7000);
-    return () => window.clearTimeout(timeout);
-  }, []);
 
   const routeLinks = [
     ["Market route", `/market/${market.slug}?theme=${theme}`],
@@ -179,9 +146,6 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
 
       <section className="civic-hero" id="top">
         <div className="civic-hero__copy">
-          <div className="civic-edition">
-            <span /> Civic Forecast / calibrated politics edition
-          </div>
           <h1>Make probability feel credible.</h1>
           <p>
             An open-source React instrument for sourced markets, public data, and
@@ -215,13 +179,7 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
           </ul>
         </div>
 
-        <div
-          className="civic-hero__stage"
-          onFocusCapture={() => setInstrumentActive(true)}
-          onPointerEnter={() => setInstrumentActive(true)}
-          onTouchStart={() => setInstrumentActive(true)}
-        >
-          {instrumentActive ? <HeroInstrument /> : <HeroInstrumentPoster />}
+        <div className="civic-hero__stage">
           <article
             className="civic-hero__market"
             data-source={bundle.source}
