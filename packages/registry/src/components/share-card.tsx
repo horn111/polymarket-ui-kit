@@ -31,7 +31,16 @@ export function ShareCard({ market }: { market: PolymarketMarket }) {
           <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-orange-300">
             {market.category ?? "Prediction market"}
           </span>
-          <h2 className="text-3xl font-black leading-[1.05] tracking-[-0.045em]">{market.question}</h2>
+          <h2
+            className="overflow-hidden break-words text-2xl font-black leading-[1.05] tracking-normal sm:text-3xl"
+            style={{
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 4,
+            }}
+          >
+            {market.question}
+          </h2>
         </div>
 
         {leadingOutcome ? (
@@ -40,7 +49,7 @@ export function ShareCard({ market }: { market: PolymarketMarket }) {
               <div className="font-mono text-[10px] uppercase tracking-[0.1em] text-zinc-400">Leading outcome</div>
               <div className="font-bold">{leadingOutcome.name}</div>
             </div>
-            <div className="text-5xl font-black leading-none tracking-[-0.06em] text-orange-300">
+            <div className="text-4xl font-black leading-none tracking-normal text-orange-300 sm:text-5xl">
               {formatProbability(leadingOutcome.price)}
             </div>
             <div className="h-1 overflow-hidden bg-zinc-700/70">

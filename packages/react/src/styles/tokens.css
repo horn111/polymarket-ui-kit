@@ -841,6 +841,7 @@
     background:
       linear-gradient(115deg, transparent 0 58%, oklch(0.62 0.085 50 / 0.08) 58% 68%, transparent 68%),
       var(--pui-metal-raised);
+    container-type: inline-size;
     display: grid;
     gap: clamp(0.75rem, 2.2vw, 1.5rem);
     grid-template-rows: auto 1fr auto;
@@ -902,25 +903,36 @@
   .pui-share-card__body,
   .pui-combo-share-card__hero {
     align-content: center;
+    align-items: center;
     display: grid;
     gap: clamp(0.75rem, 2vw, 1.5rem);
     grid-template-columns: minmax(0, 1.45fr) minmax(10rem, 0.75fr);
+    min-height: 0;
   }
 
   .pui-share-card__market,
   .pui-combo-share-card__hero {
+    align-content: center;
+    display: grid;
     min-width: 0;
+    overflow: hidden;
   }
 
   .pui-share-card h2,
   .pui-combo-share-card__hero h2 {
+    display: -webkit-box;
     font-family: var(--pui-font-display);
-    font-size: clamp(1rem, 3.4vw, 2.35rem);
+    font-size: clamp(1.1rem, 5.8cqw, 2.35rem);
     font-weight: 680;
-    letter-spacing: -0.05em;
+    letter-spacing: 0;
     line-height: 1.04;
     margin: 0.5rem 0 0;
+    max-width: 100%;
+    overflow: hidden;
+    overflow-wrap: anywhere;
     text-wrap: balance;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
   }
 
   .pui-share-card__quote,
@@ -931,6 +943,8 @@
     border-radius: var(--pui-radius-md);
     display: grid;
     gap: 0.55rem;
+    min-width: 0;
+    overflow: hidden;
     padding: clamp(0.75rem, 2vw, 1.25rem);
   }
 
@@ -947,9 +961,9 @@
   .pui-combo-share-card__hero strong {
     color: var(--pui-primary-hover);
     font-family: var(--pui-font-display);
-    font-size: clamp(1.65rem, 4.2vw, 3.25rem);
+    font-size: clamp(1.55rem, 6.8cqw, 3.25rem);
     font-weight: 720;
-    letter-spacing: -0.06em;
+    letter-spacing: 0;
     line-height: 1;
   }
 
