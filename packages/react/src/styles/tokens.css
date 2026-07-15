@@ -837,16 +837,18 @@
 
   .pui-share-card,
   .pui-combo-share-card {
+    --pui-share-card-gap: clamp(var(--pui-space-3), 1.6cqw, var(--pui-space-5));
+    --pui-share-card-gutter: clamp(var(--pui-space-4), 3cqw, var(--pui-space-7));
     aspect-ratio: 1200 / 630;
     background:
       linear-gradient(115deg, transparent 0 58%, oklch(0.62 0.085 50 / 0.08) 58% 68%, transparent 68%),
       var(--pui-metal-raised);
     container-type: inline-size;
     display: grid;
-    gap: clamp(0.75rem, 2.2vw, 1.5rem);
+    gap: var(--pui-share-card-gap);
     grid-template-rows: auto 1fr auto;
     overflow: hidden;
-    padding: clamp(1rem, 3vw, 2.25rem);
+    padding: var(--pui-share-card-gutter);
   }
 
   .pui-share-card::before,
@@ -905,7 +907,7 @@
     align-content: center;
     align-items: center;
     display: grid;
-    gap: clamp(0.75rem, 2vw, 1.5rem);
+    gap: var(--pui-share-card-gap);
     grid-template-columns: minmax(0, 1.45fr) minmax(10rem, 0.75fr);
     min-height: 0;
   }
@@ -977,6 +979,74 @@
     background: var(--pui-primary);
     display: block;
     height: 100%;
+  }
+
+  /*
+   * Share cards often live in narrow Studio and documentation previews while
+   * the page itself remains desktop-wide. Respond to the card's own width so
+   * the headline never borrows space from the brand line or the data footer.
+   */
+  @container (max-width: 38rem) {
+    .pui-share-card {
+      --pui-share-card-gap: var(--pui-space-3);
+      --pui-share-card-gutter: var(--pui-space-4);
+    }
+
+    .pui-share-card__topline {
+      gap: var(--pui-space-2);
+    }
+
+    .pui-share-card__attribution {
+      max-width: 42%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .pui-share-card__body {
+      align-content: stretch;
+      align-items: stretch;
+      gap: var(--pui-space-3);
+      grid-template-columns: minmax(0, 1.55fr) minmax(9.25rem, 0.7fr);
+      overflow: hidden;
+    }
+
+    .pui-share-card__market {
+      align-content: start;
+      grid-template-rows: auto minmax(0, 1fr);
+      min-height: 0;
+    }
+
+    .pui-share-card h2 {
+      font-size: clamp(1rem, 4.5cqw, 1.5rem);
+      line-height: 1.03;
+      margin-top: 0.35rem;
+      min-height: 0;
+    }
+
+    .pui-share-card__quote {
+      gap: 0.5rem;
+      padding: 0.75rem;
+    }
+
+    .pui-share-card__price {
+      font-size: clamp(1.6rem, 6cqw, 2.5rem);
+    }
+
+    .pui-share-card__stats div {
+      padding: 0.65rem 0.75rem;
+    }
+  }
+
+  @container (max-width: 24rem) {
+    .pui-share-card {
+      aspect-ratio: auto;
+      min-height: 21rem;
+    }
+
+    .pui-share-card__body {
+      grid-template-columns: 1fr;
+    }
   }
 
   .pui-combo-share-card__legs {
