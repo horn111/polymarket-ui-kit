@@ -17,11 +17,11 @@ export default function ComponentsPage() {
   return (
     <section className="docs-catalog">
       <header className="docs-page-heading">
-        <span>Component catalog</span>
-        <h1>Real states, not placeholder cards.</h1>
+        <span>Interactive specification</span>
+        <h1>Components built like instruments.</h1>
         <p>
-          Every primitive accepts typed host data and inherits the Civic Forecast token
-          system.
+          Anatomy, data density, responsive behavior, and states are governed by the
+          same Mechanical Probability system.
         </p>
       </header>
       <article className="docs-component-row">
@@ -30,6 +30,7 @@ export default function ComponentsPage() {
           <p>
             Compact market identity, outcomes, metadata, and optional price history.
           </p>
+          <span className="docs-spec">Default / long copy / mobile</span>
         </div>
         <MarketCard market={sampleMarket} points={samplePoints} />
       </article>
@@ -39,6 +40,7 @@ export default function ComponentsPage() {
           <p>
             Responsive comparison for illustrative external polls and market pricing.
           </p>
+          <span className="docs-spec">Table → stacked rows / null-safe</span>
         </div>
         <PollMarketComparison rows={samplePollRows} />
       </article>
@@ -46,6 +48,7 @@ export default function ComponentsPage() {
         <div>
           <code>EvidenceRail</code>
           <p>Official records, models, polls, and reporting beside the market.</p>
+          <span className="docs-spec">Linked / unlinked / overflow rail</span>
         </div>
         <EvidenceRail items={sampleEvidence} />
       </article>
@@ -53,6 +56,7 @@ export default function ComponentsPage() {
         <div>
           <code>OrderbookPanel</code>
           <p>Public CLOB depth with readable bid, ask, and spread context.</p>
+          <span className="docs-spec">Depth / empty / narrow viewport</span>
         </div>
         <OrderbookPanel orderbook={sampleOrderbook} />
       </article>
@@ -60,6 +64,7 @@ export default function ComponentsPage() {
         <div>
           <code>ShareCard</code>
           <p>A distribution-ready surface for screenshots, embeds, and OG routes.</p>
+          <span className="docs-spec">1200×630 / light / dark</span>
         </div>
         <ShareCard market={sampleMarket} attribution="pui-kit/docs" />
       </article>

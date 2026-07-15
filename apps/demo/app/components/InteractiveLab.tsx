@@ -331,8 +331,8 @@ export function MarketEmbed({ market, points }) {
   return (
     <section className="civic-lab" aria-labelledby="interactive-lab-title">
       <header className="civic-lab__heading">
-        <p>Interactive component lab</p>
-        <h2 id="interactive-lab-title">Test the Civic Forecast system.</h2>
+        <p>Interactive calibration lab</p>
+        <h2 id="interactive-lab-title">Calibrate the system.</h2>
         <span>
           Switch fixtures, inspect component states, and copy the same typed React
           surface.

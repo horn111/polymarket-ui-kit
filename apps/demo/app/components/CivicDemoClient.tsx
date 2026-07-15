@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 import type {
   EvidenceItem,
   MarketPricePoint,
@@ -17,6 +18,30 @@ import {
   ShareCard,
 } from "@polymarket-ui-kit/react";
 import { InteractiveLab } from "./InteractiveLab";
+
+const HeroInstrument = dynamic(
+  () => import("./HeroInstrument").then((module) => module.HeroInstrument),
+  {
+    loading: () => <HeroInstrumentPoster />,
+    ssr: false,
+  },
+);
+
+function HeroInstrumentPoster() {
+  return (
+    <div aria-hidden="true" className="civic-instrument is-poster">
+      <div className="civic-instrument__poster">
+        <span />
+        <i />
+        <b />
+      </div>
+      <div className="civic-instrument__readout">
+        <span>CAL / 01</span>
+        <strong>42.0</strong>
+      </div>
+    </div>
+  );
+}
 
 type DemoTheme = "light" | "dark";
 
@@ -85,7 +110,8 @@ const proof = [
 ] as const;
 
 export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
-  const [theme, setTheme] = useState<DemoTheme>("light");
+  const [theme, setTheme] = useState<DemoTheme>("dark");
+  const [instrumentActive, setInstrumentActive] = useState(false);
   const market = bundle.market;
   const points = bundle.points;
   const chartSeries = useMemo(
@@ -93,7 +119,7 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
       {
         id: "leading",
         label: market.outcomes[0]?.name ?? "Leading outcome",
-        color: "var(--pui-series-2)",
+        color: "var(--pui-series-1)",
         points,
       },
     ],
@@ -104,6 +130,13 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
     document.documentElement.dataset.demoTheme = theme;
     document.documentElement.dataset.puiTheme = theme;
   }, [theme]);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const timeout = window.setTimeout(() => setInstrumentActive(true), 7000);
+    return () => window.clearTimeout(timeout);
+  }, []);
 
   const routeLinks = [
     ["Market route", `/market/${market.slug}?theme=${theme}`],
@@ -116,7 +149,10 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
     <>
       <header className="civic-nav">
         <a className="civic-brand" href="#top" aria-label="Polymarket UI Kit home">
-          <span aria-hidden="true">◇</span>
+          <span aria-hidden="true" className="civic-brand__mark">
+            <i />
+            <i />
+          </span>
           <strong>Polymarket UI Kit</strong>
         </a>
         <nav aria-label="Primary navigation">
@@ -144,13 +180,12 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
       <section className="civic-hero" id="top">
         <div className="civic-hero__copy">
           <div className="civic-edition">
-            <span /> Civic Forecast · politics-first release
+            <span /> Civic Forecast / calibrated politics edition
           </div>
-          <h1>Publish evidence-backed market interfaces.</h1>
+          <h1>Make probability feel credible.</h1>
           <p>
-            Open-source React primitives, public data tools, and distribution surfaces
-            for builders who need political markets to feel clear, sourced, and
-            credible.
+            An open-source React instrument for sourced markets, public data, and
+            distribution-ready interfaces.
           </p>
           <div className="civic-actions">
             <a className="civic-button" href="/studio">
@@ -167,20 +202,31 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
           <ul className="civic-principles" aria-label="Product principles">
             <li>
               <strong>Neutral by design</strong>
-              <span>No party-coded visual defaults.</span>
+              <span>No party-coded defaults.</span>
             </li>
             <li>
               <strong>Source-aware</strong>
-              <span>Evidence sits beside probability.</span>
+              <span>Context travels with the number.</span>
             </li>
             <li>
               <strong>Composable</strong>
-              <span>Typed pieces, not a locked app shell.</span>
+              <span>Typed parts, not a locked shell.</span>
             </li>
           </ul>
         </div>
 
-        <article className="civic-hero__market" aria-label="Featured political market">
+        <div
+          className="civic-hero__stage"
+          onFocusCapture={() => setInstrumentActive(true)}
+          onPointerEnter={() => setInstrumentActive(true)}
+          onTouchStart={() => setInstrumentActive(true)}
+        >
+          {instrumentActive ? <HeroInstrument /> : <HeroInstrumentPoster />}
+          <article
+            className="civic-hero__market"
+            data-source={bundle.source}
+            aria-label="Featured political market"
+          >
           <div className="civic-market-topline">
             <span>
               <i />{" "}
@@ -210,13 +256,14 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
             </div>
           </div>
           <ProbabilityChart height={230} series={chartSeries} />
-          <EvidenceRail
-            className="civic-hero__evidence"
-            items={evidence}
-            maxVisible={3}
-            title="Sample evidence context"
-          />
-        </article>
+            <EvidenceRail
+              className="civic-hero__evidence"
+              items={evidence}
+              maxVisible={3}
+              title="Sample evidence context"
+            />
+          </article>
+        </div>
       </section>
 
       <section className="civic-proof" aria-label="Project capabilities">
@@ -232,11 +279,11 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
         <header className="civic-section__heading">
           <div>
             <span>Component system</span>
-            <h2>Context belongs beside the market.</h2>
+            <h2>Interfaces engineered for attention.</h2>
           </div>
           <p>
-            Politics is the first visual mode. The component contracts stay general
-            enough for every market category.
+            Politics is the first edition. The system remains category-neutral for
+            future crypto and sports surfaces.
           </p>
         </header>
         <div className="civic-showcase">
@@ -261,7 +308,7 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
       <section className="civic-developer">
         <div>
           <span>Developer quickstart</span>
-          <h2>One import. Evidence included.</h2>
+          <h2>One system. Every output.</h2>
           <p>
             Use public market data, add your own verified context, then distribute the
             same surface as React, iframe, PNG, or SVG.
@@ -289,7 +336,7 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
 
       <section className="civic-distribution">
         <div>
-          <h2>Built for distribution, not order placement.</h2>
+          <h2>Built to travel without losing its identity.</h2>
           <p>
             Public hooks, SSR-friendly props, graceful fallbacks, builder attribution,
             Combo intents, and verifiable dry-run examples. Host apps retain control of

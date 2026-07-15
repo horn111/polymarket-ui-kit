@@ -19,30 +19,32 @@ const imageSize = {
 
 const themeTokens = {
   dark: {
-    page: "#071523",
-    card: "#0d2033",
-    cardStroke: "#28425c",
-    accent: "#6f9cff",
-    accentSoft: "#183764",
-    accentStroke: "#426da9",
-    text: "#f3f7fc",
-    muted: "#a9b9ca",
-    surface: "#132940",
-    surfaceStroke: "#28425c",
-    barTrack: "#1a334d",
+    page: "#0b0a0c",
+    card: "#201f27",
+    cardShade: "#17161c",
+    cardStroke: "#45424c",
+    accent: "#d28457",
+    accentSoft: "#34231b",
+    ceramic: "#ece9e1",
+    ceramicText: "#1c1a19",
+    text: "#f0ede7",
+    muted: "#aaa5ad",
+    surface: "#0f0e12",
+    live: "#55cfb3",
   },
   light: {
-    page: "#f4f7fb",
-    card: "#ffffff",
-    cardStroke: "#d7e1ec",
-    accent: "#1e63f3",
-    accentSoft: "#e5edff",
-    accentStroke: "#b8ccfa",
-    text: "#0b1d33",
-    muted: "#52657b",
-    surface: "#f4f7fb",
-    surfaceStroke: "#d7e1ec",
-    barTrack: "#e3ebf5",
+    page: "#efede7",
+    card: "#e5e0d8",
+    cardShade: "#d6d0c7",
+    cardStroke: "#aca49a",
+    accent: "#a75c3a",
+    accentSoft: "#ead9cd",
+    ceramic: "#faf7f1",
+    ceramicText: "#211e1b",
+    text: "#211e1b",
+    muted: "#6d655e",
+    surface: "#f7f3ed",
+    live: "#188c77",
   },
 };
 
@@ -102,7 +104,7 @@ export async function GET(request: Request) {
         alignItems: "center",
         background: tokens.page,
         display: "flex",
-        fontFamily: "Instrument Sans, Arial, sans-serif",
+        fontFamily: "Arial, sans-serif",
         height: "100%",
         justifyContent: "center",
         width: "100%",
@@ -110,158 +112,193 @@ export async function GET(request: Request) {
     >
       <div
         style={{
-          background: tokens.card,
+          background: `linear-gradient(145deg, ${tokens.card}, ${tokens.cardShade} 58%, ${tokens.card})`,
           border: `1px solid ${tokens.cardStroke}`,
-          borderRadius: 28,
+          borderRadius: 18,
           display: "flex",
           flexDirection: "column",
-          height: 490,
+          height: 538,
           overflow: "hidden",
-          padding: "38px 42px",
+          padding: "32px 36px",
           position: "relative",
-          width: 1060,
+          width: 1092,
         }}
       >
         <div
           style={{
-            background: tokens.accent,
+            background: tokens.accentSoft,
             display: "flex",
-            height: 8,
-            left: 0,
+            height: 700,
             position: "absolute",
-            top: 0,
-            width: 1060,
+            right: 180,
+            top: -80,
+            transform: "rotate(24deg)",
+            width: 150,
           }}
         />
-        <div
-          style={{
-            background: tokens.accent,
-            display: "flex",
-            height: 8,
-            left: 210,
-            position: "absolute",
-            top: 0,
-            width: 210,
-          }}
-        />
-        <div
-          style={{
-            background: "#0f9f91",
-            display: "flex",
-            height: 8,
-            left: 420,
-            position: "absolute",
-            top: 0,
-            width: 210,
-          }}
-        />
-
         <div
           style={{
             alignItems: "center",
             display: "flex",
             justifyContent: "space-between",
+            position: "relative",
             width: "100%",
           }}
         >
-          <div style={{ alignItems: "center", display: "flex", gap: 20 }}>
-            <span
-              style={{
-                color: tokens.accent,
-                fontSize: 32,
-                fontWeight: 800,
-              }}
-            >
-              Polymarket
-            </span>
-            <span
-              style={{
-                background: tokens.accentSoft,
-                border: `1px solid ${tokens.accentStroke}`,
-                borderRadius: 999,
-                color: tokens.accent,
-                fontSize: 22,
-                fontWeight: 700,
-                padding: "9px 26px",
-              }}
-            >
-              {source === "live" ? "Live market" : "Fixture fallback"}
-            </span>
-          </div>
-          <span style={{ color: tokens.muted, fontSize: 22 }}>{attribution}</span>
-        </div>
-
-        <span
-          style={{
-            color: tokens.muted,
-            fontSize: 22,
-            marginTop: 34,
-          }}
-        >
-          {market.category ?? "Prediction market"}
-        </span>
-
-        <div
-          style={{
-            color: tokens.text,
-            display: "flex",
-            flexDirection: "column",
-            fontSize: 54,
-            fontFamily: "Source Serif 4, Georgia, serif",
-            fontWeight: 650,
-            lineHeight: 1.08,
-            marginTop: 20,
-            maxWidth: 790,
-            whiteSpace: "pre-wrap",
-          }}
-        >
-          {market.question}
-        </div>
-
-        <div
-          style={{
-            alignItems: "center",
-            display: "flex",
-            justifyContent: "space-between",
-            marginTop: "auto",
-            width: "100%",
-          }}
-        >
-          <div
-            style={{
-              alignItems: "center",
-              background: tokens.surface,
-              border: `1px solid ${tokens.surfaceStroke}`,
-              borderRadius: 12,
-              display: "flex",
-              height: 100,
-              justifyContent: "space-between",
-              padding: "0 30px",
-              width: 520,
-            }}
-          >
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              <span style={{ color: tokens.muted, fontSize: 22 }}>Leading outcome</span>
-              <strong style={{ color: tokens.text, fontSize: 30 }}>
-                {leadingOutcome?.name ?? "Outcome"}
-              </strong>
+          <div style={{ alignItems: "center", display: "flex", gap: 18 }}>
+            <div style={{ display: "flex", height: 38, position: "relative", width: 48 }}>
+              <span
+                style={{
+                  background: tokens.cardShade,
+                  border: `1px solid ${tokens.cardStroke}`,
+                  borderRadius: 3,
+                  display: "flex",
+                  height: 30,
+                  left: 0,
+                  position: "absolute",
+                  top: 0,
+                  width: 25,
+                }}
+              />
+              <span
+                style={{
+                  background: tokens.ceramic,
+                  border: `1px solid ${tokens.cardStroke}`,
+                  borderRadius: 3,
+                  bottom: 0,
+                  display: "flex",
+                  height: 30,
+                  position: "absolute",
+                  right: 2,
+                  width: 25,
+                }}
+              />
+              <span
+                style={{
+                  background: tokens.accent,
+                  display: "flex",
+                  height: 3,
+                  left: 8,
+                  position: "absolute",
+                  top: 17,
+                  width: 38,
+                }}
+              />
             </div>
-            <strong style={{ color: tokens.text, fontSize: 76, fontWeight: 900 }}>
-              {probabilityToCents(leadingOutcome?.price)}
+            <strong style={{ color: tokens.text, fontSize: 20, fontWeight: 850 }}>
+              POLYMARKET UI KIT
             </strong>
           </div>
-
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: 28, width: 390 }}
-          >
-            <div
+          <div style={{ alignItems: "center", display: "flex", gap: 12 }}>
+            <span
               style={{
-                background: tokens.barTrack,
+                background: tokens.live,
                 borderRadius: 999,
                 display: "flex",
-                height: 18,
-                overflow: "hidden",
-                width: 330,
+                height: 10,
+                width: 10,
+              }}
+            />
+            <span
+              style={{
+                color: tokens.muted,
+                fontFamily: "Consolas, monospace",
+                fontSize: 14,
+                letterSpacing: 1.2,
+              }}
+            >
+              {source === "live" ? "LIVE MARKET" : "FIXTURE FALLBACK"}
+            </span>
+          </div>
+        </div>
+
+        <div
+          style={{
+            background: tokens.ceramic,
+            border: `1px solid ${tokens.cardStroke}`,
+            borderRadius: 7,
+            display: "flex",
+            flexDirection: "column",
+            height: 148,
+            marginTop: 20,
+            padding: "22px 24px",
+            position: "relative",
+          }}
+        >
+          <span
+            style={{
+              color: tokens.accent,
+              fontFamily: "Consolas, monospace",
+              fontSize: 13,
+              letterSpacing: 1.1,
+            }}
+          >
+            MARKET / {(market.category ?? "PREDICTION").toUpperCase()}
+          </span>
+          <strong
+            style={{
+              color: tokens.ceramicText,
+              fontSize: 40,
+              fontWeight: 900,
+              letterSpacing: -1.8,
+              lineHeight: 1.03,
+              marginTop: 12,
+              maxWidth: 970,
+            }}
+          >
+            {market.question}
+          </strong>
+        </div>
+
+        <div style={{ display: "flex", gap: 20, marginTop: 20, position: "relative" }}>
+          <div
+            style={{
+              background: tokens.surface,
+              border: `1px solid ${tokens.cardStroke}`,
+              borderRadius: 7,
+              display: "flex",
+              flexDirection: "column",
+              height: 194,
+              padding: "26px",
+              position: "relative",
+              width: 640,
+            }}
+          >
+            <span
+              style={{
+                color: tokens.muted,
+                fontFamily: "Consolas, monospace",
+                fontSize: 14,
+                letterSpacing: 1.2,
+              }}
+            >
+              LEADING OUTCOME
+            </span>
+            <strong style={{ color: tokens.text, fontSize: 28, marginTop: 22 }}>
+              {leadingOutcome?.name ?? "Outcome"}
+            </strong>
+            <strong
+              style={{
+                color: tokens.accent,
+                fontSize: 74,
+                fontWeight: 900,
+                letterSpacing: -3,
+                position: "absolute",
+                right: 30,
+                top: 46,
+              }}
+            >
+              {probabilityToCents(leadingOutcome?.price)}
+            </strong>
+            <div
+              style={{
+                background: tokens.card,
+                bottom: 36,
+                display: "flex",
+                height: 4,
+                left: 26,
+                position: "absolute",
+                width: 340,
               }}
             >
               <span
@@ -272,22 +309,56 @@ export async function GET(request: Request) {
                 }}
               />
             </div>
-            <div style={{ display: "flex", gap: 46 }}>
-              {visibleStats.map((stat) => (
-                <div
-                  key={stat.label}
-                  style={{ display: "flex", flexDirection: "column", gap: 8 }}
-                >
-                  <span style={{ color: tokens.muted, fontSize: 22 }}>
-                    {stat.label}
-                  </span>
-                  <strong style={{ color: tokens.text, fontSize: 38 }}>
-                    {stat.value}
-                  </strong>
-                </div>
-              ))}
-            </div>
           </div>
+
+          <div
+            style={{
+              background: tokens.cardShade,
+              border: `1px solid ${tokens.cardStroke}`,
+              borderRadius: 7,
+              display: "flex",
+              flexDirection: "column",
+              gap: 20,
+              height: 194,
+              padding: "24px",
+              width: 360,
+            }}
+          >
+            {visibleStats.map((stat) => (
+              <div key={stat.label} style={{ display: "flex", flexDirection: "column" }}>
+                <span
+                  style={{
+                    color: tokens.muted,
+                    fontFamily: "Consolas, monospace",
+                    fontSize: 14,
+                    letterSpacing: 1.1,
+                  }}
+                >
+                  {stat.label.toUpperCase()}
+                </span>
+                <strong style={{ color: tokens.text, fontSize: 30, marginTop: 7 }}>
+                  {stat.value}
+                </strong>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div
+          style={{
+            alignItems: "center",
+            color: tokens.muted,
+            display: "flex",
+            fontFamily: "Consolas, monospace",
+            fontSize: 13,
+            justifyContent: "space-between",
+            letterSpacing: 1,
+            marginTop: "auto",
+            position: "relative",
+          }}
+        >
+          <span>CIVIC FORECAST / CALIBRATED EDITION</span>
+          <span>{attribution}</span>
         </div>
       </div>
     </div>,

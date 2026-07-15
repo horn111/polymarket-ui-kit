@@ -23,7 +23,7 @@ export function MarketCard({
     <article className={cx("pui-card pui-market-card", className)}>
       {market.image ? (
         <img
-          alt=""
+          alt={`${market.question} market artwork`}
           className="pui-market-card__media"
           loading="lazy"
           src={market.image}

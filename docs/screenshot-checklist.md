@@ -25,7 +25,8 @@ Capture these before grant submission and launch posts.
 
 ## Notes
 
-- Prefer dark demo screenshots for the current brutalist look.
-- Use light screenshots for grant forms if contrast or compression hurts
-  readability.
+- Prefer the dark Mechanical Probability showcase for launch and portfolio use.
+- Use the ceramic light theme for dense grant forms when dark-image compression
+  hurts fine type or chart grids.
+- Capture the hero after the 1.8s calibration sequence has settled.
 - Avoid cropped screenshots where component borders or labels are cut off.

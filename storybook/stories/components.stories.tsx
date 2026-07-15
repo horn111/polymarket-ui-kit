@@ -141,23 +141,56 @@ const rows: TraderLeaderboardRow[] = [
 ];
 
 const meta: Meta = {
-  title: "Polymarket UI Kit/MVP",
+  title: "Civic Forecast/Core surfaces",
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Mechanical Probability surfaces share one material, type, state, and data-visualization language.",
+      },
+    },
+  },
 };
 
 export default meta;
 
 export const MarketCardStory: StoryObj = {
-  name: "MarketCard",
+  name: "MarketCard / Default",
+  render: () => <MarketCard market={market} points={points} />,
+};
+
+export const MarketCardLongStory: StoryObj = {
+  name: "MarketCard / Long content",
+  render: () => (
+    <MarketCard
+      market={{
+        ...market,
+        question:
+          "Will certified national turnout in the 2026 United States midterm elections exceed the final revised 2022 turnout estimate?",
+      }}
+      points={points}
+    />
+  ),
+};
+
+export const MarketCardMobileStory: StoryObj = {
+  name: "MarketCard / Mobile 320",
+  parameters: { viewport: { defaultViewport: "mobile320" } },
   render: () => <MarketCard market={market} points={points} />,
 };
 
 export const OrderbookStory: StoryObj = {
-  name: "OrderbookPanel",
+  name: "OrderbookPanel / Default",
   render: () => <OrderbookPanel orderbook={orderbook} />,
 };
 
+export const OrderbookEmptyStory: StoryObj = {
+  name: "OrderbookPanel / Empty",
+  render: () => <OrderbookPanel orderbook={null} />,
+};
+
 export const ShareCardStory: StoryObj = {
-  name: "ShareCard",
+  name: "ShareCard / Default",
   render: () => <ShareCard market={market} />,
 };
 
@@ -166,11 +199,11 @@ export const ProbabilityChartStory: StoryObj = {
   render: () => (
     <ProbabilityChart
       series={[
-        { id: "yes", label: "Yes", color: "#0f766e", points },
+        { id: "yes", label: "Yes", color: "var(--pui-series-1)", points },
         {
           id: "no",
           label: "No",
-          color: "#b91c1c",
+          color: "var(--pui-series-2)",
           points: points.map((point) => ({ ...point, price: 1 - point.price })),
         },
       ]}
@@ -179,8 +212,13 @@ export const ProbabilityChartStory: StoryObj = {
 };
 
 export const CommentsStory: StoryObj = {
-  name: "CommentList",
+  name: "CommentList / Default",
   render: () => <CommentList comments={comments} />,
+};
+
+export const CommentsEmptyStory: StoryObj = {
+  name: "CommentList / Empty",
+  render: () => <CommentList comments={[]} />,
 };
 
 export const LeaderboardStory: StoryObj = {
@@ -203,6 +241,18 @@ export const EvidenceRailEmptyStory: StoryObj = {
   render: () => <EvidenceRail items={[]} />,
 };
 
+export const EvidenceRailLongStory: StoryObj = {
+  name: "EvidenceRail / Long content",
+  render: () => (
+    <EvidenceRail
+      items={evidence.map((item) => ({
+        ...item,
+        title: `${item.title}: a deliberately extended source title for responsive behavior`,
+      }))}
+    />
+  ),
+};
+
 export const PollMarketComparisonStory: StoryObj = {
   name: "PollMarketComparison / Default",
   render: () => <PollMarketComparison rows={pollRows} />,
@@ -212,4 +262,15 @@ export const PollMarketComparisonMobileStory: StoryObj = {
   name: "PollMarketComparison / Mobile",
   parameters: { viewport: { defaultViewport: "mobile390" } },
   render: () => <PollMarketComparison rows={pollRows} />,
+};
+
+export const PollMarketComparisonNullStory: StoryObj = {
+  name: "PollMarketComparison / Null values",
+  render: () => (
+    <PollMarketComparison
+      rows={pollRows.map((row, index) =>
+        index === 0 ? { ...row, marketProbability: null, pollShare: null } : row,
+      )}
+    />
+  ),
 };

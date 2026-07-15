@@ -1,6 +1,6 @@
 <p align="center">
   <img src="https://img.shields.io/badge/React-first-149eca?style=for-the-badge&logo=react&logoColor=white" alt="React first" />
-  <img src="https://img.shields.io/badge/Polymarket-UI%20Kit-0f766e?style=for-the-badge" alt="Polymarket UI Kit" />
+  <img src="https://img.shields.io/badge/Polymarket-UI%20Kit-d28457?style=for-the-badge" alt="Polymarket UI Kit" />
   <img src="https://img.shields.io/badge/Registry-shadcn%20style-111827?style=for-the-badge" alt="shadcn style registry" />
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT License" />
 </p>
@@ -20,13 +20,13 @@
   <a href="#builder-and-grant-angle">Builder angle</a>
 </p>
 
-<h3 align="center">Light Design Preview</h3>
+<h3 align="center">Ceramic Light Preview</h3>
 
-<img alt="Polymarket UI Kit preview (Light)" src="apps/docs/public/screenshots/hero.svg?v=2" width="100%">
+<img alt="Polymarket UI Kit preview (Light)" src="apps/docs/public/screenshots/hero.svg?v=3" width="100%">
 
-<h3 align="center">Dark Design Preview</h3>
+<h3 align="center">Mechanical Dark Preview</h3>
 
-<img alt="Polymarket UI Kit preview (Dark)" src="apps/docs/public/screenshots/hero-dark.svg?v=2" width="100%">
+<img alt="Polymarket UI Kit preview (Dark)" src="apps/docs/public/screenshots/hero-dark.svg?v=3" width="100%">
 
 Build market cards, evidence rails, poll comparisons, probability charts, orderbook panels, comment feeds, builder
 badges, fee previews, leaderboard tables, combo leg pickers, mobile trade
@@ -38,8 +38,9 @@ builders, content products, and research portals that need Polymarket-native UI
 with strong defaults and clean escape hatches.
 
 The static SVGs above are design previews. The live demo is the source of truth
-for the current brutalist demo, Builder-Code UX, real public hooks, share export,
-and Combo-aware surfaces.
+for the Mechanical Probability system, Civic Forecast edition, Builder-Code UX,
+real public hooks, share export, and Combo-aware surfaces. See
+[DESIGN.md](DESIGN.md) for the approved identity and motion rules.
 
 ## Turn Any Polymarket Link Into A Live Market Card
 

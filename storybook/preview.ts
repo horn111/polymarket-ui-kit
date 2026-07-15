@@ -5,8 +5,8 @@ import "@polymarket-ui-kit/react/themes.css";
 const preview: Preview = {
   globalTypes: {
     scheme: {
-      description: "Civic Forecast color scheme",
-      defaultValue: "light",
+      description: "Mechanical Probability color scheme",
+      defaultValue: "dark",
       toolbar: {
         icon: "mirror",
         items: ["light", "dark"],
@@ -18,7 +18,7 @@ const preview: Preview = {
       if (typeof document !== "undefined") {
         document.documentElement.setAttribute(
           "data-pui-theme",
-          context.globals.scheme ?? "light",
+          context.globals.scheme ?? "dark",
         );
         document.body.style.background = "var(--pui-canvas)";
       }
@@ -33,10 +33,10 @@ const preview: Preview = {
       },
     },
     backgrounds: {
-      default: "Civic light",
+      default: "Instrument dark",
       values: [
-        { name: "Civic light", value: "#f4f7fb" },
-        { name: "Civic dark", value: "#071523" },
+        { name: "Instrument dark", value: "#0b0a0c" },
+        { name: "Ceramic light", value: "#efede7" },
       ],
     },
     viewport: {
@@ -46,6 +46,7 @@ const preview: Preview = {
         tablet768: { name: "Tablet 768", styles: { width: "768px", height: "1024px" } },
       },
     },
+    layout: "centered",
   },
 };
 
