@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <a href="/components">Components</a>
               <a href="/examples">Examples</a>
               <a href="/registry">Registry</a>
-              <a href="https://polymarket-ui-kit-demo-fkan-chi.vercel.app/studio">
+              <a href="https://polymarket-ui-kit-demo.vercel.app/studio">
                 Studio
               </a>
               <a href="https://github.com/horn111/polymarket-ui-kit">GitHub</a>

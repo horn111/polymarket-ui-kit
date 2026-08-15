@@ -13,7 +13,7 @@ Market cards, public hooks, Link-to-Embed Studio, share export, Builder-Code UX,
 and Combo-aware components should not be rebuilt from scratch every time.
 
 Repo: https://github.com/horn111/polymarket-ui-kit
-Demo: https://polymarket-ui-kit-demo-fkan-chi.vercel.app/
+Demo: https://polymarket-ui-kit-demo.vercel.app/
 
 ## Tweet 2
 

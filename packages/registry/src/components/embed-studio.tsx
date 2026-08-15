@@ -21,7 +21,7 @@ const surfaces: Array<{ label: string; value: EmbedSurface }> = [
 export function EmbedStudio({
   baseUrl = "",
   defaultInput = "https://polymarket.com/event/who-will-win-the-2028-us-presidential-election",
-  registryBaseUrl = "https://polymarket-ui-kit-demo-fkan-chi.vercel.app/r",
+  registryBaseUrl = "https://polymarket-ui-kit-demo.vercel.app/r",
 }: {
   baseUrl?: string;
   defaultInput?: string;

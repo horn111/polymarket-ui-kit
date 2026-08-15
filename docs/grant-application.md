@@ -13,7 +13,7 @@ https://github.com/horn111/polymarket-ui-kit
 
 ## Demo URL
 
-https://polymarket-ui-kit-demo-fkan-chi.vercel.app/
+https://polymarket-ui-kit-demo.vercel.app/
 
 ## X Handle
 

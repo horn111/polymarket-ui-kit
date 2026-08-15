@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "polymarket-ui-kit",
-  "homepage": "https://polymarket-ui-kit-demo-fkan-chi.vercel.app",
+  "homepage": "https://polymarket-ui-kit-demo.vercel.app",
   "items": [
     {
       "name": "market-card",

@@ -36,7 +36,7 @@ Copy-in components are better when your app needs design control.
 
 Polymarket UI Kit now has shadcn-style registry installs:
 
-`npx shadcn@latest add https://polymarket-ui-kit-demo-fkan-chi.vercel.app/r/market-card.json`
+`npx shadcn@latest add https://polymarket-ui-kit-demo.vercel.app/r/market-card.json`
 
 ## Link-to-Embed Studio update
 
@@ -58,7 +58,7 @@ No hidden order placement.
 Just a cleaner path from market link to blog, dashboard, social card, or app.
 
 Repo: https://github.com/horn111/polymarket-ui-kit
-Demo: https://polymarket-ui-kit-demo-fkan-chi.vercel.app/studio
+Demo: https://polymarket-ui-kit-demo.vercel.app/studio
 
 ## Grant angle
 

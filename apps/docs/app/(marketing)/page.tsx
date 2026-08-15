@@ -30,14 +30,14 @@ export default function HomePage() {
             </a>
             <a
               className="docs-link"
-              href="https://polymarket-ui-kit-demo-fkan-chi.vercel.app/studio"
+              href="https://polymarket-ui-kit-demo.vercel.app/studio"
             >
               Try Studio ↗
             </a>
           </div>
           <pre className="docs-code">
             <code>{`pnpm add @polymarket-ui-kit/react
-npx shadcn@latest add https://polymarket-ui-kit-demo-fkan-chi.vercel.app/r/evidence-rail.json`}</code>
+npx shadcn@latest add https://polymarket-ui-kit-demo.vercel.app/r/evidence-rail.json`}</code>
           </pre>
         </div>
         <div className="docs-hero__preview">
