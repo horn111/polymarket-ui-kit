@@ -432,19 +432,14 @@ Grant submission checklist:
 - Link-to-Embed Studio: [studio](https://polymarket-ui-kit-demo.vercel.app/studio)
 - X account: [x.com/debythm](https://x.com/debythm)
 - Advanced Builder Flow: [examples/clob-v2-builder-flow](examples/clob-v2-builder-flow)
-- Grant application draft: [docs/grant-application.md](docs/grant-application.md)
 - 60-second demo script: [docs/demo-script.md](docs/demo-script.md)
 - Screenshot checklist: [docs/screenshot-checklist.md](docs/screenshot-checklist.md)
 
 The repo includes:
 
-- [Grant application draft](docs/grant-application.md)
-- [Grant strategy](docs/grant-strategy.md)
-- [Grant tweet thread](docs/grant-tweet-thread.md)
 - [Demo script](docs/demo-script.md)
 - [Screenshot checklist](docs/screenshot-checklist.md)
 - [Launch playbook](docs/launch-playbook.md)
-- [Tweet templates](docs/tweet-templates.md)
 - [Builder Codes notes](docs/builder-codes.md)
 - [Verifiable Builder Flow](docs/verifiable-builder-flow.md)
 - [Combo-aware UI notes](docs/combos.md)

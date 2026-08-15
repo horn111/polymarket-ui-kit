@@ -18,7 +18,6 @@ Capture these before grant submission and launch posts.
 ## Nice To Have
 
 - GitHub repo star button and README badges.
-- `docs/grant-application.md` open in GitHub.
 - `packages/react/src/index.ts` exports.
 - Registry source folder.
 - X thread screenshot after posting.
