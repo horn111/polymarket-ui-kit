@@ -10,7 +10,7 @@ distribution surfaces:
 - shadcn-style registry command
 
 Live demo:
-https://polymarket-ui-kit-demo-fkan-chi.vercel.app/studio
+https://polymarket-ui-kit-demo.vercel.app/studio
 
 ## Why It Exists
 
@@ -78,7 +78,7 @@ submit, place orders, inject default Builder Codes, or handle private keys.
 The live demo now serves registry metadata:
 
 ```bash
-npx shadcn@latest add https://polymarket-ui-kit-demo-fkan-chi.vercel.app/r/embed-studio.json
+npx shadcn@latest add https://polymarket-ui-kit-demo.vercel.app/r/embed-studio.json
 ```
 
 The planned custom registry domain is still future work. Until then, use the
