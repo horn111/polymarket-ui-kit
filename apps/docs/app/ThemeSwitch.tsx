@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 type Theme = "light" | "dark";
 
 export function ThemeSwitch() {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
     document.documentElement.dataset.puiTheme = theme;

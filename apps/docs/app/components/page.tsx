@@ -40,7 +40,7 @@ export default function ComponentsPage() {
           <p>
             Responsive comparison for illustrative external polls and market pricing.
           </p>
-          <span className="docs-spec">Table → stacked rows / null-safe</span>
+          <span className="docs-spec">Table to stacked rows / null-safe</span>
         </div>
         <PollMarketComparison rows={samplePollRows} />
       </article>
