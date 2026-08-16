@@ -84,10 +84,31 @@ const proof = [
   ["7", "copy-in registry items"],
 ] as const;
 
+const principles = [
+  ["Neutral by design", "No party-coded defaults."],
+  ["Source-aware", "Context travels with the number."],
+  ["Composable", "Typed parts, not a locked shell."],
+] as const;
+
+function ArrowIcon({ external = false }: { external?: boolean }) {
+  return (
+    <svg aria-hidden="true" height="14" viewBox="0 0 16 16" width="14">
+      <path
+        d={external ? "M5 11 11 5M6 5h5v5" : "M3 8h10M9 4l4 4-4 4"}
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="square"
+        strokeWidth="1.5"
+      />
+    </svg>
+  );
+}
+
 export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
-  const [theme, setTheme] = useState<DemoTheme>("dark");
+  const [theme, setTheme] = useState<DemoTheme>("light");
   const market = bundle.market;
   const points = bundle.points;
+  const leadingProbability = Math.round((market.outcomes[0]?.price ?? 0) * 100);
   const chartSeries = useMemo(
     () => [
       {
@@ -146,36 +167,40 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
 
       <section className="civic-hero" id="top">
         <div className="civic-hero__copy">
-          <h1>Make probability feel credible.</h1>
+          <h1>Make uncertainty legible.</h1>
+          <div
+            className="civic-hero__metric"
+            aria-label={`${leadingProbability} percent`}
+          >
+            <strong>{leadingProbability}</strong>
+            <span>%</span>
+          </div>
           <p>
-            An open-source React instrument for sourced markets, public data, and
-            distribution-ready interfaces.
+            Public data, typed React, verified context, and distribution-ready
+            interfaces.
           </p>
           <div className="civic-actions">
             <a className="civic-button" href="/studio">
-              Try Studio <span aria-hidden="true">→</span>
+              Try Studio <ArrowIcon />
             </a>
             <a
               className="civic-text-link"
               href="https://github.com/horn111/polymarket-ui-kit"
               rel="noreferrer"
             >
-              View on GitHub ↗
+              View on GitHub <ArrowIcon external />
             </a>
           </div>
-          <ul className="civic-principles" aria-label="Product principles">
-            <li>
-              <strong>Neutral by design</strong>
-              <span>No party-coded defaults.</span>
-            </li>
-            <li>
-              <strong>Source-aware</strong>
-              <span>Context travels with the number.</span>
-            </li>
-            <li>
-              <strong>Composable</strong>
-              <span>Typed parts, not a locked shell.</span>
-            </li>
+          <ul
+            className="civic-principles civic-principles--intro"
+            aria-label="Product principles"
+          >
+            {principles.map(([title, description]) => (
+              <li key={title}>
+                <strong>{title}</strong>
+                <span>{description}</span>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -185,35 +210,35 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
             data-source={bundle.source}
             aria-label="Featured political market"
           >
-          <div className="civic-market-topline">
-            <span>
-              <i />{" "}
-              {bundle.source === "live"
-                ? "Live public market"
-                : "Fallback market fixture"}
-            </span>
-            <span>{market.category ?? "Politics"}</span>
-          </div>
-          <h2>{market.question}</h2>
-          <div className="civic-market-quote">
-            <div>
-              <span>{market.outcomes[0]?.name ?? "Leading outcome"}</span>
-              <strong>{Math.round((market.outcomes[0]?.price ?? 0) * 100)}%</strong>
+            <div className="civic-market-topline">
+              <span>
+                <i />{" "}
+                {bundle.source === "live"
+                  ? "Live public market"
+                  : "Fallback market fixture"}
+              </span>
+              <span>{market.category ?? "Politics"}</span>
             </div>
-            <div>
-              <span>Resolution</span>
-              <strong>
-                {market.endDate
-                  ? new Date(market.endDate).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                    })
-                  : "Market rules"}
-              </strong>
+            <h2>{market.question}</h2>
+            <div className="civic-market-quote">
+              <div>
+                <span>{market.outcomes[0]?.name ?? "Leading outcome"}</span>
+                <strong>{leadingProbability}%</strong>
+              </div>
+              <div>
+                <span>Resolution</span>
+                <strong>
+                  {market.endDate
+                    ? new Date(market.endDate).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                      })
+                    : "Market rules"}
+                </strong>
+              </div>
             </div>
-          </div>
-          <ProbabilityChart height={230} series={chartSeries} />
+            <ProbabilityChart height={230} series={chartSeries} />
             <EvidenceRail
               className="civic-hero__evidence"
               items={evidence}
@@ -222,6 +247,17 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
             />
           </article>
         </div>
+        <ul
+          className="civic-principles civic-principles--after"
+          aria-label="Product principles"
+        >
+          {principles.map(([title, description]) => (
+            <li key={title}>
+              <strong>{title}</strong>
+              <span>{description}</span>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="civic-proof" aria-label="Project capabilities">
@@ -282,7 +318,7 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
           {routeLinks.map(([label, href]) => (
             <a href={href} key={label}>
               {label}
-              <span>↗</span>
+              <ArrowIcon external />
             </a>
           ))}
         </nav>

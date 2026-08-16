@@ -7,9 +7,9 @@ import type {
 } from "@polymarket-ui-kit/core";
 
 export const sampleMarket: PolymarketMarket = {
-  id: "sample-president-2028",
-  slug: "who-will-win-the-2028-us-presidential-election",
-  question: "Who will win the 2028 US presidential election?",
+  id: "sample-turnout-2028",
+  slug: "will-voter-turnout-exceed-2022",
+  question: "Will voter turnout exceed 2022?",
   description: "Sample market data used for local demos.",
   category: "Politics",
   image: null,
@@ -24,16 +24,16 @@ export const sampleMarket: PolymarketMarket = {
   liquidity: 870000,
   openInterest: 3100000,
   commentCount: 1842,
-  lastTradePrice: 0.42,
-  bestBid: 0.41,
-  bestAsk: 0.43,
+  lastTradePrice: 0.67,
+  bestBid: 0.66,
+  bestAsk: 0.68,
   outcomes: [
-    { id: "yes", name: "Candidate A", price: 0.42, tokenId: "token-yes" },
-    { id: "no", name: "Field", price: 0.58, tokenId: "token-no" },
+    { id: "yes", name: "Yes", price: 0.67, tokenId: "token-yes" },
+    { id: "no", name: "No", price: 0.33, tokenId: "token-no" },
   ],
   clobTokenIds: ["token-yes", "token-no"],
   tags: ["politics"],
-  url: "https://polymarket.com/event/who-will-win-the-2028-us-presidential-election",
+  url: "https://polymarket.com",
 };
 
 export const sampleEvidence: EvidenceItem[] = [
@@ -59,19 +59,19 @@ export const sampleEvidence: EvidenceItem[] = [
 
 export const samplePollRows: PollMarketComparisonRow[] = [
   {
-    id: "candidate-a",
-    label: "Candidate A",
-    pollShare: 0.39,
-    marketProbability: 0.42,
+    id: "yes",
+    label: "Yes",
+    pollShare: 0.62,
+    marketProbability: 0.67,
     sampleSize: 1287,
     marginOfErrorPoints: 2.8,
     asOf: "Illustrative data",
   },
   {
-    id: "field",
-    label: "Field",
-    pollShare: 0.61,
-    marketProbability: 0.58,
+    id: "no",
+    label: "No",
+    pollShare: 0.38,
+    marketProbability: 0.33,
     sampleSize: 1287,
     marginOfErrorPoints: 2.8,
     asOf: "Illustrative data",
@@ -79,11 +79,11 @@ export const samplePollRows: PollMarketComparisonRow[] = [
 ];
 
 export const samplePoints: MarketPricePoint[] = [
-  { timestamp: "2026-06-01T00:00:00Z", price: 0.34 },
-  { timestamp: "2026-06-02T00:00:00Z", price: 0.36 },
-  { timestamp: "2026-06-03T00:00:00Z", price: 0.33 },
-  { timestamp: "2026-06-04T00:00:00Z", price: 0.39 },
-  { timestamp: "2026-06-05T00:00:00Z", price: 0.42 },
+  { timestamp: "2026-06-01T00:00:00Z", price: 0.56 },
+  { timestamp: "2026-06-02T00:00:00Z", price: 0.6 },
+  { timestamp: "2026-06-03T00:00:00Z", price: 0.58 },
+  { timestamp: "2026-06-04T00:00:00Z", price: 0.64 },
+  { timestamp: "2026-06-05T00:00:00Z", price: 0.67 },
 ];
 
 export const sampleOrderbook: OrderbookSnapshot = {

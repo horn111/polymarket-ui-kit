@@ -3,9 +3,10 @@
   font-family: "PUI Unbounded";
   font-style: normal;
   font-weight: 200 900;
-  src: url("./fonts/unbounded-cyrillic-ext-wght-normal.woff2") format("woff2-variations");
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F,
-    U+FE2E-FE2F;
+  src: url("./fonts/unbounded-cyrillic-ext-wght-normal.woff2")
+    format("woff2-variations");
+  unicode-range:
+    U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 
 @font-face {
@@ -23,9 +24,9 @@
   font-style: normal;
   font-weight: 200 900;
   src: url("./fonts/unbounded-vietnamese-wght-normal.woff2") format("woff2-variations");
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
-    U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309,
-    U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+  unicode-range:
+    U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0,
+    U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
 }
 
 @font-face {
@@ -34,10 +35,10 @@
   font-style: normal;
   font-weight: 200 900;
   src: url("./fonts/unbounded-latin-ext-wght-normal.woff2") format("woff2-variations");
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
-    U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F,
-    U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
-    U+A720-A7FF;
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308,
+    U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0,
+    U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
 @font-face {
@@ -46,9 +47,10 @@
   font-style: normal;
   font-weight: 200 900;
   src: url("./fonts/unbounded-latin-wght-normal.woff2") format("woff2-variations");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
-    U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
-    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
+    U+FFFD;
 }
 
 @font-face {
@@ -58,10 +60,10 @@
   font-weight: 400 900;
   src: url("./fonts/schibsted-grotesk-latin-ext-wght-normal.woff2")
     format("woff2-variations");
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
-    U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F,
-    U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
-    U+A720-A7FF;
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308,
+    U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0,
+    U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
 @font-face {
@@ -71,9 +73,10 @@
   font-weight: 400 900;
   src: url("./fonts/schibsted-grotesk-latin-wght-normal.woff2")
     format("woff2-variations");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
-    U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
-    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
+    U+FFFD;
 }
 
 @font-face {
@@ -81,11 +84,10 @@
   font-family: "PUI Chivo Mono";
   font-style: normal;
   font-weight: 100 900;
-  src: url("./fonts/chivo-mono-vietnamese-wght-normal.woff2")
-    format("woff2-variations");
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
-    U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309,
-    U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+  src: url("./fonts/chivo-mono-vietnamese-wght-normal.woff2") format("woff2-variations");
+  unicode-range:
+    U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0,
+    U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
 }
 
 @font-face {
@@ -93,12 +95,11 @@
   font-family: "PUI Chivo Mono";
   font-style: normal;
   font-weight: 100 900;
-  src: url("./fonts/chivo-mono-latin-ext-wght-normal.woff2")
-    format("woff2-variations");
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
-    U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F,
-    U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
-    U+A720-A7FF;
+  src: url("./fonts/chivo-mono-latin-ext-wght-normal.woff2") format("woff2-variations");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308,
+    U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0,
+    U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
 @font-face {
@@ -106,23 +107,23 @@
   font-family: "PUI Chivo Mono";
   font-style: normal;
   font-weight: 100 900;
-  src: url("./fonts/chivo-mono-latin-wght-normal.woff2")
-    format("woff2-variations");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
-    U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
-    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url("./fonts/chivo-mono-latin-wght-normal.woff2") format("woff2-variations");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
+    U+FFFD;
 }
 
 @layer pui.reset, pui.tokens, pui.base, pui.components, pui.states, pui.motion;
 
 @layer pui.tokens {
   :root {
-    color-scheme: dark;
+    color-scheme: light;
 
-    --pui-font-display: "PUI Unbounded", "Arial Black", ui-sans-serif, sans-serif;
+    --pui-font-display:
+      "PUI Schibsted Grotesk", "Arial Nova", Arial, ui-sans-serif, system-ui, sans-serif;
     --pui-font-sans:
-      "PUI Schibsted Grotesk", "Arial Nova", Arial, ui-sans-serif, system-ui,
-      sans-serif;
+      "PUI Schibsted Grotesk", "Arial Nova", Arial, ui-sans-serif, system-ui, sans-serif;
     --pui-font-serif: var(--pui-font-display);
     --pui-font-mono:
       "PUI Chivo Mono", "Cascadia Mono", Consolas, ui-monospace, monospace;
@@ -136,10 +137,10 @@
     --pui-space-7: 2rem;
     --pui-space-8: 2.5rem;
 
-    --pui-radius-xs: 2px;
-    --pui-radius-sm: 4px;
-    --pui-radius-md: 8px;
-    --pui-radius-lg: 12px;
+    --pui-radius-xs: 1px;
+    --pui-radius-sm: 2px;
+    --pui-radius-md: 4px;
+    --pui-radius-lg: 6px;
 
     --pui-duration-fast: 160ms;
     --pui-duration-base: 220ms;
@@ -148,43 +149,40 @@
     --pui-ease-mechanical: cubic-bezier(0.2, 0.75, 0.2, 1);
     --pui-transition: var(--pui-duration-base) var(--pui-ease-control);
 
-    --pui-canvas: oklch(0.118 0.006 55);
-    --pui-surface-1: oklch(0.158 0.009 300);
-    --pui-surface-2: oklch(0.196 0.012 300);
-    --pui-surface-3: oklch(0.245 0.014 295);
-    --pui-surface-ceramic: oklch(0.925 0.009 88);
-    --pui-ink: oklch(0.945 0.008 88);
-    --pui-ink-inverse: oklch(0.17 0.008 55);
-    --pui-muted-ink: oklch(0.704 0.012 285);
-    --pui-soft-ink: oklch(0.575 0.015 285);
-    --pui-border: oklch(0.31 0.014 292 / 0.72);
-    --pui-border-strong: oklch(0.49 0.018 290 / 0.8);
+    --pui-canvas: oklch(0.972 0.009 255);
+    --pui-surface-1: oklch(0.995 0.003 255);
+    --pui-surface-2: oklch(0.938 0.017 255);
+    --pui-surface-3: oklch(0.882 0.028 255);
+    --pui-surface-ceramic: oklch(0.995 0.003 255);
+    --pui-ink: oklch(0.205 0.025 258);
+    --pui-ink-inverse: oklch(0.985 0.006 255);
+    --pui-muted-ink: oklch(0.43 0.035 255);
+    --pui-soft-ink: oklch(0.5 0.045 255);
+    --pui-border: oklch(0.77 0.025 255 / 0.9);
+    --pui-border-strong: oklch(0.56 0.06 255 / 0.95);
 
-    --pui-primary: oklch(0.68 0.105 50);
-    --pui-primary-hover: oklch(0.755 0.095 54);
-    --pui-primary-soft: oklch(0.68 0.105 50 / 0.14);
-    --pui-live: oklch(0.76 0.105 170);
-    --pui-live-soft: oklch(0.76 0.105 170 / 0.13);
-    --pui-negative-signal: oklch(0.68 0.155 28);
-    --pui-negative-soft: oklch(0.68 0.155 28 / 0.13);
-    --pui-warning: oklch(0.78 0.105 78);
-    --pui-warning-soft: oklch(0.78 0.105 78 / 0.14);
-    --pui-focus: oklch(0.82 0.085 58);
+    --pui-primary: oklch(0.49 0.205 258);
+    --pui-primary-hover: oklch(0.41 0.19 258);
+    --pui-primary-soft: oklch(0.9 0.055 255);
+    --pui-live: oklch(0.58 0.13 225);
+    --pui-live-soft: oklch(0.91 0.045 225);
+    --pui-negative-signal: oklch(0.57 0.19 29);
+    --pui-negative-soft: oklch(0.93 0.045 29);
+    --pui-warning: oklch(0.61 0.125 79);
+    --pui-warning-soft: oklch(0.93 0.04 79);
+    --pui-focus: oklch(0.62 0.18 253);
 
-    --pui-series-1: oklch(0.72 0.12 50);
-    --pui-series-2: oklch(0.76 0.105 170);
-    --pui-series-3: oklch(0.7 0.145 28);
-    --pui-series-4: oklch(0.73 0.06 240);
-    --pui-chart-grid: oklch(0.31 0.014 292 / 0.55);
+    --pui-series-1: oklch(0.49 0.205 258);
+    --pui-series-2: oklch(0.58 0.13 225);
+    --pui-series-3: oklch(0.57 0.19 29);
+    --pui-series-4: oklch(0.58 0.09 290);
+    --pui-chart-grid: oklch(0.79 0.024 255 / 0.72);
 
-    --pui-metal:
-      linear-gradient(145deg, oklch(0.24 0.015 292), oklch(0.175 0.009 300) 48%, oklch(0.225 0.013 292));
-    --pui-metal-raised:
-      linear-gradient(150deg, oklch(0.285 0.016 292), oklch(0.205 0.011 300) 52%, oklch(0.245 0.015 292));
-    --pui-ceramic:
-      linear-gradient(180deg, oklch(0.965 0.006 88), oklch(0.895 0.011 88));
-    --pui-elevation-1: 0 1px 0 oklch(0.99 0 0 / 0.04), 0 12px 28px oklch(0.04 0.006 290 / 0.28);
-    --pui-elevation-2: 0 1px 0 oklch(0.99 0 0 / 0.06), 0 24px 64px oklch(0.035 0.008 290 / 0.42);
+    --pui-metal: var(--pui-surface-2);
+    --pui-metal-raised: var(--pui-surface-1);
+    --pui-ceramic: var(--pui-primary);
+    --pui-elevation-1: 0 10px 24px oklch(0.28 0.055 258 / 0.09);
+    --pui-elevation-2: 0 20px 48px oklch(0.24 0.07 258 / 0.12);
 
     /* Compatibility aliases retained for existing host themes. */
     --pui-bg: var(--pui-surface-1);
@@ -214,7 +212,13 @@
 }
 
 @layer pui.base {
-  :where(.pui-root, .pui-card, .pui-panel, .pui-builder-disclosure, .pui-embed-snippet-panel) {
+  :where(
+    .pui-root,
+    .pui-card,
+    .pui-panel,
+    .pui-builder-disclosure,
+    .pui-embed-snippet-panel
+  ) {
     color: var(--pui-text);
     font-family: var(--pui-font-sans);
     font-variant-numeric: tabular-nums;
@@ -304,9 +308,12 @@
   .pui-button {
     align-items: center;
     background: var(--pui-ceramic);
-    border: 1px solid color-mix(in oklch, var(--pui-surface-ceramic) 76%, var(--pui-border-strong));
+    border: 1px solid
+      color-mix(in oklch, var(--pui-surface-ceramic) 76%, var(--pui-border-strong));
     border-radius: var(--pui-radius-sm);
-    box-shadow: 0 1px 0 oklch(1 0 0 / 0.35), 0 8px 18px oklch(0.04 0 0 / 0.22);
+    box-shadow:
+      0 1px 0 oklch(1 0 0 / 0.35),
+      0 8px 18px oklch(0.04 0 0 / 0.22);
     color: var(--pui-ink-inverse);
     cursor: pointer;
     display: inline-flex;
@@ -841,7 +848,12 @@
     --pui-share-card-gutter: clamp(var(--pui-space-4), 3cqw, var(--pui-space-7));
     aspect-ratio: 1200 / 630;
     background:
-      linear-gradient(115deg, transparent 0 58%, oklch(0.62 0.085 50 / 0.08) 58% 68%, transparent 68%),
+      linear-gradient(
+        115deg,
+        transparent 0 58%,
+        oklch(0.62 0.085 50 / 0.08) 58% 68%,
+        transparent 68%
+      ),
       var(--pui-metal-raised);
     container-type: inline-size;
     display: grid;
@@ -1270,7 +1282,12 @@
 
   .pui-empty-state[data-state="loading"]::after {
     animation: pui-skeleton-scan 1.4s var(--pui-ease-mechanical) infinite;
-    background: linear-gradient(90deg, transparent, var(--pui-primary-soft), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--pui-primary-soft),
+      transparent
+    );
     content: "";
     inset: 0;
     position: absolute;
@@ -1441,7 +1458,9 @@
 
   .pui-button:hover:not(:disabled) {
     border-color: var(--pui-primary-hover);
-    box-shadow: 0 1px 0 oklch(1 0 0 / 0.4), 0 10px 24px oklch(0.04 0 0 / 0.28);
+    box-shadow:
+      0 1px 0 oklch(1 0 0 / 0.4),
+      0 10px 24px oklch(0.04 0 0 / 0.28);
   }
 
   .pui-button[data-variant="ghost"]:hover:not(:disabled) {
@@ -1475,15 +1494,15 @@
   }
 
   :where(
-      .pui-button,
-      .pui-input,
-      .pui-outcome-button,
-      .pui-combo-outcome,
-      .pui-combo-search input,
-      .pui-embed-snippet-panel button,
-      .pui-evidence__item,
-      .pui-card-link
-    ):focus-visible {
+    .pui-button,
+    .pui-input,
+    .pui-outcome-button,
+    .pui-combo-outcome,
+    .pui-combo-search input,
+    .pui-embed-snippet-panel button,
+    .pui-evidence__item,
+    .pui-card-link
+  ):focus-visible {
     outline: 2px solid var(--pui-focus);
     outline-offset: 3px;
   }
@@ -1508,7 +1527,8 @@
 
   .pui-sparkline polyline,
   .pui-probability-chart__series {
-    animation: pui-line-calibrate var(--pui-duration-data) var(--pui-ease-mechanical) both;
+    animation: pui-line-calibrate var(--pui-duration-data) var(--pui-ease-mechanical)
+      both;
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
   }
@@ -1644,5 +1664,278 @@
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* Public Probability: blue-led information system. */
+@layer pui.base {
+  :where(
+    .pui-root,
+    .pui-card,
+    .pui-panel,
+    .pui-builder-disclosure,
+    .pui-embed-snippet-panel
+  ) {
+    caret-color: var(--pui-primary);
+  }
+
+  .pui-muted {
+    color: color-mix(in oklch, var(--pui-text) 68%, var(--pui-canvas));
+  }
+}
+
+@layer pui.components {
+  .pui-card,
+  .pui-panel,
+  .pui-builder-disclosure,
+  .pui-embed-snippet-panel {
+    background: var(--pui-surface-1);
+    border: 1px solid var(--pui-border);
+    border-radius: var(--pui-radius-md);
+    box-shadow: none;
+  }
+
+  .pui-card {
+    padding: clamp(1rem, 2.5vw, 1.5rem);
+  }
+
+  .pui-card::after,
+  .pui-share-card::before,
+  .pui-combo-share-card::before {
+    display: none;
+  }
+
+  .pui-button {
+    background: var(--pui-primary);
+    border: 1px solid var(--pui-primary);
+    border-radius: var(--pui-radius-sm);
+    box-shadow: none;
+    color: var(--pui-ink-inverse);
+    font-weight: 760;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .pui-button[data-variant="ghost"] {
+    background: transparent;
+    border-color: var(--pui-border-strong);
+    box-shadow: none;
+    color: var(--pui-text);
+  }
+
+  .pui-input,
+  .pui-combo-search input {
+    background: var(--pui-surface-1);
+    border-color: var(--pui-border-strong);
+    box-shadow: none;
+  }
+
+  .pui-badge {
+    background: var(--pui-primary-soft);
+    border-color: color-mix(in oklch, var(--pui-primary) 28%, var(--pui-border));
+    color: var(--pui-primary-hover);
+    letter-spacing: 0.04em;
+  }
+
+  .pui-section-heading {
+    border-bottom: 1px solid var(--pui-border);
+    padding-bottom: 0.75rem;
+  }
+
+  .pui-section-heading__signal {
+    background: var(--pui-primary);
+    border-radius: 0;
+    box-shadow: none;
+    height: 0.65rem;
+    width: 0.65rem;
+  }
+
+  .pui-market-card {
+    gap: 1rem;
+  }
+
+  .pui-market-title {
+    font-size: clamp(1.1rem, 3vw, 1.55rem);
+    font-weight: 760;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
+  }
+
+  .pui-market-meta {
+    letter-spacing: 0.015em;
+    text-transform: none;
+  }
+
+  .pui-outcomes {
+    gap: 1px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pui-outcome-button {
+    background: var(--pui-canvas);
+    border-color: var(--pui-border);
+    border-radius: 0;
+    min-height: 4.25rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .pui-outcome-button:first-child {
+    background: var(--pui-primary-soft);
+  }
+
+  .pui-outcome-button:first-child .pui-outcome-price {
+    color: var(--pui-primary-hover);
+  }
+
+  .pui-outcome-button:last-child .pui-outcome-price {
+    color: var(--pui-negative);
+  }
+
+  .pui-outcome-price {
+    font-family: var(--pui-font-sans);
+    font-size: clamp(1.25rem, 4vw, 2rem);
+    font-weight: 780;
+    letter-spacing: -0.03em;
+  }
+
+  .pui-probability-chart {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .pui-probability-chart__series {
+    stroke-width: 4;
+  }
+
+  .pui-evidence,
+  .pui-poll-comparison {
+    gap: 0;
+  }
+
+  .pui-evidence__rail {
+    gap: 0;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .pui-evidence__item,
+  .pui-evidence__more {
+    background: transparent;
+    border-right: 1px solid var(--pui-border);
+    min-height: 8rem;
+  }
+
+  .pui-evidence__item:last-child,
+  .pui-evidence__more:last-child {
+    border-right: 0;
+  }
+
+  .pui-evidence__kind {
+    color: var(--pui-primary-hover);
+  }
+
+  .pui-evidence__arrow {
+    color: var(--pui-primary);
+  }
+
+  .pui-poll-comparison__header {
+    background: var(--pui-primary-soft);
+  }
+
+  .pui-poll-comparison__row > div {
+    background: transparent;
+  }
+
+  .pui-orderbook__depth[data-side="bid"] {
+    background: var(--pui-primary-soft);
+  }
+
+  .pui-orderbook__depth[data-side="ask"] {
+    background: var(--pui-negative-soft);
+  }
+
+  .pui-share-card,
+  .pui-combo-share-card {
+    background: var(--pui-primary);
+    border: 0;
+    color: var(--pui-ink-inverse);
+  }
+
+  .pui-share-card .pui-muted,
+  .pui-share-card__attribution,
+  .pui-share-card__label,
+  .pui-combo-share-card .pui-muted,
+  .pui-combo-share-card__topline span,
+  .pui-combo-share-card__hero span {
+    color: color-mix(in oklch, var(--pui-ink-inverse) 74%, var(--pui-primary));
+  }
+
+  .pui-share-card__status {
+    background: var(--pui-ink-inverse);
+    color: var(--pui-primary-hover);
+  }
+
+  .pui-share-card__quote,
+  .pui-combo-share-card__hero > div,
+  .pui-share-card__stats div,
+  .pui-combo-share-card__legs div {
+    background: color-mix(in oklch, var(--pui-primary) 76%, black);
+  }
+
+  .pui-share-card__price,
+  .pui-combo-share-card__hero strong {
+    color: var(--pui-ink-inverse);
+  }
+
+  .pui-share-card__bar {
+    background: color-mix(in oklch, var(--pui-primary) 66%, black);
+  }
+
+  .pui-share-card__bar span {
+    background: var(--pui-live);
+  }
+
+  .pui-embed-snippet-panel__block {
+    background: var(--pui-canvas);
+  }
+}
+
+@layer pui.states {
+  .pui-card-link:hover .pui-card {
+    border-color: var(--pui-primary);
+    transform: translateY(-2px);
+  }
+
+  .pui-button:hover:not(:disabled) {
+    background: var(--pui-primary-hover);
+    border-color: var(--pui-primary-hover);
+    box-shadow: none;
+  }
+
+  .pui-button[data-variant="ghost"]:hover:not(:disabled) {
+    background: var(--pui-primary-soft);
+    border-color: var(--pui-primary);
+  }
+}
+
+@media (max-width: 720px) {
+  .pui-evidence__rail {
+    grid-auto-columns: minmax(15rem, 82%);
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    overflow-x: auto;
+  }
+
+  .pui-evidence__item,
+  .pui-evidence__more {
+    border-bottom: 0;
+    border-right: 1px solid var(--pui-border);
+  }
+}
+
+@media (max-width: 520px) {
+  .pui-outcomes {
+    grid-template-columns: 1fr;
   }
 }
