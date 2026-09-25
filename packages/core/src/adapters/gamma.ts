@@ -1,13 +1,13 @@
-import { fetchJson } from "../utils/fetcher";
-import { asNumber, asStringArray, isRecord } from "../utils/invariant";
+import { fetchJson } from "../utils/fetcher.js";
+import { asNumber, asStringArray, isRecord } from "../utils/invariant.js";
 import type {
   ListMarketsParams,
   MarketAdapterOptions,
   MarketOutcome,
   PolymarketMarket,
   SearchMarketsParams,
-} from "../types/market";
-import type { ListCommentsParams, MarketComment } from "../types/comments";
+} from "../types/market.js";
+import type { ListCommentsParams, MarketComment } from "../types/comments.js";
 
 const GAMMA_BASE_URL = "https://gamma-api.polymarket.com";
 

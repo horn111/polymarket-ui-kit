@@ -1,16 +1,16 @@
-import { fetchJson } from "../utils/fetcher";
-import { asNumber, isRecord } from "../utils/invariant";
+import { fetchJson } from "../utils/fetcher.js";
+import { asNumber, isRecord } from "../utils/invariant.js";
 import type {
   MarketPricePoint,
   PriceHistoryParams,
-} from "../types/market";
+} from "../types/market.js";
 import type {
   OrderbookAdapterOptions,
   OrderbookLevel,
   OrderbookParams,
   OrderbookSnapshot,
-} from "../types/orderbook";
-import type { MarketOutcome, PolymarketMarket } from "../types/market";
+} from "../types/orderbook.js";
+import type { MarketOutcome, PolymarketMarket } from "../types/market.js";
 
 const CLOB_BASE_URL = "https://clob.polymarket.com";
 

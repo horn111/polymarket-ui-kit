@@ -1,11 +1,11 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { hydrateRegistry } from "./hydrate-registry.js";
+import sourceRegistry from "../registry.json";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
-const registry = JSON.parse(
-  await readFile(join(root, "registry.json"), "utf8"),
-) as { items: Array<{ name: string }> };
+const registry = await hydrateRegistry(root, sourceRegistry);
 
 await mkdir(join(root, "dist", "r"), { recursive: true });
 

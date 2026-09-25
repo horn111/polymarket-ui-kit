@@ -1,9 +1,9 @@
 import {
-  EvidenceRail,
-  MarketCard,
+  ElectionBriefCard,
   PollMarketComparison,
   ShareCard,
 } from "@polymarket-ui-kit/react";
+import { DirectionArrow } from "../../../shared/DirectionArrow";
 import {
   sampleEvidence,
   sampleMarket,
@@ -16,9 +16,6 @@ export default function HomePage() {
     <>
       <section className="docs-hero">
         <div className="docs-hero__copy">
-          <span className="docs-edition">
-            <i /> Civic Forecast documentation
-          </span>
           <h1>Build credible market interfaces.</h1>
           <p>
             Typed React components, public data hooks, source-aware context, and
@@ -32,28 +29,46 @@ export default function HomePage() {
               className="docs-link"
               href="https://polymarket-ui-kit-demo-fkan-chi.vercel.app/studio"
             >
-              Try Studio ↗
+              Try Studio <DirectionArrow diagonal />
             </a>
           </div>
           <pre className="docs-code">
-            <code>{`pnpm add @polymarket-ui-kit/react
-npx shadcn@latest add https://polymarket-ui-kit-demo-fkan-chi.vercel.app/r/evidence-rail.json`}</code>
+            <code>{`# From a clone of this repository
+pnpm install
+pnpm build
+pnpm demo:dev`}</code>
           </pre>
+          <p className="docs-install-note">
+            Work from source or use the hosted registry. The first npm prerelease is
+            being prepared.
+          </p>
         </div>
         <div className="docs-hero__preview">
-          <MarketCard market={sampleMarket} points={samplePoints} />
-          <EvidenceRail items={sampleEvidence} maxVisible={2} />
+          <ElectionBriefCard
+            market={sampleMarket}
+            points={samplePoints}
+            polls={samplePollRows}
+            evidence={sampleEvidence}
+            sourceLabel="Illustrative market · sample data"
+            resolutionSummary="Illustrative rule: a certified election result settles this example."
+          />
         </div>
       </section>
 
       <section className="docs-section">
         <header>
-          <span>Politics-first release</span>
           <h2>Probability with context.</h2>
         </header>
         <div className="docs-feature-stack">
-          <PollMarketComparison rows={samplePollRows} />
-          <ShareCard market={sampleMarket} attribution="pui-kit/docs" />
+          <PollMarketComparison
+            rows={samplePollRows}
+            contextLabel="Illustrative external context"
+          />
+          <ShareCard
+            market={sampleMarket}
+            attribution="pui-kit/docs"
+            statusLabel="Sample data"
+          />
         </div>
       </section>
     </>

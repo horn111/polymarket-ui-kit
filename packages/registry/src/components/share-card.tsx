@@ -1,71 +1,59 @@
-import type { PolymarketMarket } from "@polymarket-ui-kit/core";
-import { formatCompact, formatProbability } from "../lib/polymarket-format";
+import "../lib/polymarket-theme.css";
+import { formatProbability, type PolymarketMarket } from "@polymarket-ui-kit/core";
+import { formatCompact } from "../lib/polymarket-format";
 
-export function ShareCard({ market }: { market: PolymarketMarket }) {
-  const leadingOutcome = market.outcomes[0];
-  const probability = Math.min(1, Math.max(0, leadingOutcome?.price ?? 0));
-  const stats = [
-    market.volume ? { label: "Volume", value: formatCompact(market.volume) } : null,
-    market.liquidity
-      ? { label: "Liquidity", value: formatCompact(market.liquidity) }
-      : null,
-    market.commentCount
-      ? { label: "Comments", value: formatCompact(market.commentCount) }
-      : null,
-  ].filter((item): item is { label: string; value: string } => Boolean(item));
-
+export function ShareCard({
+  market,
+  attribution = "polymarket-ui-kit",
+  statusLabel,
+}: {
+  market: PolymarketMarket;
+  attribution?: string;
+  statusLabel?: string;
+}) {
+  const leadingOutcome = [...market.outcomes].sort(
+    (a, b) => (b.price ?? -1) - (a.price ?? -1),
+  )[0];
   return (
-    <article className="grid min-h-[300px] gap-5 overflow-hidden rounded-lg border border-slate-700 bg-slate-950 p-6 text-slate-50 shadow-xl">
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <span className="text-sm font-extrabold text-teal-300">Polymarket</span>
-          <span className="rounded-full border border-teal-300/30 bg-teal-300/10 px-2 py-1 text-xs font-bold text-teal-100">
-            Live market
+    <article className="pui-registry-panel p-5">
+      <header className="flex items-center justify-between gap-3 pb-3 text-xs">
+        <span>
+          <strong className="pui-registry-accent">Polymarket</strong>
+          <span className="ml-3 border-l pui-registry-border pl-3 pui-registry-muted">
+            {statusLabel ?? market.status}
           </span>
-        </div>
-        <span className="text-xs text-slate-400">polymarket-ui-kit</span>
-      </div>
-
-      <div className="grid gap-5">
-        <div className="grid gap-2">
-          <span className="text-xs text-slate-400">
+        </span>
+        <span className="pui-registry-muted">{attribution}</span>
+      </header>
+      <div className="grid gap-4">
+        <div className="flex flex-col gap-3 py-2">
+          <h2 className="pui-registry-question text-2xl leading-tight">
+            {market.question}
+          </h2>
+          <span className="text-xs pui-registry-muted">
             {market.category ?? "Prediction market"}
           </span>
-          <h2 className="text-2xl font-black leading-tight">{market.question}</h2>
         </div>
-
         {leadingOutcome ? (
-          <div className="grid gap-3 rounded-lg border border-slate-700/70 bg-white/[0.06] p-4">
+          <div className="flex items-center justify-between border-y pui-registry-border py-6">
+            <span className="text-xs pui-registry-muted">Market leader</span>
             <div>
-              <div className="text-xs text-slate-400">Leading outcome</div>
-              <div className="font-bold">{leadingOutcome.name}</div>
-            </div>
-            <div className="text-5xl font-black leading-none">
-              {formatProbability(leadingOutcome.price)}
-            </div>
-            <div className="h-2 overflow-hidden rounded-full bg-slate-700/70">
-              <span
-                className="block h-full rounded-full bg-gradient-to-r from-teal-300 to-amber-400"
-                style={{ width: `${Math.round(probability * 100)}%` }}
-              />
+              <strong className="block text-5xl font-medium tabular-nums">
+                {formatProbability(leadingOutcome.price)}
+              </strong>
+              <span>{leadingOutcome.name}</span>
             </div>
           </div>
         ) : null}
       </div>
-
-      {stats.length ? (
-        <dl className="grid grid-cols-3 gap-2">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="rounded-md border border-slate-700/70 bg-white/[0.05] p-3"
-            >
-              <dt className="text-xs text-slate-400">{stat.label}</dt>
-              <dd className="mt-1 font-extrabold">{stat.value}</dd>
-            </div>
-          ))}
-        </dl>
-      ) : null}
+      <footer className="flex flex-wrap gap-x-6 mt-4 py-2 text-xs pui-registry-muted">
+        {market.volume != null ? (
+          <span>Volume · {formatCompact(market.volume)}</span>
+        ) : null}
+        {market.liquidity != null ? (
+          <span>Liquidity · {formatCompact(market.liquidity)}</span>
+        ) : null}
+      </footer>
     </article>
   );
 }

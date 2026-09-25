@@ -7,7 +7,7 @@ import {
   type ComboLegOutcome,
 } from "@polymarket-ui-kit/core";
 import { useMemo, useState } from "react";
-import { cx, EmptyState } from "./shared";
+import { cx, EmptyState } from "./shared.js";
 
 export interface ComboLegPickerProps {
   markets: ComboLegMarket[];

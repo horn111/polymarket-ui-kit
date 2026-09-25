@@ -33,7 +33,7 @@ export const sampleMarket: PolymarketMarket = {
   ],
   clobTokenIds: ["token-yes", "token-no"],
   tags: ["politics"],
-  url: "https://polymarket.com/event/who-will-win-the-2028-us-presidential-election",
+  url: undefined,
 };
 
 export const sampleEvidence: EvidenceItem[] = [

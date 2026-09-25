@@ -1,6 +1,6 @@
 import type { OrderbookSnapshot } from "@polymarket-ui-kit/core";
-import { useAsyncData, type AsyncDataOptions } from "./useAsyncData";
-import { usePolymarketClient } from "../providers/PolymarketProvider";
+import { useAsyncData, type AsyncDataOptions } from "./useAsyncData.js";
+import { usePolymarketClient } from "../providers/PolymarketProvider.js";
 
 export type UseOrderbookOptions = AsyncDataOptions<OrderbookSnapshot>;
 

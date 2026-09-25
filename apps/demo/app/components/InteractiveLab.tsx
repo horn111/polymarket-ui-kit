@@ -26,7 +26,9 @@ import {
   useShareImage,
 } from "@polymarket-ui-kit/react";
 import { sampleBuilder } from "../../components/sample-builder";
+import { sampleMarket } from "../../components/sample-data";
 import { sampleComboLegs, sampleComboMarkets } from "../../components/sample-combos";
+import { PreviewRail } from "../../../shared/PreviewRail";
 
 type DemoTab =
   | "market"
@@ -274,7 +276,8 @@ export function InteractiveLab({ theme }: InteractiveLabProps) {
   const [marketSlug, setMarketSlug] = useState(markets[0]?.slug ?? "");
   const [tab, setTab] = useState<DemoTab>("market");
   const [state, setState] = useState<DemoState>("live");
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState("");
+  const [copyError, setCopyError] = useState("");
   const [comboIntentLabel, setComboIntentLabel] = useState("No intent emitted");
   const market = markets.find((item) => item.slug === marketSlug) ?? markets[0]!;
   const points = useMemo(() => makePoints(market), [market]);
@@ -282,60 +285,74 @@ export function InteractiveLab({ theme }: InteractiveLabProps) {
   const pngShareImage = useShareImage({
     attribution: "pui-kit/demo",
     format: "png",
-    slug: market.slug,
+    slug: "sample",
     theme,
   });
   const svgShareImage = useShareImage({
     attribution: "pui-kit/demo",
     format: "svg",
-    slug: market.slug,
+    slug: "sample",
     theme,
   });
-  const exportPath = `/api/og?slug=${market.slug}&theme=${theme}&format=png`;
-  const snippet =
-    tab === "evidence"
-      ? `import { EvidenceRail } from "@polymarket-ui-kit/react";
+  const exportPath = `/api/og?slug=sample&theme=${theme}&format=png`;
+  const snippets: Record<DemoTab, string> = {
+    market: `import { MarketCard } from "@polymarket-ui-kit/react";
 
-export function Context({ sources }) {
-  return <EvidenceRail items={sources} />;
-}`
-      : tab === "polls"
-        ? `import { PollMarketComparison } from "@polymarket-ui-kit/react";
+<MarketCard market={market} points={points} />`,
+    evidence: `import { EvidenceRail } from "@polymarket-ui-kit/react";
 
-export function Compare({ rows }) {
-  return <PollMarketComparison rows={rows} />;
-}`
-        : tab === "combo"
-          ? `import { ComboBuilderCard } from "@polymarket-ui-kit/react";
+<EvidenceRail items={verifiedSources} />`,
+    polls: `import { PollMarketComparison } from "@polymarket-ui-kit/react";
 
-export function ComboSurface({ markets }) {
-  return <ComboBuilderCard markets={markets} onComboIntent={sendIntent} />;
-}`
-          : `import { MarketCard } from "@polymarket-ui-kit/react";
+<PollMarketComparison rows={pollRows} contextLabel="Your source and date" />`,
+    share: `import { ShareCard } from "@polymarket-ui-kit/react";
 
-export function MarketEmbed({ market, points }) {
-  return <MarketCard market={market} points={points} />;
-}`;
+<ShareCard market={market} attribution="your-publication" statusLabel="Public market" />`,
+    builder: `import { BuilderFeeDisclosure, BuilderBadge } from "@polymarket-ui-kit/react";
+
+<BuilderFeeDisclosure builder={builder} notional={100} side="taker" />
+<BuilderBadge builder={builder} showCode />`,
+    combo: `import { ComboBuilderCard } from "@polymarket-ui-kit/react";
+
+<ComboBuilderCard markets={markets} onComboIntent={handleIntent} />`,
+    export: `import { useShareImage } from "@polymarket-ui-kit/react";
+
+const image = useShareImage({ slug: "sample", format: "png", theme: "${theme}" });
+// Host the /api/og route from the demo in your application.
+<a href={image.url}>Open share image</a>`,
+    data: `import { OrderbookPanel, CommentList, LeaderboardTable } from "@polymarket-ui-kit/react";
+
+<OrderbookPanel orderbook={orderbook} />
+<CommentList comments={comments} />
+<LeaderboardTable rows={leaderboard} />`,
+    states: `import { MarketCard, useMarket } from "@polymarket-ui-kit/react";
+
+const { data, error, isLoading } = useMarket(slug);
+if (isLoading) return <p role="status">Loading market...</p>;
+if (error) return <p role="alert">Market unavailable.</p>;
+if (!data) return <p>No market data.</p>;
+return <MarketCard market={data} />;`,
+  };
+  const snippet = snippets[tab];
 
   async function copySnippet() {
+    setCopyError("");
     try {
       await navigator.clipboard.writeText(snippet);
+      setCopied(snippet);
     } catch {
-      // The local preview can run in browser contexts where clipboard writes are blocked.
+      setCopied("");
+      setCopyError("Clipboard unavailable. Select the snippet and copy it manually.");
     }
-
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 1400);
   }
 
   return (
     <section className="civic-lab" aria-labelledby="interactive-lab-title">
       <header className="civic-lab__heading">
-        <p>Interactive component lab</p>
         <h2 id="interactive-lab-title">Test the Civic Forecast system.</h2>
         <span>
           Switch fixtures, inspect component states, and copy the same typed React
-          surface.
+          surface. All values in this lab are illustrative.
         </span>
       </header>
 
@@ -355,166 +372,189 @@ export function MarketEmbed({ market, points }) {
         </label>
 
         <button onClick={copySnippet} type="button">
-          {copied ? "Copied" : "Copy React snippet"}
+          {copied === snippet ? "Copied" : "Copy React snippet"}
         </button>
       </div>
 
-      <nav className="civic-lab__tabs" aria-label="Component preview" role="tablist">
-        {labTabs.map((item) => (
-          <button
-            aria-selected={tab === item.value}
-            data-active={tab === item.value ? "true" : undefined}
-            key={item.value}
-            onClick={() => setTab(item.value)}
-            role="tab"
-            type="button"
+      <p className="civic-source-note" role="status">
+        {copyError}
+      </p>
+      <div className="civic-lab__workspace">
+        <PreviewRail
+          items={labTabs}
+          value={tab}
+          onChange={setTab}
+          panelId="lab-panel"
+        />
+        <div className="civic-lab__content" data-tab={tab}>
+          <div
+            className="civic-lab__preview"
+            role="tabpanel"
+            id="lab-panel"
+            aria-labelledby={`lab-tab-${tab}`}
+            tabIndex={0}
           >
-            {item.label}
-          </button>
-        ))}
-      </nav>
-
-      <div className="civic-lab__content" data-tab={tab}>
-        <div className="civic-lab__preview" role="tabpanel">
-          {tab === "market" ? <MarketCard market={market} points={points} /> : null}
-          {tab === "evidence" ? <EvidenceRail items={evidenceItems} /> : null}
-          {tab === "polls" ? <PollMarketComparison rows={pollComparisonRows} /> : null}
-          {tab === "share" ? (
-            <div className="civic-lab__share-stage">
-              <ShareCard market={market} attribution="pui-kit/demo" />
-              <div className="civic-lab__share-meta" aria-label="Share card metadata">
-                <span>{theme === "dark" ? "Dark theme" : "Light theme"}</span>
-                <span>{market.category ?? "Market"}</span>
-                <span>
-                  {market.outcomes[0]?.price
-                    ? `${Math.round(market.outcomes[0].price * 100)}C`
-                    : "LIVE"}
-                </span>
-              </div>
-            </div>
-          ) : null}
-          {tab === "builder" ? (
-            <div className="civic-lab__builder-grid">
-              <BuilderFeeDisclosure
-                builder={sampleBuilder}
-                notional={100}
-                price={market.outcomes[0]?.price ?? undefined}
-                side="taker"
+            {tab === "market" ? (
+              <MarketCard market={market} points={points} sourceLabel="Sample data" />
+            ) : null}
+            {tab === "evidence" ? <EvidenceRail items={evidenceItems} /> : null}
+            {tab === "polls" ? (
+              <PollMarketComparison
+                rows={pollComparisonRows}
+                contextLabel="Illustrative external context"
               />
-              <div className="civic-lab__builder-surface">
-                <BuilderBadge
+            ) : null}
+            {tab === "share" ? (
+              <div className="civic-lab__share-stage">
+                <ShareCard
+                  market={market}
+                  attribution="pui-kit/demo"
+                  statusLabel="Sample data"
+                />
+                <div className="civic-lab__share-meta" aria-label="Share card metadata">
+                  <span>{theme === "dark" ? "Dark theme" : "Light theme"}</span>
+                  <span>{market.category ?? "Market"}</span>
+                  <span>
+                    {market.outcomes[0]?.price != null
+                      ? `${Math.round(market.outcomes[0].price * 100)} cents`
+                      : "No price"}
+                  </span>
+                </div>
+              </div>
+            ) : null}
+            {tab === "builder" ? (
+              <div className="civic-lab__builder-grid">
+                <BuilderFeeDisclosure
                   builder={sampleBuilder}
-                  feeBps={sampleBuilder.takerFeeBps}
-                  feeSide="taker"
-                  showCode
+                  notional={100}
+                  price={market.outcomes[0]?.price ?? undefined}
+                  side="taker"
                 />
-                <FeePill
-                  input={{
-                    builderFeeSide: "taker",
-                    builderTakerFeeBps: sampleBuilder.takerFeeBps,
-                    notional: 100,
-                    price: market.outcomes[0]?.price ?? undefined,
+                <div className="civic-lab__builder-surface">
+                  <BuilderBadge
+                    builder={sampleBuilder}
+                    feeBps={sampleBuilder.takerFeeBps}
+                    feeSide="taker"
+                    showCode
+                  />
+                  <FeePill
+                    input={{
+                      builderFeeSide: "taker",
+                      builderTakerFeeBps: sampleBuilder.takerFeeBps,
+                      notional: 100,
+                      price: market.outcomes[0]?.price ?? undefined,
+                    }}
+                    label="Estimated builder fee"
+                  />
+                </div>
+              </div>
+            ) : null}
+            {tab === "combo" ? (
+              <div className="civic-lab__combo">
+                <ComboShareCard
+                  legs={sampleComboLegs}
+                  title="BTC ATH + Fed cut combo"
+                  attribution="pui-kit/demo"
+                />
+                <ComboBuilderCard
+                  builderCode={sampleBuilder.code}
+                  initialLegs={sampleComboLegs}
+                  markets={sampleComboMarkets}
+                  onComboIntent={(intent) => {
+                    setComboIntentLabel(
+                      `${intent.legs.length} legs / ${intent.direction} / ${intent.source}`,
+                    );
                   }}
-                  label="Estimated builder fee"
+                  size={25}
                 />
+                <div className="civic-lab__intent">{comboIntentLabel}</div>
               </div>
-            </div>
-          ) : null}
-          {tab === "combo" ? (
-            <div className="civic-lab__combo">
-              <ComboShareCard
-                legs={sampleComboLegs}
-                title="BTC ATH + Fed cut combo"
-                attribution="pui-kit/demo"
-              />
-              <ComboBuilderCard
-                builderCode={sampleBuilder.code}
-                initialLegs={sampleComboLegs}
-                markets={sampleComboMarkets}
-                onComboIntent={(intent) => {
-                  setComboIntentLabel(
-                    `${intent.legs.length} legs / ${intent.direction} / ${intent.source}`,
-                  );
-                }}
-                size={25}
-              />
-              <div className="civic-lab__intent">{comboIntentLabel}</div>
-            </div>
-          ) : null}
-          {tab === "export" ? (
-            <div className="civic-lab__export-grid">
-              <ShareCard
-                className="civic-lab__export-card"
-                market={market}
-                attribution="pui-kit/demo"
-              />
-              <div className="civic-lab__export-panel">
-                <div className="civic-lab__export-header">
-                  <span>Share export</span>
-                  <strong>One slug. PNG + SVG.</strong>
-                </div>
-                <div className="civic-lab__export-actions">
-                  <a href={pngShareImage.url} rel="noreferrer" target="_blank">
-                    Open PNG route
-                  </a>
-                  <a href={svgShareImage.url} rel="noreferrer" target="_blank">
-                    Open SVG route
-                  </a>
-                </div>
-                <div className="civic-lab__export-specs" aria-label="Export details">
-                  <div>
-                    <span>Theme</span>
-                    <strong>{theme === "dark" ? "Dark" : "Light"}</strong>
+            ) : null}
+            {tab === "export" ? (
+              <div className="civic-lab__export-grid">
+                <ShareCard
+                  className="civic-lab__export-card"
+                  market={sampleMarket}
+                  attribution="pui-kit/demo"
+                  statusLabel="Sample data"
+                />
+                <div className="civic-lab__export-panel">
+                  <div className="civic-lab__export-header">
+                    <span>Election sample export</span>
+                    <strong>One slug. PNG + SVG.</strong>
                   </div>
-                  <div>
-                    <span>Source</span>
-                    <strong>Public</strong>
+                  <div className="civic-lab__export-actions">
+                    <a href={pngShareImage.url} rel="noreferrer" target="_blank">
+                      Open PNG route
+                    </a>
+                    <a href={svgShareImage.url} rel="noreferrer" target="_blank">
+                      Open SVG route
+                    </a>
                   </div>
-                  <div>
-                    <span>Fallback</span>
-                    <strong>Ready</strong>
+                  <div className="civic-lab__export-specs" aria-label="Export details">
+                    <div>
+                      <span>Theme</span>
+                      <strong>{theme === "dark" ? "Dark" : "Light"}</strong>
+                    </div>
+                    <div>
+                      <span>Source</span>
+                      <strong>Sample data</strong>
+                    </div>
+                    <div>
+                      <span>Size</span>
+                      <strong>1200 × 630</strong>
+                    </div>
                   </div>
+                  <code>{exportPath}</code>
                 </div>
-                <code>{exportPath}</code>
               </div>
-            </div>
-          ) : null}
-          {tab === "data" ? (
-            <div className="civic-lab__data-grid">
-              <OrderbookPanel orderbook={orderbook} />
-              <CommentList comments={comments} />
-              <LeaderboardTable rows={leaderboardRows} />
-            </div>
-          ) : null}
-          {tab === "states" ? (
-            <div className="civic-lab__states">
-              <div
-                className="civic-lab__segmented"
-                role="group"
-                aria-label="Render state"
-              >
-                {(["live", "loading", "error", "empty"] as DemoState[]).map((item) => (
-                  <button
-                    data-active={state === item ? "true" : undefined}
-                    key={item}
-                    onClick={() => setState(item)}
-                    type="button"
-                  >
-                    {item}
-                  </button>
-                ))}
+            ) : null}
+            {tab === "data" ? (
+              <div className="civic-lab__data-grid">
+                <OrderbookPanel orderbook={orderbook} />
+                <CommentList comments={comments} />
+                <LeaderboardTable rows={leaderboardRows} />
               </div>
-              {state === "live" ? <MarketCard market={market} points={points} /> : null}
-              {state === "loading" ? <SkeletonState /> : null}
-              {state === "error" ? <MessageState tone="error" /> : null}
-              {state === "empty" ? <MessageState tone="empty" /> : null}
-            </div>
-          ) : null}
-        </div>
+            ) : null}
+            {tab === "states" ? (
+              <div className="civic-lab__states">
+                <div
+                  className="civic-lab__segmented"
+                  role="group"
+                  aria-label="Render state"
+                >
+                  {(["live", "loading", "error", "empty"] as DemoState[]).map(
+                    (item) => (
+                      <button
+                        aria-pressed={state === item}
+                        data-active={state === item ? "true" : undefined}
+                        key={item}
+                        onClick={() => setState(item)}
+                        type="button"
+                      >
+                        {item}
+                      </button>
+                    ),
+                  )}
+                </div>
+                {state === "live" ? (
+                  <MarketCard
+                    market={market}
+                    points={points}
+                    sourceLabel="Sample data"
+                  />
+                ) : null}
+                {state === "loading" ? <SkeletonState /> : null}
+                {state === "error" ? <MessageState tone="error" /> : null}
+                {state === "empty" ? <MessageState tone="empty" /> : null}
+              </div>
+            ) : null}
+          </div>
 
-        <pre className="civic-lab__snippet">
-          <code>{snippet}</code>
-        </pre>
+          <pre className="civic-lab__snippet">
+            <code>{snippet}</code>
+          </pre>
+        </div>
       </div>
     </section>
   );

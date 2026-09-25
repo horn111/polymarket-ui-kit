@@ -1,6 +1,6 @@
-import { fetchJson } from "../utils/fetcher";
-import { asNumber, isRecord } from "../utils/invariant";
-import type { BuilderProfile } from "../types/builder";
+import { fetchJson } from "../utils/fetcher.js";
+import { asNumber, isRecord } from "../utils/invariant.js";
+import type { BuilderProfile } from "../types/builder.js";
 
 const DATA_BASE_URL = "https://data-api.polymarket.com";
 

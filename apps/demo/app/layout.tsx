@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function DemoLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html data-demo-theme="light" data-pui-theme="light" lang="en">
+    <html data-demo-theme="dark" data-pui-theme="dark" lang="en">
       <body>
         <a className="demo-skip-link" href="#main-content">
           Skip to content

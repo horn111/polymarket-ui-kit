@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BrandMark } from "../../shared/BrandMark";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,16 +17,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html data-pui-theme="light" lang="en">
+    <html data-pui-theme="dark" lang="en">
       <body>
         <a className="docs-skip" href="#docs-content">
           Skip to content
         </a>
         <main className="docs-shell">
-          <nav className="docs-nav">
+          <nav className="docs-nav" aria-label="Documentation">
             <a className="docs-brand" href="/">
-              <span>◇</span>
-              <strong>Polymarket UI Kit</strong>
+              <BrandMark />
+              <strong>Civic Forecast</strong>
             </a>
             <div className="docs-nav__links">
               <a href="/components">Components</a>

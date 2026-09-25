@@ -3,7 +3,7 @@ import type {
   BuilderFeeSide,
   BuilderProfile,
 } from "@polymarket-ui-kit/core";
-import { shortenBuilderCode } from "./builder-utils";
+import { shortenBuilderCode } from "./builder-utils.js";
 
 export interface BuilderBadgeProps {
   builder: BuilderProfile | BuilderConfig;

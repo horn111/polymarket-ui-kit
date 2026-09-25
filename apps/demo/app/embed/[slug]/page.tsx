@@ -2,6 +2,7 @@ import { BuilderFeeDisclosure, MarketCard, ShareCard } from "@polymarket-ui-kit/
 import { RouteThemeSync } from "../../components/RouteThemeSync";
 import { sampleBuilder } from "../../../components/sample-builder";
 import { loadPublicMarketBundle } from "../../../components/live-data";
+import { MarketUnavailable } from "../../components/MarketUnavailable";
 
 export const revalidate = 60;
 
@@ -36,17 +37,36 @@ export default async function EmbedPage({ params, searchParams }: EmbedPageProps
   const builder = query.builderCode
     ? { ...sampleBuilder, code: query.builderCode }
     : sampleBuilder;
-  const { market, points } = await loadPublicMarketBundle(slug);
+  const bundle = await loadPublicMarketBundle(slug).catch(() => null);
+  if (!bundle)
+    return (
+      <>
+        <RouteThemeSync theme={theme} />
+        <MarketUnavailable slug={slug} />
+      </>
+    );
+  const { market, points, source } = bundle;
 
   return (
     <>
       <RouteThemeSync theme={theme} />
       <div className="civic-embed-surface">
+        <p className="civic-source-note" data-source={source}>
+          {source === "fixture"
+            ? "Illustrative market · sample data"
+            : source === "partial"
+              ? "Live market · some data unavailable"
+              : "Public Polymarket data"}
+        </p>
         {surface === "market-card" ? (
           <MarketCard market={market} points={points} />
         ) : null}
         {surface === "share-card" ? (
-          <ShareCard market={market} attribution={attribution} />
+          <ShareCard
+            market={market}
+            attribution={attribution}
+            statusLabel={source === "fixture" ? "Sample data" : "Public market"}
+          />
         ) : null}
         {surface === "builder-disclosure" ? (
           <BuilderFeeDisclosure

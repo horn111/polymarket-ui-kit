@@ -1,5 +1,5 @@
 import { formatCurrency, type TraderLeaderboardRow } from "@polymarket-ui-kit/core";
-import { EmptyState } from "./shared";
+import { EmptyState } from "./shared.js";
 
 export interface LeaderboardTableProps {
   rows: TraderLeaderboardRow[];

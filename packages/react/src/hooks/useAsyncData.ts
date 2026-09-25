@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export interface AsyncDataOptions<T> {
   initialData?: T | null | undefined;
@@ -51,6 +51,7 @@ export function useAsyncData<T>(
     enabled && (!hasInitialData || options.refetchOnMount !== false),
   );
   const [refreshKey, setRefreshKey] = useState(0);
+  const requestPending = useRef(false);
 
   useEffect(() => {
     if (!enabled) {
@@ -64,9 +65,11 @@ export function useAsyncData<T>(
     }
 
     let isMounted = true;
+    requestPending.current = true;
     setIsLoading(true);
 
-    load()
+    Promise.resolve()
+      .then(load)
       .then((nextData) => {
         if (isMounted) {
           setData(nextData);
@@ -80,12 +83,14 @@ export function useAsyncData<T>(
       })
       .finally(() => {
         if (isMounted) {
+          requestPending.current = false;
           setIsLoading(false);
         }
       });
 
     return () => {
       isMounted = false;
+      requestPending.current = false;
     };
   }, [...deps, enabled, hasInitialData, options.refetchOnMount, refreshKey]);
 
@@ -95,7 +100,7 @@ export function useAsyncData<T>(
     }
 
     const interval = window.setInterval(() => {
-      setRefreshKey((key) => key + 1);
+      if (!requestPending.current) setRefreshKey((key) => key + 1);
     }, options.refetchIntervalMs);
 
     return () => window.clearInterval(interval);
@@ -106,6 +111,8 @@ export function useAsyncData<T>(
     error,
     isLoading,
     isStale: Boolean(error && data),
-    refresh: () => setRefreshKey((key) => key + 1),
+    refresh: () => {
+      if (!requestPending.current) setRefreshKey((key) => key + 1);
+    },
   };
 }

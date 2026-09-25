@@ -9,7 +9,7 @@ import {
   type ComboSelectionLeg,
 } from "@polymarket-ui-kit/core";
 import { useMemo } from "react";
-import { cx } from "./shared";
+import { cx } from "./shared.js";
 
 export interface ComboIntentPreviewProps {
   legs: ComboSelectionLeg[];

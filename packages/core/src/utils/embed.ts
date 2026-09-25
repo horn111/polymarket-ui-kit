@@ -1,4 +1,4 @@
-import type { ShareImageFormat, ShareImageTheme } from "../types/market";
+import type { ShareImageFormat, ShareImageTheme } from "../types/market.js";
 
 export type EmbedSurface = "market-card" | "share-card" | "builder-disclosure";
 

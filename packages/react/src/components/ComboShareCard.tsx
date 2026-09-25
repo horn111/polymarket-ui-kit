@@ -3,7 +3,7 @@ import {
   probabilityToCents,
   type ComboSelectionLeg,
 } from "@polymarket-ui-kit/core";
-import { cx } from "./shared";
+import { cx } from "./shared.js";
 
 export interface ComboShareCardProps {
   legs: ComboSelectionLeg[];

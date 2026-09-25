@@ -1,5 +1,5 @@
-import { fetchJson } from "../utils/fetcher";
-import { asNumber, asStringArray, isRecord } from "../utils/invariant";
+import { fetchJson } from "../utils/fetcher.js";
+import { asNumber, asStringArray, isRecord } from "../utils/invariant.js";
 import type {
   BuildComboIntentInput,
   ComboIntent,
@@ -8,7 +8,7 @@ import type {
   ComboMarketAdapterOptions,
   ComboMarketsPage,
   ListComboMarketsParams,
-} from "../types/combo";
+} from "../types/combo.js";
 
 const COMBOS_BASE_URL = "https://combos-rfq-api.polymarket.com";
 

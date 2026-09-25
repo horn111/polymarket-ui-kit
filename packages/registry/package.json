@@ -6,7 +6,7 @@
   "license": "MIT",
   "files": ["dist", "registry.json", "src"],
   "exports": {
-    "./registry.json": "./registry.json"
+    "./registry.json": "./dist/registry.json"
   },
   "scripts": {
     "build": "tsx scripts/build-registry.ts",

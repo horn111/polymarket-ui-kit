@@ -1,5 +1,6 @@
 @import "@polymarket-ui-kit/react/styles.css";
 @import "@polymarket-ui-kit/react/themes.css";
+@import "../../shared/civic-foundation.css";
 
 * {
   box-sizing: border-box;
@@ -11,7 +12,6 @@ html {
 }
 body {
   margin: 0;
-  overflow-x: hidden;
 }
 a {
   color: inherit;
@@ -70,12 +70,30 @@ a {
 }
 
 .docs-hero {
-  align-items: center;
   display: grid;
-  gap: clamp(2rem, 7vw, 6rem);
-  grid-template-columns: minmax(0, 0.9fr) minmax(26rem, 1.1fr);
-  min-height: calc(100dvh - 4.75rem);
-  padding: clamp(4rem, 9vw, 8rem) 0;
+  gap: 2.5rem;
+  grid-template-columns: 1fr;
+  min-height: 0;
+  padding: clamp(3rem, 6vw, 6rem) 0;
+}
+.docs-hero__copy {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  column-gap: 3rem;
+  align-items: start;
+}
+.docs-hero__copy h1 {
+  grid-row: 1 / 5;
+}
+.docs-hero__copy > p,
+.docs-hero__copy > pre,
+.docs-hero__copy > .docs-actions {
+  grid-column: 2;
+}
+@media (max-width: 760px) {
+  .docs-hero__copy {
+    display: block;
+  }
 }
 .docs-edition {
   align-items: center;
@@ -93,17 +111,19 @@ a {
 }
 .docs-hero h1,
 .docs-page-heading h1 {
-  font-size: clamp(3.25rem, 7vw, 6rem);
+  font-family: var(--pui-font-serif);
+  font-weight: 500;
+  font-size: clamp(2.5rem, 4.5vw, 3.75rem);
   letter-spacing: -0.04em;
-  line-height: 0.94;
+  line-height: 1.04;
   margin: 1.4rem 0 0;
-  max-width: 10ch;
+  max-width: 14ch;
   text-wrap: balance;
 }
 .docs-hero__copy > p,
 .docs-page-heading p {
   color: var(--pui-text-muted);
-  font-size: 1.08rem;
+  font-size: 0.9375rem;
   line-height: 1.65;
   max-width: 58ch;
 }
@@ -117,7 +137,7 @@ a {
 .docs-button {
   background: var(--pui-accent);
   border-radius: var(--pui-radius-sm);
-  color: #fff;
+  color: var(--pui-on-accent);
   font-weight: 750;
   padding: 0.85rem 1.1rem;
   text-decoration: none;
@@ -128,9 +148,10 @@ a {
   text-decoration: none;
 }
 .docs-code {
-  background: var(--pui-text);
+  background: var(--pui-well);
+  border: 1px solid var(--pui-border);
   border-radius: var(--pui-radius-md);
-  color: var(--pui-bg);
+  color: var(--pui-text-muted);
   font-family: var(--pui-font-mono);
   font-size: 0.78rem;
   line-height: 1.55;
@@ -155,7 +176,7 @@ a {
   display: grid;
   gap: clamp(2rem, 6vw, 6rem);
   grid-template-columns: 0.7fr 1.3fr;
-  padding: clamp(5rem, 9vw, 9rem) 0;
+  padding: clamp(3.5rem, 6vw, 6rem) 0;
 }
 .docs-section header > span,
 .docs-page-heading > span {
@@ -163,10 +184,12 @@ a {
   font-size: 0.78rem;
   font-weight: 750;
 }
-.docs-section h2 {
-  font-size: clamp(2.5rem, 5vw, 4.7rem);
+.docs-section > header h2 {
+  font-family: var(--pui-font-serif);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
   letter-spacing: -0.035em;
-  line-height: 0.96;
+  line-height: 1.08;
   margin: 0.8rem 0 0;
   text-wrap: balance;
 }
@@ -187,7 +210,7 @@ a {
   margin-bottom: clamp(4rem, 8vw, 7rem);
 }
 .docs-page-heading h1 {
-  max-width: 12ch;
+  max-width: 20ch;
 }
 .docs-component-row {
   align-items: start;
@@ -230,9 +253,15 @@ a {
 }
 
 @media (max-width: 820px) {
-  .docs-nav__links a:nth-child(2),
-  .docs-nav__links a:nth-child(4) {
-    display: none;
+  .docs-nav {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding-top: 1rem;
+  }
+  .docs-nav__links {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.5rem;
   }
   .docs-hero,
   .docs-section,
@@ -256,10 +285,28 @@ a {
   }
   .docs-hero h1,
   .docs-page-heading h1 {
-    font-size: clamp(2.75rem, 14vw, 4.2rem);
+    font-size: clamp(2.5rem, 10vw, 3.5rem);
   }
   .docs-footer {
     align-items: start;
     flex-direction: column;
   }
+}
+
+.docs-nav__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+}
+.docs-install-note {
+  font-size: 0.8125rem !important;
+}
+.docs-hero__preview .pui-evidence {
+  box-shadow: none;
+}
+.docs-code {
+  min-width: 0;
+}
+.docs-hero__copy {
+  min-width: 0;
 }

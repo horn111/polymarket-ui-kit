@@ -7,11 +7,11 @@ import type {
   ComboOutcomeSide,
   ComboSelectionLeg,
 } from "@polymarket-ui-kit/core";
-import { useComboSelection } from "../hooks/useComboSelection";
-import { ComboIntentPreview } from "./ComboIntentPreview";
-import { ComboLegList } from "./ComboLegList";
-import { ComboLegPicker } from "./ComboLegPicker";
-import { cx, EmptyState } from "./shared";
+import { useComboSelection } from "../hooks/useComboSelection.js";
+import { ComboIntentPreview } from "./ComboIntentPreview.js";
+import { ComboLegList } from "./ComboLegList.js";
+import { ComboLegPicker } from "./ComboLegPicker.js";
+import { cx, EmptyState } from "./shared.js";
 
 export interface ComboBuilderCardProps {
   markets: ComboLegMarket[];

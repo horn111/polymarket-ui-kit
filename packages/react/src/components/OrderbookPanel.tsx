@@ -3,7 +3,7 @@ import {
   type OrderbookLevel,
   type OrderbookSnapshot,
 } from "@polymarket-ui-kit/core";
-import { cx, EmptyState } from "./shared";
+import { cx, EmptyState } from "./shared.js";
 
 export interface OrderbookPanelProps {
   orderbook: OrderbookSnapshot | null;

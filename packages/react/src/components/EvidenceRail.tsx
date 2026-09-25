@@ -1,5 +1,6 @@
 import { formatRelativeTime, type EvidenceItem } from "@polymarket-ui-kit/core";
-import { cx, EmptyState } from "./shared";
+import { cx, EmptyState } from "./shared.js";
+import { DirectionArrow } from "./DirectionArrow.js";
 
 export interface EvidenceRailProps {
   items: EvidenceItem[];
@@ -64,7 +65,7 @@ export function EvidenceRail({
             <a className={classes} href={item.href} key={item.id} rel="noreferrer">
               <EvidenceContent item={item} />
               <span className="pui-evidence__arrow" aria-hidden="true">
-                ↗
+                <DirectionArrow diagonal />
               </span>
             </a>
           ) : (

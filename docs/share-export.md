@@ -61,7 +61,7 @@ The hook only builds URLs. Host apps own the route implementation and can point
 
 ## Demo Route Behavior
 
-The demo route tries to fetch public market data by slug. If the public API is
-unavailable or the slug does not resolve, it falls back to fixture data and keeps
-the image route alive. This is intentional for demos, docs previews, and launch
-screenshots.
+The `sample` slug uses explicitly labeled illustrative data. Every other slug
+requests public market data. An unavailable market returns HTTP 503 with a JSON
+error and `cache-control: no-store`; it never substitutes sample prices for the
+requested market. Successful PNG and SVG responses use a five-minute cache.

@@ -1,4 +1,4 @@
-import type { BuilderFeeSide, FeePreview, FeePreviewInput } from "../types/builder";
+import type { BuilderFeeSide, FeePreview, FeePreviewInput } from "../types/builder.js";
 
 export const BUILDER_TAKER_FEE_BPS_MAX = 100;
 export const BUILDER_MAKER_FEE_BPS_MAX = 50;

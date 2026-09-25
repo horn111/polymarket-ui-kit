@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {
   CommentList,
+  ElectionBriefCard,
   EvidenceRail,
   LeaderboardTable,
   MarketCard,
@@ -148,7 +149,21 @@ export default meta;
 
 export const MarketCardStory: StoryObj = {
   name: "MarketCard",
-  render: () => <MarketCard market={market} points={points} />,
+  render: () => (
+    <MarketCard market={market} points={points} sourceLabel="Sample data" />
+  ),
+};
+
+export const ElectionBriefCardStory: StoryObj = {
+  name: "ElectionBriefCard",
+  render: () => (
+    <ElectionBriefCard
+      market={market}
+      evidence={evidence}
+      sourceLabel="Sample data"
+      resolutionSummary="Illustrative rule: certified turnout determines this example."
+    />
+  ),
 };
 
 export const OrderbookStory: StoryObj = {

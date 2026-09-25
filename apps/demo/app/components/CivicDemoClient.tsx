@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import type {
   EvidenceItem,
   MarketPricePoint,
@@ -9,14 +9,15 @@ import type {
   PolymarketMarket,
 } from "@polymarket-ui-kit/core";
 import {
-  EvidenceRail,
+  ElectionBriefCard,
   MarketCard,
   OrderbookPanel,
   PollMarketComparison,
-  ProbabilityChart,
   ShareCard,
 } from "@polymarket-ui-kit/react";
 import { InteractiveLab } from "./InteractiveLab";
+import { BrandMark } from "../../../shared/BrandMark";
+import { DirectionArrow } from "../../../shared/DirectionArrow";
 
 type DemoTheme = "light" | "dark";
 
@@ -77,29 +78,10 @@ const pollRows: PollMarketComparisonRow[] = [
   },
 ];
 
-const proof = [
-  ["21", "typed React components"],
-  ["public", "no-auth data defaults"],
-  ["PNG + SVG", "share export"],
-  ["7", "copy-in registry items"],
-] as const;
-
 export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
-  const [theme, setTheme] = useState<DemoTheme>("light");
+  const [theme, setTheme] = useState<DemoTheme>("dark");
   const market = bundle.market;
   const points = bundle.points;
-  const chartSeries = useMemo(
-    () => [
-      {
-        id: "leading",
-        label: market.outcomes[0]?.name ?? "Leading outcome",
-        color: "var(--pui-series-2)",
-        points,
-      },
-    ],
-    [market.outcomes, points],
-  );
-
   useEffect(() => {
     document.documentElement.dataset.demoTheme = theme;
     document.documentElement.dataset.puiTheme = theme;
@@ -115,9 +97,9 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
   return (
     <>
       <header className="civic-nav">
-        <a className="civic-brand" href="#top" aria-label="Polymarket UI Kit home">
-          <span aria-hidden="true">◇</span>
-          <strong>Polymarket UI Kit</strong>
+        <a className="civic-brand" href="#top" aria-label="Civic Forecast home">
+          <BrandMark />
+          <strong>Civic Forecast</strong>
         </a>
         <nav aria-label="Primary navigation">
           <a href="#components">Components</a>
@@ -130,6 +112,7 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
         <div className="civic-scheme" role="group" aria-label="Color scheme">
           {(["light", "dark"] as DemoTheme[]).map((item) => (
             <button
+              aria-pressed={theme === item}
               data-active={theme === item || undefined}
               key={item}
               onClick={() => setTheme(item)}
@@ -141,118 +124,125 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
         </div>
       </header>
 
-      <section className="civic-hero" id="top">
+      <section className="civic-hero" id="top" aria-labelledby="home-title">
         <div className="civic-hero__copy">
-          <div className="civic-edition">
-            <span /> Civic Forecast · politics-first release
+          <h1 id="home-title">
+            Market prices.
+            <br />
+            <em>Public context.</em>
+          </h1>
+          <div className="civic-hero__intro">
+            <p>
+              React components for civic reporting. Put market prices, polling, sources
+              and settlement rules on the same page.
+            </p>
+            <div className="civic-actions">
+              <a className="civic-button" href="/studio">
+                Open Studio <DirectionArrow />
+              </a>
+              <a className="civic-text-link" href="#lab">
+                Explore the components
+              </a>
+            </div>
           </div>
-          <h1>Publish evidence-backed market interfaces.</h1>
-          <p>
-            Open-source React primitives, public data tools, and distribution surfaces
-            for builders who need political markets to feel clear, sourced, and
-            credible.
-          </p>
-          <div className="civic-actions">
-            <a className="civic-button" href="/studio">
-              Try Studio <span aria-hidden="true">→</span>
-            </a>
-            <a
-              className="civic-text-link"
-              href="https://github.com/horn111/polymarket-ui-kit"
-              rel="noreferrer"
-            >
-              View on GitHub ↗
-            </a>
-          </div>
-          <ul className="civic-principles" aria-label="Product principles">
-            <li>
-              <strong>Neutral by design</strong>
-              <span>No party-coded visual defaults.</span>
-            </li>
-            <li>
-              <strong>Source-aware</strong>
-              <span>Evidence sits beside probability.</span>
-            </li>
-            <li>
-              <strong>Composable</strong>
-              <span>Typed pieces, not a locked app shell.</span>
-            </li>
-          </ul>
         </div>
 
-        <article className="civic-hero__market" aria-label="Featured political market">
-          <div className="civic-market-topline">
-            <span>
-              <i />{" "}
-              {bundle.source === "live"
-                ? "Live public market"
-                : "Fallback market fixture"}
-            </span>
-            <span>{market.category ?? "Politics"}</span>
-          </div>
-          <h2>{market.question}</h2>
-          <div className="civic-market-quote">
-            <div>
-              <span>{market.outcomes[0]?.name ?? "Leading outcome"}</span>
-              <strong>{Math.round((market.outcomes[0]?.price ?? 0) * 100)}%</strong>
-            </div>
-            <div>
-              <span>Resolution</span>
-              <strong>
-                {market.endDate
-                  ? new Date(market.endDate).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                    })
-                  : "Market rules"}
-              </strong>
-            </div>
-          </div>
-          <ProbabilityChart height={230} series={chartSeries} />
-          <EvidenceRail
-            className="civic-hero__evidence"
-            items={evidence}
-            maxVisible={3}
-            title="Sample evidence context"
-          />
-        </article>
-      </section>
+        <ElectionBriefCard
+          className="civic-hero__market"
+          market={market}
+          points={points}
+          polls={bundle.source === "fixture" ? pollRows : []}
+          evidence={bundle.source === "fixture" ? evidence : []}
+          resolutionSummary={
+            bundle.source === "fixture"
+              ? "Illustrative rule: a certified election result settles this example."
+              : undefined
+          }
+          sourceLabel={
+            bundle.source === "fixture"
+              ? "Illustrative market · sample data"
+              : bundle.source === "partial"
+                ? "Live market · some data unavailable"
+                : "Live public market"
+          }
+        />
 
-      <section className="civic-proof" aria-label="Project capabilities">
-        {proof.map(([value, label]) => (
-          <div key={label}>
-            <strong>{value}</strong>
-            <span>{label}</span>
-          </div>
-        ))}
+        <p className="civic-hero__note">
+          An illustrative briefing. Outside context is supplied by the publisher; a
+          market price is not a poll.
+        </p>
       </section>
 
       <section className="civic-section" id="components">
         <header className="civic-section__heading">
           <div>
-            <span>Component system</span>
-            <h2>Context belongs beside the market.</h2>
+            <h2>
+              A different format
+              <br />
+              for each reading.
+            </h2>
           </div>
           <p>
-            Politics is the first visual mode. The component contracts stay general
-            enough for every market category.
+            A compact market, a side-by-side comparison, a card to publish. The same
+            typed data, arranged for the question at hand.
           </p>
         </header>
         <div className="civic-showcase">
           <article className="civic-showcase__market">
-            <span className="civic-caption">Election market card</span>
-            <MarketCard market={market} points={points} />
+            <div className="civic-showcase__description">
+              <h3>The market, at a glance.</h3>
+              <p>
+                Ranked outcomes, price movement and a resolution date. A compact view
+                for a feed or article.
+              </p>
+            </div>
+            <MarketCard
+              market={market}
+              points={points}
+              sourceLabel={bundle.source === "fixture" ? "Sample data" : market.status}
+            />
           </article>
           <article className="civic-showcase__comparison">
-            <PollMarketComparison rows={pollRows} />
+            <div className="civic-showcase__description">
+              <h3>
+                Two measures.
+                <br />
+                Different meanings.
+              </h3>
+              <p>
+                Keep vote share and winning probability separate, with the sample and
+                margin of error in view.
+              </p>
+            </div>
+            <PollMarketComparison
+              rows={pollRows}
+              contextLabel="Illustrative external context"
+            />
           </article>
           <article className="civic-showcase__share">
-            <span className="civic-caption">Distribution-ready share surface</span>
-            <ShareCard market={market} attribution="pui-kit/civic" />
+            <div className="civic-showcase__description">
+              <h3>Ready for the page.</h3>
+              <p>
+                A portable market summary with attribution. Publish as an embed, PNG or
+                SVG.
+              </p>
+            </div>
+            <ShareCard
+              market={market}
+              attribution="pui-kit/civic"
+              statusLabel={
+                bundle.source === "fixture" ? "Sample data" : "Public market"
+              }
+            />
           </article>
           <article className="civic-showcase__book">
-            <span className="civic-caption">Public CLOB context</span>
+            <div className="civic-showcase__description">
+              <h3>Behind the price.</h3>
+              <p>
+                Public bids, asks and available depth. Inspect the market behind a
+                quoted probability.
+              </p>
+            </div>
             <OrderbookPanel orderbook={bundle.orderbook} />
           </article>
         </div>
@@ -260,24 +250,32 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
 
       <section className="civic-developer">
         <div>
-          <span>Developer quickstart</span>
-          <h2>One import. Evidence included.</h2>
+          <h2>
+            Your data.
+            <br />
+            Your editorial judgment.
+          </h2>
           <p>
             Use public market data, add your own verified context, then distribute the
             same surface as React, iframe, PNG, or SVG.
           </p>
         </div>
         <pre>
-          <code>{`import { EvidenceRail, MarketCard } from "@polymarket-ui-kit/react";
+          <code>{`import { ElectionBriefCard } from "@polymarket-ui-kit/react";
 
-<MarketCard market={market} points={history} />
-<EvidenceRail items={verifiedSources} />`}</code>
+<ElectionBriefCard
+  market={market}
+  points={priceHistory}
+  polls={editorialPolls}
+  evidence={verifiedSources}
+  resolutionSummary={verifiedRule}
+/>`}</code>
         </pre>
         <nav aria-label="Distribution routes">
           {routeLinks.map(([label, href]) => (
             <a href={href} key={label}>
               {label}
-              <span>↗</span>
+              <DirectionArrow diagonal />
             </a>
           ))}
         </nav>
@@ -289,11 +287,14 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
 
       <section className="civic-distribution">
         <div>
-          <h2>Built for distribution, not order placement.</h2>
+          <h2>
+            From a market URL
+            <br />
+            to your publication.
+          </h2>
           <p>
-            Public hooks, SSR-friendly props, graceful fallbacks, builder attribution,
-            Combo intents, and verifiable dry-run examples. Host apps retain control of
-            signing and trading.
+            22 React components, 8 copy-in registry items and public data hooks. Use the
+            pieces independently. Host apps retain control of signing and trading.
           </p>
         </div>
         <div className="civic-distribution__links">
@@ -321,7 +322,7 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
           Independent open-source frontend tooling. Not affiliated with Polymarket. Demo
           polls and evidence are illustrative, not current political reporting.
         </p>
-        <nav>
+        <nav aria-label="Footer">
           <a href="https://github.com/horn111/polymarket-ui-kit">GitHub</a>
           <a href="/studio">Studio</a>
           <a href="/registry.json">Registry</a>

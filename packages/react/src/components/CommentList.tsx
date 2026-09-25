@@ -1,6 +1,6 @@
 import type { MarketComment } from "@polymarket-ui-kit/core";
 import { formatRelativeTime } from "@polymarket-ui-kit/core";
-import { EmptyState } from "./shared";
+import { EmptyState } from "./shared.js";
 
 export interface CommentListProps {
   comments: MarketComment[];
