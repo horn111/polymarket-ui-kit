@@ -17,6 +17,11 @@ const market: PolymarketMarket = {
 };
 
 export default function Page() {
-  return <MarketCard market={market} />;
+  return (
+    <main className="example-shell">
+      <span>Next.js App Router / calibrated example</span>
+      <h1>One market. One precise surface.</h1>
+      <MarketCard market={market} />
+    </main>
+  );
 }
-

@@ -307,11 +307,11 @@ export function CivicDemoClient({ bundle }: CivicDemoClientProps) {
             <span>Copy components into your stack.</span>
           </a>
           <a
-            href="https://github.com/horn111/polymarket-ui-kit/blob/main/docs/grant-application.md"
+            href="https://github.com/horn111/polymarket-ui-kit/blob/main/docs/release.md"
             rel="noreferrer"
           >
-            <strong>Grant proof</strong>
-            <span>Review scope, architecture, and milestones.</span>
+            <strong>Release guide</strong>
+            <span>Review checks and publication steps.</span>
           </a>
         </div>
       </section>

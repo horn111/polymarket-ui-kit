@@ -18,11 +18,10 @@ export function EmptyState({
   ...props
 }: EmptyStateProps) {
   return (
-    <div className={cx("pui-panel pui-stack", className)} {...props}>
+    <div className={cx("pui-panel pui-stack pui-empty-state", className)} {...props}>
       <strong>{title}</strong>
       {description ? <span className="pui-muted">{description}</span> : null}
       {action}
     </div>
   );
 }
-

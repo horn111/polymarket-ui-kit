@@ -41,8 +41,9 @@ builders, content products, and research portals that need Polymarket-native UI
 with strong defaults and clean escape hatches.
 
 The screenshots show the Civic Forecast demo with explicitly labeled sample data.
-The design uses Instrument Sans, dark teal panels, inset data blocks, and brass
-controls. Its election briefing separates market odds, outside polling, source
+The design pairs Source Serif 4 questions with Instrument Sans measurements,
+teal panels, ruled data rows, and brass controls. Its election briefing separates
+market odds, outside polling, source
 records, and settlement rules. The component lab uses a draggable dial to select
 sections, with keyboard tabs and a horizontal scale on small screens.
 See [DESIGN.md](DESIGN.md) for the visual system and
@@ -109,7 +110,7 @@ pnpm demo:dev
 Hosted registry target for shadcn-style projects:
 
 ```bash
-npx shadcn@latest add https://polymarket-ui-kit-demo-fkan-chi.vercel.app/r/market-card.json
+npx shadcn@latest add https://polymarket-ui-kit-demo.vercel.app/r/market-card.json
 ```
 
 The current hosted registry lives on the Vercel demo domain. A custom registry
@@ -141,7 +142,7 @@ Paste a Polymarket URL or slug and generate a live iframe, React snippet, OG
 PNG/SVG links, and shadcn-style registry command from one surface.
 
 Live Studio:
-[polymarket-ui-kit-demo-fkan-chi.vercel.app/studio](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/studio)
+[polymarket-ui-kit-demo.vercel.app/studio](https://polymarket-ui-kit-demo.vercel.app/studio)
 
 ```tsx
 import {
@@ -445,12 +446,12 @@ The moat is not just visual polish. It is DX:
 
 ## Demo Links
 
-- Live demo: [polymarket-ui-kit-demo-fkan-chi.vercel.app](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/)
-- Link-to-Embed Studio: [studio](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/studio)
-- Hosted registry: [registry.json](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/registry.json)
-- Registry item: [embed-studio.json](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/r/embed-studio.json)
-- Demo OG PNG: [api/og](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/api/og?slug=who-will-win-the-2028-us-presidential-election&theme=light&format=png)
-- Demo OG SVG: [api/og?format=svg](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/api/og?slug=who-will-win-the-2028-us-presidential-election&theme=light&format=svg)
+- Live demo: [polymarket-ui-kit-demo.vercel.app](https://polymarket-ui-kit-demo.vercel.app/)
+- Link-to-Embed Studio: [studio](https://polymarket-ui-kit-demo.vercel.app/studio)
+- Hosted registry: [registry.json](https://polymarket-ui-kit-demo.vercel.app/registry.json)
+- Registry item: [embed-studio.json](https://polymarket-ui-kit-demo.vercel.app/r/embed-studio.json)
+- Demo OG PNG: [api/og](https://polymarket-ui-kit-demo.vercel.app/api/og?slug=who-will-win-the-2028-us-presidential-election&theme=light&format=png)
+- Demo OG SVG: [api/og?format=svg](https://polymarket-ui-kit-demo.vercel.app/api/og?slug=who-will-win-the-2028-us-presidential-election&theme=light&format=svg)
 - Docs app: `pnpm docs:dev`
 - Demo app: `pnpm demo:dev`
 - Storybook: `pnpm storybook`
@@ -465,23 +466,18 @@ into vertical apps, and make builder-code-aware UX easier to ship.
 Grant submission checklist:
 
 - Repo: [github.com/horn111/polymarket-ui-kit](https://github.com/horn111/polymarket-ui-kit)
-- Live demo: [polymarket-ui-kit-demo-fkan-chi.vercel.app](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/)
-- Link-to-Embed Studio: [studio](https://polymarket-ui-kit-demo-fkan-chi.vercel.app/studio)
+- Live demo: [polymarket-ui-kit-demo.vercel.app](https://polymarket-ui-kit-demo.vercel.app/)
+- Link-to-Embed Studio: [studio](https://polymarket-ui-kit-demo.vercel.app/studio)
 - X account: [x.com/debythm](https://x.com/debythm)
 - Advanced Builder Flow: [examples/clob-v2-builder-flow](examples/clob-v2-builder-flow)
-- Grant application draft: [docs/grant-application.md](docs/grant-application.md)
 - 60-second demo script: [docs/demo-script.md](docs/demo-script.md)
 - Screenshot checklist: [docs/screenshot-checklist.md](docs/screenshot-checklist.md)
 
 The repo includes:
 
-- [Grant application draft](docs/grant-application.md)
-- [Grant strategy](docs/grant-strategy.md)
-- [Grant tweet thread](docs/grant-tweet-thread.md)
 - [Demo script](docs/demo-script.md)
 - [Screenshot checklist](docs/screenshot-checklist.md)
 - [Launch playbook](docs/launch-playbook.md)
-- [Tweet templates](docs/tweet-templates.md)
 - [Builder Codes notes](docs/builder-codes.md)
 - [Verifiable Builder Flow](docs/verifiable-builder-flow.md)
 - [Combo-aware UI notes](docs/combos.md)

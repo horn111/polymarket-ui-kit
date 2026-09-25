@@ -10,7 +10,7 @@ distribution surfaces:
 - shadcn-style registry command
 
 Live demo:
-https://polymarket-ui-kit-demo-fkan-chi.vercel.app/studio
+https://polymarket-ui-kit-demo.vercel.app/studio
 
 ## Why It Exists
 
@@ -92,7 +92,7 @@ without typing, avoiding a new embed request for each keystroke.
 Rebuild the registry before deploying changes:
 
 ```bash
-npx shadcn@latest add https://polymarket-ui-kit-demo-fkan-chi.vercel.app/r/embed-studio.json
+npx shadcn@latest add https://polymarket-ui-kit-demo.vercel.app/r/embed-studio.json
 ```
 
 The planned custom registry domain is still future work. Until then, use the

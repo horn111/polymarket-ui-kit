@@ -27,7 +27,7 @@ export default function HomePage() {
             </a>
             <a
               className="docs-link"
-              href="https://polymarket-ui-kit-demo-fkan-chi.vercel.app/studio"
+              href="https://polymarket-ui-kit-demo.vercel.app/studio"
             >
               Try Studio <DirectionArrow diagonal />
             </a>

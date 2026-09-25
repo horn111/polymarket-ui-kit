@@ -11,7 +11,7 @@ export function LeaderboardTable({ rows }: LeaderboardTableProps) {
   }
 
   return (
-    <div className="pui-panel">
+    <div className="pui-panel pui-leaderboard">
       <table className="pui-table">
         <thead>
           <tr>
@@ -35,4 +35,3 @@ export function LeaderboardTable({ rows }: LeaderboardTableProps) {
     </div>
   );
 }
-

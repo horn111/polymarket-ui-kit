@@ -18,7 +18,7 @@ export function CommentList({ comments, limit = 5 }: CommentListProps) {
   }
 
   return (
-    <section className="pui-panel pui-stack">
+    <section className="pui-panel pui-stack pui-comments">
       <div className="pui-row pui-between">
         <strong>Comments</strong>
         <span className="pui-muted">{comments.length}</span>

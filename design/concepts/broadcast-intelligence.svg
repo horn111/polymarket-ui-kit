@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1200" viewBox="0 0 1920 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Broadcast Intelligence concept board for Polymarket UI Kit</title>
+  <desc id="desc">Premium broadcast-inspired interface direction with directional typography, carbon panels, chartreuse signals, a desktop hero, mobile view, market card, studio fragment, palette and six motion frames.</desc>
+  <defs>
+    <linearGradient id="stage" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#080a09"/><stop offset=".62" stop-color="#111512"/><stop offset="1" stop-color="#171e19"/></linearGradient>
+    <linearGradient id="signal" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#d7ff4f"/><stop offset=".6" stop-color="#85ec75"/><stop offset="1" stop-color="#51d5b1"/></linearGradient>
+    <linearGradient id="ribbon" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d7ff4f" stop-opacity=".92"/><stop offset=".45" stop-color="#5fe0b3" stop-opacity=".46"/><stop offset="1" stop-color="#111512" stop-opacity="0"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="24" stdDeviation="30" flood-color="#000" flood-opacity=".58"/></filter>
+    <pattern id="scan" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 8H8" stroke="#f3f2ea" stroke-opacity=".035"/></pattern>
+    <style>
+      .display{font-family:"Barlow Condensed","Arial Narrow",Arial,sans-serif;fill:#f3f2ea}.ui{font-family:"Public Sans","Segoe UI",Arial,sans-serif;fill:#f3f2ea}.mono{font-family:Consolas,monospace;fill:#a7afa6}.panel{fill:#111512;stroke:#f3f2ea;stroke-opacity:.15}.panel2{fill:#171d18;stroke:#f3f2ea;stroke-opacity:.12}.label{font-size:10px;letter-spacing:.14em}.body{font-size:15px;fill:#a7afa6}.muted{fill:#8b938b}.acid{fill:#d7ff4f}.live{fill:#51d5b1}.warm{fill:#f3f2ea}.rule{stroke:#f3f2ea;stroke-opacity:.16}.num{font-variant-numeric:tabular-nums}
+    </style>
+  </defs>
+  <rect width="1920" height="1200" fill="#070907"/>
+  <rect width="1920" height="1200" fill="url(#scan)" opacity=".8"/>
+  <text x="40" y="48" class="display" font-size="29" font-weight="700" letter-spacing=".04em">02 / BROADCAST INTELLIGENCE</text>
+  <text x="40" y="75" class="mono label">IMMEDIATE · INFORMED · DIRECTIONAL</text>
+  <g transform="translate(1644 28)">
+    <path d="M0 2H16V12H7V32H16V42H0Z" fill="#d7ff4f"/><path d="M42 2H26V12H35V32H26V42H42Z" fill="#f3f2ea"/>
+    <rect x="18" y="20" width="6" height="4" fill="#51d5b1"/>
+    <text x="58" y="18" class="ui" font-size="13" font-weight="700">Polymarket UI Kit</text>
+    <text x="58" y="38" class="mono" font-size="9">CIVIC FORECAST / LIVE EDITION</text>
+  </g>
+
+  <!-- Desktop hero -->
+  <g filter="url(#shadow)"><rect x="40" y="108" width="1100" height="540" rx="8" fill="url(#stage)" stroke="#f3f2ea" stroke-opacity=".16"/></g>
+  <g transform="translate(62 126)">
+    <path d="M0 0H14V9H6V27H14V36H0Z" fill="#d7ff4f"/><path d="M36 0H22V9H30V27H22V36H36Z" fill="#f3f2ea"/>
+    <text x="52" y="23" class="ui" font-size="12" font-weight="700">POLYMARKET UI KIT</text>
+    <text x="740" y="23" class="ui" font-size="11" fill="#a7afa6">COMPONENTS</text><text x="842" y="23" class="ui" font-size="11" fill="#a7afa6">STUDIO</text><text x="908" y="23" class="ui" font-size="11" fill="#a7afa6">DOCS</text>
+    <rect x="962" y="7" width="92" height="24" fill="#d7ff4f"/><text x="980" y="23" class="ui" font-size="9" font-weight="800" style="fill:#090b09">LIVE / DARK</text>
+    <line x1="0" y1="52" x2="1056" y2="52" class="rule"/>
+    <rect x="0" y="75" width="8" height="298" fill="#d7ff4f"/>
+    <text x="27" y="95" class="mono label" style="fill:#d7ff4f">CIVIC FORECAST · POLITICS EDITION</text>
+    <text x="27" y="184" class="display" font-size="80" font-weight="760" letter-spacing="-1.5">MAKE PROBABILITY</text>
+    <text x="27" y="257" class="display" font-size="80" font-weight="760" letter-spacing="-1.5">FEEL CREDIBLE.</text>
+    <text x="30" y="299" class="ui body">A React system for sourced markets, public data</text><text x="30" y="322" class="ui body">and distribution-ready surfaces.</text>
+    <rect x="29" y="348" width="136" height="43" fill="#d7ff4f"/><text x="56" y="375" class="ui" font-size="12" font-weight="800" style="fill:#090b09">TRY STUDIO →</text>
+    <text x="190" y="375" class="ui" font-size="12" style="fill:#d7ff4f">EXPLORE THE KIT ↗</text>
+    <g transform="translate(570 81)">
+      <path d="M0 220C110 114 197 262 298 122 353 47 407 30 486 12V94C412 110 373 135 330 194 214 352 102 188 0 302Z" fill="url(#ribbon)" opacity=".64"/>
+      <path d="M4 269C111 165 202 301 308 163 363 91 412 69 486 55" fill="none" stroke="#d7ff4f" stroke-width="2.5"/>
+      <path d="M4 303H486M4 239H486M4 175H486M4 111H486" class="rule"/>
+      <text x="364" y="132" class="display acid num" font-size="54" font-weight="760">42%</text>
+      <text x="365" y="153" class="mono" font-size="8">CURRENT MARKET PROBABILITY</text>
+    </g>
+    <g transform="translate(570 362)">
+      <rect width="486" height="116" class="panel"/>
+      <rect width="486" height="25" fill="#d7ff4f"/>
+      <text x="10" y="17" class="mono" font-size="8" style="fill:#090b09">LIVE PUBLIC MARKET  /  SAMPLE EVIDENCE  /  UPDATED 16:42 UTC</text>
+      <text x="15" y="53" class="display" font-size="22" font-weight="700">WHO WILL WIN THE 2028 U.S. ELECTION?</text>
+      <text x="15" y="82" class="ui" font-size="11">Candidate A</text><text x="420" y="84" class="display acid num" font-size="23" font-weight="760">42%</text>
+      <rect x="15" y="96" width="454" height="4" fill="#2a302a"/><rect x="15" y="96" width="191" height="4" fill="#d7ff4f"/>
+    </g>
+    <g transform="translate(0 478)"><rect width="1056" height="35" fill="#f3f2ea"/><text x="14" y="23" class="mono" font-size="9" style="fill:#090b09">NEUTRAL BY DESIGN</text><text x="275" y="23" class="mono" font-size="9" style="fill:#090b09">SOURCE-AWARE</text><text x="520" y="23" class="mono" font-size="9" style="fill:#090b09">21 REACT COMPONENTS</text><text x="820" y="23" class="mono" font-size="9" style="fill:#090b09">PNG + SVG EXPORT</text></g>
+  </g>
+
+  <!-- Mobile -->
+  <g filter="url(#shadow)"><rect x="1170" y="108" width="250" height="540" rx="22" fill="url(#stage)" stroke="#f3f2ea" stroke-opacity=".22"/></g>
+  <g transform="translate(1187 128)">
+    <path d="M0 0H10V7H4V20H10V27H0Z" fill="#d7ff4f"/><path d="M26 0H16V7H22V20H16V27H26Z" fill="#f3f2ea"/>
+    <text x="38" y="18" class="ui" font-size="9" font-weight="700">POLYMARKET UI KIT</text>
+    <rect x="0" y="48" width="216" height="20" fill="#d7ff4f"/><text x="8" y="62" class="mono" font-size="7" style="fill:#090b09">CIVIC FORECAST / LIVE SYSTEM</text>
+    <text x="0" y="107" class="display" font-size="31" font-weight="760">MAKE</text><text x="0" y="137" class="display" font-size="31" font-weight="760">PROBABILITY</text><text x="0" y="167" class="display" font-size="31" font-weight="760">FEEL CREDIBLE.</text>
+    <text x="0" y="197" class="ui" font-size="10" fill="#a7afa6">Sourced market surfaces for builders.</text>
+    <rect x="0" y="215" width="216" height="38" fill="#d7ff4f"/><text x="71" y="239" class="ui" font-size="10" font-weight="800" style="fill:#090b09">TRY STUDIO →</text>
+    <path d="M0 342C42 293 77 367 120 304S181 261 216 258V327C178 329 157 345 134 375 82 438 40 367 0 410Z" fill="url(#ribbon)" opacity=".65"/>
+    <path d="M0 387C44 337 83 407 127 345S181 302 216 300" fill="none" stroke="#d7ff4f" stroke-width="2"/>
+    <text x="150" y="337" class="display acid" font-size="26" font-weight="760">42%</text>
+    <rect x="0" y="430" width="216" height="52" class="panel"/><text x="9" y="450" class="mono" font-size="7">LIVE / 2028 U.S. ELECTION</text><text x="9" y="472" class="ui" font-size="11">Candidate A</text><text x="180" y="472" class="display acid" font-size="17">42</text>
+  </g>
+
+  <!-- Market Card -->
+  <g transform="translate(1450 108)">
+    <rect width="430" height="250" rx="8" class="panel"/>
+    <rect width="430" height="28" fill="#d7ff4f"/><text x="12" y="19" class="mono" font-size="8" style="fill:#090b09">MARKETCARD / LIVE / DEFAULT</text>
+    <text x="18" y="67" class="display" font-size="26" font-weight="740">WILL VOTER TURNOUT EXCEED 2022?</text>
+    <text x="18" y="87" class="ui" font-size="10" fill="#8b938b">POLITICS · NOV 03 · $5.8M VOLUME</text>
+    <line x1="18" y1="102" x2="412" y2="102" class="rule"/>
+    <text x="18" y="134" class="display" font-size="21">YES</text><text x="362" y="136" class="display acid num" font-size="28" font-weight="760">67¢</text>
+    <rect x="18" y="145" width="394" height="5" fill="#2a302a"/><rect x="18" y="145" width="264" height="5" fill="#d7ff4f"/>
+    <text x="18" y="184" class="display" font-size="21" fill="#8b938b">NO</text><text x="367" y="185" class="display num" font-size="25" font-weight="740" fill="#a7afa6">33¢</text>
+    <path d="M18 226C77 210 115 234 170 203S269 193 315 202 376 180 412 188" fill="none" stroke="url(#signal)" stroke-width="2.5"/>
+  </g>
+
+  <!-- Studio -->
+  <g transform="translate(1450 390)">
+    <rect width="430" height="258" rx="8" class="panel"/>
+    <rect width="430" height="28" fill="#f3f2ea"/><text x="12" y="19" class="mono" font-size="8" style="fill:#090b09">STUDIO / SIGNAL WORKSPACE</text>
+    <rect x="18" y="45" width="394" height="36" fill="#090b09" stroke="#f3f2ea" stroke-opacity=".2"/><text x="30" y="68" class="mono" font-size="8">polymarket.com/event/2028-us-election</text>
+    <g transform="translate(18 97)">
+      <rect width="246" height="138" class="panel2"/><rect width="246" height="20" fill="#d7ff4f"/><text x="9" y="14" class="mono" font-size="7" style="fill:#090b09">LIVE PREVIEW</text>
+      <path d="M12 111C47 78 77 119 113 78S171 47 231 40" fill="none" stroke="#d7ff4f" stroke-width="2"/>
+      <text x="154" y="83" class="display acid" font-size="32" font-weight="760">42%</text>
+      <text x="12" y="132" class="ui" font-size="9">2028 U.S. ELECTION / SAMPLE</text>
+    </g>
+    <g transform="translate(278 97)"><rect width="134" height="138" fill="#090b09" stroke="#f3f2ea" stroke-opacity=".13"/><text x="12" y="22" class="mono" font-size="7">OUTPUT SIGNAL</text><rect x="12" y="38" width="110" height="27" fill="#d7ff4f"/><text x="22" y="56" class="ui" font-size="9" font-weight="800" style="fill:#090b09">EMBED</text><text x="12" y="86" class="ui" font-size="10">React</text><line x1="12" y1="96" x2="122" y2="96" class="rule"/><text x="12" y="119" class="ui" font-size="10">OG / Registry</text></g>
+  </g>
+
+  <!-- Palette -->
+  <g transform="translate(40 688)">
+    <text x="0" y="20" class="display" font-size="24" font-weight="700">MATERIAL &amp; PALETTE</text>
+    <g transform="translate(0 42)"><rect width="84" height="58" fill="#090b09" stroke="#f3f2ea" stroke-opacity=".2"/><text y="78" class="mono" font-size="9">CARBON</text><rect x="98" width="84" height="58" fill="#171d18"/><text x="98" y="78" class="mono" font-size="9">PANEL</text><rect x="196" width="84" height="58" fill="#f3f2ea"/><text x="196" y="78" class="mono" font-size="9">SIGNAL WHITE</text><rect x="294" width="84" height="58" fill="#d7ff4f"/><text x="294" y="78" class="mono" font-size="9">CHARTREUSE</text><rect x="392" width="84" height="58" fill="#ff794f"/><text x="392" y="78" class="mono" font-size="9">NEGATIVE</text></g>
+    <g transform="translate(570)"><text y="20" class="display" font-size="24" font-weight="700">TYPE</text><text y="66" class="display" font-size="39" font-weight="760">BARLOW CONDENSED</text><text y="96" class="ui" font-size="12">Public Sans · 42.8% · LIVE 16:42 UTC</text></g>
+    <g transform="translate(1110)"><text y="20" class="display" font-size="24" font-weight="700">RULES</text><text y="54" class="ui" font-size="12" fill="#a7afa6">01  Direction before decoration</text><text y="78" class="ui" font-size="12" fill="#a7afa6">02  One active signal per surface</text><text y="102" class="ui" font-size="12" fill="#a7afa6">03  Density is earned by live information</text></g>
+  </g>
+
+  <!-- Storyboard -->
+  <text x="40" y="858" class="display" font-size="24" font-weight="700">WEB-MOTION STORYBOARD / 0–1800 MS</text>
+  <g transform="translate(40 880)">
+    <g><rect width="292" height="250" rx="8" class="panel"/><text x="14" y="23" class="mono" font-size="8">00 / 0 MS · OFF AIR</text><rect x="32" y="72" width="228" height="92" fill="#090b09" stroke="#f3f2ea" stroke-opacity=".1"/><circle cx="146" cy="118" r="4" fill="#d7ff4f"/><text x="14" y="226" class="ui" font-size="12" fill="#8b938b">A live point breaks the carbon field.</text></g>
+    <g transform="translate(306)"><rect width="292" height="250" rx="8" class="panel"/><text x="14" y="23" class="mono" font-size="8">01 / 120 MS · SIGNAL CUT</text><rect x="32" y="78" width="228" height="18" fill="#d7ff4f"/><rect x="32" y="106" width="160" height="18" fill="#f3f2ea"/><rect x="32" y="134" width="96" height="18" fill="#51d5b1"/><text x="14" y="226" class="ui" font-size="12" fill="#8b938b">Three hard wipes establish cadence.</text></g>
+    <g transform="translate(612)"><rect width="292" height="250" rx="8" class="panel"/><text x="14" y="23" class="mono" font-size="8">02 / 360 MS · HEADLINE LOCK</text><text x="42" y="112" class="display" font-size="32" font-weight="760">MAKE PROBABILITY</text><text x="42" y="143" class="display" font-size="32" font-weight="760">FEEL CREDIBLE.</text><rect x="32" y="83" width="5" height="71" fill="#d7ff4f"/><text x="14" y="226" class="ui" font-size="12" fill="#8b938b">Type lands against the live rail.</text></g>
+    <g transform="translate(918)"><rect width="292" height="250" rx="8" class="panel"/><text x="14" y="23" class="mono" font-size="8">03 / 720 MS · RIBBON</text><path d="M31 163C77 93 111 184 157 111S222 72 261 69V118C224 119 207 135 184 165 129 226 80 157 31 207Z" fill="url(#ribbon)" opacity=".72"/><text x="185" y="104" class="display acid" font-size="28">42%</text><text x="14" y="226" class="ui" font-size="12" fill="#8b938b">History folds forward through depth.</text></g>
+    <g transform="translate(1224)"><rect width="292" height="250" rx="8" class="panel"/><text x="14" y="23" class="mono" font-size="8">04 / 1080 MS · DATA LOCK</text><rect x="31" y="72" width="230" height="24" fill="#f3f2ea"/><text x="39" y="88" class="mono" font-size="7" style="fill:#090b09">LIVE MARKET / SOURCE 04</text><text x="32" y="130" class="display" font-size="25">CANDIDATE A</text><text x="206" y="130" class="display acid" font-size="25">42%</text><text x="14" y="226" class="ui" font-size="12" fill="#8b938b">Evidence and price lock on one beat.</text></g>
+    <g transform="translate(1530)"><rect width="292" height="250" rx="8" class="panel"/><text x="14" y="23" class="mono" font-size="8">05 / 1800 MS · ON AIR</text><rect x="32" y="79" width="228" height="36" fill="#d7ff4f"/><text x="105" y="102" class="ui" font-size="10" font-weight="800" style="fill:#090b09">TRY STUDIO →</text><path d="M32 144H260" stroke="#f3f2ea" stroke-opacity=".3"/><text x="32" y="165" class="mono" font-size="8">LIVE / STABLE / INTERACTIVE</text><text x="14" y="226" class="ui" font-size="12" fill="#8b938b">Energy settles into a readable system.</text></g>
+  </g>
+</svg>
