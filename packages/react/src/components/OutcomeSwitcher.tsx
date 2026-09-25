@@ -14,7 +14,7 @@ export function OutcomeSwitcher({
 }: OutcomeSwitcherProps) {
   return (
     <div className="pui-outcomes" role="group" aria-label="Market outcomes">
-      {outcomes.map((outcome) => (
+      {outcomes.map((outcome) => onValueChange ? (
         <button
           aria-pressed={value === outcome.id}
           className="pui-outcome-button"
@@ -27,6 +27,11 @@ export function OutcomeSwitcher({
             {probabilityToCents(outcome.price)}
           </span>
         </button>
+      ) : (
+        <span className="pui-outcome-button" key={outcome.id}>
+          <span>{outcome.name}</span>
+          <span className="pui-outcome-price">{probabilityToCents(outcome.price)}</span>
+        </span>
       ))}
     </div>
   );

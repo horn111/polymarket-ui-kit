@@ -1,3 +1,4 @@
+import "../lib/polymarket-theme.css";
 import type { EvidenceItem } from "@polymarket-ui-kit/core";
 
 const kindLabels: Record<NonNullable<EvidenceItem["kind"]>, string> = {
@@ -17,9 +18,9 @@ export function EvidenceRail({
 }) {
   if (items.length === 0) {
     return (
-      <section className="rounded-md border border-border/70 bg-background p-5 shadow-xl">
+      <section className="pui-registry-panel p-5">
         <strong>No evidence sources</strong>
-        <p className="mt-1 text-sm text-muted-foreground">
+        <p className="mt-1 text-sm pui-registry-muted">
           Add official records, polls, models, or reporting.
         </p>
       </section>
@@ -27,25 +28,25 @@ export function EvidenceRail({
   }
 
   return (
-    <section aria-label={title} className="rounded-md border border-border/70 bg-gradient-to-br from-background via-muted/20 to-background p-5 shadow-xl">
+    <section aria-label={title} className="pui-registry-panel p-5">
       <div className="mb-4 flex items-center justify-between gap-3">
         <strong>{title}</strong>
-        <span className="text-sm text-muted-foreground">{items.length} sources</span>
+        <span className="text-sm pui-registry-muted">{items.length} sources</span>
       </div>
       <div className="flex gap-3 overflow-x-auto pb-1">
         {items.slice(0, 4).map((item) => {
           const content = (
             <>
-              <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-primary">
+              <span className="text-xs font-semibold pui-registry-accent">
                 {kindLabels[item.kind ?? "other"]}
               </span>
               <strong className="text-sm leading-snug">{item.title}</strong>
-              <span className="text-xs text-muted-foreground">{item.publisher}</span>
+              <span className="text-xs pui-registry-muted">{item.publisher}</span>
             </>
           );
           return item.href ? (
             <a
-              className="grid min-h-36 min-w-60 gap-2 rounded-sm border border-border/70 bg-muted/35 p-4 transition hover:bg-muted"
+              className="grid min-w-60 gap-1 rounded-xl border pui-registry-border pui-registry-well p-4 underline-offset-4 hover:underline"
               href={item.href}
               key={item.id}
               rel="noreferrer"
@@ -54,7 +55,7 @@ export function EvidenceRail({
             </a>
           ) : (
             <article
-              className="grid min-h-36 min-w-60 gap-2 rounded-sm border border-border/70 bg-muted/35 p-4"
+              className="grid min-w-60 gap-1 rounded-xl border pui-registry-border pui-registry-well p-4"
               key={item.id}
             >
               {content}

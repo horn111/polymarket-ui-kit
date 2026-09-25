@@ -13,7 +13,7 @@
     "@polymarket-ui-kit/core": "workspace:*",
     "@polymarket-ui-kit/react": "workspace:*",
     "@polymarket/clob-client-v2": "^1.0.6",
-    "next": "^15.1.7",
+    "next": "^15.5.24",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "viem": "^2.54.0"

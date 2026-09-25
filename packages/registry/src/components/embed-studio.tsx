@@ -1,6 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import "../lib/polymarket-theme.css";
+
+import { useEffect, useMemo, useState } from "react";
 import {
   buildEmbedUrl,
   buildIframeSnippet,
@@ -31,9 +33,22 @@ export function EmbedStudio({
   const [surface, setSurface] = useState<EmbedSurface>("share-card");
   const [theme, setTheme] = useState<"light" | "dark">("dark");
   const [attribution, setAttribution] = useState("your-product.com");
+  const [previewFields, setPreviewFields] = useState({
+    input: defaultInput,
+    attribution: "your-product.com",
+  });
+
+  useEffect(() => {
+    const timer = window.setTimeout(
+      () => setPreviewFields({ input, attribution }),
+      450,
+    );
+    return () => window.clearTimeout(timer);
+  }, [input, attribution]);
 
   const resolved = useMemo(() => {
     try {
+      const { input, attribution } = previewFields;
       const slug = resolvePolymarketSlug(input);
       const common = {
         baseUrl,
@@ -77,27 +92,24 @@ export function EmbedStudio({
         slug: null,
       };
     }
-  }, [attribution, baseUrl, input, registryBaseUrl, surface, theme]);
+  }, [previewFields, baseUrl, registryBaseUrl, surface, theme]);
 
   return (
-    <section className="grid gap-5 rounded-md border border-border/70 bg-gradient-to-br from-background via-muted/20 to-background p-5 shadow-2xl">
+    <section className="pui-registry-panel grid gap-4 p-5">
       <div className="grid gap-2">
-        <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-primary">
-          Polymarket embed studio
-        </span>
-        <h3 className="text-3xl font-black leading-[1.05] tracking-[-0.045em]">
-          Calibrate once. Publish everywhere.
-        </h3>
+        <h3 className="text-2xl font-medium leading-tight">Polymarket embed studio</h3>
       </div>
 
       <div className="grid gap-3 md:grid-cols-[1fr_auto_auto]">
         <input
-          className="min-h-11 rounded-sm border border-border/70 bg-background px-3 text-sm"
+          aria-label="Market URL or slug"
+          className="min-h-11 min-w-0 rounded-lg border pui-registry-border pui-registry-well px-3 text-sm"
           onChange={(event) => setInput(event.target.value)}
           value={input}
         />
         <select
-          className="min-h-11 rounded-sm border border-border/70 bg-background px-3 text-sm"
+          aria-label="Surface"
+          className="min-h-11 rounded-lg border pui-registry-border pui-registry-well px-3 text-sm"
           onChange={(event) => setSurface(event.target.value as EmbedSurface)}
           value={surface}
         >
@@ -108,7 +120,9 @@ export function EmbedStudio({
           ))}
         </select>
         <button
-          className="min-h-11 rounded-sm border border-border/70 px-3 font-mono text-xs font-bold uppercase tracking-[0.08em]"
+          aria-label="Dark preview"
+          aria-pressed={theme === "dark"}
+          className="min-h-11 rounded-lg border pui-registry-border px-3 text-sm font-medium"
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           type="button"
         >
@@ -117,28 +131,32 @@ export function EmbedStudio({
       </div>
 
       <input
-        className="min-h-11 rounded-sm border border-border/70 bg-background px-3 text-sm"
+        aria-label="Attribution"
+        className="min-h-11 rounded-lg border pui-registry-border pui-registry-well px-3 text-sm"
         onChange={(event) => setAttribution(event.target.value)}
         value={attribution}
       />
 
       {resolved.error || !resolved.outputs ? (
-        <div className="rounded-sm border border-destructive/40 bg-destructive/10 p-3 text-sm font-semibold text-destructive">
+        <div
+          className="rounded-lg border pui-registry-border pui-registry-well p-3 text-sm pui-registry-accent"
+          role="alert"
+        >
           {resolved.error ?? "Paste a valid Polymarket URL or slug."}
         </div>
       ) : (
         <div className="grid gap-3">
           <iframe
-            className="h-[420px] w-full rounded-sm border border-border/70"
+            className="h-[420px] w-full rounded-xl border pui-registry-border"
             src={resolved.outputs.embed}
             title={`Polymarket embed for ${resolved.slug}`}
           />
           {Object.entries(resolved.outputs).map(([label, value]) => (
             <div className="grid gap-1" key={label}>
-              <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-muted-foreground">
+              <span className="text-xs font-bold uppercase pui-registry-muted">
                 {label}
               </span>
-              <code className="overflow-auto rounded-sm border border-border/70 bg-muted p-3 text-xs">
+              <code className="overflow-auto rounded-lg border pui-registry-border pui-registry-well p-3 text-xs">
                 {value}
               </code>
             </div>

@@ -75,11 +75,12 @@ describe("core adapters", () => {
   });
 
   it("fetches price history with public CLOB query parameters", async () => {
-    const fetcher = vi.fn(async () =>
-      new Response(JSON.stringify({ history: [{ t: 1719878400, p: 0.64 }] }), {
-        headers: { "content-type": "application/json" },
-        status: 200,
-      }),
+    const fetcher = vi.fn(
+      async () =>
+        new Response(JSON.stringify({ history: [{ t: 1719878400, p: 0.64 }] }), {
+          headers: { "content-type": "application/json" },
+          status: 200,
+        }),
     );
 
     const points = await getPriceHistory(
@@ -109,14 +110,12 @@ describe("core adapters", () => {
       market,
       outcome: market.outcomes[0]!,
       notional: 25,
-      builderCode:
-        "0x00000000000000000000000000000000000000000000000000000000000000f5",
+      builderCode: "0x00000000000000000000000000000000000000000000000000000000000000f5",
     });
 
     expect(draft).toMatchObject({
       amount: 25,
-      builderCode:
-        "0x00000000000000000000000000000000000000000000000000000000000000f5",
+      builderCode: "0x00000000000000000000000000000000000000000000000000000000000000f5",
       marketSlug: "sample",
       orderType: "FOK",
       outcomeId: "0",
@@ -222,11 +221,12 @@ describe("combo-aware core", () => {
   });
 
   it("fetches combo markets from the public RFQ catalog endpoint", async () => {
-    const fetcher = vi.fn(async () =>
-      new Response(JSON.stringify({ data: [rawComboMarket] }), {
-        headers: { "content-type": "application/json" },
-        status: 200,
-      }),
+    const fetcher = vi.fn(
+      async () =>
+        new Response(JSON.stringify({ data: [rawComboMarket] }), {
+          headers: { "content-type": "application/json" },
+          status: 200,
+        }),
     );
 
     const page = await listComboMarkets(
@@ -285,8 +285,9 @@ describe("share image export", () => {
     expect(svg).toContain('role="img"');
     expect(svg).toContain("test-studio");
     expect(svg).toContain("Fixture fallback");
-    expect(svg).toContain("#a75c3a");
-    expect(svg).toContain("#188c77");
+    expect(svg).toContain("#806021");
+    expect(svg).toContain("Civic Forecast");
+    expect(svg).toContain("70%");
     expect(svg).not.toContain("#f59e0b");
     expect(svg).toContain("&lt;script&gt;");
     expect(svg).not.toContain("<script>");
@@ -302,7 +303,9 @@ describe("distribution embed helpers", () => {
 
   it("resolves Polymarket event URLs", () => {
     expect(
-      resolvePolymarketSlug("https://polymarket.com/event/will-bitcoin-hit-100k-in-2026"),
+      resolvePolymarketSlug(
+        "https://polymarket.com/event/will-bitcoin-hit-100k-in-2026",
+      ),
     ).toBe("will-bitcoin-hit-100k-in-2026");
   });
 
@@ -318,7 +321,9 @@ describe("distribution embed helpers", () => {
     expect(() => resolvePolymarketSlug("https://example.com/event/x")).toThrowError(
       PolymarketEmbedError,
     );
-    expect(() => resolvePolymarketSlug("not a slug")).toThrowError(PolymarketEmbedError);
+    expect(() => resolvePolymarketSlug("not a slug")).toThrowError(
+      PolymarketEmbedError,
+    );
   });
 
   it("builds iframe snippets with encoded embed routes", () => {
@@ -331,7 +336,9 @@ describe("distribution embed helpers", () => {
     });
 
     expect(snippet).toContain("iframe");
-    expect(snippet).toContain("https://demo.example/embed/will-bitcoin-hit-100k-in-2026");
+    expect(snippet).toContain(
+      "https://demo.example/embed/will-bitcoin-hit-100k-in-2026",
+    );
     expect(snippet).toContain("surface=share-card");
     expect(snippet).toContain("theme=light");
     expect(snippet).toContain("attribution=builder+studio");

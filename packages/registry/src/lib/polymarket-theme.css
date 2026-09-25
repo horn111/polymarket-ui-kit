@@ -1,0 +1,321 @@
+/* Namespaced tokens follow the nearest theme scope, independently of Tailwind. */
+:root,
+[data-pui-theme="light"],
+.light {
+  --pui-registry-text: #1c302c;
+  --pui-registry-muted: #53665f;
+  --pui-registry-accent: #806021;
+  --pui-registry-border: #cad5ca;
+  --pui-registry-well: #dfe7de;
+  --pui-registry-surface: #e3eae2;
+  --pui-registry-material: linear-gradient(135deg, #f8faf5, #e4ece3);
+  --pui-registry-positive: #32614c;
+  --pui-registry-positive-bg: #e3eee4;
+}
+
+.dark:not([data-pui-theme="light"]),
+[data-pui-theme="dark"] {
+  --pui-registry-text: #e4eae3;
+  --pui-registry-muted: #a5b4ad;
+  --pui-registry-accent: #d0b779;
+  --pui-registry-border: #2c4140;
+  --pui-registry-well: #101c1e;
+  --pui-registry-surface: #132224;
+  --pui-registry-material: linear-gradient(135deg, #142326, #233c3a);
+  --pui-registry-positive: #98c9ad;
+  --pui-registry-positive-bg: #203c33;
+}
+
+.pui-registry-panel {
+  border: 1px solid var(--pui-registry-border);
+  border-radius: 14px;
+  background: var(--pui-registry-material);
+  color: var(--pui-registry-text);
+}
+.pui-registry-muted {
+  color: var(--pui-registry-muted);
+}
+.pui-registry-question {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+.pui-registry-accent {
+  color: var(--pui-registry-accent);
+}
+.pui-registry-border {
+  border-color: var(--pui-registry-border);
+}
+.pui-registry-well {
+  background: var(--pui-registry-well);
+}
+.pui-registry-surface {
+  background: var(--pui-registry-surface);
+}
+.pui-registry-track {
+  background: var(--pui-registry-border);
+}
+.pui-registry-fill {
+  background: var(--pui-registry-accent);
+}
+.pui-registry-positive {
+  background: var(--pui-registry-positive-bg);
+  color: var(--pui-registry-positive);
+}
+.pui-registry-panel :is(a, button, input, select, summary):focus-visible {
+  outline: 2px solid var(--pui-registry-accent);
+  outline-offset: 3px;
+}
+
+/* A briefing is a question and its evidence sheet, not a dashboard of tiles. */
+.pui-registry-brief {
+  container-type: inline-size;
+  background: var(--pui-registry-material);
+  border: 1px solid var(--pui-registry-border);
+  border-radius: 14px;
+  color: var(--pui-registry-text);
+  font-family: "Instrument Sans", system-ui, sans-serif;
+  min-width: 0;
+  overflow: hidden;
+}
+.pui-registry-brief__layout {
+  display: grid;
+}
+.pui-registry-brief__cover {
+  padding: 1.5rem;
+  background: var(--pui-registry-surface);
+}
+.pui-registry-brief__opening h2 {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: clamp(1.75rem, 3.4cqi, 2.65rem);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.14;
+  margin: 0;
+  text-wrap: pretty;
+}
+.pui-registry-brief__topline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+  margin-top: 1.2rem;
+  color: var(--pui-registry-muted);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+.pui-registry-brief__topline span:first-child {
+  color: var(--pui-registry-accent);
+}
+.pui-registry-brief__record {
+  display: grid;
+  align-content: start;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: var(--pui-registry-surface);
+  border-top: 1px solid var(--pui-registry-border);
+}
+.pui-registry-brief h3 {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.pui-registry-brief__record p {
+  margin: 0.5rem 0;
+  color: var(--pui-registry-muted);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+.pui-registry-brief__record section > span {
+  display: block;
+  color: var(--pui-registry-muted);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+.pui-registry-brief__record a,
+.pui-registry-brief summary {
+  color: var(--pui-registry-accent);
+  font-size: 0.75rem;
+}
+.pui-registry-brief__record a {
+  display: inline-block;
+  padding-block: 0.6rem;
+}
+.pui-registry-brief summary {
+  cursor: pointer;
+  min-height: 44px;
+  padding-block: 0.8rem;
+}
+.pui-registry-brief summary:focus-visible,
+.pui-registry-brief a:focus-visible {
+  outline: 2px solid var(--pui-registry-accent);
+  outline-offset: 3px;
+}
+.pui-registry-brief ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.pui-registry-brief li {
+  border-top: 1px solid var(--pui-registry-border);
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.65rem 0;
+  font-size: 0.75rem;
+}
+.pui-registry-brief li span {
+  color: var(--pui-registry-muted);
+}
+.pui-registry-brief li a {
+  padding: 0;
+}
+.pui-registry-brief__sheet {
+  padding: 1.5rem;
+  min-width: 0;
+  border-top: 1px solid var(--pui-registry-border);
+}
+.pui-registry-brief__reading-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+.pui-registry-brief__reading-columns > section {
+  min-width: 0;
+}
+.pui-registry-brief__reading header {
+  display: grid;
+  gap: 0.3rem;
+  padding-bottom: 1rem;
+}
+.pui-registry-brief__reading header > span {
+  color: var(--pui-registry-muted);
+  font-size: 0.75rem;
+}
+.pui-registry-brief__row {
+  min-height: 5.05rem;
+  border-top: 1px solid var(--pui-registry-border);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 0.55rem;
+  padding: 0.9rem 0;
+}
+.pui-registry-brief__row strong {
+  font-size: 0.875rem;
+  font-weight: 400;
+  overflow-wrap: anywhere;
+}
+.pui-registry-brief__row b,
+.pui-registry-brief__poll strong {
+  font-size: 1.75rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 450;
+  letter-spacing: -0.03em;
+}
+.pui-registry-brief__measure {
+  grid-column: 1 / -1;
+  background: var(--pui-registry-border);
+  height: 4px;
+}
+.pui-registry-brief__measure > span {
+  display: block;
+  height: 100%;
+  background: var(--pui-registry-accent);
+}
+.pui-registry-brief__poll {
+  border-top: 1px solid var(--pui-registry-border);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.9rem 0;
+  min-height: 5.05rem;
+}
+.pui-registry-brief__poll > span {
+  font-size: 0.875rem;
+}
+.pui-registry-brief__caution {
+  border-top: 1px solid var(--pui-registry-border);
+  margin: 0;
+  padding-top: 1rem;
+  color: var(--pui-registry-muted);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  max-width: 65ch;
+}
+.pui-registry-brief__history {
+  display: grid;
+  margin-top: 2rem;
+  min-width: 0;
+}
+.pui-registry-brief__history-heading,
+.pui-registry-brief__history-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+  align-items: baseline;
+}
+.pui-registry-brief__history-heading strong {
+  color: var(--pui-registry-accent);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+.pui-registry-brief__history .pui-registry-sparkline {
+  width: 100%;
+  height: 5.25rem;
+  margin: 1.25rem 0 0.9rem;
+  overflow: visible;
+}
+.pui-registry-brief__history .pui-registry-sparkline polyline {
+  vector-effect: non-scaling-stroke;
+  stroke-width: 2px;
+}
+.pui-registry-brief__history-foot {
+  border-top: 1px solid var(--pui-registry-border);
+  padding-top: 0.5rem;
+  color: var(--pui-registry-muted);
+  font-size: 0.6875rem;
+  font-variant-numeric: tabular-nums;
+}
+.pui-registry-brief__history > p {
+  color: var(--pui-registry-muted);
+  font-size: 0.875rem;
+}
+@container (min-width: 700px) {
+  .pui-registry-brief__layout {
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.4fr);
+    grid-template-areas: "cover sheet" "record sheet";
+    grid-template-rows: auto 1fr;
+  }
+  .pui-registry-brief__cover,
+  .pui-registry-brief__sheet {
+    padding: clamp(1.5rem, 3cqi, 2.5rem);
+  }
+  .pui-registry-brief__cover {
+    grid-area: cover;
+  }
+  .pui-registry-brief__record {
+    grid-area: record;
+    border-top: 0;
+    padding: 0 clamp(1.5rem, 3cqi, 2.5rem) clamp(1.5rem, 3cqi, 2.5rem);
+  }
+  .pui-registry-brief__sheet {
+    grid-area: sheet;
+    border-top: 0;
+    border-left: 1px solid var(--pui-registry-border);
+  }
+}
+@container (max-width: 380px) {
+  .pui-registry-brief__reading-columns {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .pui-registry-brief__cover,
+  .pui-registry-brief__sheet,
+  .pui-registry-brief__record {
+    padding: 1.25rem;
+  }
+}
+
+.pui-registry-sparkline {
+  color: var(--pui-registry-accent);
+}

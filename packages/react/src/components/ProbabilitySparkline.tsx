@@ -1,5 +1,5 @@
 import type { MarketPricePoint } from "@polymarket-ui-kit/core";
-import { cx } from "./shared";
+import { cx } from "./shared.js";
 
 export interface ProbabilitySparklineProps {
   points: MarketPricePoint[];

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import {
   buildIframeSnippet,
   buildReactSnippet,
@@ -46,7 +46,7 @@ function SnippetBlock({ copied, disabled, label, onCopy, value }: SnippetBlockPr
       <div>
         <span>{label}</span>
         <button disabled={disabled} onClick={() => onCopy(label, value)} type="button">
-          {copied === label ? "Copied" : "Copy"}
+          {copied === `${label}:${value}` ? "Copied" : "Copy"}
         </button>
       </div>
       <code>{value}</code>
@@ -65,6 +65,8 @@ export function EmbedSnippetPanel({
   theme = "dark",
 }: EmbedSnippetPanelProps) {
   const [copied, setCopied] = useState<string | null>(null);
+  const [copyError, setCopyError] = useState("");
+  const id = useId();
   const [outputTab, setOutputTab] = useState<OutputTab>("embed");
   const resolved = useMemo(() => {
     try {
@@ -121,14 +123,16 @@ export function EmbedSnippetPanel({
   }, [attribution, baseUrl, builderCode, input, registryBaseUrl, surface, theme]);
 
   async function copyValue(label: string, value: string) {
+    setCopyError("");
     try {
       await navigator.clipboard.writeText(value);
+      setCopied(`${label}:${value}`);
     } catch {
-      // Clipboard writes can be blocked in embedded or local preview contexts.
+      setCopied(null);
+      setCopyError(
+        "Clipboard unavailable. Select the code below and copy it manually.",
+      );
     }
-
-    setCopied(label);
-    window.setTimeout(() => setCopied(null), 1400);
   }
 
   const classes = ["pui-embed-snippet-panel", className].filter(Boolean).join(" ");
@@ -137,7 +141,6 @@ export function EmbedSnippetPanel({
     <section className={classes} data-pui-theme={theme}>
       <header className="pui-embed-snippet-panel__header">
         <div>
-          <span>Distribution outputs</span>
           <h3>{outputTabs.find((item) => item.value === outputTab)?.label} output</h3>
         </div>
         <strong>{resolved.slug ?? "Invalid input"}</strong>
@@ -147,10 +150,31 @@ export function EmbedSnippetPanel({
         className="pui-embed-snippet-panel__tabs"
         role="tablist"
         aria-label="Output format"
+        onKeyDown={(event) => {
+          const index = outputTabs.findIndex((item) => item.value === outputTab);
+          const next =
+            event.key === "ArrowRight"
+              ? (index + 1) % outputTabs.length
+              : event.key === "ArrowLeft"
+                ? (index + outputTabs.length - 1) % outputTabs.length
+                : event.key === "Home"
+                  ? 0
+                  : event.key === "End"
+                    ? outputTabs.length - 1
+                    : -1;
+          if (next < 0) return;
+          event.preventDefault();
+          setOutputTab(outputTabs[next]!.value);
+          const buttons = event.currentTarget.querySelectorAll<HTMLButtonElement>("button");
+          buttons[next]?.focus();
+        }}
       >
         {outputTabs.map((item) => (
           <button
             aria-selected={outputTab === item.value}
+            aria-controls={`${id}-panel`}
+            id={`${id}-${item.value}`}
+            tabIndex={outputTab === item.value ? 0 : -1}
             data-active={outputTab === item.value ? "true" : undefined}
             key={item.value}
             onClick={() => setOutputTab(item.value)}
@@ -168,7 +192,16 @@ export function EmbedSnippetPanel({
         </div>
       ) : null}
 
-      <div className="pui-embed-snippet-panel__grid" role="tabpanel">
+      <p className="pui-muted" role="status">
+        {copyError}
+      </p>
+      <div
+        className="pui-embed-snippet-panel__grid"
+        role="tabpanel"
+        id={`${id}-panel`}
+        aria-labelledby={`${id}-${outputTab}`}
+        tabIndex={0}
+      >
         {outputTab === "embed" ? (
           <SnippetBlock
             copied={copied}

@@ -3,7 +3,7 @@ import {
   type LeaderboardParams,
   type TraderLeaderboardRow,
 } from "@polymarket-ui-kit/core";
-import { useAsyncData, type AsyncDataOptions } from "./useAsyncData";
+import { useAsyncData, type AsyncDataOptions } from "./useAsyncData.js";
 
 export type UseLeaderboardOptions = AsyncDataOptions<TraderLeaderboardRow[]>;
 

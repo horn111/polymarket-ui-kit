@@ -1,5 +1,6 @@
 import { formatRelativeTime, type EvidenceItem } from "@polymarket-ui-kit/core";
-import { cx, EmptyState } from "./shared";
+import { cx, EmptyState } from "./shared.js";
+import { DirectionArrow } from "./DirectionArrow.js";
 
 export interface EvidenceRailProps {
   items: EvidenceItem[];
@@ -26,20 +27,6 @@ function EvidenceContent({ item }: { item: EvidenceItem }) {
         {item.publishedAt ? ` · ${formatRelativeTime(item.publishedAt)}` : ""}
       </span>
     </>
-  );
-}
-
-function ExternalArrowIcon() {
-  return (
-    <svg aria-hidden="true" height="14" viewBox="0 0 16 16" width="14">
-      <path
-        d="M5 11 11 5M6 5h5v5"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="square"
-        strokeWidth="1.5"
-      />
-    </svg>
   );
 }
 
@@ -78,7 +65,7 @@ export function EvidenceRail({
             <a className={classes} href={item.href} key={item.id} rel="noreferrer">
               <EvidenceContent item={item} />
               <span className="pui-evidence__arrow" aria-hidden="true">
-                <ExternalArrowIcon />
+                <DirectionArrow diagonal />
               </span>
             </a>
           ) : (

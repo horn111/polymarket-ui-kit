@@ -1,42 +1,26 @@
-import { formatCompactNumber } from "../format/currency";
-import { clampProbability, probabilityToCents } from "../format/probability";
-import type { PolymarketMarket, ShareCardSvgOptions } from "../types/market";
+import { formatCompactNumber } from "../format/currency.js";
+import { clampProbability, formatProbability } from "../format/probability.js";
+import type { PolymarketMarket, ShareCardSvgOptions } from "../types/market.js";
 
 const DEFAULT_WIDTH = 1200;
 const DEFAULT_HEIGHT = 630;
 
 const themes = {
   dark: {
-    page: "#0b0a0c",
-    card: "#201f27",
-    cardShade: "#17161c",
-    cardStroke: "#45424c",
-    accent: "#d28457",
-    accentSoft: "#34231b",
-    accentStroke: "#865338",
-    ceramic: "#ece9e1",
-    ceramicText: "#1c1a19",
-    text: "#f0ede7",
-    muted: "#aaa5ad",
-    surface: "#0f0e12",
-    surfaceStroke: "#3d3a43",
-    live: "#55cfb3",
+    page: "#0d1718",
+    paper: "#1b302f",
+    border: "#2c4140",
+    accent: "#d0b779",
+    text: "#e4eae3",
+    muted: "#a5b4ad",
   },
   light: {
-    page: "#efede7",
-    card: "#e5e0d8",
-    cardShade: "#d6d0c7",
-    cardStroke: "#aca49a",
-    accent: "#a75c3a",
-    accentSoft: "#ead9cd",
-    accentStroke: "#bc8366",
-    ceramic: "#faf7f1",
-    ceramicText: "#211e1b",
-    text: "#211e1b",
-    muted: "#6d655e",
-    surface: "#f7f3ed",
-    surfaceStroke: "#bdb5ab",
-    live: "#188c77",
+    page: "#e9ede7",
+    paper: "#f5f7f1",
+    border: "#cad5ca",
+    accent: "#806021",
+    text: "#1c302c",
+    muted: "#53665f",
   },
 };
 
@@ -57,10 +41,8 @@ function truncate(value: string, maxLength: number): string {
 function splitText(value: string, maxLength: number, maxLines: number): string[] {
   const lines: string[] = [];
   let current = "";
-
   for (const word of value.split(/\s+/).filter(Boolean)) {
     const next = current ? `${current} ${word}` : word;
-
     if (next.length > maxLength && current) {
       lines.push(current);
       current = word;
@@ -68,22 +50,13 @@ function splitText(value: string, maxLength: number, maxLines: number): string[]
       current = next;
     }
   }
-
-  if (current) {
-    lines.push(current);
-  }
-
+  if (current) lines.push(current);
   if (lines.length > maxLines) {
     const visible = lines.slice(0, maxLines);
     visible[maxLines - 1] = truncate(visible[maxLines - 1] ?? "", maxLength);
     return visible;
   }
-
   return lines;
-}
-
-function statValue(label: string, value: number | null | undefined) {
-  return value ? { label, value: formatCompactNumber(value) } : null;
 }
 
 export function createShareCardSvg(
@@ -94,66 +67,40 @@ export function createShareCardSvg(
   const height = options.height ?? DEFAULT_HEIGHT;
   const theme = themes[options.theme ?? "dark"];
   const attribution = options.attribution ?? "polymarket-ui-kit";
-  const statusLabel = options.statusLabel ?? "Live market";
-  const leadingOutcome = market.outcomes[0];
-  const probability = leadingOutcome ? clampProbability(leadingOutcome.price ?? 0) : 0;
-  const probabilityWidth = Math.round(340 * probability);
-  const questionLines = splitText(market.question, 43, 3)
+  const statusLabel =
+    options.statusLabel ??
+    (market.status === "unknown"
+      ? "Market"
+      : `${market.status[0]!.toUpperCase()}${market.status.slice(1)} market`);
+  const leadingOutcome = [...market.outcomes]
+    .filter(
+      (outcome) => typeof outcome.price === "number" && Number.isFinite(outcome.price),
+    )
+    .sort((a, b) => (b.price ?? -1) - (a.price ?? -1))[0];
+  const probability =
+    leadingOutcome?.price != null ? clampProbability(leadingOutcome.price) : null;
+  const questionLines = splitText(market.question, 21, 4)
     .map(
       (line, index) =>
-        `<text x="112" y="${202 + index * 43}" fill="${theme.ceramicText}" font-family="Arial, sans-serif" font-size="38" font-weight="900" letter-spacing="-1.5">${escapeSvg(line)}</text>`,
+        `<text x="104" y="${245 + index * 62}" fill="${theme.text}" font-family="Instrument Sans, Arial, sans-serif" font-size="54" font-weight="500">${escapeSvg(line)}</text>`,
     )
     .join("\n  ");
-  const stats = [
-    statValue("Volume", market.volume),
-    statValue("Liquidity", market.liquidity),
-    statValue("Comments", market.commentCount),
-  ].filter((item): item is { label: string; value: string } => Boolean(item));
-  const visibleStats = stats.length
-    ? stats.slice(0, 2)
-    : [{ label: "Status", value: market.status }];
-  const statsSvg = visibleStats
-    .map((stat, index) => {
-      const y = 375 + index * 82;
-      return `<text x="774" y="${y}" fill="${theme.muted}" font-family="Consolas, monospace" font-size="16" letter-spacing="1.2">${escapeSvg(stat.label.toUpperCase())}</text>
-  <text x="774" y="${y + 34}" fill="${theme.text}" font-family="Arial, sans-serif" font-size="30" font-weight="850">${escapeSvg(stat.value)}</text>`;
-    })
-    .join("\n  ");
+  const volume = market.volume != null ? formatCompactNumber(market.volume) : "—";
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${DEFAULT_WIDTH} ${DEFAULT_HEIGHT}" role="img" aria-label="${escapeSvg(market.question)}">
-  <defs>
-    <linearGradient id="pui-metal" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="${theme.card}"/>
-      <stop offset="0.55" stop-color="${theme.cardShade}"/>
-      <stop offset="1" stop-color="${theme.card}"/>
-    </linearGradient>
-    <clipPath id="pui-card-clip"><rect x="54" y="46" width="1092" height="538" rx="18"/></clipPath>
-  </defs>
   <rect width="1200" height="630" fill="${theme.page}"/>
-  <rect x="54" y="46" width="1092" height="538" rx="18" fill="url(#pui-metal)" stroke="${theme.cardStroke}"/>
-  <g clip-path="url(#pui-card-clip)">
-    <path d="M760 46h196L690 584H494z" fill="${theme.accentSoft}" opacity="0.48"/>
-  </g>
-  <circle cx="74" cy="66" r="5" fill="${theme.muted}"/>
-  <circle cx="1126" cy="66" r="5" fill="${theme.muted}"/>
-  <rect x="90" y="78" width="24" height="30" rx="3" fill="${theme.cardShade}" stroke="${theme.cardStroke}"/>
-  <rect x="102" y="86" width="25" height="30" rx="3" fill="${theme.ceramic}" stroke="${theme.cardStroke}"/>
-  <path d="M96 97h38" stroke="${theme.accent}" stroke-width="3"/>
-  <text x="148" y="102" fill="${theme.text}" font-family="Arial, sans-serif" font-size="19" font-weight="850">POLYMARKET UI KIT</text>
-  <circle cx="884" cy="97" r="5" fill="${theme.live}"/>
-  <text x="900" y="102" fill="${theme.muted}" font-family="Consolas, monospace" font-size="14" letter-spacing="1.2">${escapeSvg(statusLabel)}</text>
-  <rect x="90" y="136" width="1020" height="148" rx="7" fill="${theme.ceramic}" stroke="${theme.cardStroke}"/>
-  <text x="112" y="168" fill="${theme.accent}" font-family="Consolas, monospace" font-size="13" letter-spacing="1.1">MARKET / ${escapeSvg((market.category ?? "PREDICTION").toUpperCase())}</text>
+  <text x="70" y="100" fill="${theme.text}" font-family="Instrument Sans, Arial, sans-serif" font-size="30" font-weight="700">Civic Forecast</text>
+  <text x="1128" y="100" text-anchor="end" fill="${theme.muted}" font-family="Instrument Sans, Arial, sans-serif" font-size="22">${escapeSvg(truncate(statusLabel, 38))}</text>
+  <path d="M70 119H1130" stroke="${theme.border}"/>
+  <rect x="70" y="145" width="1060" height="370" rx="24" fill="${theme.paper}" stroke="${theme.border}"/>
+  <text x="104" y="199" fill="${theme.muted}" font-family="Instrument Sans, Arial, sans-serif" font-size="22">${escapeSvg(truncate(market.category ?? "Prediction market", 36))}</text>
   ${questionLines}
-  <rect x="90" y="306" width="640" height="194" rx="7" fill="${theme.surface}" stroke="${theme.surfaceStroke}"/>
-  <text x="116" y="344" fill="${theme.muted}" font-family="Consolas, monospace" font-size="14" letter-spacing="1.2">LEADING OUTCOME</text>
-  <text x="116" y="390" fill="${theme.text}" font-family="Arial, sans-serif" font-size="28" font-weight="800">${escapeSvg(truncate(leadingOutcome?.name ?? "Outcome", 26))}</text>
-  <text x="522" y="406" fill="${theme.accent}" font-family="Arial, sans-serif" font-size="74" font-weight="900" letter-spacing="-3">${escapeSvg(probabilityToCents(leadingOutcome?.price))}</text>
-  <rect x="116" y="452" width="340" height="4" fill="${theme.card}"/>
-  <rect x="116" y="452" width="${probabilityWidth}" height="4" fill="${theme.accent}"/>
-  <rect x="750" y="306" width="360" height="194" rx="7" fill="${theme.cardShade}" stroke="${theme.surfaceStroke}"/>
-  ${statsSvg}
-  <text x="90" y="548" fill="${theme.muted}" font-family="Consolas, monospace" font-size="13" letter-spacing="1.1">CIVIC FORECAST / CALIBRATED EDITION</text>
-  <text x="840" y="548" fill="${theme.muted}" font-family="Consolas, monospace" font-size="13">${escapeSvg(truncate(attribution, 30))}</text>
+  <rect x="780" y="161" width="334" height="338" rx="16" fill="#101c1e"/>
+  <text x="810" y="208" fill="#a5b4ad" font-family="Instrument Sans, Arial, sans-serif" font-size="23">Market leader</text>
+  <text x="810" y="385" fill="#e4eae3" font-family="Instrument Sans, Arial, sans-serif" font-size="102" font-weight="500">${escapeSvg(formatProbability(probability))}</text>
+  <text x="810" y="448" fill="#e4eae3" font-family="Instrument Sans, Arial, sans-serif" font-size="31">${escapeSvg(truncate(leadingOutcome?.name ?? "No outcome", 18))}</text>
+  <path d="M70 540H1130" stroke="${theme.border}"/>
+  <text x="70" y="576" fill="${theme.muted}" font-family="Instrument Sans, Arial, sans-serif" font-size="21">Volume · ${escapeSvg(volume)}</text>
+  <text x="1130" y="576" text-anchor="end" fill="${theme.accent}" font-family="Instrument Sans, Arial, sans-serif" font-size="21">${escapeSvg(truncate(attribution, 34))}</text>
 </svg>`;
 }

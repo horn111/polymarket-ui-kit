@@ -5,10 +5,6 @@
     "incremental": true,
     "jsx": "preserve",
     "baseUrl": "../..",
-    "paths": {
-      "@polymarket-ui-kit/core": ["packages/core/src/index.ts"],
-      "@polymarket-ui-kit/react": ["packages/react/src/index.ts"]
-    },
     "plugins": [
       {
         "name": "next"

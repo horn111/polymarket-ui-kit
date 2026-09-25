@@ -1,80 +1,59 @@
-import type { PolymarketMarket } from "@polymarket-ui-kit/core";
-import { formatCompact, formatProbability } from "../lib/polymarket-format";
+import "../lib/polymarket-theme.css";
+import { formatProbability, type PolymarketMarket } from "@polymarket-ui-kit/core";
+import { formatCompact } from "../lib/polymarket-format";
 
-export function ShareCard({ market }: { market: PolymarketMarket }) {
-  const leadingOutcome = market.outcomes[0];
-  const probability = Math.min(1, Math.max(0, leadingOutcome?.price ?? 0));
-  const stats = [
-    market.volume ? { label: "Volume", value: formatCompact(market.volume) } : null,
-    market.liquidity
-      ? { label: "Liquidity", value: formatCompact(market.liquidity) }
-      : null,
-    market.commentCount
-      ? { label: "Comments", value: formatCompact(market.commentCount) }
-      : null,
-  ].filter((item): item is { label: string; value: string } => Boolean(item));
-
+export function ShareCard({
+  market,
+  attribution = "polymarket-ui-kit",
+  statusLabel,
+}: {
+  market: PolymarketMarket;
+  attribution?: string;
+  statusLabel?: string;
+}) {
+  const leadingOutcome = [...market.outcomes].sort(
+    (a, b) => (b.price ?? -1) - (a.price ?? -1),
+  )[0];
   return (
-    <article className="grid min-h-[340px] gap-5 overflow-hidden rounded-md border border-zinc-700 bg-gradient-to-br from-zinc-800 via-zinc-950 to-zinc-900 p-6 text-stone-100 shadow-2xl tabular-nums">
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <span className="text-sm font-black tracking-tight">Polymarket UI Kit</span>
-          <span className="border border-teal-300/30 bg-teal-300/10 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.1em] text-teal-200">
-            Live market
+    <article className="pui-registry-panel p-5">
+      <header className="flex items-center justify-between gap-3 pb-3 text-xs">
+        <span>
+          <strong className="pui-registry-accent">Polymarket</strong>
+          <span className="ml-3 border-l pui-registry-border pl-3 pui-registry-muted">
+            {statusLabel ?? market.status}
           </span>
-        </div>
-        <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-zinc-400">polymarket-ui-kit</span>
-      </div>
-
-      <div className="grid gap-5">
-        <div className="grid gap-2">
-          <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-orange-300">
-            {market.category ?? "Prediction market"}
-          </span>
-          <h2
-            className="overflow-hidden break-words text-2xl font-black leading-[1.05] tracking-normal sm:text-3xl"
-            style={{
-              display: "-webkit-box",
-              WebkitBoxOrient: "vertical",
-              WebkitLineClamp: 4,
-            }}
-          >
+        </span>
+        <span className="pui-registry-muted">{attribution}</span>
+      </header>
+      <div className="grid gap-4">
+        <div className="flex flex-col gap-3 py-2">
+          <h2 className="pui-registry-question text-2xl leading-tight">
             {market.question}
           </h2>
+          <span className="text-xs pui-registry-muted">
+            {market.category ?? "Prediction market"}
+          </span>
         </div>
-
         {leadingOutcome ? (
-          <div className="grid gap-3 rounded-sm border border-zinc-700 bg-zinc-950/90 p-4">
+          <div className="flex items-center justify-between border-y pui-registry-border py-6">
+            <span className="text-xs pui-registry-muted">Market leader</span>
             <div>
-              <div className="font-mono text-[10px] uppercase tracking-[0.1em] text-zinc-400">Leading outcome</div>
-              <div className="font-bold">{leadingOutcome.name}</div>
-            </div>
-            <div className="text-4xl font-black leading-none tracking-normal text-orange-300 sm:text-5xl">
-              {formatProbability(leadingOutcome.price)}
-            </div>
-            <div className="h-1 overflow-hidden bg-zinc-700/70">
-              <span
-                className="block h-full bg-orange-300"
-                style={{ width: `${Math.round(probability * 100)}%` }}
-              />
+              <strong className="block text-5xl font-medium tabular-nums">
+                {formatProbability(leadingOutcome.price)}
+              </strong>
+              <span>{leadingOutcome.name}</span>
             </div>
           </div>
         ) : null}
       </div>
-
-      {stats.length ? (
-        <dl className="grid grid-cols-3 gap-2">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="border border-zinc-700/70 bg-zinc-950/60 p-3"
-            >
-              <dt className="font-mono text-[10px] uppercase tracking-[0.1em] text-zinc-400">{stat.label}</dt>
-              <dd className="mt-1 font-extrabold">{stat.value}</dd>
-            </div>
-          ))}
-        </dl>
-      ) : null}
+      <footer className="flex flex-wrap gap-x-6 mt-4 py-2 text-xs pui-registry-muted">
+        {market.volume != null ? (
+          <span>Volume · {formatCompact(market.volume)}</span>
+        ) : null}
+        {market.liquidity != null ? (
+          <span>Liquidity · {formatCompact(market.liquidity)}</span>
+        ) : null}
+      </footer>
     </article>
   );
 }

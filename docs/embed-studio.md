@@ -37,6 +37,15 @@ https://polymarket.com/event/will-bitcoin-hit-100k-in-2026?ref=builder#comments
 The core helper strips query strings and hash fragments, validates the slug, and
 rejects non-Polymarket hosts.
 
+`sample` is reserved by the demo for illustrative data. It works in the demo's
+iframe and image routes; it is not a Polymarket API slug. Paste a real market slug
+before copying the generated `useMarket` React example into another app.
+
+Unavailable markets show a retry state. Image requests for unavailable markets
+return HTTP 503 with `Cache-Control: no-store`. Missing history or orderbook data
+stays empty and is labeled as partial data. The app never relabels a fixture as
+the market you requested.
+
 ## Generated Outputs
 
 ```ts
@@ -75,7 +84,12 @@ submit, place orders, inject default Builder Codes, or handle private keys.
 
 ## Hosted Registry
 
-The live demo now serves registry metadata:
+The demo serves registry items with complete source content and local helper
+dependencies, including the shared `polymarket-theme.css` file. Theme scopes use
+the same `data-pui-theme` attribute as the React package; see [theming](theming.md).
+Text fields update the preview and generated snippets together after 450 ms
+without typing, avoiding a new embed request for each keystroke.
+Rebuild the registry before deploying changes:
 
 ```bash
 npx shadcn@latest add https://polymarket-ui-kit-demo.vercel.app/r/embed-studio.json

@@ -3,8 +3,8 @@ import {
   formatRelativeTime,
   type PolymarketMarket,
 } from "@polymarket-ui-kit/core";
-import { BuilderBadge, type BuilderBadgeProps } from "./BuilderBadge";
-import { cx } from "./shared";
+import { BuilderBadge, type BuilderBadgeProps } from "./BuilderBadge.js";
+import { cx } from "./shared.js";
 
 export interface MarketHeaderProps {
   market: PolymarketMarket;

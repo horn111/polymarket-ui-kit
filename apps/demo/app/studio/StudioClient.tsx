@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   buildEmbedUrl,
   buildShareImageUrl,
@@ -10,13 +10,12 @@ import {
   type ShareImageTheme,
 } from "@polymarket-ui-kit/core";
 import { EmbedSnippetPanel } from "@polymarket-ui-kit/react";
-import { sampleBuilder } from "../../components/sample-builder";
 import { RouteThemeSync } from "../components/RouteThemeSync";
+import { BrandMark } from "../../../shared/BrandMark";
 
 type OutputMode = "embed" | "og-png" | "og-svg";
 
-const defaultInput =
-  "https://polymarket.com/event/who-will-win-the-2028-us-presidential-election";
+const defaultInput = "sample";
 
 const surfaces: Array<{ label: string; value: EmbedSurface }> = [
   { label: "Share card", value: "share-card" },
@@ -30,14 +29,67 @@ const outputModes: Array<{ label: string; value: OutputMode }> = [
   { label: "OG SVG", value: "og-svg" },
 ];
 
+function PreviewFrame({ src, title }: { src: string; title: string }) {
+  const frame = useRef<HTMLIFrameElement>(null);
+  const [height, setHeight] = useState(530);
+
+  useEffect(() => {
+    const element = frame.current;
+    if (!element) return;
+    let observer: ResizeObserver | undefined;
+    const observe = () => {
+      observer?.disconnect();
+      const document = element.contentDocument;
+      const surface = document?.querySelector(".civic-embed-surface") ?? document?.body;
+      if (!surface) return;
+      const measure = () =>
+        setHeight(
+          Math.max(
+            240,
+            Math.ceil(
+              surface.getBoundingClientRect().bottom +
+                (element.contentWindow?.scrollY ?? 0) +
+                20,
+            ),
+          ),
+        );
+      observer = new ResizeObserver(measure);
+      observer.observe(surface);
+      measure();
+    };
+    element.addEventListener("load", observe);
+    observe();
+    return () => {
+      element.removeEventListener("load", observe);
+      observer?.disconnect();
+    };
+  }, [src]);
+
+  return <iframe ref={frame} src={src} title={title} style={{ height }} />;
+}
+
 export function StudioClient() {
   const [attribution, setAttribution] = useState("pui-kit/demo");
-  const [builderCode, setBuilderCode] = useState(sampleBuilder.code ?? "");
+  const [builderCode, setBuilderCode] = useState("");
   const [input, setInput] = useState(defaultInput);
   const [origin, setOrigin] = useState("");
   const [outputMode, setOutputMode] = useState<OutputMode>("embed");
   const [surface, setSurface] = useState<EmbedSurface>("share-card");
   const [theme, setTheme] = useState<ShareImageTheme>("dark");
+  const [previewFields, setPreviewFields] = useState({
+    input: defaultInput,
+    attribution: "pui-kit/demo",
+    builderCode: "",
+  });
+  const [imageFailed, setImageFailed] = useState(false);
+
+  useEffect(() => {
+    const timer = window.setTimeout(
+      () => setPreviewFields({ input, attribution, builderCode }),
+      450,
+    );
+    return () => window.clearTimeout(timer);
+  }, [input, attribution, builderCode]);
 
   useEffect(() => {
     setOrigin(window.location.origin);
@@ -45,6 +97,7 @@ export function StudioClient() {
 
   const resolved = useMemo(() => {
     try {
+      const { input, attribution, builderCode } = previewFields;
       const slug = resolvePolymarketSlug(input);
       const common = {
         baseUrl: origin,
@@ -86,7 +139,7 @@ export function StudioClient() {
         slug: null,
       };
     }
-  }, [attribution, builderCode, input, origin, surface, theme]);
+  }, [previewFields, origin, surface, theme]);
 
   const previewUrl =
     outputMode === "og-png"
@@ -95,33 +148,49 @@ export function StudioClient() {
         ? resolved.ogSvgUrl
         : resolved.embedUrl;
 
+  useEffect(() => setImageFailed(false), [previewUrl]);
+
   return (
     <>
       <RouteThemeSync theme={theme} />
+      <nav className="civic-breadcrumb" aria-label="Breadcrumb">
+        <a className="civic-brand" href="/">
+          <BrandMark />
+          <strong>Civic Forecast</strong>
+        </a>
+        <span>Embed Studio</span>
+      </nav>
       <section className="demo-studio" aria-labelledby="studio-title">
         <header className="demo-studio__hero">
           <div>
-            <p className="demo-kicker">
-              <a href="/">Polymarket UI Kit</a> / Calibration Studio
-            </p>
-            <h1 id="studio-title">Calibrate once. Publish everywhere.</h1>
+            <h1 id="studio-title">
+              Prepare a market
+              <br />
+              for publication.
+            </h1>
             <p>
-              Turn one market URL into a live embed, React surface, share plate, and
-              registry command from a single controlled workspace.
+              Turn a Polymarket URL into a live iframe, React snippet, source-aware
+              share image, and registry command without adding order placement.
             </p>
-          </div>
-          <div className="demo-studio__stamp" aria-hidden="true">
-            CAL / 01
           </div>
         </header>
 
         <div className="demo-studio__controls" aria-label="Embed controls">
           <label>
-            MARKET URL OR SLUG
-            <input onChange={(event) => setInput(event.target.value)} value={input} />
+            Market URL or slug
+            <input
+              aria-describedby="market-input-help"
+              spellCheck={false}
+              autoComplete="off"
+              onChange={(event) => setInput(event.target.value)}
+              value={input}
+            />
+            <small id="market-input-help">
+              “sample” uses illustrative data. Paste a market URL for public data.
+            </small>
           </label>
           <label>
-            SURFACE
+            Surface
             <select
               onChange={(event) => setSurface(event.target.value as EmbedSurface)}
               value={surface}
@@ -134,17 +203,18 @@ export function StudioClient() {
             </select>
           </label>
           <label>
-            ATTRIBUTION
+            Attribution
             <input
               onChange={(event) => setAttribution(event.target.value)}
               value={attribution}
             />
           </label>
           <label>
-            PUBLIC BUILDER CODE
+            Public builder code (optional)
             <input
               onChange={(event) => setBuilderCode(event.target.value)}
               value={builderCode}
+              placeholder="0x…"
             />
           </label>
         </div>
@@ -153,6 +223,7 @@ export function StudioClient() {
           <div className="demo-studio__theme" role="group" aria-label="Theme">
             {(["light", "dark"] as ShareImageTheme[]).map((item) => (
               <button
+                aria-pressed={theme === item}
                 data-active={theme === item ? "true" : undefined}
                 key={item}
                 onClick={() => setTheme(item)}
@@ -165,6 +236,7 @@ export function StudioClient() {
           <div className="demo-studio__theme" role="group" aria-label="Output type">
             {outputModes.map((item) => (
               <button
+                aria-pressed={outputMode === item.value}
                 data-active={outputMode === item.value ? "true" : undefined}
                 key={item.value}
                 onClick={() => setOutputMode(item.value)}
@@ -178,33 +250,50 @@ export function StudioClient() {
 
         <div className="demo-studio__workspace">
           <div className="demo-studio__preview">
-            <div className="demo-module__label">
-              <span aria-hidden="true">●</span>
-              <strong>Live preview</strong>
+            <div className="demo-studio__preview-label">
+              <strong>Preview</strong>
+              {!resolved.error ? (
+                <a href={previewUrl} target="_blank" rel="noreferrer">
+                  Open preview
+                </a>
+              ) : null}
             </div>
             {resolved.error ? (
               <div className="demo-studio__error" role="alert">
                 {resolved.error}
               </div>
+            ) : imageFailed ? (
+              <div className="demo-studio__error" role="alert">
+                Image unavailable. Check the market URL or choose Embed to see the
+                market status.
+              </div>
             ) : outputMode === "embed" ? (
-              <iframe
+              <PreviewFrame
                 key={previewUrl}
                 src={previewUrl}
                 title={`Polymarket embed for ${resolved.slug}`}
               />
             ) : (
-              <img alt={`Share export for ${resolved.slug}`} src={previewUrl} />
+              <img
+                alt={`Share export for ${resolved.slug}`}
+                src={previewUrl}
+                width={1200}
+                height={630}
+                onError={() => setImageFailed(true)}
+              />
             )}
           </div>
 
           <EmbedSnippetPanel
-            attribution={attribution}
+            attribution={previewFields.attribution}
             baseUrl={origin}
             className="demo-studio__outputs"
-            input={input}
+            input={previewFields.input}
             surface={surface}
             theme={theme}
-            {...(builderCode ? { builderCode } : {})}
+            {...(previewFields.builderCode
+              ? { builderCode: previewFields.builderCode }
+              : {})}
             {...(origin ? { registryBaseUrl: `${origin}/r` } : {})}
           />
         </div>

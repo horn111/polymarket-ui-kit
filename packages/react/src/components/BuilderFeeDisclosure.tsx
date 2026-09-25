@@ -4,8 +4,8 @@ import {
   type BuilderConfig,
   type BuilderFeeSide,
 } from "@polymarket-ui-kit/core";
-import { cx } from "./shared";
-import { shortenBuilderCode } from "./builder-utils";
+import { cx } from "./shared.js";
+import { shortenBuilderCode } from "./builder-utils.js";
 
 export interface BuilderFeeDisclosureProps {
   builder: BuilderConfig;

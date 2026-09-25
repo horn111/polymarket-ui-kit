@@ -3,12 +3,13 @@ import {
   formatProbability,
   type PollMarketComparisonRow,
 } from "@polymarket-ui-kit/core";
-import { cx, EmptyState } from "./shared";
+import { cx, EmptyState } from "./shared.js";
 
 export interface PollMarketComparisonProps {
   rows: PollMarketComparisonRow[];
   pollLabel?: string;
   marketLabel?: string;
+  contextLabel?: string;
   className?: string;
 }
 
@@ -20,6 +21,7 @@ export function PollMarketComparison({
   rows,
   pollLabel = "Latest poll average",
   marketLabel = "Market probability",
+  contextLabel = "External context",
   className,
 }: PollMarketComparisonProps) {
   if (rows.length === 0) {
@@ -39,7 +41,7 @@ export function PollMarketComparison({
           <span className="pui-section-heading__signal" aria-hidden="true" />
           <strong>Poll + market</strong>
         </div>
-        <span className="pui-muted">Sample external context</span>
+        <span className="pui-muted">{contextLabel}</span>
       </header>
       <div
         className="pui-poll-comparison__table"

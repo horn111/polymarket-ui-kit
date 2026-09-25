@@ -1,0 +1,111 @@
+@font-face {
+  font-family: "Instrument Sans";
+  src: url("./fonts/instrument-sans-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("./fonts/source-serif-4-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("./fonts/source-serif-4-latin-italic.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 200 900;
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  background: var(--pui-canvas);
+  color: var(--pui-text);
+  color-scheme: light;
+}
+html[data-pui-theme="dark"] {
+  color-scheme: dark;
+}
+body {
+  margin: 0;
+  font-family: var(--pui-font-sans);
+}
+a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+input,
+textarea {
+  caret-color: var(--pui-accent);
+}
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+:focus-visible {
+  outline: 2px solid var(--pui-accent);
+  outline-offset: 4px;
+}
+::selection {
+  background: var(--pui-accent);
+  color: var(--pui-on-accent);
+}
+:root {
+  scrollbar-color: var(--pui-border-strong) var(--pui-canvas);
+}
+pre,
+code {
+  overflow-wrap: anywhere;
+}
+[id] {
+  scroll-margin-top: 1.5rem;
+}
+
+.civic-brand svg,
+.docs-brand svg {
+  flex: none;
+  color: var(--pui-accent);
+}
+.civic-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  min-height: 4.75rem;
+  border-bottom: 1px solid var(--pui-border);
+  font-size: 0.875rem;
+}
+.civic-breadcrumb a {
+  text-decoration: none;
+}
+.civic-breadcrumb span {
+  color: var(--pui-text-muted);
+}
+.civic-source-note {
+  color: var(--pui-text-muted);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+.civic-source-note[data-source="fixture"] {
+  color: var(--pui-warning);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+}

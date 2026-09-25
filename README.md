@@ -1,6 +1,6 @@
 <p align="center">
   <img src="https://img.shields.io/badge/React-first-149eca?style=for-the-badge&logo=react&logoColor=white" alt="React first" />
-  <img src="https://img.shields.io/badge/Polymarket-UI%20Kit-d28457?style=for-the-badge" alt="Polymarket UI Kit" />
+  <img src="https://img.shields.io/badge/Polymarket-UI%20Kit-0f766e?style=for-the-badge" alt="Polymarket UI Kit" />
   <img src="https://img.shields.io/badge/Registry-shadcn%20style-111827?style=for-the-badge" alt="shadcn style registry" />
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT License" />
 </p>
@@ -20,15 +20,18 @@
   <a href="#builder-and-grant-angle">Builder angle</a>
 </p>
 
-<h3 align="center">Ceramic Light Preview</h3>
+<h3 align="center">Civic Forecast · Dark Preview</h3>
 
-<img alt="Polymarket UI Kit preview (Light)" src="apps/docs/public/screenshots/hero.svg?v=3" width="100%">
+<img alt="Civic Forecast demo with teal panels and brass controls" src="apps/docs/public/screenshots/civic-dark.png" width="100%">
 
-<h3 align="center">Mechanical Dark Preview</h3>
+<details>
+<summary>Light preview</summary>
 
-<img alt="Polymarket UI Kit preview (Dark)" src="apps/docs/public/screenshots/hero-dark.svg?v=3" width="100%">
+<img alt="Civic Forecast demo in light mode" src="apps/docs/public/screenshots/civic-light.png" width="100%">
 
-Build market cards, evidence rails, poll comparisons, probability charts, orderbook panels, comment feeds, builder
+</details>
+
+Build election briefings, market cards, evidence rails, poll comparisons, probability charts, orderbook panels, comment feeds, builder
 badges, fee previews, leaderboard tables, combo leg pickers, mobile trade
 previews, and social share cards without rebuilding the same Polymarket UI layer
 from scratch.
@@ -37,10 +40,39 @@ This project is built for frontend developers, media tools, embeddings, dashboar
 builders, content products, and research portals that need Polymarket-native UI
 with strong defaults and clean escape hatches.
 
-The static SVGs above are design previews. The live demo is the source of truth
-for the Mechanical Probability system, Civic Forecast edition, Builder-Code UX,
-real public hooks, share export, and Combo-aware surfaces. See
-[DESIGN.md](DESIGN.md) for the approved identity and motion rules.
+The screenshots show the Civic Forecast demo with explicitly labeled sample data.
+The design pairs Source Serif 4 questions with Instrument Sans measurements,
+teal panels, ruled data rows, and brass controls. Its election briefing separates
+market odds, outside polling, source
+records, and settlement rules. The component lab uses a draggable dial to select
+sections, with keyboard tabs and a horizontal scale on small screens.
+See [DESIGN.md](DESIGN.md) for the visual system and
+[the release guide](docs/release.md) for checks and publication steps.
+
+## Election Briefing
+
+`ElectionBriefCard` is the opinionated surface for civic reporting. It ranks
+market outcomes, shows poll vote share separately from winning probability,
+and keeps resolution criteria and sources in the same reading path. A host
+application supplies polls, evidence, and the resolution summary; the kit does
+not fetch or verify outside political data. If those inputs are absent, the
+card says so instead of filling the gaps with sample facts.
+
+```tsx
+import { ElectionBriefCard } from "@polymarket-ui-kit/react";
+
+<ElectionBriefCard
+  market={market}
+  polls={verifiedPollRows}
+  evidence={verifiedSources}
+  resolutionSummary={verifiedResolutionRule}
+  sourceLabel="Live public market"
+/>;
+```
+
+The general `MarketCard` uses the same ranked, percentage-first language for
+non-election markets. `ShareCard` and PNG/SVG exports carry the same panel
+style into embeds and social previews.
 
 ## Turn Any Polymarket Link Into A Live Market Card
 
@@ -71,6 +103,7 @@ Run the current repo locally today:
 
 ```bash
 pnpm install
+pnpm build
 pnpm demo:dev
 ```
 
@@ -95,7 +128,7 @@ import "@polymarket-ui-kit/react/themes.css";
 | Surface               | Status                                                       |
 | --------------------- | ------------------------------------------------------------ |
 | Live demo             | Deployed                                                     |
-| Local development     | Ready with `pnpm install` and `pnpm demo:dev`                |
+| Local development     | `pnpm install`, `pnpm build`, then `pnpm demo:dev`           |
 | React package         | First npm prerelease planned                                 |
 | Core package          | First npm prerelease planned                                 |
 | Hosted registry       | Live on the Vercel demo domain                               |
@@ -133,6 +166,10 @@ const ogPng = buildShareImageUrl({ slug, format: "png", theme: "dark" });
 ```
 
 Read the implementation notes in [docs/embed-studio.md](docs/embed-studio.md).
+
+Studio starts with `sample`, a reserved demo slug. Real market slugs load public
+Polymarket data. If a request fails, the page shows an unavailable state and image
+exports return HTTP 503; neither substitutes sample prices for a requested market.
 
 ## Copy-Paste Examples
 
@@ -323,7 +360,8 @@ Read the verification notes in
 | `MarketHeader`         | Question, status, category, volume, expiry, builder badge | MVP    |
 | `EvidenceRail`         | Official, poll, model, news, and other source context     | MVP    |
 | `PollMarketComparison` | Responsive poll-share and market-probability comparison   | MVP    |
-| `MarketCard`           | Compact embeddable market card                            | MVP    |
+| `ElectionBriefCard`    | Market odds, polls, sources, and settlement context       | MVP    |
+| `MarketCard`           | Ranked outcome sheet for embeds and links                 | MVP    |
 | `ProbabilitySparkline` | Lightweight inline price movement                         | MVP    |
 | `ProbabilityChart`     | Multi-series probability chart                            | MVP    |
 | `OrderbookPanel`       | Bid/ask depth with spread and totals                      | MVP    |

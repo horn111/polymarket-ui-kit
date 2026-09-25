@@ -2,9 +2,8 @@
 
 Polymarket UI Kit supports two share-image paths:
 
-The renderer uses the same Mechanical Probability materials, copper calibration
-signal, and light/dark semantic palette as the React components. Existing URL
-parameters remain backward compatible.
+The Civic Forecast renderer uses the same light/dark semantic palette as the
+React components and keeps existing URL parameters backward compatible.
 
 - `ShareCard` renders a React component that can be embedded in app surfaces.
 - `createShareCardSvg` returns a framework-agnostic SVG string for API routes,
@@ -13,8 +12,8 @@ parameters remain backward compatible.
 The demo app exposes both from one endpoint:
 
 ```txt
-/api/og?slug=<market-slug>&theme=dark&format=png
-/api/og?slug=<market-slug>&theme=dark&format=svg
+/api/og?slug=<market-slug>&theme=light&format=png
+/api/og?slug=<market-slug>&theme=light&format=svg
 ```
 
 ## Why This Matters
@@ -32,7 +31,7 @@ import { createShareCardSvg, getMarketBySlug } from "@polymarket-ui-kit/core";
 const market = await getMarketBySlug("who-will-win-the-2028-us-presidential-election");
 const svg = createShareCardSvg(market, {
   attribution: "your-product.com",
-  theme: "dark",
+  theme: "light",
 });
 ```
 
@@ -45,8 +44,8 @@ is deterministic and does not require React.
 import { useShareImage } from "@polymarket-ui-kit/react";
 
 export function ShareActions({ slug }: { slug: string }) {
-  const png = useShareImage({ slug, format: "png", theme: "dark" });
-  const svg = useShareImage({ slug, format: "svg", theme: "dark" });
+  const png = useShareImage({ slug, format: "png", theme: "light" });
+  const svg = useShareImage({ slug, format: "svg", theme: "light" });
 
   return (
     <>
@@ -62,7 +61,7 @@ The hook only builds URLs. Host apps own the route implementation and can point
 
 ## Demo Route Behavior
 
-The demo route tries to fetch public market data by slug. If the public API is
-unavailable or the slug does not resolve, it falls back to fixture data and keeps
-the image route alive. This is intentional for demos, docs previews, and launch
-screenshots.
+The `sample` slug uses explicitly labeled illustrative data. Every other slug
+requests public market data. An unavailable market returns HTTP 503 with a JSON
+error and `cache-control: no-store`; it never substitutes sample prices for the
+requested market. Successful PNG and SVG responses use a five-minute cache.

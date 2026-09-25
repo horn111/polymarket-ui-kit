@@ -8,6 +8,7 @@ import type { EvidenceItem } from "@polymarket-ui-kit/core";
 import { RouteThemeSync } from "../../components/RouteThemeSync";
 import { sampleBuilder } from "../../../components/sample-builder";
 import { loadPublicMarketBundle } from "../../../components/live-data";
+import { MarketUnavailable } from "../../components/MarketUnavailable";
 
 export const revalidate = 60;
 
@@ -38,7 +39,15 @@ function resolveTheme(value: string | undefined): "light" | "dark" {
 export default async function MarketPage({ params, searchParams }: MarketPageProps) {
   const { slug } = await params;
   const theme = resolveTheme((await searchParams).theme);
-  const { market, orderbook, points, source } = await loadPublicMarketBundle(slug);
+  const bundle = await loadPublicMarketBundle(slug).catch(() => null);
+  if (!bundle)
+    return (
+      <>
+        <RouteThemeSync theme={theme} />
+        <MarketUnavailable slug={slug} />
+      </>
+    );
+  const { market, orderbook, points, source } = bundle;
 
   return (
     <>
@@ -49,21 +58,27 @@ export default async function MarketPage({ params, searchParams }: MarketPagePro
         </a>
         <div className="demo-route-note" data-source={source}>
           <span>
-            {source === "live" ? "Live public market" : "Graceful fallback fixture"}
+            {source === "live"
+              ? "Live public market"
+              : source === "partial"
+                ? "Live market · some data unavailable"
+                : "Illustrative market · sample data"}
           </span>
-          <strong>{market.question}</strong>
+          <h1>{market.question}</h1>
         </div>
         <div className="civic-route__grid">
           <MarketCard market={market} points={points} />
-          <OrderbookPanel orderbook={orderbook} />
+          <div className="pui-stack">
+            <OrderbookPanel orderbook={orderbook} />
+            <MobileTradeDrawer
+              builder={sampleBuilder}
+              builderFeeSide="taker"
+              market={market}
+            />
+          </div>
         </div>
         <EvidenceRail items={sampleEvidence} title="Data provenance" />
       </section>
-      <MobileTradeDrawer
-        builder={sampleBuilder}
-        builderFeeSide="taker"
-        market={market}
-      />
     </>
   );
 }

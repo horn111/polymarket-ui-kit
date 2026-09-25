@@ -1,25 +1,31 @@
 import {
   clampProbability,
   formatCompactNumber,
-  probabilityToCents,
+  formatProbability,
   type PolymarketMarket,
 } from "@polymarket-ui-kit/core";
-import { cx } from "./shared";
+import { cx } from "./shared.js";
 
 export interface ShareCardProps {
   market: PolymarketMarket;
   className?: string;
   attribution?: string;
+  statusLabel?: string;
 }
 
 export function ShareCard({
   market,
   className,
   attribution = "polymarket-ui-kit",
+  statusLabel,
 }: ShareCardProps) {
-  const leadingOutcome = market.outcomes[0];
-  const probability = leadingOutcome ? clampProbability(leadingOutcome.price ?? 0) : 0;
-  const probabilityWidth = `${Math.round(probability * 100)}%`;
+  const leadingOutcome = [...market.outcomes].sort(
+    (a, b) => (b.price ?? -1) - (a.price ?? -1),
+  )[0];
+  const probability =
+    leadingOutcome?.price != null && Number.isFinite(leadingOutcome.price)
+      ? clampProbability(leadingOutcome.price)
+      : null;
   const stats = [
     market.volume
       ? { label: "Volume", value: formatCompactNumber(market.volume) }
@@ -37,17 +43,22 @@ export function ShareCard({
       <div className="pui-share-card__topline">
         <div className="pui-row">
           <span className="pui-share-card__brand">Polymarket</span>
-          <span className="pui-share-card__status">Live market</span>
+          <span className="pui-share-card__status">
+            {statusLabel ??
+              (market.status === "unknown"
+                ? "Market"
+                : `${market.status[0]!.toUpperCase()}${market.status.slice(1)} market`)}
+          </span>
         </div>
         <span className="pui-share-card__attribution">{attribution}</span>
       </div>
 
       <div className="pui-share-card__body">
         <div className="pui-share-card__market">
+          <h2>{market.question}</h2>
           <span className="pui-share-card__label">
             {market.category ?? "Prediction market"}
           </span>
-          <h2>{market.question}</h2>
         </div>
 
         {leadingOutcome ? (
@@ -57,10 +68,7 @@ export function ShareCard({
               <strong>{leadingOutcome.name}</strong>
             </div>
             <div className="pui-share-card__price">
-              {probabilityToCents(leadingOutcome.price)}
-            </div>
-            <div className="pui-share-card__bar" aria-hidden="true">
-              <span style={{ width: probabilityWidth }} />
+              {formatProbability(probability)}
             </div>
           </div>
         ) : null}

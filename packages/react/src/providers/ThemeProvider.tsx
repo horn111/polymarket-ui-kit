@@ -17,21 +17,6 @@ export interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
-function resolveTheme(theme: PolymarketTheme): "light" | "dark" {
-  if (theme !== "system") {
-    return theme;
-  }
-
-  if (
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches
-  ) {
-    return "dark";
-  }
-
-  return "light";
-}
-
 export interface ThemeProviderProps extends PropsWithChildren {
   defaultTheme?: PolymarketTheme;
   storageKey?: string;
@@ -45,14 +30,28 @@ export function ThemeProvider({
   attributeTarget,
 }: ThemeProviderProps) {
   const [theme, setThemeState] = useState<PolymarketTheme>(defaultTheme);
-  const resolvedTheme = resolveTheme(theme);
+  const [systemTheme, setSystemTheme] = useState<"light" | "dark">("light");
+  const resolvedTheme = theme === "system" ? systemTheme : theme;
 
   useEffect(() => {
-    const stored = window.localStorage.getItem(storageKey) as PolymarketTheme | null;
-    if (stored === "light" || stored === "dark" || stored === "system") {
-      setThemeState(stored);
+    try {
+      const stored = window.localStorage.getItem(storageKey);
+      if (stored === "light" || stored === "dark" || stored === "system") {
+        setThemeState(stored);
+      }
+    } catch {
+      // The selected theme still works when browser storage is unavailable.
     }
   }, [storageKey]);
+
+  useEffect(() => {
+    if (theme !== "system" || !window.matchMedia) return;
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const update = () => setSystemTheme(media.matches ? "dark" : "light");
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, [theme]);
 
   useEffect(() => {
     const target = attributeTarget ?? document.documentElement;
@@ -64,7 +63,11 @@ export function ThemeProvider({
       theme,
       resolvedTheme,
       setTheme: (nextTheme) => {
-        window.localStorage.setItem(storageKey, nextTheme);
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch {
+          // Persistence is optional; do not block the theme change.
+        }
         setThemeState(nextTheme);
       },
     }),
@@ -83,4 +86,3 @@ export function useTheme(): ThemeContextValue {
 
   return value;
 }
-

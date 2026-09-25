@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {
   CommentList,
+  ElectionBriefCard,
   EvidenceRail,
   LeaderboardTable,
   MarketCard,
@@ -141,56 +142,37 @@ const rows: TraderLeaderboardRow[] = [
 ];
 
 const meta: Meta = {
-  title: "Civic Forecast/Core surfaces",
-  parameters: {
-    docs: {
-      description: {
-        component:
-          "Mechanical Probability surfaces share one material, type, state, and data-visualization language.",
-      },
-    },
-  },
+  title: "Polymarket UI Kit/MVP",
 };
 
 export default meta;
 
 export const MarketCardStory: StoryObj = {
-  name: "MarketCard / Default",
-  render: () => <MarketCard market={market} points={points} />,
+  name: "MarketCard",
+  render: () => (
+    <MarketCard market={market} points={points} sourceLabel="Sample data" />
+  ),
 };
 
-export const MarketCardLongStory: StoryObj = {
-  name: "MarketCard / Long content",
+export const ElectionBriefCardStory: StoryObj = {
+  name: "ElectionBriefCard",
   render: () => (
-    <MarketCard
-      market={{
-        ...market,
-        question:
-          "Will certified national turnout in the 2026 United States midterm elections exceed the final revised 2022 turnout estimate?",
-      }}
-      points={points}
+    <ElectionBriefCard
+      market={market}
+      evidence={evidence}
+      sourceLabel="Sample data"
+      resolutionSummary="Illustrative rule: certified turnout determines this example."
     />
   ),
 };
 
-export const MarketCardMobileStory: StoryObj = {
-  name: "MarketCard / Mobile 320",
-  parameters: { viewport: { defaultViewport: "mobile320" } },
-  render: () => <MarketCard market={market} points={points} />,
-};
-
 export const OrderbookStory: StoryObj = {
-  name: "OrderbookPanel / Default",
+  name: "OrderbookPanel",
   render: () => <OrderbookPanel orderbook={orderbook} />,
 };
 
-export const OrderbookEmptyStory: StoryObj = {
-  name: "OrderbookPanel / Empty",
-  render: () => <OrderbookPanel orderbook={null} />,
-};
-
 export const ShareCardStory: StoryObj = {
-  name: "ShareCard / Default",
+  name: "ShareCard",
   render: () => <ShareCard market={market} />,
 };
 
@@ -199,11 +181,11 @@ export const ProbabilityChartStory: StoryObj = {
   render: () => (
     <ProbabilityChart
       series={[
-        { id: "yes", label: "Yes", color: "var(--pui-series-1)", points },
+        { id: "yes", label: "Yes", color: "#0f766e", points },
         {
           id: "no",
           label: "No",
-          color: "var(--pui-series-2)",
+          color: "#b91c1c",
           points: points.map((point) => ({ ...point, price: 1 - point.price })),
         },
       ]}
@@ -212,13 +194,8 @@ export const ProbabilityChartStory: StoryObj = {
 };
 
 export const CommentsStory: StoryObj = {
-  name: "CommentList / Default",
+  name: "CommentList",
   render: () => <CommentList comments={comments} />,
-};
-
-export const CommentsEmptyStory: StoryObj = {
-  name: "CommentList / Empty",
-  render: () => <CommentList comments={[]} />,
 };
 
 export const LeaderboardStory: StoryObj = {
@@ -241,18 +218,6 @@ export const EvidenceRailEmptyStory: StoryObj = {
   render: () => <EvidenceRail items={[]} />,
 };
 
-export const EvidenceRailLongStory: StoryObj = {
-  name: "EvidenceRail / Long content",
-  render: () => (
-    <EvidenceRail
-      items={evidence.map((item) => ({
-        ...item,
-        title: `${item.title}: a deliberately extended source title for responsive behavior`,
-      }))}
-    />
-  ),
-};
-
 export const PollMarketComparisonStory: StoryObj = {
   name: "PollMarketComparison / Default",
   render: () => <PollMarketComparison rows={pollRows} />,
@@ -262,15 +227,4 @@ export const PollMarketComparisonMobileStory: StoryObj = {
   name: "PollMarketComparison / Mobile",
   parameters: { viewport: { defaultViewport: "mobile390" } },
   render: () => <PollMarketComparison rows={pollRows} />,
-};
-
-export const PollMarketComparisonNullStory: StoryObj = {
-  name: "PollMarketComparison / Null values",
-  render: () => (
-    <PollMarketComparison
-      rows={pollRows.map((row, index) =>
-        index === 0 ? { ...row, marketProbability: null, pollShare: null } : row,
-      )}
-    />
-  ),
 };

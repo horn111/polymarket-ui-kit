@@ -37,6 +37,14 @@ export interface PolymarketProviderProps extends PropsWithChildren {
 
 const PolymarketContext = createContext<PolymarketClient | null>(null);
 const PolymarketBuilderContext = createContext<BuilderConfig | null>(null);
+const defaultClient: PolymarketClient = {
+  listMarkets,
+  getMarketBySlug,
+  listComments,
+  getOrderbook,
+  getPriceHistory,
+  listComboMarkets,
+};
 
 export function PolymarketProvider({
   children,
@@ -76,18 +84,7 @@ export function PolymarketProvider({
 export function usePolymarketClient(): PolymarketClient {
   const client = useContext(PolymarketContext);
 
-  if (!client) {
-    return {
-      listMarkets: (params?: ListMarketsParams) => listMarkets(params),
-      getMarketBySlug: (slug: string) => getMarketBySlug(slug),
-      listComments: (params?: ListCommentsParams) => listComments(params),
-      getOrderbook: (params: OrderbookParams) => getOrderbook(params),
-      getPriceHistory: (params: PriceHistoryParams) => getPriceHistory(params),
-      listComboMarkets: (params?: ListComboMarketsParams) => listComboMarkets(params),
-    };
-  }
-
-  return client;
+  return client ?? defaultClient;
 }
 
 export function usePolymarketBuilder(): BuilderConfig | null {

@@ -6,11 +6,11 @@ import type {
   PolymarketMarket,
 } from "@polymarket-ui-kit/core";
 import { formatCurrency, previewFees } from "@polymarket-ui-kit/core";
-import { useMemo, useState } from "react";
-import { usePolymarketBuilder } from "../providers/PolymarketProvider";
-import { BuilderFeeDisclosure } from "./BuilderFeeDisclosure";
-import { FeePill } from "./FeePill";
-import { OutcomeSwitcher } from "./OutcomeSwitcher";
+import { useId, useMemo, useState } from "react";
+import { usePolymarketBuilder } from "../providers/PolymarketProvider.js";
+import { BuilderFeeDisclosure } from "./BuilderFeeDisclosure.js";
+import { FeePill } from "./FeePill.js";
+import { OutcomeSwitcher } from "./OutcomeSwitcher.js";
 
 export interface TradeIntent {
   market: PolymarketMarket;
@@ -44,11 +44,15 @@ export function MobileTradeDrawer({
   const [selectedOutcome, setSelectedOutcome] = useState<MarketOutcome | null>(
     market.outcomes[0] ?? null,
   );
-  const [notional, setNotional] = useState(defaultNotional);
+  const [notionalInput, setNotionalInput] = useState(String(defaultNotional));
+  const notional = Number(notionalInput);
+  const validNotional = Number.isFinite(notional) && notional >= 1;
+  const previewNotional = validNotional ? notional : 0;
+  const notionalHelpId = useId();
   const feePreview = useMemo(
     () =>
       previewFees({
-        notional,
+        notional: previewNotional,
         price: selectedOutcome?.price ?? 0,
         builderFeeBps,
         builderFeeSide,
@@ -60,13 +64,13 @@ export function MobileTradeDrawer({
       builderFeeSide,
       effectiveBuilder?.makerFeeBps,
       effectiveBuilder?.takerFeeBps,
-      notional,
+      previewNotional,
       selectedOutcome?.price,
     ],
   );
 
   return (
-    <div className="pui-trade-drawer">
+    <div className="pui-trade-drawer" data-mode={onTradeIntent ? "action" : "preview"}>
       <section className="pui-panel pui-stack pui-trade-drawer__inner">
         <div className="pui-row pui-between">
           <strong>Trade preview</strong>
@@ -75,7 +79,7 @@ export function MobileTradeDrawer({
         {effectiveBuilder ? (
           <BuilderFeeDisclosure
             builder={effectiveBuilder}
-            notional={notional}
+            notional={previewNotional}
             price={selectedOutcome?.price ?? undefined}
             side={builderFeeSide}
           />
@@ -89,33 +93,43 @@ export function MobileTradeDrawer({
           <span className="pui-muted">Notional</span>
           <input
             className="pui-input"
+            aria-invalid={!validNotional}
+            aria-describedby={!validNotional ? notionalHelpId : undefined}
             inputMode="decimal"
             min={1}
-            onChange={(event) => setNotional(Number(event.target.value))}
+            onChange={(event) => setNotionalInput(event.target.value)}
+            step="any"
             type="number"
-            value={notional}
+            value={notionalInput}
           />
+          {!validNotional ? <span id={notionalHelpId}>Enter at least $1.</span> : null}
         </label>
-        <button
-          className="pui-button"
-          disabled={!selectedOutcome}
-          onClick={() =>
-            selectedOutcome
-              ? onTradeIntent?.({
-                  market,
-                  outcome: selectedOutcome,
-                  notional,
-                  builder: effectiveBuilder,
-                  builderCode: effectiveBuilder?.code,
-                  builderFeeSide,
-                  feePreview,
-                })
-              : undefined
-          }
-          type="button"
-        >
-          Continue with {formatCurrency(feePreview.totalCost)}
-        </button>
+        {onTradeIntent ? (
+          <button
+            className="pui-button"
+            disabled={!selectedOutcome || !validNotional}
+            onClick={() =>
+              selectedOutcome && validNotional
+                ? onTradeIntent({
+                    market,
+                    outcome: selectedOutcome,
+                    notional,
+                    builder: effectiveBuilder,
+                    builderCode: effectiveBuilder?.code,
+                    builderFeeSide,
+                    feePreview,
+                  })
+                : undefined
+            }
+            type="button"
+          >
+            Continue with {formatCurrency(feePreview.totalCost)}
+          </button>
+        ) : (
+          <p className="pui-muted pui-reset-margin">
+            Preview only. No order will be submitted.
+          </p>
+        )}
       </section>
     </div>
   );

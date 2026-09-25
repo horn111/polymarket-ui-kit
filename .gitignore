@@ -13,3 +13,6 @@ test-results/
 .env.*
 !.env.example
 *.tsbuildinfo
+.impeccable/review/
+.impeccable/config.local.json
+.impeccable/design.json
